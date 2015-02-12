@@ -1,0 +1,152 @@
+frontend_label,frontend_input,is_required,option,default,attribute_code,is_global,default_value_text,default_value_yesno,default_value_date,default_value_textarea,is_unique,is_searchable,is_visible_in_advanced_search,is_comparable,is_filterable,is_filterable_in_search,position,is_used_for_promo_rules,is_html_allowed_on_front,is_visible_on_front,used_in_product_listing,used_for_sort_by,attribute_set
+"Activity General
+Activity",multiselect,0,"Hike
+Outdoor
+Running
+Warmup
+Yoga
+Recreation
+Lounge
+Gym
+Climbing
+Crosstraining
+Post-workout
+Cycling
+Athletic
+Sports",,activity_general,1,,0,,,0,0,0,1,1,0,,1,1,1,0,0,"Top
+Bottom
+Gear
+Sprite Stasis Ball
+Sprite Yoga Strap
+Downloadable"
+"Activity Bags
+Activity",multiselect,0,"Gym
+Hiking
+Overnight
+School
+Trail
+Travel
+Urban
+Warmup
+Yoga",,activity_bags,1,,0,,,0,0,0,1,1,0,,1,1,1,0,0,Bag
+"Style Bags
+Style",multiselect,0,"Backpack
+Luggage
+Duffel
+Messenger
+Laptop
+Exercise
+Tote",,style_bags,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Bag
+"Material Bag
+Material",multiselect,0,"Burlap
+Canvas
+Cotton
+Faux Leather
+Leather
+Mesh
+Nylon
+Polyester
+Rayon
+Ripstop
+Suede",,material_bag,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Bag
+"Material Gear
+Material",multiselect,0,"Burlap
+Canvas
+Cotton
+Faux Leather
+Foam
+Leather
+Mesh
+Metal
+Nylon
+Polyester
+Plastic
+Rayon
+Ripstop
+Rubber
+Synthetic
+Stainless Steel
+Suede
+Silicone",,material_gear,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Gear
+Sprite Stasis Ball
+Sprite Yoga Strap"
+Color,select,,"Black
+Blue
+Brown
+Gray
+Green
+Lavender
+Multi
+Orange
+Purple
+Red
+White
+Yellow",,color,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Top
+Bottom
+Bag
+Gear
+Sprite Stasis Ball
+Sprite Yoga Strap"
+Strap/Handle,multiselect,0,"Adjustable
+Cross Body
+Detachable
+Double
+Padded
+Shoulder
+Single
+Telescoping",,strap_bags,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Bag
+Features,multiselect,0,"Audio Pocket
+Wheeled
+Hydration Pocket
+Audio Pocket
+Flapover
+Waterproof
+Lightweight
+TSA Approved
+Reflective
+Laptop Sleeve
+Lockable",,features_bags,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Bag
+Gender,multiselect,0,"Men
+Women
+Boys
+Girls
+Unisex",,gender,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Gear
+Sprite Stasis Ball
+Sprite Yoga Strap"
+"Category Gear
+Category",multiselect,0,"Cardio
+Electronic
+Exercise
+Fashion
+Hydration
+Timepiece",,category_gear,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Gear
+Sprite Stasis Ball
+Sprite Yoga Strap"
+"Size Ball
+Size",select,0,"55 cm
+65 cm
+75 cm",,size_ball,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Sprite Stasis Ball
+"Size Strap
+Size",select,0,"6 foot
+8 foot
+10 foot",,size_strap,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Sprite Yoga Strap"
+"Eco Collection",boolean,0,,,eco_collection,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Gear
+Bag
+Top
+Bottom"
+"Performance Fabric",boolean,0,,,performance_fabric,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Gear
+Bag
+Top
+Bottom"
+"Erin Recommends",boolean,0,,,erin_recommends,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Gear
+Bag
+Top
+Bottom"
+New,boolean,0,,,new,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Gear
+Bag
+Top
+Bottom"
+Sale,boolean,0,,,sale,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Gear
+Bag
+Top
+Bottom"

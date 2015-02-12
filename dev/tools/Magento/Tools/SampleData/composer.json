@@ -1,0 +1,19 @@
+{
+    "name": "magento/sample-data",
+    "description": "Sample Data scripts",
+    "version": "0.42.0-beta6",
+    "require": {
+        "magento/framework": "~0.42.0-beta7",
+        "magento/magento-composer-installer": "*",
+        "magento/sample-data-media": "0.42.0-beta1"
+    },
+    "type": "magento2-component",
+    "extra": {
+        "map": [
+            [
+                "*",
+                "dev/tools/Magento/Tools/SampleData"
+            ]
+        ]
+    }
+}

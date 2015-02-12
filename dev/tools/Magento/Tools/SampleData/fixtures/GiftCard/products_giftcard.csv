@@ -1,0 +1,15 @@
+category,name,sku,qty,description,price,type,format,attribute_set,gift_message_available
+"Gift Cards","Luma Mailed Gift Card",243-MB04,100,"A Luma gift card is specially wrapped in a custom art mailer and sent at no charge to your special someone. It can be redeemed in store, by phone, or on any of the Luma family of websites. It will never expire. Give the gift of purchase power!","25
+50
+100
+200
+Custom","Products
+Video Streaming
+All-Purpose",Physical,"Gift Card",1
+"Gift Cards","Luma Virtual Gift Card",243-MB09,,"A Luma virtual gift card is emailed with an optional message to your special someone. It can be redeemed on any of the Luma family of websites and will never expire. Give the gift of purchase power!","25
+50
+100
+200
+Custom","Products
+Video Streaming
+All-Purpose",Virtual,"Gift Card",1

@@ -1,0 +1,5 @@
+title,identifier,content
+Login Info Block,login-data,"<div class=""message info"" style=""margin-top: 50px;"">
+    <p><span style=""display:inline-block; width: 80px; padding-right: 10px;"">Email:</span>roni_cost@dmail.com</p>
+    <p><span style=""display:inline-block; width: 80px; padding-right: 10px;"">Password:</span>yayitsroni!</p>
+</div>"
