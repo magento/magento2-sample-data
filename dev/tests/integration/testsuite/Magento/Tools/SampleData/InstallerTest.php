@@ -16,26 +16,37 @@ class InstallerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLaunch()
     {
-        $this->markTestSkipped('Skipped because of amount of time required for test.');
-
-        $setupFactory = $this->getMockBuilder('Magento\Tools\SampleData\SetupFactory')->disableOriginalConstructor()
+        $setupFactory = $this->getMockBuilder('Magento\Tools\SampleData\SetupFactory')
+            ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMock();
 
         $setupFactory->expects($this->any())->method('create')
             ->will($this->returnCallback([$this, 'createSetupModel']));
 
-        /** @var \Magento\Tools\SampleData\Installer $installer */
-        $installer = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
-            'Magento\Tools\SampleData\Installer',
+        \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->configure(
             [
-                'data' => ['admin_username' => 'adminUser'],
-                'logger' => TestLogger::factory(),
+                'preferences' =>
+                    ['Magento\Tools\SampleData\Helper\Fixture' => 'Magento\Tools\SampleData\Helper\TestFixture']
             ]
         );
 
+        /** @var \Magento\Tools\SampleData\Installer $installer */
+        $installer = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
+            ->create('Magento\Tools\SampleData\Installer');
+
+        /** @var \Magento\User\Model\UserFactory $userFactory */
+        $userFactory = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
+            ->get('Magento\User\Model\UserFactory');
+        $user = $userFactory->create()->loadByUsername('adminUser');
+
+        /** @var \Magento\Tools\SampleData\Logger $sampleDataLogger */
+        $sampleDataLogger = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
+            ->get('Magento\Tools\SampleData\Logger');
+        $sampleDataLogger->setSubject(TestLogger::factory());
+
         ob_start();
-        $installer->launch();
+        $installer->run($user);
         $result = ob_get_clean();
         $this->assertContains('Installing theme', $result);
         $this->assertContains('Installing customers', $result);
@@ -44,11 +55,9 @@ class InstallerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Installing categories', $result);
         $this->assertContains('Installing simple products', $result);
         $this->assertContains('Installing configurable products', $result);
-        $this->assertContains('Installing downloadable products', $result);
         $this->assertContains('Installing bundle products', $result);
         $this->assertContains('Installing grouped products', $result);
         $this->assertContains('Installing Tablerate', $result);
-        $this->assertContains('Installing virtual products', $result);
         $this->assertContains('Installing taxes', $result);
         $this->assertContains('Installing CMS blocks', $result);
         $this->assertContains('Installing orders', $result);
