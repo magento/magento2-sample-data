@@ -2,6 +2,7 @@
     "name": "magento/sample-data",
     "version": "0.42.0-beta10",
     "type": "metapackage",
+    "minimum-stability": "beta",
     "require": {
         "magento/sample-data-fixtures": "self.version",
         "magento/sample-data-media": "~0.42.0-beta2"
