@@ -46,10 +46,11 @@ if (!file_exists($sampleDataSource)) {
 
 $excludePaths = [];
 $unusedPaths = [];
+$ignorePath = include __DIR__ . '/build-sample-data-ignore.php';
 
 switch ($command) {
     case 'link':
-        foreach (scanFiles($sampleDataSource) as $filename) {
+        foreach (scanFiles($sampleDataSource, $ignorePath) as $filename) {
             $target = preg_replace('#^' . preg_quote($sampleDataSource) . "#", '', $filename);
 
             if (!file_exists(dirname($ceSource . $target))) {
@@ -142,16 +143,22 @@ function formatContent(&$content)
 /**
  * Scan all files from Magento root
  *
- * @param string $path
+ * @param $path
+ * @param array $ignorePath
  * @return array
  */
-function scanFiles($path)
+function scanFiles($path, $ignorePath = [])
 {
+    global $sampleDataSource;
+
     $results = [];
     foreach (glob($path . DIRECTORY_SEPARATOR . '*') as $filename) {
-        $results[] = $filename;
-        if (is_dir($filename)) {
-            $results = array_merge($results, scanFiles($filename));
+        $target = preg_replace('#^' . preg_quote($sampleDataSource) . "#", '', $filename);
+        if (!in_array(resolvePath($target), $ignorePath)) {
+            $results[] = $filename;
+            if (is_dir($filename)) {
+                $results = array_merge($results, scanFiles($filename, $ignorePath));
+            }
         }
     }
     return $results;
