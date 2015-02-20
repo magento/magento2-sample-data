@@ -5,7 +5,7 @@
  */
 namespace Magento\Tools\SampleData\Helper;
 
-use Magento\Framework\Store\StoreManagerInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class StoreManager
@@ -28,12 +28,12 @@ class StoreManager
     protected $website;
 
     /**
-     * @var \Magento\Framework\Store\StoreManagerInterface
+     * @var Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
 
     /**
-     * @param \Magento\Framework\Store\StoreManagerInterface $storeManager
+     * @param Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         StoreManagerInterface $storeManager
