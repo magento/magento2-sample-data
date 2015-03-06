@@ -3,6 +3,6 @@
     "description": "Sample Data media files",
     "version": "0.42.0-beta2",
     "require": {
-        "magento/sample-data-fixtures": "~0.42.0-beta10"
+        "magento/sample-data-fixtures": "~0.42.0-beta11"
     }
 }
