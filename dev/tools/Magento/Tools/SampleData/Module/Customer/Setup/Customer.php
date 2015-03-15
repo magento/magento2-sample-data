@@ -137,17 +137,29 @@ class Customer implements SetupInterface
                     RegionInterface::REGION_CODE => !empty($address['region_code']) ? $address['region_code'] : null,
                 ];
                 $region = $this->regionFactory->create();
-                $this->dataObjectHelper->populateWithArray($region, $regionData);
+                $this->dataObjectHelper->populateWithArray(
+                    $region,
+                    $regionData,
+                    '\Magento\Customer\Api\Data\RegionInterface'
+                );
 
                 $addresses = $this->addressFactory->create();
                 unset($customerData['address']['region']);
-                $this->dataObjectHelper->populateWithArray($addresses, $customerData['address']);
+                $this->dataObjectHelper->populateWithArray(
+                    $addresses,
+                    $customerData['address'],
+                    '\Magento\Customer\Api\Data\AddressInterface'
+                );
                 $addresses->setRegion($region)
                     ->setIsDefaultBilling(true)
                     ->setIsDefaultShipping(true);
 
                 $customer = $this->customerFactory->create();
-                $this->dataObjectHelper->populateWithArray($customer, $customerData['profile']);
+                $this->dataObjectHelper->populateWithArray(
+                    $customer,
+                    $customerData['profile'],
+                    '\Magento\Customer\Api\Data\CustomerInterface'
+                );
                 $customer->setAddresses([$addresses]);
 
                 $this->accountManagement->createAccount($customer, $row['password']);
