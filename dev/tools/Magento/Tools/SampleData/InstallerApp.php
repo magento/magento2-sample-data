@@ -78,7 +78,7 @@ class InstallerApp implements \Magento\Framework\AppInterface
         $this->response = $response;
         $this->installer = $installer;
         $this->userFactory = $userFactory;
-        $this->adminUserName = isset($data['admin_username']) ? $data['admin_username'] : '';
+        $this->adminUserName = isset($data['admin_user']) ? $data['admin_user'] : '';
     }
 
     /**
