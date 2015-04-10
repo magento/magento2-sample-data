@@ -1,9 +1,9 @@
 {
     "name": "magento/sample-data-fixtures",
     "description": "Sample Data fixtures",
-    "version": "0.74.0-beta3",
+    "version": "0.74.0-beta4",
     "require": {
-        "magento/framework": "~0.74.0-beta3",
+        "magento/framework": "~0.74.0-beta4",
         "magento/magento-composer-installer": "*"
     },
     "type": "magento2-component",
