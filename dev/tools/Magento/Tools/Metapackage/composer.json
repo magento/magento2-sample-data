@@ -1,6 +1,6 @@
 {
     "name": "magento/sample-data",
-    "version": "0.74.0-beta5",
+    "version": "0.74.0-beta6",
     "type": "metapackage",
     "require": {
         "magento/sample-data-fixtures": "self.version",
