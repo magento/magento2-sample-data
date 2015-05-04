@@ -17,6 +17,8 @@ use Magento\Framework\Console\Cli;
 use Magento\Setup\Model\AdminAccount;
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\State;
+use Magento\Setup\Model\SampleData;
+use Magento\Setup\Model\ConsoleLogger;
 
 /**
  * Command for installing Sample Data
@@ -36,15 +38,22 @@ class SampleDataInstallCommand extends Command
     protected $objectManager;
 
     /**
+     * @var SampleData
+     */
+    private $sampleData;
+
+    /**
      * Constructor
      *
      * @param ObjectManagerFactory $objectManagerFactory
+     * @param SampleData $sampleData
      */
-    public function __construct(ObjectManagerFactory $objectManagerFactory)
+    public function __construct(ObjectManagerFactory $objectManagerFactory, SampleData $sampleData)
     {
         $params[Bootstrap::PARAM_REQUIRE_MAINTENANCE] = null;
         $params[State::PARAM_MODE] = State::MODE_DEVELOPER;
         $this->objectManager = $objectManagerFactory->create($params);
+        $this->sampleData = $sampleData;
         parent::__construct();
     }
 
@@ -78,10 +87,9 @@ class SampleDataInstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $user = $input->getArgument(AdminAccount::KEY_USER);
-        /** @var \Magento\SampleData\Model\InstallerApp $installerApp*/
-        $installerApp = $this->objectManager->create('Magento\SampleData\Model\InstallerApp', ['data' => $user]);
-        $installerApp->launch();
+        $adminUserName = $input->getArgument(AdminAccount::KEY_USER);
+        $logger = new ConsoleLogger($output);
+        $this->sampleData->install($this->objectManager, $logger, $adminUserName);
         $output->writeln('<info>' . 'Successfully installed sample data.' . '</info>');
     }
 }
