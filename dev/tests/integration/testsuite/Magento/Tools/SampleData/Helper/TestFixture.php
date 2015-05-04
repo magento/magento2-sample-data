@@ -4,10 +4,10 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\SampleData\Helper;
+namespace Magento\Tools\SampleData\Helper;
 
 
-class TestFixture extends Fixture
+class TestFixture extends Magento\SampleData\Helper\Fixture
 {
     public function getPath($subPath)
     {
