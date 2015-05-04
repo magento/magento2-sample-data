@@ -3,13 +3,13 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Catalog\Setup\Product;
+namespace Magento\SampleData\Module\Catalog\Setup\Product;
 
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Catalog\Model\Resource\Product\Attribute\Backend\Media as GalleryAttribute;
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Logger;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\Logger;
 
 /**
  * Class Gallery
@@ -174,7 +174,7 @@ class Gallery
     {
         $this->images = [];
         foreach ($this->fixtures as $file) {
-            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {

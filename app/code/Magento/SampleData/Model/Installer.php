@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData;
+namespace Magento\SampleData\Model;
 
 /**
  * Model for installation Sample Data
@@ -47,7 +47,7 @@ class Installer
     public function __construct(
         \Magento\Framework\Module\ModuleListInterface $moduleList,
         \Magento\SampleData\Helper\Deploy $deploy,
-        \Magento\SampleData\SetupFactory $setupFactory,
+        \Magento\SampleData\Model\SetupFactory $setupFactory,
         \Magento\SampleData\Helper\PostInstaller $postInstaller,
         \Magento\Backend\Model\Auth\Session $session
     ) {
@@ -97,7 +97,7 @@ class Installer
     private function initResources()
     {
         $config = [];
-        foreach (glob(__DIR__ . '/config/*.php') as $filename) {
+        foreach (glob(__DIR__ . '/../config/*.php') as $filename) {
             if (is_file($filename)) {
                 $configPart = include $filename;
                 $config = array_merge_recursive($config, $configPart);

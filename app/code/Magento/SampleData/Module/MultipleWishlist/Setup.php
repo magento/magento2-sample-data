@@ -4,10 +4,10 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\MultipleWishlist;
+namespace Magento\SampleData\Module\MultipleWishlist;
 
-use Magento\Tools\SampleData\Helper\PostInstaller;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\PostInstaller;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Launches setup of sample data for MultipleWishlist module
@@ -41,7 +41,7 @@ class Setup implements SetupInterface
      */
     public function run()
     {
-        $this->postInstaller->removeSetupResourceType('Magento\Tools\SampleData\Module\Wishlist\Setup\Wishlist');
+        $this->postInstaller->removeSetupResourceType('Magento\SampleData\Module\Wishlist\Setup\Wishlist');
         $this->postInstaller->addSetupResource($this->wishlistSetup);
     }
 }

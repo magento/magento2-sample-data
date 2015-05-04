@@ -3,17 +3,17 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Downloadable\Setup;
+namespace Magento\SampleData\Module\Downloadable\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Module\Catalog\Setup\Product\Gallery;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Module\Catalog\Setup\Product\Gallery;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Setup downloadable product
  */
-class Product extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product implements SetupInterface
+class Product extends \Magento\SampleData\Module\Catalog\Setup\Product implements SetupInterface
 {
     /**
      * @var string
@@ -21,7 +21,7 @@ class Product extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product imp
     protected $productType = \Magento\Downloadable\Model\Product\Type::TYPE_DOWNLOADABLE;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Deploy
+     * @var \Magento\SampleData\Helper\Deploy
      */
     protected $deployHelper;
 
@@ -37,9 +37,9 @@ class Product extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product imp
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param Gallery $gallery
-     * @param \Magento\Tools\SampleData\Logger $logger
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
-     * @param \Magento\Tools\SampleData\Helper\Deploy $deployHelper
+     * @param \Magento\SampleData\Model\Logger $logger
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Helper\Deploy $deployHelper
      * @param array $fixtures
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -50,9 +50,9 @@ class Product extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product imp
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         Gallery $gallery,
-        \Magento\Tools\SampleData\Logger $logger,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
-        \Magento\Tools\SampleData\Helper\Deploy $deployHelper,
+        \Magento\SampleData\Model\Logger $logger,
+        \Magento\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Helper\Deploy $deployHelper,
         $fixtures = ['Downloadable/products_training_video_download.csv']
     ) {
         $this->deployHelper = $deployHelper;

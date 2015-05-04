@@ -3,13 +3,13 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData;
+namespace Magento\SampleData\Model;
 
 use Magento\Framework\ObjectManagerInterface;
 
 class SetupFactory
 {
-    const INSTANCE_TYPE = 'Magento\SampleData\SetupInterface';
+    const INSTANCE_TYPE = 'Magento\SampleData\Model\SetupInterface';
 
     /**
      * @var ObjectManagerInterface

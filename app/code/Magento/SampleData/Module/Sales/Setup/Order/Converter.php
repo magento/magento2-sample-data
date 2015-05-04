@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\Sales\Setup\Order;
+namespace Magento\SampleData\Module\Sales\Setup\Order;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 
@@ -24,7 +24,7 @@ class Converter
     protected $productFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter
+     * @var \Magento\SampleData\Module\Catalog\Setup\Product\Converter
      */
     protected $productConverter;
 
@@ -36,13 +36,13 @@ class Converter
     /**
      * @param CustomerRepositoryInterface $customerAccount
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter $productConverter
+     * @param \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         CustomerRepositoryInterface $customerAccount,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter $productConverter,
+        \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->customerRepository = $customerAccount;

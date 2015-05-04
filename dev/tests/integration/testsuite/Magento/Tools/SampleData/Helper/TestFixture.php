@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Helper;
+namespace Magento\SampleData\Helper;
 
 
 class TestFixture extends Fixture

@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Sales\Setup\Order;
+namespace Magento\SampleData\Module\Sales\Setup\Order;
 
 use Magento\Framework\Object;
 
@@ -60,12 +60,12 @@ class Processor
     protected $creditmemoLoaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
     /**
-     * @var \Magento\Tools\SampleData\ObserverManager
+     * @var \Magento\SampleData\Model\ObserverManager
      */
     protected $observerManager;
 
@@ -80,8 +80,8 @@ class Processor
      * @param \Magento\Sales\Model\Service\OrderFactory $serviceOrderFactory
      * @param \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory
      * @param \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
-     * @param \Magento\Tools\SampleData\ObserverManager $observerManager
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Model\ObserverManager $observerManager
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -95,8 +95,8 @@ class Processor
         \Magento\Sales\Model\Service\OrderFactory $serviceOrderFactory,
         \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory,
         \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
-        \Magento\Tools\SampleData\ObserverManager $observerManager
+        \Magento\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Model\ObserverManager $observerManager
     ) {
         $this->coreRegistry = $coreRegistry;
         $this->rendererCompositeFactory = $rendererCompositeFactory;

@@ -4,9 +4,9 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\GroupedProduct;
+namespace Magento\SampleData\Module\GroupedProduct;
 
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Launches setup of sample data for GroupedProduct module

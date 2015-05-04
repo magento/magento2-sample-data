@@ -3,11 +3,11 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Tax\Setup;
+namespace Magento\SampleData\Module\Tax\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Tax
@@ -40,17 +40,17 @@ class Tax implements SetupInterface
     protected $taxRateFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
@@ -62,7 +62,7 @@ class Tax implements SetupInterface
      * @param \Magento\Tax\Model\Calculation\RateFactory $taxRateFactory
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
-     * @param \Magento\Tools\SampleData\Logger $logger
+     * @param \Magento\SampleData\Model\Logger $logger
      */
     public function __construct(
         \Magento\Tax\Api\TaxRuleRepositoryInterface $taxRuleRepository,
@@ -72,7 +72,7 @@ class Tax implements SetupInterface
         \Magento\Tax\Model\Calculation\RateFactory $taxRateFactory,
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
-        \Magento\Tools\SampleData\Logger $logger
+        \Magento\SampleData\Model\Logger $logger
     ) {
         $this->taxRuleRepository = $taxRuleRepository;
         $this->ruleFactory = $ruleFactory;
@@ -92,7 +92,7 @@ class Tax implements SetupInterface
         $this->logger->log('Installing taxes:');
         $fixtureFile = 'Tax/tax_rate.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-        /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+        /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $data) {
             $taxRate = $this->rateFactory->create();
@@ -107,7 +107,7 @@ class Tax implements SetupInterface
 
         $fixtureFile = 'Tax/tax_rule.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-        /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+        /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $data) {
             $taxRate = $this->taxRateFactory->create()->loadByCode($data['tax_rate']);

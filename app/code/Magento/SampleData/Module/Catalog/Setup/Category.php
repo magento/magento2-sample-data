@@ -3,11 +3,11 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Catalog\Setup;
+namespace Magento\SampleData\Module\Catalog\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Category
@@ -20,7 +20,7 @@ class Category implements SetupInterface
     protected $categoryFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -50,12 +50,12 @@ class Category implements SetupInterface
     protected $categoryTree;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Deploy
+     * @var \Magento\SampleData\Helper\Deploy
      */
     protected $deployHelper;
 
@@ -68,20 +68,20 @@ class Category implements SetupInterface
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param FixtureHelper $fixtureHelper
-     * @param \Magento\Tools\SampleData\Logger $logger
-     * @param \Magento\Tools\SampleData\Helper\Deploy $deployHelper
+     * @param \Magento\SampleData\Model\Logger $logger
+     * @param \Magento\SampleData\Helper\Deploy $deployHelper
      * @param CsvReaderFactory $csvReaderFactory
      */
     public function __construct(
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory,
         \Magento\Framework\Module\ModuleListInterface $moduleList,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Helper\StoreManager $storeManager,
         FixtureHelper $fixtureHelper,
-        \Magento\Tools\SampleData\Logger $logger,
-        \Magento\Tools\SampleData\Helper\Deploy $deployHelper,
+        \Magento\SampleData\Model\Logger $logger,
+        \Magento\SampleData\Helper\Deploy $deployHelper,
         CsvReaderFactory $csvReaderFactory
     ) {
         $this->categoryFactory = $categoryFactory;

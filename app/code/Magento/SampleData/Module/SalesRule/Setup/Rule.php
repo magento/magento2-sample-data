@@ -3,14 +3,14 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\SalesRule\Setup;
+namespace Magento\SampleData\Module\SalesRule\Setup;
 
 use Magento\SalesRule\Model\RuleFactory as RuleFactory;
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Logger;
-use Magento\Tools\SampleData\Module\CatalogRule\Setup\Rule as CatalogRule;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\Logger;
+use Magento\SampleData\Module\CatalogRule\Setup\Rule as CatalogRule;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Rule
@@ -23,7 +23,7 @@ class Rule implements SetupInterface
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 

@@ -3,9 +3,9 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\ConfigurableProduct\Setup\Product;
+namespace Magento\SampleData\Module\ConfigurableProduct\Setup\Product;
 
-class Converter extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter
+class Converter extends \Magento\SampleData\Module\Catalog\Setup\Product\Converter
 {
     /**
      * @var \Magento\ConfigurableProduct\Model\Product\Type\VariationMatrix

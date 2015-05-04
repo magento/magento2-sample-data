@@ -3,17 +3,17 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\GiftCard\Setup;
+namespace Magento\SampleData\Module\GiftCard\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Module\Catalog\Setup\Product\Gallery;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Module\Catalog\Setup\Product\Gallery;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Setup Gift Card
  */
-class Product extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product implements SetupInterface
+class Product extends \Magento\SampleData\Module\Catalog\Setup\Product implements SetupInterface
 {
     /**
      * @var string
@@ -27,8 +27,8 @@ class Product extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product imp
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param Gallery $gallery
-     * @param \Magento\Tools\SampleData\Logger $logger
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Model\Logger $logger
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param array $fixtures
      * @codingStandardsIgnoreStart
      */
@@ -39,8 +39,8 @@ class Product extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product imp
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         Gallery $gallery,
-        \Magento\Tools\SampleData\Logger $logger,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Model\Logger $logger,
+        \Magento\SampleData\Helper\StoreManager $storeManager,
         $fixtures = [
             'GiftCard/products_giftcard.csv',
         ]

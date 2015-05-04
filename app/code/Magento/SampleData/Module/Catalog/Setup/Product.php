@@ -3,11 +3,11 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Catalog\Setup;
+namespace Magento\SampleData\Module\Catalog\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Product
@@ -42,17 +42,17 @@ class Product implements SetupInterface
     protected $converter;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $fixtures;
 
@@ -62,12 +62,12 @@ class Product implements SetupInterface
     protected $gallery;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -78,8 +78,8 @@ class Product implements SetupInterface
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param Product\Gallery $gallery
-     * @param \Magento\Tools\SampleData\Logger $logger
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Model\Logger $logger
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param array $fixtures
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      * @codingStandardsIgnoreStart
@@ -91,8 +91,8 @@ class Product implements SetupInterface
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         Product\Gallery $gallery,
-        \Magento\Tools\SampleData\Logger $logger,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Model\Logger $logger,
+        \Magento\SampleData\Helper\StoreManager $storeManager,
         $fixtures = [
             'Catalog/SimpleProduct/products_gear_bags.csv',
             'Catalog/SimpleProduct/products_gear_fitness_equipment.csv',
@@ -122,7 +122,7 @@ class Product implements SetupInterface
         $product = $this->productFactory->create();
 
         foreach ($this->fixtures as $file) {
-            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {

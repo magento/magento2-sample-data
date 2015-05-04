@@ -4,11 +4,11 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\Widget\Setup;
+namespace Magento\SampleData\Module\Widget\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Launches setup of sample data for Widget module
@@ -21,17 +21,17 @@ class CmsBlock implements SetupInterface
     protected $categoryFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $fixtures;
 
@@ -51,7 +51,7 @@ class CmsBlock implements SetupInterface
     protected $cmsBlockFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
@@ -62,7 +62,7 @@ class CmsBlock implements SetupInterface
      * @param \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
      * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
-     * @param \Magento\Tools\SampleData\Logger $logger
+     * @param \Magento\SampleData\Model\Logger $logger
      * @param array $fixtures
      */
     public function __construct(
@@ -72,7 +72,7 @@ class CmsBlock implements SetupInterface
         \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory,
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
         \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory,
-        \Magento\Tools\SampleData\Logger $logger,
+        \Magento\SampleData\Model\Logger $logger,
         $fixtures = []
     ) {
         $this->fixtureHelper = $fixtureHelper;

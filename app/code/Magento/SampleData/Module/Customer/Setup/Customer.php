@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Customer\Setup;
+namespace Magento\SampleData\Module\Customer\Setup;
 
 use Magento\Customer\Api\Data\RegionInterface;
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Customer
@@ -60,12 +60,12 @@ class Customer implements SetupInterface
     protected $customerDataAddress;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -82,8 +82,8 @@ class Customer implements SetupInterface
      * @param \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory
      * @param \Magento\Customer\Api\Data\RegionInterfaceFactory $regionFactory
      * @param \Magento\Customer\Api\AccountManagementInterface $accountManagement
-     * @param \Magento\Tools\SampleData\Logger $logger
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Model\Logger $logger
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
      * @param array $fixtures
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
@@ -96,8 +96,8 @@ class Customer implements SetupInterface
         \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory,
         \Magento\Customer\Api\Data\RegionInterfaceFactory $regionFactory,
         \Magento\Customer\Api\AccountManagementInterface $accountManagement,
-        \Magento\Tools\SampleData\Logger $logger,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Model\Logger $logger,
+        \Magento\SampleData\Helper\StoreManager $storeManager,
         \Magento\Framework\Api\DataObjectHelper $dataObjectHelper,
         $fixtures = ['Customer/customer_profile.csv']
     ) {
@@ -121,7 +121,7 @@ class Customer implements SetupInterface
     {
         $this->logger->log('Installing customers:');
         foreach ($this->fixtures as $file) {
-            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {

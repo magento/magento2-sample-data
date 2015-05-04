@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\MultipleWishlist\Setup;
+namespace Magento\SampleData\Module\MultipleWishlist\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Logger;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\Logger;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Installation of sample data for multiple wishlist
@@ -16,17 +16,17 @@ use Magento\Tools\SampleData\SetupInterface;
 class Wishlist implements SetupInterface
 {
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Module\Wishlist\Setup\Wishlist\Helper
+     * @var \Magento\SampleData\Module\Wishlist\Setup\Wishlist\Helper
      */
     protected $wishlistHelper;
 
@@ -63,7 +63,7 @@ class Wishlist implements SetupInterface
     /**
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
-     * @param \Magento\Tools\SampleData\Module\Wishlist\Setup\Wishlist\Helper $wishlistHelper
+     * @param \Magento\SampleData\Module\Wishlist\Setup\Wishlist\Helper $wishlistHelper
      * @param \Magento\MultipleWishlist\Model\WishlistEditor $wishlistEditor
      * @param \Magento\Wishlist\Model\Resource\Wishlist\CollectionFactory $wishlistColFactory
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
@@ -74,7 +74,7 @@ class Wishlist implements SetupInterface
     public function __construct(
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
-        \Magento\Tools\SampleData\Module\Wishlist\Setup\Wishlist\Helper $wishlistHelper,
+        \Magento\SampleData\Module\Wishlist\Setup\Wishlist\Helper $wishlistHelper,
         \Magento\MultipleWishlist\Model\WishlistEditor $wishlistEditor,
         \Magento\Wishlist\Model\Resource\Wishlist\CollectionFactory $wishlistColFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
@@ -108,7 +108,7 @@ class Wishlist implements SetupInterface
         $fixtureFiles = ['Wishlist/wishlist.csv', 'MultipleWishlist/wishlist.csv'];
         foreach ($fixtureFiles as $fixtureFile) {
             $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
             foreach ($csvReader as $row) {
                 /** @var \Magento\Customer\Model\Customer $customer */

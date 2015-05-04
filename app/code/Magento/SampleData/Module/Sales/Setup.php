@@ -3,11 +3,11 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Sales;
+namespace Magento\SampleData\Module\Sales;
 
 use Magento\Framework\App\State;
-use Magento\Tools\SampleData\Helper\PostInstaller;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\PostInstaller;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Setup

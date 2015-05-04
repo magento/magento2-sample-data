@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Cms\Setup\Block;
+namespace Magento\SampleData\Module\Cms\Setup\Block;
 
 /**
  * Class Converter
@@ -16,7 +16,7 @@ class Converter
     protected $categoryFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter
+     * @var \Magento\SampleData\Module\Catalog\Setup\Product\Converter
      */
     protected $productConverter;
 
@@ -48,7 +48,7 @@ class Converter
     /**
      * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
      * @param \Magento\Eav\Model\Config $eavConfig
-     * @param \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter $productConverter
+     * @param \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter
      * @param \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory
      * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
      * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
@@ -56,7 +56,7 @@ class Converter
     public function __construct(
         \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory,
         \Magento\Eav\Model\Config $eavConfig,
-        \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter $productConverter,
+        \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter,
         \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory,
         \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
         \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory

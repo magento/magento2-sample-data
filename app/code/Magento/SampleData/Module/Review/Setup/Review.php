@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Review\Setup;
+namespace Magento\SampleData\Module\Review\Setup;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Review
@@ -23,12 +23,12 @@ class Review implements SetupInterface
     protected $reviewFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
@@ -48,7 +48,7 @@ class Review implements SetupInterface
     protected $productCollection;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
@@ -73,7 +73,7 @@ class Review implements SetupInterface
     protected $entityId;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -84,9 +84,9 @@ class Review implements SetupInterface
      * @param \Magento\Review\Model\RatingFactory $ratingFactory
      * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
      * @param CustomerRepositoryInterface $customerAccount
-     * @param \Magento\Tools\SampleData\Logger $logger
+     * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      */
     public function __construct(
         \Magento\Review\Model\ReviewFactory $reviewFactory,
@@ -95,9 +95,9 @@ class Review implements SetupInterface
         \Magento\Review\Model\RatingFactory $ratingFactory,
         \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
         CustomerRepositoryInterface $customerAccount,
-        \Magento\Tools\SampleData\Logger $logger,
+        \Magento\SampleData\Model\Logger $logger,
         \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+        \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         $this->reviewFactory = $reviewFactory;
         $this->fixtureHelper = $fixtureHelper;
@@ -118,7 +118,7 @@ class Review implements SetupInterface
         $this->logger->log('Installing product reviews:');
         $fixtureFile = 'Review/products_reviews.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-        /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+        /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $row) {
             $storeId = [$this->storeManager->getStoreId()];

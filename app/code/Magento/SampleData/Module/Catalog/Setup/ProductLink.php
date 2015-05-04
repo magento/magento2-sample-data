@@ -3,11 +3,11 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Catalog\Setup;
+namespace Magento\SampleData\Module\Catalog\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Product links setup
@@ -35,12 +35,12 @@ class ProductLink implements SetupInterface
     protected $linksInitializer;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\PostInstaller
+     * @var \Magento\SampleData\Helper\PostInstaller
      */
     protected $postInstaller;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
@@ -49,16 +49,16 @@ class ProductLink implements SetupInterface
      * @param FixtureHelper $fixtureHelper
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks $linksInitializer
-     * @param \Magento\Tools\SampleData\Helper\PostInstaller $postInstaller
-     * @param \Magento\Tools\SampleData\Logger $logger
+     * @param \Magento\SampleData\Helper\PostInstaller $postInstaller
+     * @param \Magento\SampleData\Model\Logger $logger
      */
     public function __construct(
         CsvReaderFactory $csvReaderFactory,
         FixtureHelper $fixtureHelper,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks $linksInitializer,
-        \Magento\Tools\SampleData\Helper\PostInstaller $postInstaller,
-        \Magento\Tools\SampleData\Logger $logger
+        \Magento\SampleData\Helper\PostInstaller $postInstaller,
+        \Magento\SampleData\Model\Logger $logger
     ) {
         $this->csvReaderFactory = $csvReaderFactory;
         $this->fixtureHelper = $fixtureHelper;
@@ -87,7 +87,7 @@ class ProductLink implements SetupInterface
                 if (!$fileName) {
                     continue;
                 }
-                /** @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory $csvReader */
+                /** @var \Magento\SampleData\Helper\Csv\ReaderFactory $csvReader */
                 $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
                 foreach ($csvReader as $row) {
                     /** @var \Magento\Catalog\Model\Product $product */

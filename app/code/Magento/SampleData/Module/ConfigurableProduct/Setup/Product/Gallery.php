@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\ConfigurableProduct\Setup\Product;
+namespace Magento\SampleData\Module\ConfigurableProduct\Setup\Product;
 
 /**
  * Class Gallery
  */
-class Gallery extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Gallery
+class Gallery extends \Magento\SampleData\Module\Catalog\Setup\Product\Gallery
 {
     /**
      * {@inheritdoc}

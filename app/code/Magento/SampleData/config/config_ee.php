@@ -6,9 +6,9 @@
 
 return [
     'setup_resources' => [
-        'Magento_GiftCard' => 'Magento\Tools\SampleData\Module\GiftCard\Setup',
-        'Magento_TargetRule' => 'Magento\Tools\SampleData\Module\TargetRule\Setup',
-        'Magento_MultipleWishlist' => 'Magento\Tools\SampleData\Module\MultipleWishlist\Setup',
-        'Magento_GiftRegistry' => 'Magento\Tools\SampleData\Module\GiftRegistry\Setup',
+        'Magento_GiftCard' => 'Magento\SampleData\Module\GiftCard\Setup',
+        'Magento_TargetRule' => 'Magento\SampleData\Module\TargetRule\Setup',
+        'Magento_MultipleWishlist' => 'Magento\SampleData\Module\MultipleWishlist\Setup',
+        'Magento_GiftRegistry' => 'Magento\SampleData\Module\GiftRegistry\Setup',
     ],
 ];

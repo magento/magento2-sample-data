@@ -4,11 +4,11 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\Cms\Setup;
+namespace Magento\SampleData\Module\Cms\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Launches setup of sample data for CMS Page
@@ -16,12 +16,12 @@ use Magento\Tools\SampleData\SetupInterface;
 class Page implements SetupInterface
 {
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
@@ -31,12 +31,12 @@ class Page implements SetupInterface
     protected $pageFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $fixtures;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
@@ -44,7 +44,7 @@ class Page implements SetupInterface
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Cms\Model\PageFactory $pageFactory
-     * @param \Magento\Tools\SampleData\Logger $logger
+     * @param \Magento\SampleData\Model\Logger $logger
      * @param array $fixtures
      * @codingStandardsIgnoreStart
      */
@@ -52,7 +52,7 @@ class Page implements SetupInterface
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         \Magento\Cms\Model\PageFactory $pageFactory,
-        \Magento\Tools\SampleData\Logger $logger,
+        \Magento\SampleData\Model\Logger $logger,
         $fixtures = [
             'Cms/Page/pages.csv',
         ]
@@ -73,7 +73,7 @@ class Page implements SetupInterface
         $this->logger->log('Installing CMS pages:');
 
         foreach ($this->fixtures as $file) {
-            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {

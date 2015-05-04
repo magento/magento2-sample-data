@@ -3,10 +3,10 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Helper\Csv;
+namespace Magento\SampleData\Helper\Csv;
 
 /**
- * Factory class for \Magento\Tools\SampleData\Helper\Csv\Reader
+ * Factory class for \Magento\SampleData\Helper\Csv\Reader
  */
 class ReaderFactory
 {
@@ -32,7 +32,7 @@ class ReaderFactory
      */
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
-        $instanceName = 'Magento\Tools\SampleData\Helper\Csv\Reader'
+        $instanceName = 'Magento\SampleData\Helper\Csv\Reader'
     ) {
         $this->_objectManager = $objectManager;
         $this->_instanceName = $instanceName;
@@ -42,7 +42,7 @@ class ReaderFactory
      * Create class instance with specified parameters
      *
      * @param array $data
-     * @return \Magento\Tools\SampleData\Helper\Csv\Reader
+     * @return \Magento\SampleData\Helper\Csv\Reader
      */
     public function create(array $data = [])
     {

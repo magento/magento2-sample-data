@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData;
+namespace Magento\SampleData\Model;
 
 interface SetupInterface
 {

@@ -4,12 +4,12 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\Bundle\Setup\Product;
+namespace Magento\SampleData\Module\Bundle\Setup\Product;
 
 /**
  * Convert data for bundle product
  */
-class Converter extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter
+class Converter extends \Magento\SampleData\Module\Catalog\Setup\Product\Converter
 {
     /**
      * Convert CSV format row to array

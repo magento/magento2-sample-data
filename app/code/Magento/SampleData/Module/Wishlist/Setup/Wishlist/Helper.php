@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Wishlist\Setup\Wishlist;
+namespace Magento\SampleData\Module\Wishlist\Setup\Wishlist;
 
 /**
  * Common functionality for installation of sample data for Wishlists
@@ -26,7 +26,7 @@ class Helper
     protected $productIndexer;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -34,13 +34,13 @@ class Helper
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      */
     public function __construct(
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+        \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         $this->customerFactory = $customerFactory;
         $this->productFactory = $productFactory;

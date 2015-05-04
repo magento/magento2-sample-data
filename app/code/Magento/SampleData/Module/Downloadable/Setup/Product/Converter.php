@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Downloadable\Setup\Product;
+namespace Magento\SampleData\Module\Downloadable\Setup\Product;
 
 /**
  * Class Converter
  */
-class Converter extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter
+class Converter extends \Magento\SampleData\Module\Catalog\Setup\Product\Converter
 {
     /**
      * Get downloadable data from array

@@ -3,11 +3,11 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Sales\Setup;
+namespace Magento\SampleData\Module\Sales\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Order
@@ -15,27 +15,27 @@ use Magento\Tools\SampleData\SetupInterface;
 class Order implements SetupInterface
 {
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Module\Sales\Setup\Order\Converter
+     * @var \Magento\SampleData\Module\Sales\Setup\Order\Converter
      */
     protected $converter;
 
     /**
-     * @var \Magento\Tools\SampleData\Module\Sales\Setup\Order\Processor
+     * @var \Magento\SampleData\Module\Sales\Setup\Order\Processor
      */
     protected $orderProcessor;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
@@ -44,7 +44,7 @@ class Order implements SetupInterface
      * @param CsvReaderFactory $csvReaderFactory
      * @param Order\Converter $converter
      * @param Order\Processor $orderProcessor
-     * @param \Magento\Tools\SampleData\Logger $logger
+     * @param \Magento\SampleData\Model\Logger $logger
      * @param array $fixtures
      */
     public function __construct(
@@ -52,7 +52,7 @@ class Order implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         Order\Converter $converter,
         Order\Processor $orderProcessor,
-        \Magento\Tools\SampleData\Logger $logger,
+        \Magento\SampleData\Model\Logger $logger,
         $fixtures = ['Sales/orders.csv']
     ) {
         $this->fixtureHelper = $fixtureHelper;

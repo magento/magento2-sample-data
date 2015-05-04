@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData;
+namespace Magento\SampleData\Model;
 
 use Magento\Framework\App\State;
 use Magento\Framework\Event;
@@ -89,8 +89,8 @@ class InstallerApp implements \Magento\Framework\AppInterface
         $areaCode = 'adminhtml';
         $this->appState->setAreaCode($areaCode);
         $this->objectManager->configure($this->configLoader->load($areaCode));
-        /** @var \Magento\SampleData\Logger $sampleDataLogger */
-        $sampleDataLogger = $this->objectManager->get('Magento\SampleData\Logger');
+        /** @var \Magento\SampleData\Model\Logger $sampleDataLogger */
+        $sampleDataLogger = $this->objectManager->get('Magento\SampleData\Model\Logger');
         $sampleDataLogger->setSubject($this->objectManager->get('Magento\Setup\Model\ConsoleLogger'));
 
         $this->installer->run($this->userFactory->create()->loadByUsername($this->adminUserName));

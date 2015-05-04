@@ -3,14 +3,14 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\TargetRule\Setup;
+namespace Magento\SampleData\Module\TargetRule\Setup;
 
 use Magento\TargetRule\Model\Actions\Condition\Product\Attributes as TargetRuleActionAttributes;
 use Magento\TargetRule\Model\RuleFactory as RuleFactory;
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Helper\PostInstaller;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Helper\PostInstaller;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Setup
@@ -24,7 +24,7 @@ class Rule implements SetupInterface
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
@@ -44,7 +44,7 @@ class Rule implements SetupInterface
     protected $categoryReadService;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
@@ -54,7 +54,7 @@ class Rule implements SetupInterface
      * @param RuleFactory $ruleFactory
      * @param \Magento\Catalog\Api\CategoryManagementInterface $categoryReadService
      * @param PostInstaller $postInstaller
-     * @param \Magento\Tools\SampleData\Logger $logger
+     * @param \Magento\SampleData\Model\Logger $logger
      */
     public function __construct(
         CsvReaderFactory $csvReaderFactory,
@@ -62,7 +62,7 @@ class Rule implements SetupInterface
         RuleFactory $ruleFactory,
         \Magento\Catalog\Api\CategoryManagementInterface $categoryReadService,
         PostInstaller $postInstaller,
-        \Magento\Tools\SampleData\Logger $logger
+        \Magento\SampleData\Model\Logger $logger
     ) {
         $this->csvReaderFactory = $csvReaderFactory;
         $this->fixtureHelper = $fixtureHelper;
@@ -117,7 +117,7 @@ class Rule implements SetupInterface
     public function run()
     {
         $this->logger->log('Installing related product rules:');
-        $this->postInstaller->removeSetupResourceType('Magento\Tools\SampleData\Module\Catalog\Setup\ProductLink');
+        $this->postInstaller->removeSetupResourceType('Magento\SampleData\Module\Catalog\Setup\ProductLink');
         $entityFileAssociation = [
             \Magento\TargetRule\Model\Rule::RELATED_PRODUCTS => 'related',
             \Magento\TargetRule\Model\Rule::UP_SELLS => 'upsell',
@@ -130,7 +130,7 @@ class Rule implements SetupInterface
             if (!$fileName) {
                 continue;
             }
-            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {
                 /** @var \Magento\TargetRule\Model\Rule $rule */

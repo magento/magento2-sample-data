@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\GiftRegistry\Setup;
+namespace Magento\SampleData\Module\GiftRegistry\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Logger;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\Logger;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class GiftRegistry
@@ -18,12 +18,12 @@ use Magento\Tools\SampleData\SetupInterface;
 class GiftRegistry implements SetupInterface
 {
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
@@ -68,7 +68,7 @@ class GiftRegistry implements SetupInterface
     protected $productIndexer;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -88,7 +88,7 @@ class GiftRegistry implements SetupInterface
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\GiftRegistry\Model\ItemFactory $itemFactory
      * @param \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param Logger $logger
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -103,7 +103,7 @@ class GiftRegistry implements SetupInterface
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\GiftRegistry\Model\ItemFactory $itemFactory,
         \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Helper\StoreManager $storeManager,
         Logger $logger
     ) {
         $this->fixtureHelper = $fixtureHelper;
@@ -128,7 +128,7 @@ class GiftRegistry implements SetupInterface
         $this->logger->log('Installing Gift Registry:');
         $fixtureFile = 'GiftRegistry/gift_registry.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-        /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+        /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $giftRegistryData) {
             $data = $this->generateData($giftRegistryData);

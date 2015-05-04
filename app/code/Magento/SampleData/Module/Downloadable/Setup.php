@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Downloadable;
+namespace Magento\SampleData\Module\Downloadable;
 
 /**
  * Launches setup of sample data for downloadable module
  */
-class Setup extends \Magento\Tools\SampleData\Module\Catalog\Setup
+class Setup extends \Magento\SampleData\Module\Catalog\Setup
 {
     /**
      * Setup class for products
@@ -18,13 +18,13 @@ class Setup extends \Magento\Tools\SampleData\Module\Catalog\Setup
     protected $productSetup;
 
     /**
-     * @param \Magento\Tools\SampleData\Module\Catalog\Setup\Category $categorySetup
-     * @param \Magento\Tools\SampleData\Module\Catalog\Setup\Attribute $attributeSetup
+     * @param \Magento\SampleData\Module\Catalog\Setup\Category $categorySetup
+     * @param \Magento\SampleData\Module\Catalog\Setup\Attribute $attributeSetup
      * @param Setup\Product $productSetup
      */
     public function __construct(
-        \Magento\Tools\SampleData\Module\Catalog\Setup\Category $categorySetup,
-        \Magento\Tools\SampleData\Module\Catalog\Setup\Attribute $attributeSetup,
+        \Magento\SampleData\Module\Catalog\Setup\Category $categorySetup,
+        \Magento\SampleData\Module\Catalog\Setup\Attribute $attributeSetup,
         Setup\Product $productSetup
     ) {
         $this->categorySetup = $categorySetup;

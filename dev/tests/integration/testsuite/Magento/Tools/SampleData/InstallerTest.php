@@ -16,7 +16,7 @@ class InstallerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLaunch()
     {
-        $setupFactory = $this->getMockBuilder('Magento\Tools\SampleData\SetupFactory')
+        $setupFactory = $this->getMockBuilder('Magento\SampleData\Model\SetupFactory')
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMock();
@@ -31,18 +31,18 @@ class InstallerTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        /** @var \Magento\Tools\SampleData\Installer $installer */
+        /** @var \Magento\SampleData\Model\Installer $installer */
         $installer = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
-            ->create('Magento\Tools\SampleData\Installer');
+            ->create('Magento\SampleData\Model\Installer');
 
         /** @var \Magento\User\Model\UserFactory $userFactory */
         $userFactory = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->get('Magento\User\Model\UserFactory');
         $user = $userFactory->create()->loadByUsername('adminUser');
 
-        /** @var \Magento\Tools\SampleData\Logger $sampleDataLogger */
+        /** @var \Magento\SampleData\Model\Logger $sampleDataLogger */
         $sampleDataLogger = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
-            ->get('Magento\Tools\SampleData\Logger');
+            ->get('Magento\SampleData\Model\Logger');
         $sampleDataLogger->setSubject(TestLogger::factory());
 
         ob_start();

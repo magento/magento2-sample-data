@@ -11,7 +11,7 @@
         "map": [
             [
                 "*",
-                "dev/tools/Magento/Tools/SampleData"
+                "Magento/SampleData"
             ]
         ]
     }

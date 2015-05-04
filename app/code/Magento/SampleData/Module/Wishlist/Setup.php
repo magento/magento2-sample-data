@@ -4,10 +4,10 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\Wishlist;
+namespace Magento\SampleData\Module\Wishlist;
 
-use Magento\Tools\SampleData\Helper\PostInstaller;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\PostInstaller;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Launches setup of sample data for Wishlist module

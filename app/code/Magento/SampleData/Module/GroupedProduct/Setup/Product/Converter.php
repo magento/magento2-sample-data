@@ -4,12 +4,12 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\GroupedProduct\Setup\Product;
+namespace Magento\SampleData\Module\GroupedProduct\Setup\Product;
 
 /**
  * Convert data for grouped product
  */
-class Converter extends \Magento\Tools\SampleData\Module\Catalog\Setup\Product\Converter
+class Converter extends \Magento\SampleData\Module\Catalog\Setup\Product\Converter
 {
     /**
      * @inheritdoc

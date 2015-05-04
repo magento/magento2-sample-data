@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Helper;
+namespace Magento\SampleData\Helper;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use SebastianBergmann\Exporter\Exception;

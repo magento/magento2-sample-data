@@ -3,12 +3,12 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\OfflineShipping\Setup;
+namespace Magento\SampleData\Module\OfflineShipping\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Logger;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\Logger;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Tablerate
@@ -21,12 +21,12 @@ class Tablerate implements SetupInterface
     protected $tablerate;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Fixture
+     * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
@@ -54,7 +54,7 @@ class Tablerate implements SetupInterface
      * @param \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
-     * @var \Magento\Tools\SampleData\Helper\StoreManager
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -71,7 +71,7 @@ class Tablerate implements SetupInterface
      * @param \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
-     * @param \Magento\Tools\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param Logger $logger
      */
     public function __construct(
@@ -82,7 +82,7 @@ class Tablerate implements SetupInterface
         \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
-        \Magento\Tools\SampleData\Helper\StoreManager $storeManager,
+        \Magento\SampleData\Helper\StoreManager $storeManager,
         Logger $logger
     ) {
         $this->tablerate = $tablerate;
@@ -107,7 +107,7 @@ class Tablerate implements SetupInterface
         $fixtureFile = 'OfflineShipping/tablerate.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
         $regions = $this->loadDirectoryRegions();
-        /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
+        /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $data) {
             $regionId = ($data['region'] != '*')

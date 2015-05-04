@@ -3,11 +3,11 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Cms\Setup;
+namespace Magento\SampleData\Module\Cms\Setup;
 
-use Magento\Tools\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Block
@@ -25,7 +25,7 @@ class Block implements SetupInterface
     protected $converter;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $fixtures;
 
@@ -35,17 +35,17 @@ class Block implements SetupInterface
     protected $categoryRepository;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
      */
     protected $csvReaderFactory;
 
     /**
-     * @var \Magento\Tools\SampleData\Logger
+     * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
 
     /**
-     * @var \Magento\Tools\SampleData\Helper\Deploy
+     * @var \Magento\SampleData\Helper\Deploy
      */
     protected $deployHelper;
 
@@ -55,8 +55,8 @@ class Block implements SetupInterface
      * @param \Magento\Cms\Model\BlockFactory $blockFactory
      * @param Block\Converter $converter
      * @param \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository
-     * @param \Magento\Tools\SampleData\Logger $logger
-     * @param \Magento\Tools\SampleData\Helper\Deploy $deployHelper
+     * @param \Magento\SampleData\Model\Logger $logger
+     * @param \Magento\SampleData\Helper\Deploy $deployHelper
      * @param array $fixtures
      */
     public function __construct(
@@ -65,8 +65,8 @@ class Block implements SetupInterface
         \Magento\Cms\Model\BlockFactory $blockFactory,
         Block\Converter $converter,
         \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
-        \Magento\Tools\SampleData\Logger $logger,
-        \Magento\Tools\SampleData\Helper\Deploy $deployHelper,
+        \Magento\SampleData\Model\Logger $logger,
+        \Magento\SampleData\Helper\Deploy $deployHelper,
         $fixtures = []
     ) {
         $this->fixtureHelper = $fixtureHelper;
@@ -93,7 +93,7 @@ class Block implements SetupInterface
             return;
         }
         foreach ($this->fixtures as $file) {
-            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader */
+            /** @var \Magento\SampleData\Helper\Csv\Reader */
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {

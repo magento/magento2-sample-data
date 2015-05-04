@@ -3,9 +3,9 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Tools\SampleData\Module\Tax;
+namespace Magento\SampleData\Module\Tax;
 
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Class Setup

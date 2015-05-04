@@ -4,13 +4,13 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\Theme;
+namespace Magento\SampleData\Module\Theme;
 
 use Magento\Framework\App\ScopeInterface;
 use Magento\Store\Model\Store;
-use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\Tools\SampleData\Logger;
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Helper\Fixture as FixtureHelper;
+use Magento\SampleData\Model\Logger;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Launches setup of sample data for Theme module
