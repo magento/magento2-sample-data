@@ -89,8 +89,8 @@ class InstallerApp implements \Magento\Framework\AppInterface
         $areaCode = 'adminhtml';
         $this->appState->setAreaCode($areaCode);
         $this->objectManager->configure($this->configLoader->load($areaCode));
-        /** @var \Magento\Tools\SampleData\Logger $sampleDataLogger */
-        $sampleDataLogger = $this->objectManager->get('Magento\Tools\SampleData\Logger');
+        /** @var \Magento\SampleData\Logger $sampleDataLogger */
+        $sampleDataLogger = $this->objectManager->get('Magento\SampleData\Logger');
         $sampleDataLogger->setSubject($this->objectManager->get('Magento\Setup\Model\ConsoleLogger'));
 
         $this->installer->run($this->userFactory->create()->loadByUsername($this->adminUserName));

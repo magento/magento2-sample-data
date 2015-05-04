@@ -9,7 +9,7 @@ use Magento\Framework\ObjectManagerInterface;
 
 class SetupFactory
 {
-    const INSTANCE_TYPE = 'Magento\Tools\SampleData\SetupInterface';
+    const INSTANCE_TYPE = 'Magento\SampleData\SetupInterface';
 
     /**
      * @var ObjectManagerInterface

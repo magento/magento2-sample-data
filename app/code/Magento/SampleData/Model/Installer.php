@@ -46,9 +46,9 @@ class Installer
      */
     public function __construct(
         \Magento\Framework\Module\ModuleListInterface $moduleList,
-        \Magento\Tools\SampleData\Helper\Deploy $deploy,
-        \Magento\Tools\SampleData\SetupFactory $setupFactory,
-        \Magento\Tools\SampleData\Helper\PostInstaller $postInstaller,
+        \Magento\SampleData\Helper\Deploy $deploy,
+        \Magento\SampleData\SetupFactory $setupFactory,
+        \Magento\SampleData\Helper\PostInstaller $postInstaller,
         \Magento\Backend\Model\Auth\Session $session
     ) {
         $this->deploy = $deploy;

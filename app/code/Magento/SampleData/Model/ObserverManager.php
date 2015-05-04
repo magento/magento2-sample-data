@@ -50,7 +50,7 @@ class ObserverManager
         $this->observers = [];
         foreach ($this->moduleList->getNames() as $module) {
             $parts = explode('_', $module);
-            $class = 'Magento\Tools\SampleData\Module\\' . $parts[1] . '\Observer';
+            $class = 'Magento\SampleData\Module\\' . $parts[1] . '\Observer';
             if (class_exists($class)) {
                 $this->observers[] = $this->objectManager->get($class);
             }
