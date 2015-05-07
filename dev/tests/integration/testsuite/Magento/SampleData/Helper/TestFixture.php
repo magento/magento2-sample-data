@@ -7,7 +7,7 @@
 namespace Magento\SampleData\Helper;
 
 
-class TestFixture extends Magento\SampleData\Helper\Fixture
+class TestFixture extends \Magento\SampleData\Helper\Fixture
 {
     public function getPath($subPath)
     {
