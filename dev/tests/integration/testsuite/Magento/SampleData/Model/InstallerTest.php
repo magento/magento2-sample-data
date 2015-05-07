@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData;
+namespace Magento\SampleData\Model;
 
 /**
  * Class InstallTest
@@ -27,7 +27,7 @@ class InstallerTest extends \PHPUnit_Framework_TestCase
         \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->configure(
             [
                 'preferences' =>
-                    ['Magento\SampleData\Helper\Fixture' => 'Magento\Tools\SampleData\Helper\TestFixture']
+                    ['Magento\SampleData\Helper\Fixture' => 'Magento\SampleData\Helper\TestFixture']
             ]
         );
 
