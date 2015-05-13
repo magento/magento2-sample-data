@@ -6,7 +6,7 @@
 
 namespace Magento\Tools\SampleData\Module\Theme;
 
-use Magento\Framework\App\ScopeInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\Store;
 use Magento\Tools\SampleData\Helper\Fixture as FixtureHelper;
 use Magento\Tools\SampleData\Logger;
@@ -130,7 +130,11 @@ class Setup implements SetupInterface
         /** @var \Magento\Theme\Model\Theme $theme */
         foreach ($themes as $theme) {
             if ($theme->getCode() == 'Magento/luma') {
-                $this->config->assignToStore($theme, [Store::DEFAULT_STORE_ID], ScopeInterface::SCOPE_DEFAULT);
+                $this->config->assignToStore(
+                    $theme,
+                    [Store::DEFAULT_STORE_ID],
+                    ScopeConfigInterface::SCOPE_TYPE_DEFAULT
+                );
             }
         }
     }
