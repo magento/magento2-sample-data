@@ -75,9 +75,7 @@ class ConsoleInstaller implements \Magento\Framework\AppInterface
 
         /** @var \Magento\Tools\SampleData\Installer $installer */
         $installer = $this->objectManager->get('Magento\Tools\SampleData\Installer');
-        $userName = isset($this->data['admin_user']) ? $this->data['admin_user'] : '';
-        $modules = isset($this->data['modules']) ? $this->data['modules'] : '';
-        $installer->run($userName, $modules);
+        $installer->run($this->getRequestedUserName($this->data), $this->getRequestedModules($this->data));
 
         return $this->response;
     }
@@ -89,5 +87,33 @@ class ConsoleInstaller implements \Magento\Framework\AppInterface
     public function catchException(Bootstrap $bootstrap, \Exception $exception)
     {
         return false;
+    }
+
+    /**
+     * Retrieve requested modules
+     *
+     * @param array $data
+     * @return array
+     */
+    private function getRequestedModules($data)
+    {
+        $modules = [];
+        if (isset($data['modules'])) {
+            foreach (explode(' ', str_replace(',', ' ', $data['modules'])) as $module) {
+                $modules[] = trim($module);
+            }
+        }
+        return $modules;
+    }
+
+    /**
+     * Retrieve requested user name
+     *
+     * @param $data
+     * @return string
+     */
+    private function getRequestedUserName($data)
+    {
+        return isset($data['admin_user']) ? $data['admin_user'] : '';
     }
 }

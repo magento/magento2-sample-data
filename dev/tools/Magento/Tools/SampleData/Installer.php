@@ -69,10 +69,10 @@ class Installer
      * Run installation in context of the specified admin user
      *
      * @param $userName
-     * @param string $modules
+     * @param array $modules
      * @throws \Exception
      */
-    public function run($userName, $modules = '')
+    public function run($userName, array $modules = [])
     {
         set_time_limit(3600);
 
@@ -102,10 +102,10 @@ class Installer
     /**
      * Init resources
      *
-     * @param string $modules
+     * @param array $modules
      * @return array
      */
-    private function initResources($modules = '')
+    private function initResources(array $modules)
     {
         $config = [];
         foreach (glob(__DIR__ . '/config/*.php') as $filename) {
@@ -116,12 +116,7 @@ class Installer
         }
 
         if ($modules) {
-            $arrayModules = [];
-            foreach (explode(' ', str_replace(',', ' ', $modules)) as $module) {
-                $module = trim($module);
-                $arrayModules[$module] = $module;
-            }
-            $config['setup_resources'] = array_intersect_key($config['setup_resources'], $arrayModules);
+            $config['setup_resources'] = array_intersect_key($config['setup_resources'], array_flip($modules));
         }
 
         return isset($config['setup_resources']) ? $config['setup_resources'] : [];
