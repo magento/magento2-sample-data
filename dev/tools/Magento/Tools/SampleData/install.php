@@ -10,11 +10,12 @@ use Magento\Framework\Shell\ComplexParameter;
 
 require_once __DIR__ . '/../../../../../app/bootstrap.php';
 
-$usage = 'Usage: php -f install.php -- --admin_user= [--bootstrap=]
-    --admin_user - store\'s admin username. Required for installation.
-    [--bootstrap] - add or override parameters of the bootstrap' . PHP_EOL;
+$usage = 'Usage: php -f install.php -- --admin_user= [--modules=] [--bootstrap=]' . PHP_EOL
+    . '--admin_user - store\'s admin username. Required for installation.' . PHP_EOL
+    . '[--modules] - install sample data for a module(s)' . PHP_EOL
+    . '[--bootstrap] - add or override parameters of the bootstrap' . PHP_EOL;
 
-$data = getopt('', ['admin_user:', 'bootstrap::']);
+$data = getopt('', ['admin_user:', 'bootstrap::', 'modules::']);
 if (!isset($data['admin_user']) || empty($data['admin_user'])) {
     echo $usage;
     exit(1);
@@ -26,5 +27,5 @@ $params[Bootstrap::PARAM_REQUIRE_MAINTENANCE] = null;
 $params[State::PARAM_MODE] = State::MODE_DEVELOPER;
 
 $bootstrap = Bootstrap::create(BP, $params);
-$app = $bootstrap->createApplication('Magento\Tools\SampleData\InstallerApp', ['data' => $data]);
+$app = $bootstrap->createApplication('Magento\Tools\SampleData\ConsoleInstaller', ['data' => $data]);
 $bootstrap->run($app);

@@ -35,18 +35,13 @@ class InstallerTest extends \PHPUnit_Framework_TestCase
         $installer = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->create('Magento\Tools\SampleData\Installer');
 
-        /** @var \Magento\User\Model\UserFactory $userFactory */
-        $userFactory = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
-            ->get('Magento\User\Model\UserFactory');
-        $user = $userFactory->create()->loadByUsername('adminUser');
-
         /** @var \Magento\Tools\SampleData\Logger $sampleDataLogger */
         $sampleDataLogger = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->get('Magento\Tools\SampleData\Logger');
         $sampleDataLogger->setSubject(TestLogger::factory());
 
         ob_start();
-        $installer->run($user);
+        $installer->run('adminUser');
         $result = ob_get_clean();
         $this->assertContains('Installing theme', $result);
         $this->assertContains('Installing customers', $result);

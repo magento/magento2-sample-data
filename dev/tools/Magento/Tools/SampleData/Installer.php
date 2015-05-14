@@ -36,6 +36,11 @@ class Installer
     private $session;
 
     /**
+     * @var \Magento\User\Model\UserFactory
+     */
+    private $userFactory;
+
+    /**
      * Constructor
      *
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
@@ -49,34 +54,39 @@ class Installer
         \Magento\Tools\SampleData\Helper\Deploy $deploy,
         \Magento\Tools\SampleData\SetupFactory $setupFactory,
         \Magento\Tools\SampleData\Helper\PostInstaller $postInstaller,
-        \Magento\Backend\Model\Auth\Session $session
+        \Magento\Backend\Model\Auth\Session $session,
+        \Magento\User\Model\UserFactory $userFactory
     ) {
         $this->deploy = $deploy;
         $this->moduleList = $moduleList;
         $this->setupFactory = $setupFactory;
         $this->postInstaller = $postInstaller;
         $this->session = $session;
+        $this->userFactory = $userFactory;
     }
 
     /**
      * Run installation in context of the specified admin user
      *
-     * @param \Magento\User\Model\User $adminUser
+     * @param $userName
+     * @param array $modules
      * @throws \Exception
-     *
-     * @return void
      */
-    public function run(\Magento\User\Model\User $adminUser)
+    public function run($userName, array $modules = [])
     {
         set_time_limit(3600);
-        if (!$adminUser || !$adminUser->getId()) {
+
+        /** @var \Magento\User\Model\User $user */
+        $user = $this->userFactory->create()->loadByUsername($userName);
+        if (!$user->getId()) {
             throw new \Exception('Invalid admin user provided');
         }
-        $this->session->setUser($adminUser);
+
+        $this->session->setUser($user);
 
         $this->deploy->run();
 
-        $resources = $this->initResources();
+        $resources = $this->initResources($modules);
         foreach ($this->moduleList->getNames() as $moduleName) {
             if (isset($resources[$moduleName])) {
                 $resourceType = $resources[$moduleName];
@@ -92,9 +102,10 @@ class Installer
     /**
      * Init resources
      *
+     * @param array $modules
      * @return array
      */
-    private function initResources()
+    private function initResources(array $modules)
     {
         $config = [];
         foreach (glob(__DIR__ . '/config/*.php') as $filename) {
@@ -103,6 +114,11 @@ class Installer
                 $config = array_merge_recursive($config, $configPart);
             }
         }
+
+        if ($modules) {
+            $config['setup_resources'] = array_intersect_key($config['setup_resources'], array_flip($modules));
+        }
+
         return isset($config['setup_resources']) ? $config['setup_resources'] : [];
     }
 }
