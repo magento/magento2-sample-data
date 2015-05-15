@@ -162,6 +162,7 @@ class Processor
         if (!empty($data['order'])) {
             $orderCreateModel->importPostData($data['order']);
         }
+        $orderCreateModel->getQuote()->setReservedOrderId($data['order']['increment_id']);
         $orderCreateModel->getBillingAddress();
         $orderCreateModel->setShippingAsBilling(true);
         if (!empty($data['add_products'])) {
