@@ -6,6 +6,7 @@
 
 return [
     'setup_resources' => [
+        'Magento_Null' => 'Magento\SampleData\Module\Null\Setup',
         'Magento_Catalog' => 'Magento\SampleData\Module\Catalog\Setup',
         'Magento_ConfigurableProduct' => 'Magento\SampleData\Module\ConfigurableProduct\Setup',
         'Magento_Downloadable' => 'Magento\SampleData\Module\Downloadable\Setup',

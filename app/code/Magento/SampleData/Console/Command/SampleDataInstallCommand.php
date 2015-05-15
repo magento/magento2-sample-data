@@ -28,7 +28,7 @@ class SampleDataInstallCommand extends Command
     /**
      * Name of input option
      */
-    const INPUT_KEY_GROUP = 'group';
+    const INPUT_KEY_MODULES = 'modules';
 
     /**
      * Object Manager
@@ -72,6 +72,12 @@ class SampleDataInstallCommand extends Command
                         'Store\'s admin username'
                     ),
                     new InputOption(
+                        self::INPUT_KEY_MODULES,
+                        null,
+                        InputOption::VALUE_REQUIRED,
+                        'Install sample data for comma-separated module(s)'
+                    ),
+                    new InputOption(
                         Cli::INPUT_KEY_BOOTSTRAP,
                         null,
                         InputOption::VALUE_REQUIRED,
@@ -88,8 +94,29 @@ class SampleDataInstallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $adminUserName = $input->getArgument(AdminAccount::KEY_USER);
+        $modules = [];
+        if ($input->getOption(self::INPUT_KEY_MODULES)) {
+            $modules = $this->getRequestedModules(self::INPUT_KEY_MODULES);
+        }
         $logger = new ConsoleLogger($output);
-        $this->sampleData->install($this->objectManager, $logger, $adminUserName);
+        $this->sampleData->install($this->objectManager, $logger, $adminUserName, $modules);
         $output->writeln('<info>' . 'Successfully installed sample data.' . '</info>');
+    }
+
+    /**
+     * Retrieve requested modules
+     *
+     * @param array $data
+     * @return array
+     */
+    private function getRequestedModules($data)
+    {
+        $modules = [];
+        if (isset($data['modules'])) {
+            foreach (explode(' ', str_replace(',', ' ', $data['modules'])) as $module) {
+                $modules[] = trim($module);
+            }
+        }
+        return $modules;
     }
 }

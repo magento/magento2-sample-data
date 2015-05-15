@@ -4,9 +4,9 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\Tools\SampleData\Module\Null;
+namespace Magento\SampleData\Module\Null;
 
-use Magento\Tools\SampleData\SetupInterface;
+use Magento\SampleData\Model\SetupInterface;
 
 class Setup implements SetupInterface
 {
