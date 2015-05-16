@@ -34,11 +34,19 @@ class Logger implements LoggerInterface
     }
 
     /**
+     * @return LoggerInterface
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function log($message)
     {
-        return $this->subject->log($message);
+        return $this->getSubject()->log($message);
     }
 
     /**
@@ -46,7 +54,7 @@ class Logger implements LoggerInterface
      */
     public function logInline($message)
     {
-        return $this->subject->logInline($message);
+        return $this->getSubject()->logInline($message);
     }
 
     /**
@@ -54,7 +62,7 @@ class Logger implements LoggerInterface
      */
     public function logError(\Exception $e)
     {
-        return $this->subject->logError($e);
+        return $this->getSubject()->logError($e);
     }
 
     /**
@@ -62,7 +70,7 @@ class Logger implements LoggerInterface
      */
     public function logMeta($message)
     {
-        return $this->subject->logMeta($message);
+        return $this->getSubject()->logMeta($message);
     }
 
     /**
@@ -70,6 +78,6 @@ class Logger implements LoggerInterface
      */
     public function logSuccess($message)
     {
-        return $this->subject->logSuccess($message);
+        return $this->getSubject()->logSuccess($message);
     }
 }

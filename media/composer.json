@@ -1,8 +1,5 @@
 {
     "name": "magento/sample-data-media",
     "description": "Sample Data media files",
-    "version": "0.42.0-beta2",
-    "require": {
-        "magento/sample-data-fixtures": "~0.74.0-beta1"
-    }
+    "version": "0.42.0-beta2"
 }

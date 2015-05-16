@@ -156,6 +156,7 @@ class Processor
      */
     protected function processQuote($data = [])
     {
+        /** @var \Magento\Sales\Model\AdminOrder\Create $orderCreateModel */
         $orderCreateModel = $this->createOrderFactory->create(
             ['quoteSession' => $this->sessionQuoteFactory->create()]
         );
