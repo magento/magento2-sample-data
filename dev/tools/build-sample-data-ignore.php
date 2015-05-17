@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'dev/tools/Magento/Tools/Metapackage',
+    'metapackage',
     'media'
 ];
