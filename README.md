@@ -8,25 +8,26 @@ Installing sample data fills your database with a number of products of each typ
 To deploy sample data, use Composer:
 
 1. In your composer.json, specify the following:
- - repository:
-```
-{
-    "repositories": [
+    - repository:
+        ```
         {
-            "type": "composer",
-            "url": "http://packages.magento.com/"
+            "repositories": [
+                {
+                    "type": "composer",
+                    "url": "http://packages.magento.com/"
+                }
+            ],
         }
-    ],
-}
-```
- - packages:
-```
-{
-    "require": {
-        "magento/sample-data": "{version}"
-    }
-}
-```
+        ```
+
+    - packages:
+         ```
+        {
+            "require": {
+                "magento/sample-data": "{version}"
+            }
+        }
+        ```
 2. From your Magento root directory, run composer update.
 
 #Installing
@@ -40,7 +41,8 @@ To install sample data, select the Use Sample Data checkbox [x] on the 4-th step
 ###Console Installation
 
 The steps required to install sample data are different depending on whether the Magento application itself is installed:
- - If the Magento application is not installed, you can install it with sample data at once. Use the following code sample as an example:
+
+1. If the Magento application is not installed, you can install it with sample data at once. Use the following code sample as an example:
 ```
 php -f index.php install --base-url=http://localhost/magento2/ \
   --backend-frontname=admin \
@@ -50,8 +52,7 @@ php -f index.php install --base-url=http://localhost/magento2/ \
   --currency=USD --timezone=America/Chicago
   --use-sample-data
 ```
-
- - If the Magento application is already installed, to install the sample data use the following command:
+2. If the Magento application is already installed, to install the sample data use the following command:
 ```
 php -f ./dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=<admin> [--bootstrap="..."]
 ```
