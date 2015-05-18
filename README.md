@@ -1,16 +1,14 @@
 #Introduction
 
-Sample Data is a data set that represents Magento features. It consists of installation scripts, fixtures and media files.
-After its installation on Magento instance an admin user will receive a number of products of any kind, price rules, CMS pages, banners and more.
+Sample data is a data set that represents Magento features. It consists of installation scripts, fixtures and media files. 
+Installing sample data fills your database with a number of products of each type, price rules, CMS pages, banners and more.
 
 #Deployment
 
-Deployment of Sample Data can be performed using composer.
+To deploy sample data, use Composer:
 
-###Using Composer
-To deploy Sample Data using composer, please, specify sample data package in your composer.json
-
-1. Specify repository
+1. In your composer.json, specify the following:
+ - repository:
 ```
 {
     "repositories": [
@@ -21,7 +19,7 @@ To deploy Sample Data using composer, please, specify sample data package in you
     ],
 }
 ```
-2. Specify packages
+ - packages:
 ```
 {
     "require": {
@@ -29,26 +27,20 @@ To deploy Sample Data using composer, please, specify sample data package in you
     }
 }
 ```
-3. Run composer update from your Magento root directory
+2. From your Magento root directory, run composer update.
 
 #Installing
 
-Being once deployed the Sample Data is available for installation through the Magento Installation Wizard or using CLI.
+Once deployed, the sample data can be installed using the Magento Installation Wizard (web installation) or using CLI (console installation).
 
 ###Web Installation
 
-To install Sample Data user should choose checkbox [v] "Use Sample Data".
+To install sample data, select the Use Sample Data checkbox [x] on the 4-th step "Customize Your Store"
 
 ###Console Installation
 
-There are two ways
- - Magento has not been installed yet
- - Magento has already been installed
-
-####Magento has not been installed yet
-
-Specify additional parameter --use-sample-data
-Example
+The steps required to install sample data are different depending on whether the Magento application itself is installed:
+ - If the Magento application is not installed, you can install it with sample data at once. Use the following code sample as an example:
 ```
 php -f index.php install --base-url=http://localhost/magento2/ \
   --backend-frontname=admin \
@@ -59,14 +51,12 @@ php -f index.php install --base-url=http://localhost/magento2/ \
   --use-sample-data
 ```
 
-####Magento has already been installed
-
-Run Sample Data command in Magento CLI
-
+ - If the Magento application is already installed, to install the sample data use the following command:
 ```
 php -f ./dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=<admin> [--bootstrap="..."]
 ```
 
-#Uninstalling
+#Removing Sample Data
 
-There is no special scripts that assist in uninstalling of Sample Data. All installed data should be removed manually.
+There is no special scripts that assist in uninstalling of Sample Data. 
+To remove sample data, you must delete the database and re-install Magento with a new empty database
