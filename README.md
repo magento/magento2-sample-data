@@ -42,7 +42,7 @@ To install sample data, select the Use Sample Data checkbox [x] on the 4-th step
 
 The steps required to install sample data are different depending on whether the Magento application itself is installed:
 
-1. If the Magento application is not installed, you can install it with sample data at once. Use the following code sample as an example:
+- If the Magento application is not installed, you can install it with sample data at once. Use the following code sample as an example:
 ```
 php -f index.php install --base-url=http://localhost/magento2/ \
   --backend-frontname=admin \
@@ -52,7 +52,7 @@ php -f index.php install --base-url=http://localhost/magento2/ \
   --currency=USD --timezone=America/Chicago
   --use-sample-data
 ```
-2. If the Magento application is already installed, to install the sample data use the following command:
+- If the Magento application is already installed, to install the sample data use the following command:
 ```
 php -f ./dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=<admin> [--bootstrap="..."]
 ```
