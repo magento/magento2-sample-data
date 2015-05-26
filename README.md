@@ -30,13 +30,13 @@ To deploy sample data, use Composer:
         ```
 2. From your Magento root directory, run composer update.
 
-#Installing
+#Installation
 
 Once deployed, the sample data can be installed using the Magento Installation Wizard (web installation) or using CLI (console installation).
 
 ###Web Installation
 
-To install sample data, select the Use Sample Data checkbox [x] on the 4-th step "Customize Your Store"
+When installing the Magento application using the Magento Installation Wizard, you can choose to install the sample data at once. To do this, during installation, on the **Customize Your Store** step, select the **Use Sample Data** checkbox.
 
 ###Console Installation
 
@@ -59,5 +59,5 @@ php -f ./dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=<admin> 
 
 #Removing Sample Data
 
-There is no special scripts that assist in uninstalling of Sample Data. 
+There are no special scripts that assist in uninstalling of sample data. 
 To remove sample data, you must delete the database and re-install Magento with a new empty database
