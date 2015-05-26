@@ -1,5 +1,5 @@
 {
-    "name": "magento/sample-data-fixtures",
+    "name": "magento/module-sample-data",
     "description": "Sample Data fixtures",
     "version": "0.74.0-beta10",
     "require": {

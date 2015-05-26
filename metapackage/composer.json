@@ -3,7 +3,7 @@
     "version": "0.74.0-beta10",
     "type": "metapackage",
     "require": {
-        "magento/sample-data-fixtures": "self.version",
+        "magento/module-sample-data": "self.version",
         "magento/sample-data-media": "~0.42.0-beta2"
     }
 }
