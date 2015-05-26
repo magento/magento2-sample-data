@@ -1,6 +1,6 @@
 #Introduction
 
-Sample data is a data set that represents Magento features. It consists of installation scripts, fixtures and media files. 
+Sample data consists of installation scripts, fixtures and media files. 
 Installing sample data fills your database with a number of products of each type, price rules, CMS pages, banners and more.
 
 #Deployment
