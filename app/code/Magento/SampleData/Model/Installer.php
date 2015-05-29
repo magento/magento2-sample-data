@@ -76,6 +76,8 @@ class Installer
      */
     public function run($userName, array $modules = [])
     {
+        set_time_limit(0);
+
         /** @var \Magento\User\Model\User $user */
         $user = $this->userFactory->create()->loadByUsername($userName);
         if (!$user->getId()) {
