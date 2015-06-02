@@ -41,6 +41,12 @@ class Installer
     private $userFactory;
 
     /**
+     * @var \Magento\SampleData\Helper\State
+     */
+    private $state;
+
+
+    /**
      * Constructor
      *
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
@@ -48,6 +54,7 @@ class Installer
      * @param SetupFactory $setupFactory
      * @param Helper\PostInstaller $postInstaller
      * @param \Magento\Backend\Model\Auth\Session $session
+     * @param \Magento\SampleData\Helper\State $state
      */
     public function __construct(
         \Magento\Framework\Module\ModuleListInterface $moduleList,
@@ -55,7 +62,8 @@ class Installer
         \Magento\SampleData\Model\SetupFactory $setupFactory,
         \Magento\SampleData\Helper\PostInstaller $postInstaller,
         \Magento\Backend\Model\Auth\Session $session,
-        \Magento\User\Model\UserFactory $userFactory
+        \Magento\User\Model\UserFactory $userFactory,
+        \Magento\SampleData\Helper\State $state
     ) {
         $this->deploy = $deploy;
         $this->moduleList = $moduleList;
@@ -63,6 +71,7 @@ class Installer
         $this->postInstaller = $postInstaller;
         $this->session = $session;
         $this->userFactory = $userFactory;
+        $this->state = $state;
     }
 
     /**
@@ -82,7 +91,7 @@ class Installer
         if (!$user->getId()) {
             throw new \Exception('Invalid admin user provided');
         }
-
+        $this->state->start();
         $this->session->setUser($user);
 
         $this->deploy->run();
@@ -98,6 +107,7 @@ class Installer
 
         $this->session->unsUser();
         $this->postInstaller->run();
+        $this->state->finish();
     }
 
     /**
