@@ -11,7 +11,7 @@ namespace Magento\SampleData\Model;
 class Installer
 {
     /**
-     * @var Helper\Deploy
+     * @var \Magento\SampleData\Helper\Deploy
      */
     private $deploy;
 
@@ -26,7 +26,7 @@ class Installer
     private $setupFactory;
 
     /**
-     * @var Helper\PostInstaller
+     * @var \Magento\SampleData\Helper\PostInstaller
      */
     private $postInstaller;
 
@@ -44,10 +44,11 @@ class Installer
      * Constructor
      *
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
-     * @param Helper\Deploy $deploy
+     * @param \Magento\SampleData\Helper\Deploy $deploy
      * @param SetupFactory $setupFactory
-     * @param Helper\PostInstaller $postInstaller
+     * @param \Magento\SampleData\Helper\PostInstaller $postInstaller
      * @param \Magento\Backend\Model\Auth\Session $session
+     * @param \Magento\User\Model\UserFactory $userFactory
      */
     public function __construct(
         \Magento\Framework\Module\ModuleListInterface $moduleList,
@@ -75,7 +76,7 @@ class Installer
      */
     public function run($userName, array $modules = [])
     {
-        set_time_limit(3600);
+        set_time_limit(0);
 
         /** @var \Magento\User\Model\User $user */
         $user = $this->userFactory->create()->loadByUsername($userName);
