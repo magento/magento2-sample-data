@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\SampleData\Module\Null;
+namespace Magento\SampleData\Module\DevNull;
 
 use Magento\SampleData\Model\SetupInterface;
 

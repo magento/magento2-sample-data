@@ -96,7 +96,7 @@ class SampleDataInstallCommand extends Command
         $adminUserName = $input->getArgument(AdminAccount::KEY_USER);
         $modules = [];
         if ($input->getOption(self::INPUT_KEY_MODULES)) {
-            $modules = $this->getRequestedModules(self::INPUT_KEY_MODULES);
+            $modules = $this->getRequestedModules($input->getOption(self::INPUT_KEY_MODULES));
         }
         $logger = new ConsoleLogger($output);
         $this->sampleData->install($this->objectManager, $logger, $adminUserName, $modules);
@@ -106,14 +106,14 @@ class SampleDataInstallCommand extends Command
     /**
      * Retrieve requested modules
      *
-     * @param array $data
+     * @param string $modulesString
      * @return array
      */
-    private function getRequestedModules($data)
+    private function getRequestedModules($modulesString)
     {
         $modules = [];
-        if (isset($data['modules'])) {
-            foreach (explode(' ', str_replace(',', ' ', $data['modules'])) as $module) {
+        if ($modulesString) {
+            foreach (explode(' ', str_replace(',', ' ', $modulesString)) as $module) {
                 $modules[] = trim($module);
             }
         }
