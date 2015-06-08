@@ -52,9 +52,16 @@ php -f index.php install --base-url=http://localhost/magento2/ \
   --currency=USD --timezone=America/Chicago
   --use-sample-data
 ```
-- If the Magento application is already installed, to install the sample data use the following command:
+- If the Magento application is already installed, to install the sample data, enter the following commands in the order shown:
 ```
-php -f ./dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=<admin> [--bootstrap="..."]
+<path to Magento 2 bin dir>/magento setup:upgrade
+<path to Magento 2 bin dir>/magento sampledata:install <your Magento administrator user name>
+```
+
+For example,
+```
+/var/www/magento2/bin magento setup:upgrade
+/var/www/magento2/bin magento sampledata:install admin
 ```
 
 #Removing Sample Data
