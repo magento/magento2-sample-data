@@ -6,7 +6,7 @@
 
 namespace Magento\SampleData\Model;
 
-use Magento\Setup\Model\LoggerInterface;
+use Magento\Framework\Setup\LoggerInterface;
 
 class TestLogger implements LoggerInterface
 {
