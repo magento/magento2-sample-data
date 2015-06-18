@@ -5,7 +5,7 @@
  */
 namespace Magento\SampleData\Model;
 
-use Magento\Setup\Model\LoggerInterface;
+use Magento\Framework\Setup\LoggerInterface;
 
 /**
  * A dirty proxy for Setup application logger
