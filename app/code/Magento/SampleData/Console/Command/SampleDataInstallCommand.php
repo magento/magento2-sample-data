@@ -18,7 +18,7 @@ use Magento\Setup\Model\AdminAccount;
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\State;
 use Magento\Setup\Model\SampleData;
-use Magento\Setup\Model\ConsoleLogger;
+use Magento\Framework\Setup\ConsoleLogger;
 
 /**
  * Command for installing Sample Data
