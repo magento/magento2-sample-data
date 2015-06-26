@@ -1,6 +1,6 @@
 {
     "name": "magento/sample-data",
-    "version": "0.74.0-beta14",
+    "version": "0.74.0-beta15",
     "type": "metapackage",
     "require": {
         "magento/module-sample-data": "self.version",
