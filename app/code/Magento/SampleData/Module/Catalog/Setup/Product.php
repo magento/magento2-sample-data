@@ -119,6 +119,7 @@ class Product implements SetupInterface
     public function run()
     {
         $this->logger->log("Installing {$this->productType} products:");
+        /** @var $product \Magento\Catalog\Model\Product */
         $product = $this->productFactory->create();
 
         foreach ($this->fixtures as $file) {
@@ -126,6 +127,11 @@ class Product implements SetupInterface
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {
+                /** @var \Magento\Catalog\Model\Resource\Product $productResource */
+                $productResource = $product->getResource();
+                if ($productResource->getIdBySku($row['sku'])) {
+                    continue;
+                }
                 $attributeSetId = $this->catalogConfig->getAttributeSetId(4, $row['attribute_set']);
                 $this->converter->setAttributeSetId($attributeSetId);
                 $data = $this->converter->convertRow($row);

@@ -113,7 +113,7 @@ class Tablerate implements SetupInterface
             $regionId = ($data['region'] != '*')
                 ? $regions[$data['country']][$data['region']]
                 : 0;
-            $adapter->insert(
+            $adapter->insertOnDuplicate(
                 $this->tablerate->getMainTable(),
                 [
                     'website_id' => $this->storeManager->getWebsiteId(),
