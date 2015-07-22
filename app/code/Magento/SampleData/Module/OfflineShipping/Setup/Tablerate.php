@@ -103,7 +103,7 @@ class Tablerate implements SetupInterface
     {
         $this->logger->log('Installing Tablerate:');
         /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter */
-        $adapter = $this->resource->getConnection('core_write');
+        $adapter = $this->resource->getConnection('core');
         $fixtureFile = 'OfflineShipping/tablerate.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
         $regions = $this->loadDirectoryRegions();
