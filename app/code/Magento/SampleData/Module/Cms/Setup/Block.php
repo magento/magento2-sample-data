@@ -98,30 +98,21 @@ class Block implements SetupInterface
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {
                 $data = $this->converter->convertRow($row);
-                $cmsBlock = $this->saveCmsBlock($data['block']);
+                $data = $data['block'];
+                /** @var \Magento\Cms\Model\Block $cmsBlock */
+                $cmsBlock = $this->blockFactory->create();
+                $cmsBlock->getResource()->load($cmsBlock, $data['identifier']);
+                if ($cmsBlock->getId()) {
+                    continue;
+                }
+                $cmsBlock->addData($data);
+                $cmsBlock->setStores([\Magento\Store\Model\Store::DEFAULT_STORE_ID]);
+                $cmsBlock->setIsActive(1);
+                $cmsBlock->save();
                 $cmsBlock->unsetData();
                 $this->logger->logInline('.');
             }
         }
-    }
-
-    /**
-     * @param array $data
-     * @return \Magento\Cms\Model\Block
-     */
-    protected function saveCmsBlock($data)
-    {
-        $cmsBlock = $this->blockFactory->create();
-        $cmsBlock->getResource()->load($cmsBlock, $data['identifier']);
-        if (!$cmsBlock->getData()) {
-            $cmsBlock->setData($data);
-        } else {
-            $cmsBlock->addData($data);
-        }
-        $cmsBlock->setStores([\Magento\Store\Model\Store::DEFAULT_STORE_ID]);
-        $cmsBlock->setIsActive(1);
-        $cmsBlock->save();
-        return $cmsBlock;
     }
 
     /**

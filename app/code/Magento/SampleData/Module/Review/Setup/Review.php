@@ -146,7 +146,7 @@ class Review implements SetupInterface
             $reviewCollection = $this->reviewCollectionFactory->create();
             $reviewCollection->addFilter('entity_pk_value', $productId)
                 ->addFilter('entity_id', $this->getReviewEntityId())
-                ->addFilter('detail.title', $row['title']);
+                ->addFieldToFilter('detail.title', ['eq' => $row['title']]);
             if ($reviewCollection->getSize() > 0) {
                 continue;
             }
