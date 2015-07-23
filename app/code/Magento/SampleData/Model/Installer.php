@@ -45,6 +45,10 @@ class Installer
      */
     private $state;
 
+    /**
+     * @var \Magento\SampleData\Model\Logger
+     */
+    private $logger;
 
     /**
      * Constructor
@@ -56,6 +60,7 @@ class Installer
      * @param \Magento\Backend\Model\Auth\Session $session
      * @param \Magento\User\Model\UserFactory $userFactory
      * @param \Magento\SampleData\Helper\State $state
+     * @param \Magento\SampleData\Model\Logger $logger
      */
     public function __construct(
         \Magento\Framework\Module\ModuleListInterface $moduleList,
@@ -64,7 +69,8 @@ class Installer
         \Magento\SampleData\Helper\PostInstaller $postInstaller,
         \Magento\Backend\Model\Auth\Session $session,
         \Magento\User\Model\UserFactory $userFactory,
-        \Magento\SampleData\Helper\State $state
+        \Magento\SampleData\Helper\State $state,
+        \Magento\SampleData\Model\Logger $logger
     ) {
         $this->deploy = $deploy;
         $this->moduleList = $moduleList;
@@ -73,6 +79,7 @@ class Installer
         $this->session = $session;
         $this->userFactory = $userFactory;
         $this->state = $state;
+        $this->logger = $logger;
     }
 
     /**
@@ -98,10 +105,16 @@ class Installer
         $this->deploy->run();
 
         $resources = $this->initResources($modules);
+        $this->state->clearErrorFlag();
         foreach ($this->moduleList->getNames() as $moduleName) {
             if (isset($resources[$moduleName])) {
                 $resourceType = $resources[$moduleName];
-                $this->setupFactory->create($resourceType)->run();
+                try {
+                    $this->setupFactory->create($resourceType)->run();
+                } catch (\Exception $e) {
+                    $this->state->setError();
+                    $this->logger->log($e->getMessage());
+                }
                 $this->postInstaller->addModule($moduleName);
             }
         }
