@@ -129,9 +129,6 @@ class Attribute implements SetupInterface
 
                 /** @var \Magento\Catalog\Model\Resource\Eav\Attribute $attribute */
                 $attribute = $this->eavConfig->getAttribute('catalog_product', $data['attribute_code']);
-                if ($attribute->getId()) {
-                    continue;
-                }
                 if (!$attribute) {
                     $attribute = $this->attributeFactory->create();
                 }
