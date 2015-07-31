@@ -6,6 +6,7 @@
 namespace Magento\SampleData\Module\SalesRule\Setup;
 
 use Magento\SalesRule\Model\RuleFactory as RuleFactory;
+use Magento\SalesRule\Model\Resource\Rule\CollectionFactory as RuleCollectionFactory;
 use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
 use Magento\SampleData\Helper\Fixture as FixtureHelper;
 use Magento\SampleData\Model\Logger;
@@ -33,6 +34,11 @@ class Rule implements SetupInterface
     protected $ruleFactory;
 
     /**
+     * @var RuleCollectionFactory
+     */
+    protected $ruleCollectionFactory;
+
+    /**
      * @var CatalogRule
      */
     protected $catalogRule;
@@ -51,6 +57,7 @@ class Rule implements SetupInterface
      * @param CsvReaderFactory $csvReaderFactory
      * @param FixtureHelper $fixtureHelper
      * @param RuleFactory $ruleFactory
+     * @param RuleCollectionFactory $ruleCollectionFactory
      * @param CatalogRule $catalogRule
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param Logger $logger
@@ -59,6 +66,7 @@ class Rule implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         FixtureHelper $fixtureHelper,
         RuleFactory $ruleFactory,
+        RuleCollectionFactory $ruleCollectionFactory,
         CatalogRule $catalogRule,
         \Magento\Eav\Model\Config $eavConfig,
         Logger $logger
@@ -66,6 +74,7 @@ class Rule implements SetupInterface
         $this->csvReaderFactory = $csvReaderFactory;
         $this->fixtureHelper = $fixtureHelper;
         $this->ruleFactory = $ruleFactory;
+        $this->ruleCollectionFactory = $ruleCollectionFactory;
         $this->catalogRule = $catalogRule;
         $this->eavConfig = $eavConfig;
         $this->logger = $logger;
@@ -85,10 +94,17 @@ class Rule implements SetupInterface
             $attribute->setIsUsedForPromoRules('1')->save();
         }
         foreach ($csvReader as $row) {
+            /** @var \Magento\SalesRule\Model\Resource\Rule\Collection $ruleCollection */
+            $ruleCollection = $this->ruleCollectionFactory->create();
+            $ruleCollection->addFilter('name', $row['name']);
+            if ($ruleCollection->count() > 0) {
+                continue;
+            }
             $row['customer_group_ids'] = $this->catalogRule->getGroupIds();
             $row['website_ids'] = $this->catalogRule->getWebsiteIds();
             $row['conditions_serialized'] = $this->catalogRule->convertSerializedData($row['conditions_serialized']);
             $row['actions_serialized'] = $this->catalogRule->convertSerializedData($row['actions_serialized']);
+            /** @var \Magento\SalesRule\Model\Rule $rule */
             $rule = $this->ruleFactory->create();
             $rule->loadPost($row);
             $rule->save();

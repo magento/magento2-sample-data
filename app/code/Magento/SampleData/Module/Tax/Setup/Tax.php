@@ -40,6 +40,16 @@ class Tax implements SetupInterface
     protected $taxRateFactory;
 
     /**
+     * @var \Magento\Framework\Api\SearchCriteriaBuilder
+     */
+    protected $criteriaBuilder;
+
+    /**
+     * @var \Magento\Framework\Api\FilterBuilder
+     */
+    protected $filterBuilder;
+
+    /**
      * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
@@ -60,6 +70,8 @@ class Tax implements SetupInterface
      * @param \Magento\Tax\Api\TaxRateRepositoryInterface $taxRateRepository
      * @param \Magento\Tax\Api\Data\TaxRateInterfaceFactory $rateFactory
      * @param \Magento\Tax\Model\Calculation\RateFactory $taxRateFactory
+     * @param \Magento\Framework\Api\SearchCriteriaBuilder $criteriaBuilder
+     * @param \Magento\Framework\Api\FilterBuilder $filterBuilder
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\SampleData\Model\Logger $logger
@@ -70,6 +82,8 @@ class Tax implements SetupInterface
         \Magento\Tax\Api\TaxRateRepositoryInterface $taxRateRepository,
         \Magento\Tax\Api\Data\TaxRateInterfaceFactory $rateFactory,
         \Magento\Tax\Model\Calculation\RateFactory $taxRateFactory,
+        \Magento\Framework\Api\SearchCriteriaBuilder $criteriaBuilder,
+        \Magento\Framework\Api\FilterBuilder $filterBuilder,
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         \Magento\SampleData\Model\Logger $logger
@@ -79,6 +93,8 @@ class Tax implements SetupInterface
         $this->taxRateRepository = $taxRateRepository;
         $this->rateFactory = $rateFactory;
         $this->taxRateFactory = $taxRateFactory;
+        $this->criteriaBuilder = $criteriaBuilder;
+        $this->filterBuilder = $filterBuilder;
         $this->fixtureHelper = $fixtureHelper;
         $this->csvReaderFactory = $csvReaderFactory;
         $this->logger = $logger;
@@ -95,6 +111,9 @@ class Tax implements SetupInterface
         /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $data) {
+            if ($this->rateFactory->create()->loadByCode($data['code'])->getId()) {
+                continue;
+            }
             $taxRate = $this->rateFactory->create();
             $taxRate->setCode($data['code'])
                 ->setTaxCountryId($data['tax_country_id'])
@@ -110,6 +129,16 @@ class Tax implements SetupInterface
         /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $data) {
+            $filter = $this->filterBuilder->setField('code')
+                ->setConditionType('=')
+                ->setValue($data['code'])
+                ->create();
+            $criteria = $this->criteriaBuilder->addFilters([$filter])->create();
+            $existingRates = $this->taxRuleRepository->getList($criteria)->getItems();
+            if (!empty($existingRates)) {
+                continue;
+            }
+
             $taxRate = $this->taxRateFactory->create()->loadByCode($data['tax_rate']);
             $taxRule = $this->ruleFactory->create();
             $taxRule->setCode($data['code'])

@@ -23,6 +23,11 @@ class Review implements SetupInterface
     protected $reviewFactory;
 
     /**
+     * @var \Magento\Review\Model\Resource\Review\CollectionFactory
+     */
+    protected $reviewCollectionFactory;
+
+    /**
      * @var \Magento\SampleData\Helper\Fixture
      */
     protected $fixtureHelper;
@@ -70,7 +75,12 @@ class Review implements SetupInterface
     /**
      * @var int
      */
-    protected $entityId;
+    protected $ratingProductEntityId;
+
+    /**
+     * @var int
+     */
+    protected $reviewProductEntityId;
 
     /**
      * @var \Magento\SampleData\Helper\StoreManager
@@ -79,6 +89,7 @@ class Review implements SetupInterface
 
     /**
      * @param \Magento\Review\Model\ReviewFactory $reviewFactory
+     * @param \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Review\Model\RatingFactory $ratingFactory
@@ -90,6 +101,7 @@ class Review implements SetupInterface
      */
     public function __construct(
         \Magento\Review\Model\ReviewFactory $reviewFactory,
+        \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory,
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         \Magento\Review\Model\RatingFactory $ratingFactory,
@@ -100,6 +112,7 @@ class Review implements SetupInterface
         \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         $this->reviewFactory = $reviewFactory;
+        $this->reviewCollectionFactory = $reviewCollectionFactory;
         $this->fixtureHelper = $fixtureHelper;
         $this->csvReaderFactory = $csvReaderFactory;
         $this->ratingFactory = $ratingFactory;
@@ -122,11 +135,22 @@ class Review implements SetupInterface
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $row) {
             $storeId = [$this->storeManager->getStoreId()];
+            $review = $this->prepareReview($row);
             $this->createRating($row['rating_code'], $storeId);
-            if (!$this->getProductIdBySku($row['sku'])) {
+            $productId = $this->getProductIdBySku($row['sku']);
+
+            if (empty($productId)) {
                 continue;
             }
-            $review = $this->prepareReview($row);
+            /** @var \Magento\Review\Model\Resource\Review\Collection $reviewCollection */
+            $reviewCollection = $this->reviewCollectionFactory->create();
+            $reviewCollection->addFilter('entity_pk_value', $productId)
+                ->addFilter('entity_id', $this->getReviewEntityId())
+                ->addFieldToFilter('detail.title', ['eq' => $row['title']]);
+            if ($reviewCollection->getSize() > 0) {
+                continue;
+            }
+
             if (!empty($row['email']) && ($this->getCustomerIdByEmail($row['email']) != null)) {
                 $review->setCustomerId($this->getCustomerIdByEmail($row['email']));
             }
@@ -277,10 +301,27 @@ class Review implements SetupInterface
      */
     protected function getRatingEntityId()
     {
-        if (!$this->entityId) {
+        if (!$this->ratingProductEntityId) {
             $rating = $this->ratingFactory->create();
-            $this->entityId = $rating->getEntityIdByCode(\Magento\Review\Model\Rating::ENTITY_PRODUCT_CODE);
+            $this->ratingProductEntityId = $rating->getEntityIdByCode(
+                \Magento\Review\Model\Rating::ENTITY_PRODUCT_CODE
+            );
         }
-        return $this->entityId;
+        return $this->ratingProductEntityId;
+    }
+
+    /**
+     * @return int
+     */
+    protected function getReviewEntityId()
+    {
+        if (!$this->reviewProductEntityId) {
+            /** @var $review \Magento\Review\Model\Review */
+            $review = $this->reviewFactory->create();
+            $this->reviewProductEntityId = $review->getEntityIdByCode(
+                \Magento\Review\Model\Review::ENTITY_PRODUCT_CODE
+            );
+        }
+        return $this->reviewProductEntityId;
     }
 }

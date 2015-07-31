@@ -127,6 +127,9 @@ class Customer implements SetupInterface
             foreach ($csvReader as $row) {
                 // Collect customer profile and addresses data
                 $customerData['profile'] = $this->convertRowData($row, $this->getDefaultCustomerProfile());
+                if (!$this->accountManagement->isEmailAvailable($customerData['profile']['email'])) {
+                    continue;
+                }
                 $customerData['address'] = $this->convertRowData($row, $this->getDefaultCustomerAddress());
                 $customerData['address']['region_id'] = $this->getRegionId($customerData['address']);
 
