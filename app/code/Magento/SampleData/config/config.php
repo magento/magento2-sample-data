@@ -23,5 +23,6 @@ return [
         'Magento_Theme' => 'Magento\SampleData\Module\Theme\Setup',
         'Magento_SalesRule' => 'Magento\SampleData\Module\SalesRule\Setup',
         'Magento_CatalogRule' => 'Magento\SampleData\Module\CatalogRule\Setup',
+        'Magento_Msrp' => 'Magento\SampleData\Module\Msrp\Setup',
     ],
 ];
