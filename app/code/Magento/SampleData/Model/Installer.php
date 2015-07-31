@@ -106,17 +106,17 @@ class Installer
 
         $resources = $this->initResources($modules);
         $this->state->clearErrorFlag();
-        foreach ($this->moduleList->getNames() as $moduleName) {
-            if (isset($resources[$moduleName])) {
-                $resourceType = $resources[$moduleName];
-                try {
+        try {
+            foreach ($this->moduleList->getNames() as $moduleName) {
+                if (isset($resources[$moduleName])) {
+                    $resourceType = $resources[$moduleName];
                     $this->setupFactory->create($resourceType)->run();
-                } catch (\Exception $e) {
-                    $this->state->setError();
-                    $this->logger->log($e->getMessage());
+                    $this->postInstaller->addModule($moduleName);
                 }
-                $this->postInstaller->addModule($moduleName);
             }
+        } catch (\Exception $e) {
+            $this->state->setError();
+            $this->logger->log($e->getMessage());
         }
 
         $this->session->unsUser();
