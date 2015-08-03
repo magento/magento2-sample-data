@@ -102,8 +102,8 @@ class Tablerate implements SetupInterface
     public function run()
     {
         $this->logger->log('Installing Tablerate:');
-        /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter */
-        $adapter = $this->resource->getConnection('core_write');
+        /** @var \Magento\Framework\DB\Adapter\AdapterInterface $connection */
+        $connection = $this->resource->getConnection('core');
         $fixtureFile = 'OfflineShipping/tablerate.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
         $regions = $this->loadDirectoryRegions();
@@ -113,7 +113,7 @@ class Tablerate implements SetupInterface
             $regionId = ($data['region'] != '*')
                 ? $regions[$data['country']][$data['region']]
                 : 0;
-            $adapter->insert(
+            $connection->insert(
                 $this->tablerate->getMainTable(),
                 [
                     'website_id' => $this->storeManager->getWebsiteId(),
