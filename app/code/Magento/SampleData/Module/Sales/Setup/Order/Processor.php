@@ -70,6 +70,11 @@ class Processor
     protected $observerManager;
 
     /**
+     * @var \Magento\Sales\Api\CreditmemoManagementInterface
+     */
+    protected $creditmemoManagement;
+
+    /**
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\Phrase\Renderer\CompositeFactory $rendererCompositeFactory
      * @param \Magento\Sales\Model\AdminOrder\CreateFactory $createOrderFactory
@@ -82,6 +87,7 @@ class Processor
      * @param \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param \Magento\SampleData\Model\ObserverManager $observerManager
+     * @param \Magento\Sales\Api\CreditmemoManagementInterface $creditmemoManagement
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -96,7 +102,8 @@ class Processor
         \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory,
         \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory,
         \Magento\SampleData\Helper\StoreManager $storeManager,
-        \Magento\SampleData\Model\ObserverManager $observerManager
+        \Magento\SampleData\Model\ObserverManager $observerManager,
+        \Magento\Sales\Api\CreditmemoManagementInterface $creditmemoManagement
     ) {
         $this->coreRegistry = $coreRegistry;
         $this->rendererCompositeFactory = $rendererCompositeFactory;
@@ -110,6 +117,7 @@ class Processor
         $this->creditmemoLoaderFactory = $creditmemoLoaderFactory;
         $this->storeManager = $storeManager;
         $this->observerManager = $observerManager;
+        $this->creditmemoManagement = $creditmemoManagement;
     }
 
     /**
@@ -261,7 +269,7 @@ class Processor
         $creditmemo = $creditmemoLoader->load();
         if ($creditmemo && $creditmemo->isValidGrandTotal()) {
             $creditmemo->setOfflineRequested(true);
-            $creditmemo->register();
+            $this->creditmemoManagement->refund($creditmemo, true);
             $creditmemoTransaction = $this->transactionFactory->create()
                 ->addObject($creditmemo)
                 ->addObject($creditmemo->getOrder());
