@@ -45,9 +45,9 @@ class Processor
     protected $orderFactory;
 
     /**
-     * @var \Magento\Sales\Model\Service\OrderFactory
+     * @var \Magento\Sales\Api\InvoiceManagementInterface
      */
-    protected $serviceOrderFactory;
+    protected $invoiceManagement;
 
     /**
      * @var \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory
@@ -77,7 +77,7 @@ class Processor
      * @param \Magento\Backend\Model\Session\QuoteFactory $sessionQuoteFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
-     * @param \Magento\Sales\Model\Service\OrderFactory $serviceOrderFactory
+     * @param \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement
      * @param \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory
      * @param \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
@@ -92,7 +92,7 @@ class Processor
         \Magento\Backend\Model\Session\QuoteFactory $sessionQuoteFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
         \Magento\Sales\Model\OrderFactory $orderFactory,
-        \Magento\Sales\Model\Service\OrderFactory $serviceOrderFactory,
+        \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement,
         \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory,
         \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory,
         \Magento\SampleData\Helper\StoreManager $storeManager,
@@ -105,7 +105,7 @@ class Processor
         $this->sessionQuoteFactory = $sessionQuoteFactory;
         $this->transactionFactory = $transactionFactory;
         $this->orderFactory = $orderFactory;
-        $this->serviceOrderFactory = $serviceOrderFactory;
+        $this->invoiceManagement = $invoiceManagement;
         $this->shipmentLoaderFactory = $shipmentLoaderFactory;
         $this->creditmemoLoaderFactory = $creditmemoLoaderFactory;
         $this->storeManager = $storeManager;
@@ -224,8 +224,7 @@ class Processor
         if (!$order) {
             return false;
         }
-        $invoice = $this->serviceOrderFactory->create(['order' => $order])
-            ->prepareInvoice($invoiceData);
+        $invoice = $this->invoiceManagement->prepareInvoice($order->getId(), $invoiceData);
         return $invoice;
     }
 
