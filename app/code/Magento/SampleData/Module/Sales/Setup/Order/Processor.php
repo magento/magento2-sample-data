@@ -45,9 +45,9 @@ class Processor
     protected $orderFactory;
 
     /**
-     * @var \Magento\Sales\Model\Service\OrderFactory
+     * @var \Magento\Sales\Api\InvoiceManagementInterface
      */
-    protected $serviceOrderFactory;
+    protected $invoiceManagement;
 
     /**
      * @var \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory
@@ -70,6 +70,11 @@ class Processor
     protected $observerManager;
 
     /**
+     * @var \Magento\Sales\Api\CreditmemoManagementInterface
+     */
+    protected $creditmemoManagement;
+
+    /**
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\Phrase\Renderer\CompositeFactory $rendererCompositeFactory
      * @param \Magento\Sales\Model\AdminOrder\CreateFactory $createOrderFactory
@@ -77,11 +82,12 @@ class Processor
      * @param \Magento\Backend\Model\Session\QuoteFactory $sessionQuoteFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
-     * @param \Magento\Sales\Model\Service\OrderFactory $serviceOrderFactory
+     * @param \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement
      * @param \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory
      * @param \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param \Magento\SampleData\Model\ObserverManager $observerManager
+     * @param \Magento\Sales\Api\CreditmemoManagementInterface $creditmemoManagement
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -92,11 +98,12 @@ class Processor
         \Magento\Backend\Model\Session\QuoteFactory $sessionQuoteFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
         \Magento\Sales\Model\OrderFactory $orderFactory,
-        \Magento\Sales\Model\Service\OrderFactory $serviceOrderFactory,
+        \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement,
         \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory,
         \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory,
         \Magento\SampleData\Helper\StoreManager $storeManager,
-        \Magento\SampleData\Model\ObserverManager $observerManager
+        \Magento\SampleData\Model\ObserverManager $observerManager,
+        \Magento\Sales\Api\CreditmemoManagementInterface $creditmemoManagement
     ) {
         $this->coreRegistry = $coreRegistry;
         $this->rendererCompositeFactory = $rendererCompositeFactory;
@@ -105,11 +112,12 @@ class Processor
         $this->sessionQuoteFactory = $sessionQuoteFactory;
         $this->transactionFactory = $transactionFactory;
         $this->orderFactory = $orderFactory;
-        $this->serviceOrderFactory = $serviceOrderFactory;
+        $this->invoiceManagement = $invoiceManagement;
         $this->shipmentLoaderFactory = $shipmentLoaderFactory;
         $this->creditmemoLoaderFactory = $creditmemoLoaderFactory;
         $this->storeManager = $storeManager;
         $this->observerManager = $observerManager;
+        $this->creditmemoManagement = $creditmemoManagement;
     }
 
     /**
@@ -224,8 +232,7 @@ class Processor
         if (!$order) {
             return false;
         }
-        $invoice = $this->serviceOrderFactory->create(['order' => $order])
-            ->prepareInvoice($invoiceData);
+        $invoice = $this->invoiceManagement->prepareInvoice($order->getId(), $invoiceData);
         return $invoice;
     }
 
@@ -262,7 +269,7 @@ class Processor
         $creditmemo = $creditmemoLoader->load();
         if ($creditmemo && $creditmemo->isValidGrandTotal()) {
             $creditmemo->setOfflineRequested(true);
-            $creditmemo->register();
+            $this->creditmemoManagement->refund($creditmemo, true);
             $creditmemoTransaction = $this->transactionFactory->create()
                 ->addObject($creditmemo)
                 ->addObject($creditmemo->getOrder());
