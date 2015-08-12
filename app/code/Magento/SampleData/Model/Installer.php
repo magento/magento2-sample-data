@@ -114,14 +114,13 @@ class Installer
                     $this->postInstaller->addModule($moduleName);
                 }
             }
+            $this->session->unsUser();
+            $this->postInstaller->run();
+            $this->state->finish();
         } catch (\Exception $e) {
             $this->state->setError();
             $this->logger->log($e->getMessage());
         }
-
-        $this->session->unsUser();
-        $this->postInstaller->run();
-        $this->state->finish();
     }
 
     /**
