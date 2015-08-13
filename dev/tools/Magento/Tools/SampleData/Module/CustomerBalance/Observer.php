@@ -11,10 +11,10 @@ namespace Magento\Tools\SampleData\Module\CustomerBalance;
 class Observer
 {
     /**
-     * @param \Magento\Framework\Object $params
+     * @param \Magento\Framework\DataObject $params
      * @return mixed
      */
-    public function getCreditmemoData(\Magento\Framework\Object $params)
+    public function getCreditmemoData(\Magento\Framework\DataObject $params)
     {
         /** @var \Magento\Sales\Model\Order\Item $orderItem */
         $orderItem = $params->getOrderItem();
