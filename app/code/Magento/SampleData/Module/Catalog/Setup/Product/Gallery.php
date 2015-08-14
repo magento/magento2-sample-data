@@ -61,11 +61,17 @@ class Gallery
     protected $logger;
 
     /**
+     * @var \Magento\Framework\App\Resource
+     */
+    protected $resource;
+
+    /**
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param ProductFactory $productFactory
      * @param GalleryAttribute $galleryAttribute
      * @param \Magento\Eav\Model\Config $eavConfig
+     * @param \Magento\Framework\App\Resource $resource
      * @param Logger $logger
      */
     public function __construct(
@@ -74,6 +80,7 @@ class Gallery
         ProductFactory $productFactory,
         GalleryAttribute $galleryAttribute,
         \Magento\Eav\Model\Config $eavConfig,
+        \Magento\Framework\App\Resource $resource,
         Logger $logger
     ) {
         $this->fixtureHelper = $fixtureHelper;
@@ -81,6 +88,7 @@ class Gallery
         $this->productFactory = $productFactory;
         $this->csvReaderFactory = $csvReaderFactory;
         $this->mediaAttribute = $eavConfig->getAttribute('catalog_product', 'media_gallery');
+        $this->resource = $resource;
         $this->logger = $logger;
         $this->loadFixtures();
     }
@@ -141,7 +149,7 @@ class Gallery
             $imageAttribute = $product->getResource()->getAttribute('image');
             $smallImageAttribute = $product->getResource()->getAttribute('small_image');
             $thumbnailAttribute = $product->getResource()->getAttribute('thumbnail');
-            $adapter = $product->getResource()->getConnection();
+            $adapter = $this->resource->getConnection('core');
             foreach ([$imageAttribute, $smallImageAttribute, $thumbnailAttribute] as $attribute) {
                 $table = $imageAttribute->getBackend()->getTable();
                 /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter*/
