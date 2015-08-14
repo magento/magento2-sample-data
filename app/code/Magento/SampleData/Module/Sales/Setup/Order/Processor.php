@@ -5,7 +5,7 @@
  */
 namespace Magento\SampleData\Module\Sales\Setup\Order;
 
-use Magento\Framework\Object;
+use Magento\Framework\DataObject;
 
 /**
  * Class Processor
@@ -286,7 +286,7 @@ class Processor
         $data = [$orderItem->getId() => $orderItem->getQtyToRefund()];
         foreach ($this->observerManager->getObservers() as $observer) {
             if (is_callable([$observer, 'getCreditmemoData'])) {
-                $params = new Object([
+                $params = new DataObject([
                     'order_item' => $orderItem,
                     'credit_memo' => $data
                 ]);

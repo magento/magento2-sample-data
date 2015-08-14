@@ -156,7 +156,7 @@ class CmsBlock implements SetupInterface
 
     /**
      * @param string $urlKey
-     * @return \Magento\Framework\Object
+     * @return \Magento\Framework\DataObject
      */
     protected function getCategoryByUrlKey($urlKey)
     {
