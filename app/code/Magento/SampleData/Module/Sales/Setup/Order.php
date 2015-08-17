@@ -40,10 +40,22 @@ class Order implements SetupInterface
     protected $logger;
 
     /**
+     * @var \Magento\Sales\Model\Resource\Order\CollectionFactory
+     */
+    protected $orderCollectionFactory;
+
+    /**
+     * @var \Magento\Customer\Api\CustomerRepositoryInterface
+     */
+    protected $customerRepository;
+
+    /**
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param Order\Converter $converter
      * @param Order\Processor $orderProcessor
+     * @param \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\SampleData\Model\Logger $logger
      * @param array $fixtures
      */
@@ -52,6 +64,8 @@ class Order implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         Order\Converter $converter,
         Order\Processor $orderProcessor,
+        \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory,
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\SampleData\Model\Logger $logger,
         $fixtures = ['Sales/orders.csv']
     ) {
@@ -59,6 +73,8 @@ class Order implements SetupInterface
         $this->csvReaderFactory = $csvReaderFactory;
         $this->converter = $converter;
         $this->orderProcessor = $orderProcessor;
+        $this->orderCollectionFactory = $orderCollectionFactory;
+        $this->customerRepository = $customerRepository;
         $this->fixtures = $fixtures;
         $this->logger = $logger;
     }
@@ -72,7 +88,21 @@ class Order implements SetupInterface
         foreach ($this->fixtures as $file) {
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
+            $isFirst = true;
             foreach ($csvReader as $row) {
+                if ($isFirst) {
+                    $customer = $this->customerRepository->get($row['customer_email']);
+                    if (!$customer->getId()) {
+                        continue;
+                    }
+                    /** @var \Magento\Sales\Model\Resource\Collection $orderCollection */
+                    $orderCollection = $this->orderCollectionFactory->create();
+                    $orderCollection->addFilter('customer_id', $customer->getId());
+                    if ($orderCollection->count() > 0) {
+                        break;
+                    }
+                }
+                $isFirst = false;
                 $orderData = $this->converter->convertRow($row);
                 $this->orderProcessor->createOrder($orderData);
                 $this->logger->logInline('.');

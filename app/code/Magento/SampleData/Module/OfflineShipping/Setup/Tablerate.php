@@ -16,6 +16,11 @@ use Magento\SampleData\Model\SetupInterface;
 class Tablerate implements SetupInterface
 {
     /**
+     * Code of "Integrity constraint violation: 1062 Duplicate entry" error
+     */
+    const ERROR_CODE_DUPLICATE_ENTRY = 23000;
+
+    /**
      * @var \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate
      */
     protected $tablerate;
@@ -102,8 +107,8 @@ class Tablerate implements SetupInterface
     public function run()
     {
         $this->logger->log('Installing Tablerate:');
-        /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter */
-        $adapter = $this->resource->getConnection('core_write');
+        /** @var \Magento\Framework\DB\Adapter\AdapterInterface $connection */
+        $connection = $this->resource->getConnection('core');
         $fixtureFile = 'OfflineShipping/tablerate.csv';
         $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
         $regions = $this->loadDirectoryRegions();
@@ -113,19 +118,28 @@ class Tablerate implements SetupInterface
             $regionId = ($data['region'] != '*')
                 ? $regions[$data['country']][$data['region']]
                 : 0;
-            $adapter->insert(
-                $this->tablerate->getMainTable(),
-                [
-                    'website_id' => $this->storeManager->getWebsiteId(),
-                    'dest_country_id' => $data['country'],
-                    'dest_region_id' => $regionId,
-                    'dest_zip' => $data['zip'],
-                    'condition_name' => 'package_value',
-                    'condition_value' => $data['order_subtotal'],
-                    'price' => $data['price'],
-                    'cost' => 0,
-                ]
-            );
+            try {
+                $connection->insert(
+                    $this->tablerate->getMainTable(),
+                    [
+                        'website_id' => $this->storeManager->getWebsiteId(),
+                        'dest_country_id' => $data['country'],
+                        'dest_region_id' => $regionId,
+                        'dest_zip' => $data['zip'],
+                        'condition_name' => 'package_value',
+                        'condition_value' => $data['order_subtotal'],
+                        'price' => $data['price'],
+                        'cost' => 0,
+                    ]
+                );
+            } catch (\Zend_Db_Statement_Exception $e) {
+                if ($e->getCode() == self::ERROR_CODE_DUPLICATE_ENTRY) {
+                    // In case if Sample data was already installed we just skip duplicated records installation
+                    continue;
+                } else {
+                    throw $e;
+                }
+            }
             $this->logger->logInline('.');
         }
         $this->configWriter->save('carriers/tablerate/active', 1);

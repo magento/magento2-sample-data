@@ -6,6 +6,7 @@
 namespace Magento\SampleData\Module\CatalogRule\Setup;
 
 use Magento\CatalogRule\Model\RuleFactory as RuleFactory;
+use Magento\CatalogRule\Model\Resource\Rule\CollectionFactory as RuleCollectionFactory;
 use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
 use Magento\SampleData\Helper\Fixture as FixtureHelper;
 use Magento\SampleData\Model\Logger;
@@ -30,6 +31,11 @@ class Rule implements SetupInterface
      * @var RuleFactory
      */
     protected $ruleFactory;
+
+    /**
+     * @var RuleCollectionFactory
+     */
+    protected $ruleCollectionFactory;
 
     /**
      * @var \Magento\CatalogRule\Model\Rule\JobFactory
@@ -60,6 +66,7 @@ class Rule implements SetupInterface
      * @param CsvReaderFactory $csvReaderFactory
      * @param FixtureHelper $fixtureHelper
      * @param RuleFactory $ruleFactory
+     * @param RuleCollectionFactory $ruleCollectionFactory
      * @param \Magento\CatalogRule\Model\Rule\JobFactory $jobFactory
      * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Customer\Model\GroupFactory $groupFactory
@@ -70,6 +77,7 @@ class Rule implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         FixtureHelper $fixtureHelper,
         RuleFactory $ruleFactory,
+        RuleCollectionFactory $ruleCollectionFactory,
         \Magento\CatalogRule\Model\Rule\JobFactory $jobFactory,
         \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Customer\Model\GroupFactory $groupFactory,
@@ -79,6 +87,7 @@ class Rule implements SetupInterface
         $this->csvReaderFactory = $csvReaderFactory;
         $this->fixtureHelper = $fixtureHelper;
         $this->ruleFactory = $ruleFactory;
+        $this->ruleCollectionFactory = $ruleCollectionFactory;
         $this->jobFactory = $jobFactory;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->groupFactory = $groupFactory;
@@ -96,6 +105,12 @@ class Rule implements SetupInterface
         $fileName = $this->fixtureHelper->getPath($file);
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
         foreach ($csvReader as $row) {
+            /** @var \Magento\CatalogRule\Model\Resource\Rule\Collection $ruleCollection */
+            $ruleCollection = $this->ruleCollectionFactory->create();
+            $ruleCollection->addFilter('name', $row['name']);
+            if ($ruleCollection->count() > 0) {
+                continue;
+            }
             $row['customer_group_ids'] = $this->getGroupIds();
             $row['website_ids'] = $this->getWebsiteIds();
             $row['conditions_serialized'] = $this->convertSerializedData($row['conditions_serialized']);

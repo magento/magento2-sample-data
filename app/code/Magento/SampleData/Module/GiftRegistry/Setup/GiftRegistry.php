@@ -38,6 +38,11 @@ class GiftRegistry implements SetupInterface
     protected $giftRegistryFactory;
 
     /**
+     * @var \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * @var \Magento\Customer\Model\AddressFactory
      */
     protected $addressFactory;
@@ -82,6 +87,7 @@ class GiftRegistry implements SetupInterface
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
      * @param \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory
+     * @param \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory $collectionFactory
      * @param \Magento\Customer\Model\AddressFactory $addressFactory
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param \Magento\Framework\Stdlib\DateTime\DateTimeFactory $dateFactory
@@ -97,6 +103,7 @@ class GiftRegistry implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         \Magento\Directory\Model\CountryFactory $countryFactory,
         \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory,
+        \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory $collectionFactory,
         \Magento\Customer\Model\AddressFactory $addressFactory,
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Framework\Stdlib\DateTime\DateTimeFactory $dateFactory,
@@ -110,6 +117,7 @@ class GiftRegistry implements SetupInterface
         $this->csvReaderFactory = $csvReaderFactory;
         $this->countryFactory = $countryFactory;
         $this->giftRegistryFactory = $giftRegistryFactory;
+        $this->collectionFactory = $collectionFactory;
         $this->addressFactory = $addressFactory;
         $this->customerFactory = $customerFactory;
         $this->dateFactory = $dateFactory;
@@ -131,7 +139,14 @@ class GiftRegistry implements SetupInterface
         /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $giftRegistryData) {
+            /** @var \Magento\GiftRegistry\Model\Resource\Entity\Collection $collection */
+            $collection = $this->collectionFactory->create();
+            $collection->addFilter('title', $giftRegistryData['title']);
+            if ($collection->count() > 0) {
+                continue;
+            }
             $data = $this->generateData($giftRegistryData);
+            /** @var \Magento\GiftRegistry\Model\Entity $giftRegistry */
             $giftRegistry = $this->giftRegistryFactory->create();
             $address = $this->addressFactory->create();
             $address->setData($data['address']);
