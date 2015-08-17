@@ -43,7 +43,7 @@ class Product extends \Magento\SampleData\Module\Catalog\Setup\Product implement
      * @param Product\Gallery $gallery
      * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
-     * @param \Magento\ConfigurableProduct\Model\Product\Type\Configurable $variationHandler
+     * @param \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param array $fixtures
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
