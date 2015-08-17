@@ -93,7 +93,7 @@ class Converter
 
     /**
      * @param string $productSku
-     * @return \Magento\Framework\Object
+     * @return \Magento\Framework\DataObject
      */
     protected function getProductData($productSku)
     {

@@ -90,7 +90,7 @@ class Converter
 
     /**
      * @param string $urlKey
-     * @return \Magento\Framework\Object
+     * @return \Magento\Framework\DataObject
      */
     protected function getCategoryByUrlKey($urlKey)
     {
