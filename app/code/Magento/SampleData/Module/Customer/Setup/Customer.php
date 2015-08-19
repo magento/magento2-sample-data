@@ -164,7 +164,6 @@ class Customer implements SetupInterface
                     '\Magento\Customer\Api\Data\CustomerInterface'
                 );
                 $customer->setAddresses([$addresses]);
-
                 $this->accountManagement->createAccount($customer, $row['password']);
                 $this->logger->logInline('.');
             }
