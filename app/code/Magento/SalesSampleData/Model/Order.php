@@ -3,41 +3,34 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\SampleData\Module\Sales\Setup;
+namespace Magento\SalesSampleData\Model;
 
-use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\SampleData\Model\SetupInterface;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Class Order
  */
-class Order implements SetupInterface
+class Order
 {
     /**
-     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\Framework\File\Csv
      */
-    protected $csvReaderFactory;
+    protected $csvReader;
 
     /**
-     * @var \Magento\SampleData\Helper\Fixture
+     * @var \Magento\Framework\Setup\SampleData\FixtureManager
      */
-    protected $fixtureHelper;
+    protected $fixtureManager;
 
     /**
-     * @var \Magento\SampleData\Module\Sales\Setup\Order\Converter
+     * @var Order\Converter
      */
     protected $converter;
 
     /**
-     * @var \Magento\SampleData\Module\Sales\Setup\Order\Processor
+     * @var Order\Processor
      */
     protected $orderProcessor;
-
-    /**
-     * @var \Magento\SampleData\Model\Logger
-     */
-    protected $logger;
 
     /**
      * @var \Magento\Sales\Model\Resource\Order\CollectionFactory
@@ -50,46 +43,42 @@ class Order implements SetupInterface
     protected $customerRepository;
 
     /**
-     * @param FixtureHelper $fixtureHelper
-     * @param CsvReaderFactory $csvReaderFactory
+     * @param SampleDataContext $optionalDataContext
+     * @param \Magento\Framework\File\Csv $csvReader
      * @param Order\Converter $converter
      * @param Order\Processor $orderProcessor
      * @param \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
-     * @param \Magento\SampleData\Model\Logger $logger
-     * @param array $fixtures
      */
     public function __construct(
-        FixtureHelper $fixtureHelper,
-        CsvReaderFactory $csvReaderFactory,
+        SampleDataContext $optionalDataContext,
+        \Magento\Framework\File\Csv $csvReader,
         Order\Converter $converter,
         Order\Processor $orderProcessor,
         \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory,
-        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-        \Magento\SampleData\Model\Logger $logger,
-        $fixtures = ['Sales/orders.csv']
+        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     ) {
-        $this->fixtureHelper = $fixtureHelper;
-        $this->csvReaderFactory = $csvReaderFactory;
+        $this->fixtureManager = $optionalDataContext->getFixtureManager();
+        $this->csvReader = $csvReader;
         $this->converter = $converter;
         $this->orderProcessor = $orderProcessor;
         $this->orderCollectionFactory = $orderCollectionFactory;
         $this->customerRepository = $customerRepository;
-        $this->fixtures = $fixtures;
-        $this->logger = $logger;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function run()
+    public function run(array $fixtures)
     {
-        $this->logger->log('Installing orders:');
-        foreach ($this->fixtures as $file) {
-            $fileName = $this->fixtureHelper->getPath($file);
-            $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
+        foreach ($fixtures as $file) {
+            $fileName = $this->fixtureManager->getFixture($file);
+            if (!file_exists($fileName)) {
+                continue;
+            }
+            $data = $this->csvReader->getData($fileName);
             $isFirst = true;
-            foreach ($csvReader as $row) {
+            foreach ($data as $row) {
                 if ($isFirst) {
                     $customer = $this->customerRepository->get($row['customer_email']);
                     if (!$customer->getId()) {
@@ -105,7 +94,6 @@ class Order implements SetupInterface
                 $isFirst = false;
                 $orderData = $this->converter->convertRow($row);
                 $this->orderProcessor->createOrder($orderData);
-                $this->logger->logInline('.');
             }
         }
     }

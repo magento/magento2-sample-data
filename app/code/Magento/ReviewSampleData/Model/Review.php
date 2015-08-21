@@ -3,20 +3,28 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\SampleData\Module\Review\Setup;
+namespace Magento\ReviewSampleData\Model;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\SampleData\Model\SetupInterface;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Class Review
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class Review implements SetupInterface
+class Review
 {
+    /**
+     * @var \Magento\Framework\Setup\SampleData\FixtureManager
+     */
+    protected $fixtureManager;
+
+    /**
+     * @var \Magento\Framework\File\Csv
+     */
+    protected $csvReader;
+
     /**
      * @var \Magento\Review\Model\ReviewFactory
      */
@@ -26,16 +34,6 @@ class Review implements SetupInterface
      * @var \Magento\Review\Model\Resource\Review\CollectionFactory
      */
     protected $reviewCollectionFactory;
-
-    /**
-     * @var \Magento\SampleData\Helper\Fixture
-     */
-    protected $fixtureHelper;
-
-    /**
-     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
-     */
-    protected $csvReaderFactory;
 
     /**
      * @var \Magento\Review\Model\RatingFactory
@@ -51,11 +49,6 @@ class Review implements SetupInterface
      * @var \Magento\Catalog\Model\Resource\Product\Collection
      */
     protected $productCollection;
-
-    /**
-     * @var \Magento\SampleData\Model\Logger
-     */
-    protected $logger;
 
     /**
      * @var CustomerRepositoryInterface
@@ -83,41 +76,38 @@ class Review implements SetupInterface
     protected $reviewProductEntityId;
 
     /**
-     * @var \Magento\SampleData\Helper\StoreManager
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
 
     /**
+     * @param SampleDataContext $sampleDataContext
+     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Review\Model\ReviewFactory $reviewFactory
      * @param \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory
-     * @param FixtureHelper $fixtureHelper
-     * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Review\Model\RatingFactory $ratingFactory
      * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
      * @param CustomerRepositoryInterface $customerAccount
-     * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
+        SampleDataContext $sampleDataContext,
+        \Magento\Framework\File\Csv $csvReader,
         \Magento\Review\Model\ReviewFactory $reviewFactory,
         \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory,
-        FixtureHelper $fixtureHelper,
-        CsvReaderFactory $csvReaderFactory,
         \Magento\Review\Model\RatingFactory $ratingFactory,
         \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
         CustomerRepositoryInterface $customerAccount,
-        \Magento\SampleData\Model\Logger $logger,
         \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory,
-        \Magento\SampleData\Helper\StoreManager $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
+        $this->fixtureManager = $sampleDataContext->getFixtureManager();
+        $this->csvReader = $csvReader;
         $this->reviewFactory = $reviewFactory;
         $this->reviewCollectionFactory = $reviewCollectionFactory;
-        $this->fixtureHelper = $fixtureHelper;
-        $this->csvReaderFactory = $csvReaderFactory;
         $this->ratingFactory = $ratingFactory;
         $this->productCollection = $productCollectionFactory->create()->addAttributeToSelect('sku');
-        $this->logger = $logger;
         $this->customerRepository = $customerAccount;
         $this->ratingOptionsFactory = $ratingOptionsFactory;
         $this->storeManager = $storeManager;
@@ -126,37 +116,38 @@ class Review implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function run()
+    public function run(array $fixtures)
     {
-        $this->logger->log('Installing product reviews:');
-        $fixtureFile = 'Review/products_reviews.csv';
-        $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-        /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
-        $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
-        foreach ($csvReader as $row) {
-            $storeId = [$this->storeManager->getStoreId()];
-            $review = $this->prepareReview($row);
-            $this->createRating($row['rating_code'], $storeId);
-            $productId = $this->getProductIdBySku($row['sku']);
-
-            if (empty($productId)) {
+        foreach ($fixtures as $fileName) {
+            $filePath = $this->fixtureManager->getPath($fileName);
+            if (!file_exists($fileName)) {
                 continue;
             }
-            /** @var \Magento\Review\Model\Resource\Review\Collection $reviewCollection */
-            $reviewCollection = $this->reviewCollectionFactory->create();
-            $reviewCollection->addFilter('entity_pk_value', $productId)
-                ->addFilter('entity_id', $this->getReviewEntityId())
-                ->addFieldToFilter('detail.title', ['eq' => $row['title']]);
-            if ($reviewCollection->getSize() > 0) {
-                continue;
-            }
+            $rows = $this->csvReader->getData($filePath);
+            foreach ($rows as $row) {
+                $storeId = [$this->storeManager->getStoreId()];
+                $review = $this->prepareReview($row);
+                $this->createRating($row['rating_code'], $storeId);
+                $productId = $this->getProductIdBySku($row['sku']);
 
-            if (!empty($row['email']) && ($this->getCustomerIdByEmail($row['email']) != null)) {
-                $review->setCustomerId($this->getCustomerIdByEmail($row['email']));
+                if (empty($productId)) {
+                    continue;
+                }
+                /** @var \Magento\Review\Model\Resource\Review\Collection $reviewCollection */
+                $reviewCollection = $this->reviewCollectionFactory->create();
+                $reviewCollection->addFilter('entity_pk_value', $productId)
+                    ->addFilter('entity_id', $this->getReviewEntityId())
+                    ->addFieldToFilter('detail.title', ['eq' => $row['title']]);
+                if ($reviewCollection->getSize() > 0) {
+                    continue;
+                }
+
+                if (!empty($row['email']) && ($this->getCustomerIdByEmail($row['email']) != null)) {
+                    $review->setCustomerId($this->getCustomerIdByEmail($row['email']));
+                }
+                $review->save();
+                $this->setReviewRating($review, $row);
             }
-            $review->save();
-            $this->setReviewRating($review, $row);
-            $this->logger->logInline('.');
         }
     }
 

@@ -3,8 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-namespace Magento\SampleData\Module\Sales\Setup\Order;
+namespace Magento\SalesSampleData\Model\Order;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 
