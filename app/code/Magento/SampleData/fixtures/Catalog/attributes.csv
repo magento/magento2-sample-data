@@ -122,14 +122,14 @@ Hydration
 Timepiece",,category_gear,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Gear
 Sprite Stasis Ball
 Sprite Yoga Strap"
-"Size Ball
+"Size
 Size",select,0,"55 cm
 65 cm
-75 cm",,size_ball,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Sprite Stasis Ball
-"Size Strap
-Size",select,0,"6 foot
+75 cm
+6 foot
 8 foot
-10 foot",,size_strap,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Sprite Yoga Strap"
+10 foot",,size,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Sprite Stasis Ball
+Sprite Yoga Strap"
 "Eco Collection",boolean,0,,,eco_collection,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Gear
 Bag
 Top

@@ -67,8 +67,13 @@ Short-Sleeve
 Sleeveless
 Tank
 Strap",,sleeve,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Top
-"Size Pants
-Size",select,0,"28
+"Size
+Size",select,0,"XS
+S
+M
+L
+XL
+28
 29
 30
 31
@@ -76,12 +81,8 @@ Size",select,0,"28
 33
 34
 36
-38",,size_pants,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,Bottom
-Size,select,0,"XS
-S
-M
-L
-XL",,size_general,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,Top
+38",,size,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Bottom
+Top"
 Collar,multiselect,0,"N/A
 ? zip
 Boat Neck

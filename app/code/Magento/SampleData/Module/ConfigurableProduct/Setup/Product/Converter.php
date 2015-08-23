@@ -66,7 +66,7 @@ class Converter extends \Magento\SampleData\Module\Catalog\Setup\Product\Convert
      */
     protected function convertField(&$data, $field, $value)
     {
-        if (in_array($field, ['color', 'size_general', 'size_pants', 'size_ball', 'size_strap'])) {
+        if (in_array($field, ['color', 'size'])) {
             if (!empty($value)) {
                 $data['configurable_attributes_data'][$field] = $this->getArrayValue($value);
             }
