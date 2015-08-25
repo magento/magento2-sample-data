@@ -16,7 +16,7 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
 ",1,,,,,,,
 "Privacy Policy",1column,,,privacy-policy-cookie-restriction-mode,"Privacy Policy","<div class=""privacy-policy cms-content"">
     <div class=""privacy-policy-content"">
-        <p>This website (""website"") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are currently covered by this privacy policy.</p>
+        <p>This website (""website"") is operated by Luma Inc., which includes Luma stores, and Luma Private Sales. This privacy policy only covers information collected at this website, and does not cover any information collected offline by Luma. All Luma websites are covered by this privacy policy.</p>
 
         <h2 id=""privacy-policy-title-1"">Luma Security</h2>
         <p>Personal information provided on the website and online credit card transactions are transmitted through a secure server. We are committed to handling your personal information with high standards of information security. We take appropriate physical, electronic, and administrative steps to maintain the security and accuracy of personally identifiable information we collect, including limiting the number of people who have physical access to our database servers, as well as employing electronic security systems and password protections that guard against unauthorized access.</p>
@@ -45,11 +45,11 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
             <li>Internal record keeping.</li>
             <li>We may use the information to improve our products and services.</li>
             <li>We may periodically send promotional emails about new products, special offers or other information which we think you may find interesting using the email address which you have provided.</li>
-            <li>From time to time, we may also use your information to contact you for market research purposes. We may contact you by email, phone, fax or mail. We may use the information to customise the website according to your interests.</li>
+            <li>From time to time, we may also use your information to contact you for market research purposes. We may contact you by email, phone, fax or mail. We may use the information to customize the website according to your interests.</li>
         </ul>
 
         <h2 id=""privacy-policy-title-5"">Security</h2>
-        <p>We are committed to ensuring that your information is secure. In order to prevent unauthorised access or disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect online.</p>
+        <p>We are committed to ensuring that your information is secure. In order to prevent unauthorized access or disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect online.</p>
 
         <h2 id=""privacy-policy-title-6"">Others With Whom We Share Your Information.</h2>
         <p><b>The Luma Group:</b> All of the above information that we collect, as described  above, may be shared among all Luma entities, including Luma Venia and Luma  Terra stores, website and Private Sales.</p>
@@ -85,9 +85,9 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
         <p>Under California Civil Code sections 1798.83-1798.84, California residents are  entitled to ask us for a notice describing what categories of personal customer  information we share with third parties or corporate affiliates for those third  parties or corporate affiliates' direct marketing purposes. That notice will identify  the categories of information shared and will include a list of the third parties and  affiliates with which it was shared, along with their names and addresses. If you  are a California resident and would like a copy of this notice, please submit a  written request to the following address: Luma Customer Care, 112 West 34th  Street, 18th Floor, New York, NY 10120. Please allow 30 days for a response.</p>
 
         <h2 id=""privacy-policy-title-9"">Cookies, Web Beacons, and How We Use Them</h2>
-        <p>A cookie is a small file which asks permission to be placed on your computer's hard drive. Once you agree, the file is added and the cookie helps analyse web traffic or lets you know when you visit a particular site. Cookies allow web applications to respond to you as an individual. The web application can tailor its operations to your needs, likes and dislikes by gathering and remembering information about your preferences.</p>
+        <p>A cookie is a small file which asks permission to be placed on your computer's hard drive. Once you agree, the file is added and the cookie helps analyze web traffic or lets you know when you visit a particular site. Cookies allow web applications to respond to you as an individual. The web application can tailor its operations to your needs, likes and dislikes by gathering and remembering information about your preferences.</p>
 
-        <p>We use traffic log cookies to identify which pages are being used. This helps us analyse data about web page traffic and improve our website in order to tailor it to customer needs. We only use this information for statistical analysis purposes and then the data is removed from the system.</p>
+        <p>We use traffic log cookies to identify which pages are being used. This helps us analyze data about web page traffic and improve our website in order to tailor it to customer needs. We only use this information for statistical analysis purposes and then the data is removed from the system.</p>
 
         <p>Overall, cookies help us provide you with a better website, by enabling us to monitor which pages you find useful and which you do not. A cookie in no way gives us access to your computer or any information about you, other than the data you choose to share with us. You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. This may prevent you from taking full advantage of the website.</p>
 
@@ -98,7 +98,7 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
         <p>We may contract with third parties who may use cookies and web beacons and collect information on our behalf or provide services such as credit card processing, shipping, promotional services, or data management. We call them our Customer Care Partners. These third parties are prohibited by our contract with them from sharing that information with anyone other than us or our other Customer Care Partners.</p>
 
         <h2 id=""privacy-policy-title-10"">List of cookies we collect</h2>
-        <p>The table below lists the cookies we collect and what information they store.</p>
+        <p>The table below lists the cookies we collect and the information they store.</p>
         <table class=""data-table"">
             <thead>
                 <tr>
@@ -113,7 +113,7 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
                 </tr>
                 <tr>
                     <th>CATEGORY_INFO</th>
-                    <td>Stores the category info on the page, that allows to display pages more quickly.</td>
+                    <td>Allows pages to be displayed more quickly.</td>
                 </tr>
                 <tr>
                     <th>COMPARE</th>
@@ -121,11 +121,11 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
                 </tr>
                 <tr>
                     <th>CUSTOMER</th>
-                    <td>An encrypted version of your customer id with the store.</td>
+                    <td>An encrypted version of your customer id.</td>
                 </tr>
                 <tr>
                     <th>CUSTOMER_AUTH</th>
-                    <td>An indicator if you are currently logged into the store.</td>
+                    <td>An indicator if you are signed into the store.</td>
                 </tr>
                 <tr>
                     <th>CUSTOMER_INFO</th>
@@ -133,15 +133,15 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
                 </tr>
                 <tr>
                     <th>CUSTOMER_SEGMENT_IDS</th>
-                    <td>Stores the Customer Segment ID</td>
+                    <td>Stores your Customer Segment ID</td>
                 </tr>
                 <tr>
                     <th>EXTERNAL_NO_CACHE</th>
-                    <td>A flag, which indicates whether caching is disabled or not.</td>
+                    <td>A flag that, indicates whether caching is on or off.</td>
                 </tr>
                 <tr>
                     <th>FRONTEND</th>
-                    <td>You sesssion ID on the server.</td>
+                    <td>Your session ID on the server.</td>
                 </tr>
                 <tr>
                     <th>GUEST-VIEW</th>
@@ -153,7 +153,7 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
                 </tr>
                 <tr>
                     <th>LAST_PRODUCT</th>
-                    <td>The most recent product you have viewed.</td>
+                    <td>The last product you looked at.</td>
                 </tr>
                 <tr>
                     <th>NEWMESSAGE</th>
@@ -169,11 +169,11 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
                 </tr>
                 <tr>
                     <th>RECENTLYCOMPARED</th>
-                    <td>The items that you have recently compared.</td>
+                    <td>The items you recently compared.</td>
                 </tr>
                 <tr>
                     <th>STF</th>
-                    <td>Information on products you have emailed to friends.</td>
+                    <td>Information on products you emailed to friends.</td>
                 </tr>
                 <tr>
                     <th>STORE</th>
@@ -181,19 +181,19 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
                 </tr>
                 <tr>
                     <th>USER_ALLOWED_SAVE_COOKIE</th>
-                    <td>Indicates whether a customer allowed to use cookies.</td>
+                    <td>Indicates whether a customer authorized cookies.</td>
                 </tr>
                 <tr>
                     <th>VIEWED_PRODUCT_IDS</th>
-                    <td>The products that you have recently viewed.</td>
+                    <td>The products that you recently looked at.</td>
                 </tr>
                 <tr>
                     <th>WISHLIST</th>
-                    <td>An encrypted list of products added to your Wishlist.</td>
+                    <td>An encrypted list of products added to your wish list.</td>
                 </tr>
                 <tr>
                     <th>WISHLIST_CNT</th>
-                    <td>The number of items in your Wishlist.</td>
+                    <td>The number of items in your wish list.</td>
                 </tr>
             </tbody>
         </table>

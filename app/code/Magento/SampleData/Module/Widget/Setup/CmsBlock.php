@@ -51,6 +51,11 @@ class CmsBlock implements SetupInterface
     protected $cmsBlockFactory;
 
     /**
+     * @var \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory
+     */
+    protected $appCollectionFactory;
+
+    /**
      * @var \Magento\SampleData\Model\Logger
      */
     protected $logger;
@@ -61,6 +66,7 @@ class CmsBlock implements SetupInterface
      * @param \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory
      * @param \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
+     * @param \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory $appCollectionFactory
      * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
      * @param \Magento\SampleData\Model\Logger $logger
      * @param array $fixtures
@@ -71,6 +77,7 @@ class CmsBlock implements SetupInterface
         \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory,
         \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory,
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
+        \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory $appCollectionFactory,
         \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory,
         \Magento\SampleData\Model\Logger $logger,
         $fixtures = []
@@ -80,6 +87,7 @@ class CmsBlock implements SetupInterface
         $this->widgetFactory = $widgetFactory;
         $this->themeCollectionFactory = $themeCollectionFactory;
         $this->cmsBlockFactory = $cmsBlockFactory;
+        $this->appCollectionFactory = $appCollectionFactory;
         $this->categoryFactory = $categoryFactory;
         $this->fixtures = $fixtures;
         if (empty($this->fixtures)) {
@@ -122,8 +130,16 @@ class CmsBlock implements SetupInterface
 
         foreach ($this->fixtures as $file) {
             $fileName = $this->fixtureHelper->getPath($file);
+            /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {
+                /** @var \Magento\Widget\Model\Resource\Widget\Instance\Collection $instanceCollection */
+                $instanceCollection = $this->appCollectionFactory->create();
+                $instanceCollection->addFilter('title', $row['title']);
+                if ($instanceCollection->count() > 0) {
+                    continue;
+                }
+                /** @var \Magento\Cms\Model\Block $block */
                 $block = $this->cmsBlockFactory->create()->load($row['block_identifier'], 'identifier');
                 if (!$block) {
                     continue;

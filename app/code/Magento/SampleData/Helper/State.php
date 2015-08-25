@@ -13,6 +13,8 @@ class State
 
     const STATE_FINISHED = 'finished';
 
+    const ERROR = 'error';
+
     /**
      * @var array
      */
@@ -27,14 +29,20 @@ class State
     protected $fileName = 'sample-data-state.flag';
 
     /**
+     * @var string
+     */
+    protected $errorFileName = 'sample-data-error.flag';
+
+    /**
      * Get file resource to write sample data installation state
      *
      * @param string $mode
+     * @param string $fileName
      * @return resource|false
      */
-    protected function getStream($mode = 'r')
+    protected function getStream($mode = 'r', $fileName)
     {
-        $filePath = BP . '/var/' . $this->fileName;
+        $filePath = BP . '/var/' . $fileName;
         $stream = @fopen($filePath, $mode);
         return $stream;
     }
@@ -71,7 +79,7 @@ class State
     public function getState()
     {
         $defaultState = self::STATE_NOT_STARTED;
-        $stream = $this->getStream('r');
+        $stream = $this->getStream('r', $this->fileName);
         if (!$stream) {
             return $defaultState;
         }
@@ -84,23 +92,49 @@ class State
     }
 
     /**
+     * @return bool
+     */
+    public function isError()
+    {
+        $isError = false;
+        $stream = $this->getStream('r', $this->errorFileName);
+        if (!$stream) {
+            return $isError;
+        } elseif (trim(fread($stream, 400)) == self::ERROR) {
+            $isError = true;
+        }
+        $this->closeStream($stream);
+        return $isError;
+    }
+
+    /**
      * @param string $state
      * @return $this
      * @throws \Exception
      */
-    public function setState($state)
+    protected function setState($state)
     {
         if ($this->isStateCorrect($state)) {
-            $stream = $this->getStream('w');
-            if ($stream === false) {
-                throw new \Exception(
-                    'Please, ensure that file var/state.lock inside Sample data directory exists and is writable'
-                );
-            }
-            fwrite($stream, $state);
-            $this->closeStream($stream);
+            $this->writeStream($state, $this->fileName);
         }
         return $this;
+    }
+
+    /**
+     * @param string $data
+     * @param string $fileName
+     * @throws \Exception
+     */
+    protected function writeStream($data, $fileName)
+    {
+        $stream = $this->getStream('w', $fileName);
+        if ($stream === false) {
+            throw new \Exception(
+                'Please, ensure that file var/' . $fileName . ' inside Sample data directory exists and is writable'
+            );
+        }
+        fwrite($stream, $data);
+        $this->closeStream($stream);
     }
 
     /**
@@ -117,5 +151,26 @@ class State
     public function finish()
     {
         return $this->setState(self::STATE_FINISHED);
+    }
+
+    /**
+     * @return State
+     */
+    public function setError()
+    {
+        return $this->writeStream(self::ERROR, $this->errorFileName);
+    }
+
+    public function clearErrorFlag()
+    {
+        $this->writeStream('', $this->errorFileName);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getError()
+    {
+        return $this->isError();
     }
 }

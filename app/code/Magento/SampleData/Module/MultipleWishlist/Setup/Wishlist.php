@@ -123,9 +123,10 @@ class Wishlist implements SetupInterface
                 $wishlistCollection->filterByCustomerId($customer->getId())->addFieldToFilter('name', $wishlistName);
                 /** @var \Magento\Wishlist\Model\Wishlist $wishlist */
                 $wishlist = $wishlistCollection->fetchItem();
-                if (!$wishlist) {
-                    $wishlist = $this->wishlistEditor->edit($customer->getId(), $wishlistName, true);
+                if ($wishlist) {
+                    continue;
                 }
+                $wishlist = $this->wishlistEditor->edit($customer->getId(), $wishlistName, true);
                 if (!$wishlist->getId()) {
                     continue;
                 }
