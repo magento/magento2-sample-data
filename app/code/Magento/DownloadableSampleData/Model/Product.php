@@ -5,7 +5,7 @@
  */
 namespace Magento\DownloadableSampleData\Model;
 
-use Magento\Framework\Setup\OptionalData\Context as OptionalDataContext;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Setup downloadable product
@@ -23,14 +23,17 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     protected $deployHelper;
 
     /**
+     * @var \Magento\DownloadableSampleData\Model\Product\Converter $converter
+     */
+    protected $converter;
+
+    /**
      * @var array
      */
     protected $downloadableData = [];
 
-    protected $converter;
-
     /**
-     * @param OptionalDataContext $optionalDataContext
+     * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Config $catalogConfig
      * @param \Magento\DownloadableSampleData\Model\Product\Converter $converter
@@ -39,19 +42,19 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
-        OptionalDataContext $optionalDataContext,
+        SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Config $catalogConfig,
         \Magento\DownloadableSampleData\Model\Product\Converter $converter,
         \Magento\Framework\File\Csv $csvReader,
-        \Magento\CatalogSampleData\model\Product\Gallery $gallery,
+        \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\SampleData\Helper\Deploy $deployHelper
     )
     {
         $this->deployHelper = $deployHelper;
         parent::__construct(
-            $optionalDataContext,
+            $sampleDataContext,
             $productFactory,
             $catalogConfig,
             $converter,

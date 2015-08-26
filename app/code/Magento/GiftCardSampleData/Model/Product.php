@@ -5,15 +5,12 @@
  */
 namespace Magento\GiftCardSampleData\Model;
 
-use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\SampleData\Module\Catalog\Setup\Product\Gallery;
-use Magento\SampleData\Model\SetupInterface;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Setup Gift Card
  */
-class Product extends \Magento\CatalogSampleData\Model\Product implements SetupInterface
+class Product extends \Magento\CatalogSampleData\Model\Product
 {
     /**
      * @var string
@@ -21,29 +18,29 @@ class Product extends \Magento\CatalogSampleData\Model\Product implements SetupI
     protected $productType = \Magento\GiftCard\Model\Catalog\Product\Type\Giftcard::TYPE_GIFTCARD;
 
     /**
+     * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Config $catalogConfig
      * @param \Magento\GiftCardSampleData\Model\Product\Converter $converter
-     * @param FixtureHelper $fixtureHelper
-     * @param CsvReaderFactory $csvReaderFactory
-     * @param Gallery $gallery
+     * @param \Magento\Framework\File\Csv $csvReader
+     * @param \Magento\CatalogSampleData\model\Product\Gallery $gallery
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
      */
     public function __construct(
+        SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Config $catalogConfig,
-        Product\Converter $converter,
-        FixtureHelper $fixtureHelper,
-        CsvReaderFactory $csvReaderFactory,
-        Gallery $gallery,
+        \Magento\GiftCardSampleData\Model\Product\Converter $converter,
+        \Magento\Framework\File\Csv $csvReader,
+        \Magento\CatalogSampleData\model\Product\Gallery $gallery,
         \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         parent::__construct(
+            $sampleDataContext,
             $productFactory,
             $catalogConfig,
             $converter,
-            $fixtureHelper,
-            $csvReaderFactory,
+            $csvReader,
             $gallery,
             $storeManager
         );

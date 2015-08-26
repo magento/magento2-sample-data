@@ -1,0 +1,24 @@
+name,source_category,target_category,limit,conditions
+"Upsells Women Top Tees","Women
+Tops
+Tees","Women
+Tops
+Tees",,"a:3:{s:4:""type"";s:64:""Magento\TargetRule\Model\Actions\Condition\Product\Special\Price"";s:8:""operator"";s:1:"">"";s:5:""value"";s:3:""100"";}"
+"Upsells Women Bottoms Pants","Women
+Bottoms
+Pants","Women
+Bottoms
+Pants",,"a:3:{s:4:""type"";s:64:""Magento\TargetRule\Model\Actions\Condition\Product\Special\Price"";s:8:""operator"";s:1:"">"";s:5:""value"";s:3:""100"";}"
+"Upsells Men Top Tees","Men
+Tops
+Tees","Men
+Tops
+Tees",,"a:3:{s:4:""type"";s:64:""Magento\TargetRule\Model\Actions\Condition\Product\Special\Price"";s:8:""operator"";s:1:"">"";s:5:""value"";s:3:""100"";}"
+"Upsells Men Bottoms Pants","Men
+Bottoms
+Pants","Men
+Bottoms
+Pants",,"a:3:{s:4:""type"";s:64:""Magento\TargetRule\Model\Actions\Condition\Product\Special\Price"";s:8:""operator"";s:1:"">"";s:5:""value"";s:3:""100"";}"
+"Upsells Gear Bags","Gear
+Bags","Gear
+Bags",,"a:3:{s:4:""type"";s:64:""Magento\TargetRule\Model\Actions\Condition\Product\Special\Price"";s:8:""operator"";s:1:"">"";s:5:""value"";s:3:""100"";}"

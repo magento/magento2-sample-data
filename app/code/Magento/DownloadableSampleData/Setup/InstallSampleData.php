@@ -38,12 +38,12 @@ class InstallSampleData implements SetupInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->attribute->run(['Magento_Downloadable::Setup/OptionalData/fixtures/attributes.csv']);
-        $this->category->run(['Magento_Downloadable::Setup/OptionalData/fixtures/categories.csv']);
+        $this->attribute->run(['Magento_DownloadableSampleData::fixtures/attributes.csv']);
+        $this->category->run(['Magento_DownloadableSampleData::fixtures/categories.csv']);
         $this->downloadableProduct->run(
-            ['Magento_Downloadable::Setup/OptionalData/fixtures/products_training_video_download.csv'],
-            ['Magento_Downloadable::Setup/OptionalData/fixtures/images_products_training_video.csv'],
-            ['Magento_Downloadable::Setup/OptionalData/fixtures/downloadable_data_training_video_download.csv']
+            ['Magento_DownloadableSampleData::fixtures/products_training_video_download.csv'],
+            ['Magento_DownloadableSampleData::fixtures/images_products_training_video.csv'],
+            ['Magento_DownloadableSampleData::fixtures/downloadable_data_training_video_download.csv']
         );
     }
 }

@@ -7,35 +7,29 @@
 namespace Magento\MultipleWishlistSampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\MultipleWishlistSampleData\Model;
-use Magento\MultipleWishlistSampleData\Helper;
 
 /**
  * @codeCoverageIgnore
  */
-class InstallSampleData implements Setup\InstallSampleDataInterface
+class InstallSampleData implements SetupInterface
 {
     /**
-     * @var Model\Wishlist
+     * @var \Magento\MultipleWishlistSampleData\Model\Wishlist
      */
     private $wishlist;
 
     /**
-     * @param Model\Wishlist $wishlist
+     * @param \Magento\MultipleWishlistSampleData\Model\Wishlist $wishlist
      */
-    public function __construct(Model\Wishlist $wishlist) {
+    public function __construct(\Magento\MultipleWishlistSampleData\Model\Wishlist $wishlist) {
         $this->wishlist = $wishlist;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $context)
+    public function install()
     {
-        $this->wishlist->install(
-            [
-                'Magento_MultipleWishlistSampleData::fixtures/wishlist.csv',
-            ]
-        );
+        $this->wishlist->run(['Magento_MultipleWishlistSampleData::fixtures/wishlist.csv']);
     }
 }

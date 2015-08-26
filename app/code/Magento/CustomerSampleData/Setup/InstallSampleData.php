@@ -33,6 +33,6 @@ class InstallSampleData implements SetupInterface
      */
     public function install()
     {
-        $this->customerSetup->run(['Magento_Customer::Setup/OptionalData/fixtures/customer_profile.csv']);
+        $this->customerSetup->run(['Magento_CustomerSampleData::Setup/OptionalData/fixtures/customer_profile.csv']);
     }
 }

@@ -5,21 +5,18 @@
  */
 namespace Magento\CustomerSampleData\Model;
 
-use Magento\Customer\Api\Data\RegionInterface;
-use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\SampleData\Model\SetupInterface;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Class Customer
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class Customer implements SetupInterface
+class Customer
 {
     /**
-     * @var FixtureHelper
+     * @var \Magento\Framework\Setup\SampleData\FixtureManager
      */
-    protected $fixtureHelper;
+    protected $fixtureManager;
 
     /**
      * @var \Magento\Framework\File\Csv
@@ -72,7 +69,7 @@ class Customer implements SetupInterface
     protected $dataObjectHelper;
 
     /**
-     * @param FixtureHelper $fixtureHelper
+     * @param SampleDataContext $sampleDataContext
      * @param \Magento\Framework\File\Csv $csvReader,
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
      * @param \Magento\Customer\Api\Data\CustomerInterfaceFactory $customerFactory
@@ -84,7 +81,7 @@ class Customer implements SetupInterface
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        FixtureHelper $fixtureHelper,
+        SampleDataContext $sampleDataContext,
         \Magento\Framework\File\Csv $csvReader,
         \Magento\Directory\Model\CountryFactory $countryFactory,
         \Magento\Customer\Api\Data\CustomerInterfaceFactory $customerFactory,
@@ -94,7 +91,7 @@ class Customer implements SetupInterface
         \Magento\SampleData\Helper\StoreManager $storeManager,
         \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
     ) {
-        $this->fixtureHelper = $fixtureHelper;
+        $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $csvReader;
         $this->countryFactory = $countryFactory;
         $this->customerFactory = $customerFactory;
@@ -111,8 +108,8 @@ class Customer implements SetupInterface
     public function run($fixtures)
     {
         foreach ($fixtures as $fileName) {
-            $fileName = $this->fixtureManager->getFixture($fileName);
-            $rows = $this->csvReader->getData($fileName);
+            $filePath = $this->fixtureManager->getPath($fileName);
+            $rows = $this->csvReader->getData($filePath);
             foreach ($rows as $row) {
                 // Collect customer profile and addresses data
                 $customerData['profile'] = $this->convertRowData($row, $this->getDefaultCustomerProfile());

@@ -96,11 +96,10 @@ class Tablerate
         $adapter = $this->resource->getConnection('core_write');
         $regions = $this->loadDirectoryRegions();
         foreach ($fixtures as $fileName) {
-            $fileName = $this->fixtureManager->getFixture($fileName);
+            $fileName = $this->fixtureManager->getPath($fileName);
             if (!file_exists($fileName)) {
                 continue;
             }
-
             $rows = $this->csvReader->getData($fileName);
             foreach ($rows as $data) {
                 $regionId = ($data['region'] != '*')

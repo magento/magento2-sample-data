@@ -11,7 +11,7 @@ use Magento\Framework\Setup;
 /**
  * Launches setup of sample data for GroupedProduct module
  */
-class InstallSampleData implements Setup\InstallSampleDataInterface
+class InstallSampleData implements SetupInterface
 {
     /**
      * Setup class for grouped products
@@ -32,7 +32,7 @@ class InstallSampleData implements Setup\InstallSampleDataInterface
     /**
      * {@inheritdoc}
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $moduleContext)
+    public function install()
     {
         $this->groupedProduct->run(
             ['Magento_GroupedProduct::GroupedProduct/yoga_grouped.csv'],

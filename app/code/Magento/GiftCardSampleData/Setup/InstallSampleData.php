@@ -33,8 +33,8 @@ class InstallSampleData implements SetupInterface
     public function install()
     {
         $this->product->run(
-            ['Magento_GiftCard::fixtures/products_giftcard.csv'],
-            ['Magento_GiftCard::fixtures/GiftCard/images_giftcard.csv']
+            ['Magento_GiftCardSampleData::fixtures/products_giftcard.csv'],
+            ['Magento_GiftCardSampleData::fixtures/GiftCard/images_giftcard.csv']
         );
     }
 }

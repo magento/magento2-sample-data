@@ -3,16 +3,20 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\MultipleWishlistSampleData\Model;
+namespace Magento\WishlistSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
+
+/**
+ * Installation of sample data for wishlist
+ */
 class Wishlist
 {
     /**
      * @var \Magento\Framework\Setup\SampleData\FixtureManager
      */
-    private $fixtureManager;
+    protected $fixtureManager;
 
     /**
      * @var \Magento\Framework\File\Csv
@@ -25,45 +29,38 @@ class Wishlist
     protected $wishlistFactory;
 
     /**
-     * @var Helper\Wishlist
+     * @var Wishlist\Helper;
      */
     protected $wishlistHelper;
 
     /**
-     * @param SampleDataContext $optionalDataContext
+     * @param SampleDataContext $sampleDataContext
      * @param \Magento\Framework\File\Csv $csvReader
-     * @param Helper\Wishlist $wishlistHelper
+     * @param Wishlist\Helper $wishlistHelper
      * @param \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
      */
     public function __construct(
-        SampleDataContext $optionalDataContext,
+        SampleDataContext $sampleDataContext,
         \Magento\Framework\File\Csv $csvReader,
-        Helper\Wishlist $wishlistHelper,
+        Wishlist\Helper $wishlistHelper,
         \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
     ) {
-        $this->fixtureManager = $optionalDataContext->getFixtureManager();
+        $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $csvReader;
         $this->wishlistHelper = $wishlistHelper;
         $this->wishlistFactory = $wishlistFactory;
     }
 
-    public function install(array $fixtures)
+    /**
+     * {@inheritdoc}
+     */
+    public function run(array $fixtures)
     {
         foreach ($fixtures as $fileName) {
             $fileName = $this->fixtureManager->getPath($fileName);
-            if (!file_exists($fileName)) {
-                continue;
-            }
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $rows = $this->csvReader->getData($fileName);
-            $header = array_shift($rows);
-
             foreach ($rows as $row) {
-                $data = [];
-                foreach ($row as $key => $value) {
-                    $data[$header[$key]] = $value;
-                }
-                $row = $data;
-
                 /** @var \Magento\Customer\Model\Customer $customer */
                 $customer = $this->wishlistHelper->getCustomerByEmail($row['customer_email']);
                 if (!$customer) {

@@ -5,20 +5,19 @@
  */
 namespace Magento\GiftRegistrySampleData\Model;
 
-use Magento\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\SampleData\Model\SetupInterface;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Class GiftRegistry
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class GiftRegistry implements SetupInterface
+class GiftRegistry
 {
     /**
-     * @var \Magento\SampleData\Helper\Fixture
+     * @var \Magento\Framework\Setup\SampleData\FixtureManager
      */
-    protected $fixtureHelper;
+    protected $fixtureManager;
 
     /**
      * @var \Magento\Framework\File\Csv
@@ -76,7 +75,7 @@ class GiftRegistry implements SetupInterface
     protected $storeManager;
 
     /**
-     * @param FixtureHelper $fixtureHelper
+     * @param SampleDataContext $sampleDataContext
      * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
      * @param \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory
@@ -91,7 +90,7 @@ class GiftRegistry implements SetupInterface
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        FixtureHelper $fixtureHelper,
+        SampleDataContext $sampleDataContext,
         \Magento\Framework\File\Csv $csvReader,
         \Magento\Directory\Model\CountryFactory $countryFactory,
         \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory,
@@ -104,7 +103,7 @@ class GiftRegistry implements SetupInterface
         \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer,
         \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
-        $this->fixtureHelper = $fixtureHelper;
+        $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $csvReader;
         $this->countryFactory = $countryFactory;
         $this->giftRegistryFactory = $giftRegistryFactory;
@@ -123,8 +122,8 @@ class GiftRegistry implements SetupInterface
      */
     public function run(array $fixtures)
     {
-        foreach ( $fixtures as $fixture) {
-            $fileName = $this->fixtureManager->getFixture($fixture);
+        foreach ($fixtures as $fixture) {
+            $fileName = $this->fixtureManager->getPath($fixture);
             /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
             $rows = $this->csvReader->getData($fileName);
             foreach ($rows as $giftRegistryData) {
@@ -168,7 +167,6 @@ class GiftRegistry implements SetupInterface
                 }
             }
         }
-
     }
 
     /**
