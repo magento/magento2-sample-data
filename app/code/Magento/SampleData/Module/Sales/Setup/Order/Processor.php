@@ -232,7 +232,7 @@ class Processor
         if (!$order) {
             return false;
         }
-        $invoice = $this->invoiceManagement->prepareInvoice($order->getId(), $invoiceData);
+        $invoice = $this->invoiceManagement->prepareInvoice($order, $invoiceData);
         return $invoice;
     }
 
