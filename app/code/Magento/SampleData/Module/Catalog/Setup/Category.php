@@ -110,7 +110,6 @@ class Category implements SetupInterface
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {
                 $this->createCategory($row);
-                $this->logger->logInline('.');
             }
         }
     }
@@ -234,6 +233,7 @@ class Category implements SetupInterface
                 ->setStoreId(\Magento\Store\Model\Store::DEFAULT_STORE_ID);
             $this->setAdditionalData($row, $category);
             $category->save();
+            $this->logger->logInline('.');
         }
     }
 
