@@ -13,43 +13,38 @@ use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 class Product extends \Magento\CatalogSampleData\Model\Product
 {
     /**
-     * @var \Magento\Framework\File\Csv
-     */
-    protected $csvReader;
-
-    /**
-     * @var \Magento\Framework\Setup\SampleData\FixtureManager
-     */
-    protected $fixtureManager;
-
-    /**
      * @var string
      */
     protected $productType = \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE;
 
     /**
+     * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Config $catalogConfig
      * @param \Magento\GroupedProductSampleData\Model\Product\Converter $converter
      * @param \Magento\Framework\Setup\SampleData\FixtureManager $fixtureManager
      * @param \Magento\Framework\File\Csv $csvReader
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
+        SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Config $catalogConfig,
         \Magento\GroupedProductSampleData\Model\Product\Converter $converter,
         \Magento\Framework\Setup\SampleData\FixtureManager $fixtureManager,
         \Magento\Framework\File\Csv $csvReader,
-        \Magento\SampleData\Helper\StoreManager $storeManager
+        \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     )
     {
         parent::__construct(
+            $sampleDataContext,
             $productFactory,
             $catalogConfig,
             $converter,
-            $fixtureManager,
             $csvReader,
+            $gallery,
             $storeManager
         );
     }

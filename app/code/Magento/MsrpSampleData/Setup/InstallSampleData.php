@@ -3,28 +3,26 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\SampleData\Module\Msrp;
+namespace Magento\MsrpSampleData\Setup;
 
-use Magento\SampleData\Model\SetupInterface;
-
+use Magento\Framework\Setup;
 /**
  * Class Setup
  * Launches setup of sample data for Msrp module
  */
-class Setup implements SetupInterface
-{
+class InstallData implements Setup\InstallDataInterface{
     /**
      * Setup class for Msrp
      *
-     * @var Setup\Msrp
+     * @var \Magento\MsrpSampleData\Model\Msrp
      */
     protected $msrp;
 
     /**
-     * @param Setup\Msrp $msrp
+     * @param \Magento\MsrpSampleData\Model\Msrp $msrp
      */
     public function __construct(
-        Setup\Msrp $msrp
+        \Magento\MsrpSampleData\Model\Msrp $msrp
     ) {
         $this->msrp = $msrp;
     }
@@ -32,8 +30,8 @@ class Setup implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function run()
+    public function install()
     {
-        $this->msrp->run();
+        $this->msrp->run(['MsrpSampleData::fixtures/products_msrp.csv']);
     }
 }

@@ -3,29 +3,26 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\SampleData\Module\Msrp\Setup;
+namespace Magento\MsrpSampleData\Model;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\SampleData\Helper\Fixture as FixtureHelper;
-use Magento\SampleData\Model\SetupInterface;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Class Msrp
  *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class Msrp implements SetupInterface
+class Msrp
 {
     /**
-     * @var \Magento\SampleData\Helper\Fixture
+     * @var \Magento\Framework\File\Csv
      */
-    protected $fixtureHelper;
+    protected $csvReader;
 
     /**
-     * @var \Magento\SampleData\Helper\Csv\ReaderFactory
+     * @var \Magento\Framework\Setup\SampleData\FixtureManager
      */
-    protected $csvReaderFactory;
+    protected $fixtureManager;
 
     /**
      * @var array
@@ -48,21 +45,21 @@ class Msrp implements SetupInterface
     protected $configWriter;
 
     /**
-     * @param FixtureHelper $fixtureHelper
-     * @param CsvReaderFactory $csvReaderFactory
+     * @param SampleDataContext $sampleDataContext
+     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      */
     public function __construct(
-        FixtureHelper $fixtureHelper,
-        CsvReaderFactory $csvReaderFactory,
+        SampleDataContext $sampleDataContext,
+        \Magento\Framework\File\Csv $csvReader,
         \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
         \Magento\SampleData\Model\Logger $logger,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
     ) {
-        $this->fixtureHelper = $fixtureHelper;
-        $this->csvReaderFactory = $csvReaderFactory;
+        $this->fixtureManager = $sampleDataContext->getFixtureManager();
+        $this->csvReader = $csvReader;
         $this->productCollection = $productCollectionFactory->create()->addAttributeToSelect('sku');
         $this->logger = $logger;
         $this->configWriter = $configWriter;
@@ -71,31 +68,30 @@ class Msrp implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function run()
+    public function run(array $fixtures)
     {
-        $this->logger->log('Installing MAP:');
         $this->configWriter->save('sales/msrp/enabled', 1);
-
-        $fixtureFile = 'Msrp/products_msrp.csv';
-        $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-        /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
-        $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
-        foreach ($csvReader as $row) {
-            $productId = $this->getProductIdBySku($row['sku']);
-            if (!$productId) {
-                continue;
+        foreach ($fixtures as $fileName) {
+            $fixtureFile = $this->fixtureManager->getPath($fileName);
+            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
+            $csvReader = $this->csvReader->getData($fixtureFile);
+            foreach ($csvReader as $row) {
+                $productId = $this->getProductIdBySku($row['sku']);
+                if (!$productId) {
+                    continue;
+                }
+                /** @var \Magento\Catalog\Model\Product $product */
+                $product = $this->productCollection->getItemById($productId);
+                $product->setMsrpDisplayActualPriceType(\Magento\Msrp\Model\Product\Attribute\Source\Type::TYPE_ON_GESTURE);
+                if (!empty($row['msrp'])) {
+                    $price = $row['msrp'];
+                } else {
+                    $price = $product->getPrice()*1.1;
+                }
+                $product->setMsrp($price);
+                $product->save();
+                $this->logger->logInline('.');
             }
-            /** @var \Magento\Catalog\Model\Product $product */
-            $product = $this->productCollection->getItemById($productId);
-            $product->setMsrpDisplayActualPriceType(\Magento\Msrp\Model\Product\Attribute\Source\Type::TYPE_ON_GESTURE);
-            if (!empty($row['msrp'])) {
-                $price = $row['msrp'];
-            } else {
-                $price = $product->getPrice()*1.1;
-            }
-            $product->setMsrp($price);
-            $product->save();
-            $this->logger->logInline('.');
         }
     }
 
