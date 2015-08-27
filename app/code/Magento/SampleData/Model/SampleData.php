@@ -27,6 +27,8 @@ class SampleData
     private $directoryList;
 
     /**
+     * Sample Data installation state
+     *
      * @var State
      */
     private $state;
@@ -48,7 +50,7 @@ class SampleData
      */
     public function isInstalledSuccessfully()
     {
-        return \Magento\SampleData\Helper\State::STATE_FINISHED == $this->state->getState();
+        return State::STATE_FINISHED === $this->state->getState();
     }
 
     /**
@@ -58,7 +60,7 @@ class SampleData
      */
     public function isInstallationError()
     {
-        return \Magento\SampleData\Helper\State::STATE_STARTED == $this->state->getState();
+        return State::STATE_STARTED === $this->state->getState();
     }
 
     /**

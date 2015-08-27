@@ -19,11 +19,6 @@ class SampleDataTest extends \PHPUnit_Framework_TestCase
     protected $sampleDataInstall;
 
     /**
-     * @var \Magento\Framework\Setup\LoggerInterface
-     */
-    protected $loggerInterface;
-
-    /**
      * @var \Magento\Framework\App\Filesystem\DirectoryList
      */
     protected $directoryList;
@@ -35,7 +30,6 @@ class SampleDataTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->loggerInterface = $this->getMock('Magento\Framework\Setup\LoggerInterface');
         $this->directoryList = $this->getMock('Magento\Framework\App\Filesystem\DirectoryList', [], [], '', false);
         $this->state = $this->getMock('Magento\SampleData\Helper\State', [], [], '', false);
         $this->sampleDataInstall = new SampleData($this->directoryList, $this->state);
