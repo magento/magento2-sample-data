@@ -6,10 +6,11 @@
 namespace Magento\DownloadableSampleData\Setup;
 
 use Magento\Framework\Setup;
+
 /**
  * Launches setup of sample data for downloadable module
  */
-class InstallSampleData implements SetupInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * Setup class for products
@@ -19,13 +20,13 @@ class InstallSampleData implements SetupInterface
     protected $productSetup;
 
     /**
-     * @param \Magento\CatalogSampleData\Module\Catalog\Setup\Category $category
-     * @param \Magento\CatalogSampleData\Module\Catalog\Setup\Attribute $attribute
+     * @param \Magento\CatalogSampleData\Model\Category $category
+     * @param \Magento\CatalogSampleData\Model\Attribute $attribute
      * @param \Magento\DownloadableSampleData\Model\Product $product
      */
     public function __construct(
-        \Magento\CatalogSampleData\Module\Catalog\Setup\Category $category,
-        \Magento\CatalogSampleData\Module\Catalog\Setup\Attribute $attribute,
+        \Magento\CatalogSampleData\Model\Category $category,
+        \Magento\CatalogSampleData\Model\Attribute $attribute,
         \Magento\DownloadableSampleData\Model\Product $product
     ) {
         $this->category = $category;

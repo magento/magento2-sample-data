@@ -12,7 +12,7 @@ use Magento\TaxSampleData\Model\Tax;
  * Class Setup
  * Launches setup of sample data for Tax module
  */
-class InstallSampleData implements SetupInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * @var Tax
@@ -31,7 +31,7 @@ class InstallSampleData implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function install()
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
         $this->tax->run(['Magento_TaxSampleData::fixtures/tax_rate.csv']);
     }

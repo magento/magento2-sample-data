@@ -5,15 +5,13 @@
  */
 namespace Magento\SalesSampleData\Setup;
 
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Framework\Setup\PostInstallSampleDataInterface;
+use Magento\Framework\Setup;
 use Magento\SalesSampleData\Model;
 
 /**
  * Class PostInstallSampleData
  */
-class PostInstallSampleData implements PostInstallSampleDataInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * @var Model\Order;
@@ -29,13 +27,9 @@ class PostInstallSampleData implements PostInstallSampleDataInterface
     }
 
     /**
-     * Installs optional data for a module
-     *
-     * @param ModuleDataSetupInterface $setup
-     * @param ModuleContextInterface $moduleContext
-     * @return void
+     * @inheritdoc
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $moduleContext)
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
         $this->order->install(['Magento_SalesSampleData::fixtures/orders.csv']);
     }

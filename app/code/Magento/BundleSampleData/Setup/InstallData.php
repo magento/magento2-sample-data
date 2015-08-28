@@ -7,6 +7,7 @@
 namespace Magento\BundleSampleData\Setup;
 
 use Magento\Framework\Setup;
+
 /**
  * Launches setup of sample data for Bundle module
  */
@@ -33,7 +34,7 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->bundleProduct->install(
+        $this->bundleProduct->run(
             ['Magento_BundleSampleData::fixtures/yoga_bundle.csv'],
             ['Magento_BundleSampleData::fixtures/images_yoga_bundle.csv']
         );

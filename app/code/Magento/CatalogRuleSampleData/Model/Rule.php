@@ -71,7 +71,7 @@ class Rule
      * @param array $fixtures
      * @throws \Exception
      */
-    public function install(array $fixtures)
+    public function run(array $fixtures)
     {
         foreach ($fixtures as $fileName) {
             $fileName = $this->fixtureManager->getFixture($fileName);

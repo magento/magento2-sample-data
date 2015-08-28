@@ -77,7 +77,7 @@ class Category
      * @param array $fixtures
      * @throws \Exception
      */
-    public function install(array $fixtures)
+    public function run(array $fixtures)
     {
         $this->isMediaInstalled();
         foreach ($fixtures as $fileName) {

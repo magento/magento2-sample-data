@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\SampleData\Module\Widget\Setup;
+namespace Magento\WidgetSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 

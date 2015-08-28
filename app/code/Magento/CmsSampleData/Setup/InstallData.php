@@ -58,7 +58,7 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $context)
     {
-        $this->category->install(['Magento_CmsSampleData::fixtures/categories.csv']);
+        $this->category->run(['Magento_CmsSampleData::fixtures/categories.csv']);
         $this->css->install(['Magento_CmsSampleData::fixtures/styles.css' => 'styles.css']);
         $this->page->install(['Magento_CmsSampleData::fixtures/pages/pages.csv']);
         $this->block->install(

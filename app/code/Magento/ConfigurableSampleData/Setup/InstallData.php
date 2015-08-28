@@ -55,8 +55,8 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->attribute->install(['Magento_ConfigurableProduct::fixtures/attributes.csv']);
-        $this->category->install(['Magento_ConfigurableProduct::fixtures/categories.csv']);
+        $this->attribute->run(['Magento_ConfigurableProduct::fixtures/attributes.csv']);
+        $this->category->run(['Magento_ConfigurableProduct::fixtures/categories.csv']);
         $this->configurableProduct->install(
             [
                 'Magento_ConfigurableSampleData::fixtures/products_men_tops.csv',

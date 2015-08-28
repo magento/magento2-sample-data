@@ -3,34 +3,34 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\CatalogRuleSampleData\Setup;
+namespace Magento\SalesRuleSampleData\Setup;
 
+use Magento\SalesRuleSampleData\Model;
 use Magento\Framework\Setup;
 
 /**
- * Class Setup
+ * Class PostInstallSampleData
  */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var \Magento\CatalogRuleSampleData\Model\Rule
+     * @var Model\Rule;
      */
     protected $rule;
 
     /**
-     * @param \Magento\CatalogRuleSampleData\Model\Rule $rule
+     * @param Model\Rule $rule
      */
-    public function __construct(
-        \Magento\CatalogRuleSampleData\Model\Rule $rule
-    ) {
+    public function __construct(Model\Rule $rule)
+    {
         $this->rule = $rule;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->rule->run(['Magento_CatalogRule::fixtures/catalog_rules.csv']);
+        $this->rule->run(['Magento_SalesRuleSampleData::fixtures/sales_rules.csv']);
     }
 }

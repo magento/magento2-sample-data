@@ -7,7 +7,6 @@ namespace Magento\WishlistSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
-
 /**
  * Installation of sample data for wishlist
  */

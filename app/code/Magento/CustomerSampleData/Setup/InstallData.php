@@ -10,7 +10,7 @@ use Magento\Framework\Setup;
 /**
  * Class Setup
  */
-class InstallSampleData implements SetupInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * Setup class for customer
@@ -31,8 +31,8 @@ class InstallSampleData implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function install()
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->customerSetup->run(['Magento_CustomerSampleData::Setup/OptionalData/fixtures/customer_profile.csv']);
+        $this->customerSetup->run(['Magento_CustomerSampleData::fixtures/customer_profile.csv']);
     }
 }

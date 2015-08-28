@@ -12,7 +12,7 @@ use Magento\Framework\Setup;
  * Class Setup
  * Launches setup of sample data for TargetRule module
  */
-class InstallSampleData implements SetupInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * Model class for products
@@ -36,9 +36,9 @@ class InstallSampleData implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function install()
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->removeSetupResourceType('Magento\CatalogSampleData\Setup\ProductLink');
+//        $this->removeSetupResourceType('Magento\CatalogSampleData\Setup\ProductLink');
         $this->rule->run(
             [
                 \Magento\TargetRule\Model\Rule::RELATED_PRODUCTS => 'Magento_TargetRuleSampleData::fixtures/crossel.csv',

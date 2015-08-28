@@ -10,6 +10,12 @@
         <sequence>
             <module name="Magento_Sales"/>
             <module name="Magento_SampleData"/>
+            <module name="Magento_CustomerSampleData"/>
+            <module name="Magento_CatalogSampleData"/>
+            <module name="Magento_BundleSampleData"/>
+            <module name="Magento_ConfigurableSampleData"/>
+            <module name="Magento_GroupedSampleData"/>
+            <module name="Magento_GiftCardSampleData"/>
         </sequence>
     </module>
 </config>

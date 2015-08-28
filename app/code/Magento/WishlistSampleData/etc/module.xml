@@ -11,6 +11,11 @@
             <module name="Magento_Wishlist"/>
             <module name="Magento_Customer"/>
             <module name="Magento_SampleData"/>
+            <module name="Magento_CatalogSampleData"/>
+            <module name="Magento_BundleSampleData"/>
+            <module name="Magento_ConfigurableSampleData"/>
+            <module name="Magento_GroupedSampleData"/>
+            <module name="Magento_GiftCardSampleData"/>
         </sequence>
     </module>
 </config>

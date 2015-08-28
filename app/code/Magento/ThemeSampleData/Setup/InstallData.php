@@ -9,13 +9,14 @@ namespace Magento\SampleData\Module\Theme;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Setup;
 use Magento\Store\Model\Store;
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
  * Launches setup of sample data for Theme module
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class InstallSampleData implements SetupInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * @var \Magento\Theme\Model\Config
@@ -68,13 +69,13 @@ class InstallSampleData implements SetupInterface
      * @param \Magento\Theme\Model\Config $config
      * @param \Magento\Theme\Model\Resource\Theme\CollectionFactory $collectionFactory
      * @param \Magento\Framework\UrlInterface $baseUrl
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param ScopeConfigInterface $scopeConfig
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      * @param \Magento\Framework\App\Cache\Type\Config $configCacheType
      * @param \Magento\Framework\App\Filesystem\DirectoryList $directoryList
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
-     * @param SampleData\Context $sampleDataContext
-
+     * @param SampleDataContext $sampleDataContext
+     *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -86,7 +87,7 @@ class InstallSampleData implements SetupInterface
         \Magento\Framework\App\Cache\Type\Config $configCacheType,
         \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
         \Magento\Framework\Module\ModuleListInterface $moduleList,
-        SampleData\Context $sampleDataContext
+        SampleDataContext $sampleDataContext
     ) {
         $this->config = $config;
         $this->collectionFactory = $collectionFactory;
@@ -102,7 +103,7 @@ class InstallSampleData implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function install()
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
         $this->assignTheme();
         $this->addHeadInclude();

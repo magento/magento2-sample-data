@@ -3,40 +3,38 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento\GroupedProductSampleData\Setup;
 
+use Magento\GroupedProductSampleData\Model\Product;
 use Magento\Framework\Setup;
 
 /**
  * Launches setup of sample data for GroupedProduct module
  */
-class InstallSampleData implements SetupInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * Setup class for grouped products
      *
-     * @var \Magento\GroupedProductSampleData\Model\Product
+     * @var Product
      */
     protected $groupedProduct;
 
     /**
-     * @param \Magento\GroupedProductSampleData\Model\Product $groupedProduct
+     * @param Product $groupedProduct
      */
-    public function __construct(
-        \Magento\GroupedProductSampleData\Model\Product $groupedProduct
-    ) {
+    public function __construct(Product $groupedProduct) {
         $this->groupedProduct = $groupedProduct;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function install()
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
         $this->groupedProduct->run(
-            ['Magento_GroupedProduct::GroupedProduct/yoga_grouped.csv'],
-            ['Magento_GroupedProduct/images_yoga_grouped.csv']
+            ['Magento_GroupedProductSampleData::fixtures/yoga_grouped.csv'],
+            ['Magento_GroupedProductSampleData::fixtures/images_yoga_grouped.csv']
         );
     }
 }

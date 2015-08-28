@@ -11,7 +11,7 @@ use Magento\Framework\Setup;
  * Class Setup
  * Launches setup of sample data for GiftCard module
  */
-class InstallSampleData implements SetupInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * @var \Magento\GiftCardSampleData\Model\Product
@@ -30,11 +30,11 @@ class InstallSampleData implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function install()
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
         $this->product->run(
             ['Magento_GiftCardSampleData::fixtures/products_giftcard.csv'],
-            ['Magento_GiftCardSampleData::fixtures/GiftCard/images_giftcard.csv']
+            ['Magento_GiftCardSampleData::fixtures/images_giftcard.csv']
         );
     }
 }

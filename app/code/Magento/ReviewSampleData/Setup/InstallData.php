@@ -6,14 +6,12 @@
 namespace Magento\ReviewSampleData\Setup;
 
 use Magento\ReviewSampleData\Model\Review;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Framework\Setup\PostInstallSampleDataInterface;
+use Magento\Framework\Setup;
 
 /**
  * Class InstallSampleData
  */
-class PostInstallSampleData implements PostInstallSampleDataInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * @var Review
@@ -29,13 +27,9 @@ class PostInstallSampleData implements PostInstallSampleDataInterface
     }
 
     /**
-     * Installs optional data for a module
-     *
-     * @param ModuleDataSetupInterface $setup
-     * @param ModuleContextInterface $moduleContext
-     * @return void
+     * @inheritdoc
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $moduleContext)
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
         $this->review->run(['Magento_ReviewSampleData::fixtures/products_reviews.csv']);
     }

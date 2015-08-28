@@ -8,8 +8,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
     <module name="Magento_BundleSampleData" setup_version="2.0.0">
         <sequence>
+            <module name="Magento_Catalog"/>
             <module name="Magento_Bundle"/>
             <module name="Magento_SampleData"/>
+            <module name="Magento_CatalogSampleData"/>
         </sequence>
     </module>
 </config>

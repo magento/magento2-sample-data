@@ -95,7 +95,7 @@ class Product
      * @param array $galleryFixtures
      * @throws \Exception
      */
-    public function install(array $productFixtures, array $galleryFixtures)
+    public function run(array $productFixtures, array $galleryFixtures)
     {
         $this->setGalleryFixtures($galleryFixtures);
 
