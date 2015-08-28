@@ -1,4 +1,4 @@
-category,name,sku,size_ball,description,price,activity_general,material_gear,qty,category_gear,gender,color,associated_product_ids,attribute_set
+category,name,sku,size,description,price,activity_general,material_gear,qty,category_gear,gender,color,associated_product_ids,attribute_set
 "Gear
 Fitness Equipment","Sprite Stasis Ball",24-WG081-configurable,"55 cm
 65 cm;4.0

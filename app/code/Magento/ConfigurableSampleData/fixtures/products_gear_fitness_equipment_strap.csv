@@ -1,4 +1,4 @@
-category,name,sku,size_strap,description,price,activity_general,material_gear,qty,category_gear,gender,associated_product_ids,attribute_set
+category,name,sku,size,description,price,activity_general,material_gear,qty,category_gear,gender,associated_product_ids,attribute_set
 "Gear
 Fitness Equipment","Sprite Yoga Strap",24-WG085-configurable,"6 foot
 8 foot;3.0
