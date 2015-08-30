@@ -147,7 +147,7 @@ class Gallery
             $imageAttribute = $product->getResource()->getAttribute('image');
             $smallImageAttribute = $product->getResource()->getAttribute('small_image');
             $thumbnailAttribute = $product->getResource()->getAttribute('thumbnail');
-            $adapter = $product->getResource()->getWriteConnection();
+            $adapter = $product->getResource()->getConnection();
             foreach ([$imageAttribute, $smallImageAttribute, $thumbnailAttribute] as $attribute) {
                 $table = $imageAttribute->getBackend()->getTable();
                 /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter*/
