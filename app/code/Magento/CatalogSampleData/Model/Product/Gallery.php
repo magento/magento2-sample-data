@@ -42,7 +42,7 @@ class Gallery
     /**
      * @var false|\Magento\Eav\Model\Entity\Attribute\AbstractAttribute
      */
-    protected $mediaAttribute;
+    protected $eavConfig;
 
     /**
      * @param SampleDataContext $sampleDataContext
@@ -62,7 +62,7 @@ class Gallery
         $this->galleryAttribute = $galleryAttribute;
         $this->productFactory = $productFactory;
         $this->csvReader = $csvReader;
-        $this->mediaAttribute = $eavConfig->getAttribute('catalog_product', 'media_gallery');
+        $this->eavConfig = $eavConfig;
     }
 
     /**
@@ -115,6 +115,7 @@ class Gallery
     {
         $baseImage = '';
         $i = 1;
+        $mediaAttribute = $this->eavConfig->getAttribute('catalog_product', 'media_gallery');
         foreach ($images as $image) {
             if (empty($image)) {
                 $this->errors[] = $product->getSku();
@@ -124,7 +125,7 @@ class Gallery
                 $baseImage = $image;
             }
             $id = $this->galleryAttribute->insertGallery([
-                'attribute_id' => $this->mediaAttribute->getAttributeId(),
+                'attribute_id' => $mediaAttribute->getAttributeId(),
                 'entity_id' => $product->getId(),
                 'value' => $image,
             ]);

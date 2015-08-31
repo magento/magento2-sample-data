@@ -57,20 +57,20 @@ class Converter
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory
      * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Product\Collection $productCollection
+     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
      */
     public function __construct(
         \Magento\Catalog\Api\CategoryManagementInterfaceFactory $categoryTreeFactory,
         \Magento\Eav\Model\Config $eavConfig,
         \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory,
         \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
-        \Magento\Catalog\Model\Resource\Product\Collection $productCollection
+        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
     ) {
         $this->categoryTreeFactory = $categoryTreeFactory;
         $this->eavConfig = $eavConfig;
         $this->attributeCollectionFactory = $attributeCollectionFactory;
         $this->attrOptionCollectionFactory = $attrOptionCollectionFactory;
-        $this->productCollection = $productCollection->removeAllItems()->clear()->addAttributeToSelect('sku');
+        $this->productCollection = $productCollectionFactory->create();
     }
 
     /**
@@ -274,6 +274,7 @@ class Converter
     protected function getProductIdBySku($sku)
     {
         if (empty($this->productIds)) {
+            $this->productCollection->addAttributeToSelect('sku');
             foreach ($this->productCollection as $product) {
                 $this->productIds[$product->getSku()] = $product->getId();
             }
