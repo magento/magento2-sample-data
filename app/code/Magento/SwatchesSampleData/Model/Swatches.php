@@ -46,23 +46,15 @@ class Swatches
     protected $eavConfig;
 
     /**
-     * @var \Magento\SampleData\Model\Logger
-     */
-    protected $logger;
-
-    /**
      * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
      * @param \Magento\Eav\Model\Config $eavConfig
-     * @param \Magento\SampleData\Model\Logger $logger
      */
     public function __construct(
         \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
-        \Magento\Eav\Model\Config $eavConfig,
-        \Magento\SampleData\Model\Logger $logger
+        \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->attrOptionCollectionFactory = $attrOptionCollectionFactory;
         $this->eavConfig = $eavConfig;
-        $this->logger = $logger;
     }
 
     /**
@@ -70,7 +62,6 @@ class Swatches
      */
     public function run()
     {
-        $this->logger->log("Installing Swatches:");
         $this->convertColorToSwatches();
         $this->convertSizeToSwatches();
     }
@@ -91,7 +82,6 @@ class Swatches
         $attributeData['swatchvisual'] = $this->getOptionSwatchVisual($attributeData);
         $attribute->addData($attributeData);
         $attribute->save();
-        $this->logger->logInline('.');
     }
 
     public function convertSizeToSwatches()
@@ -110,7 +100,6 @@ class Swatches
         $attributeData['swatchtext'] = $this->getOptionSwatchText($attributeData);
         $attribute->addData($attributeData);
         $attribute->save();
-        $this->logger->logInline('.');
     }
 
     /**
