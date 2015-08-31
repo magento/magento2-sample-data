@@ -41,13 +41,12 @@ class InstallData implements Setup\InstallDataInterface
     public function __construct(
         \Magento\CatalogSampleData\Model\Attribute $attribute,
         \Magento\CatalogSampleData\Model\Category $category,
-        \Magento\ConfigurableSampleData\Model\Product $configurableProduct,
-        \Magento\SalesSampleData\Model\Order $order
+        \Magento\ConfigurableSampleData\Model\Product $configurableProduct
+        //\Magento\SalesSampleData\Model\Order $order
     ) {
         $this->attribute = $attribute;
         $this->category = $category;
         $this->configurableProduct = $configurableProduct;
-        $this->order = $order;
     }
 
     /**
@@ -55,8 +54,8 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->attribute->run(['Magento_ConfigurableProduct::fixtures/attributes.csv']);
-        $this->category->run(['Magento_ConfigurableProduct::fixtures/categories.csv']);
+        $this->attribute->install(['Magento_ConfigurableSampleData::fixtures/attributes.csv']);
+        $this->category->install(['Magento_ConfigurableSampleData::fixtures/categories.csv']);
         $this->configurableProduct->install(
             [
                 'Magento_ConfigurableSampleData::fixtures/products_men_tops.csv',

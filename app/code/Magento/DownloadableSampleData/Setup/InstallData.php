@@ -39,9 +39,9 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->attribute->run(['Magento_DownloadableSampleData::fixtures/attributes.csv']);
-        $this->category->run(['Magento_DownloadableSampleData::fixtures/categories.csv']);
-        $this->downloadableProduct->run(
+        $this->attribute->install(['Magento_DownloadableSampleData::fixtures/attributes.csv']);
+        $this->category->install(['Magento_DownloadableSampleData::fixtures/categories.csv']);
+        $this->downloadableProduct->install(
             ['Magento_DownloadableSampleData::fixtures/products_training_video_download.csv'],
             ['Magento_DownloadableSampleData::fixtures/images_products_training_video.csv'],
             ['Magento_DownloadableSampleData::fixtures/downloadable_data_training_video_download.csv']

@@ -68,14 +68,24 @@ class Msrp
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         $this->configWriter->save('sales/msrp/enabled', 1);
         foreach ($fixtures as $fileName) {
-            $fixtureFile = $this->fixtureManager->getPath($fileName);
-            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
-            $csvReader = $this->csvReader->getData($fixtureFile);
-            foreach ($csvReader as $row) {
+            $fileName = $this->fixtureManager->getFixture($fileName);
+            if (!file_exists($fileName)) {
+                continue;
+            }
+
+            $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 $productId = $this->getProductIdBySku($row['sku']);
                 if (!$productId) {
                     continue;

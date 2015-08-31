@@ -53,7 +53,7 @@ class Wishlist
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         foreach ($fixtures as $fileName) {
             $fileName = $this->fixtureManager->getPath($fileName);

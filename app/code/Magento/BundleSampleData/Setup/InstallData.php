@@ -34,7 +34,7 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->bundleProduct->run(
+        $this->bundleProduct->install(
             ['Magento_BundleSampleData::fixtures/yoga_bundle.csv'],
             ['Magento_BundleSampleData::fixtures/images_yoga_bundle.csv']
         );

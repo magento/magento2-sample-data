@@ -6,7 +6,6 @@
 namespace Magento\ConfigurableSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
-use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 
 /**
  * Setup configurable product
@@ -16,12 +15,12 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     /**
      * @var string
      */
-    protected $productType = Configurable::TYPE_CODE;
+    protected $productType = \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE;
 
     /**
-     * @var Configurable
+     * @var \Magento\ConfigurableProduct\Model\Product\VariationHandler
      */
-    protected $configurableProductType;
+    protected $variationHandler;
 
     /**
      * @var \Magento\Eav\Model\Config
@@ -41,7 +40,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param Configurable $configurableProductType
+     * @param \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
@@ -52,7 +51,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\Framework\File\Csv $csvReader,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        Configurable $configurableProductType,
+        \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         parent::__construct(
@@ -64,7 +63,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             $gallery,
             $storeManager
         );
-        $this->configurableProductType = $configurableProductType;
+        $this->variationHandler = $variationHandler;
         $this->eavConfig = $eavConfig;
     }
 
@@ -99,7 +98,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             $this->eavConfig->clear();
         }
         if (empty($data['associated_product_ids'])) {
-            $simpleIds = $this->configurableProductType
+            $simpleIds = $this->variationHandler
                 ->generateSimpleProducts($product, $data['variations_matrix']);
         } else {
             $simpleIds = $data['associated_product_ids'];

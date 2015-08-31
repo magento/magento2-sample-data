@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\CustomerSampleData;
+namespace Magento\CustomerSampleData\Setup;
 
 use Magento\Framework\Setup;
 
@@ -33,6 +33,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->customerSetup->run(['Magento_CustomerSampleData::fixtures/customer_profile.csv']);
+        $this->customerSetup->install(['Magento_CustomerSampleData::fixtures/customer_profile.csv']);
     }
 }

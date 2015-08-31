@@ -67,7 +67,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     /**
      * {@inheritdoc}
      */
-    public function run(array $productFixtures, array $galleryFixtures, array $downloadableFixtures = [])
+    public function install(array $productFixtures, array $galleryFixtures, array $downloadableFixtures = [])
     {
         if (!$this->deployHelper->isMediaPresent()) {
             return;
@@ -97,7 +97,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             }
         }
 
-        parent::run($productFixtures, $galleryFixtures);
+        parent::install($productFixtures, $galleryFixtures);
     }
 
     /**

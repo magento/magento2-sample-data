@@ -23,7 +23,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param \Magento\Catalog\Model\Config $catalogConfig
      * @param \Magento\GiftCardSampleData\Model\Product\Converter $converter
      * @param \Magento\Framework\File\Csv $csvReader
-     * @param \Magento\CatalogSampleData\model\Product\Gallery $gallery
+     * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
      */
     public function __construct(
@@ -32,7 +32,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\Catalog\Model\Config $catalogConfig,
         \Magento\GiftCardSampleData\Model\Product\Converter $converter,
         \Magento\Framework\File\Csv $csvReader,
-        \Magento\CatalogSampleData\model\Product\Gallery $gallery,
+        \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         parent::__construct(

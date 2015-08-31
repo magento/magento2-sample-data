@@ -78,7 +78,7 @@ class CmsBlock
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         $pageGroupConfig = [
             'pages' => [

@@ -69,7 +69,7 @@ class Order
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         foreach ($fixtures as $file) {
             $fileName = $this->fixtureManager->getFixture($file);

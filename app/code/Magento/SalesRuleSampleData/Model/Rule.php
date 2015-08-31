@@ -72,7 +72,7 @@ class Rule
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         $attribute = $this->eavConfig->getAttribute('catalog_product', 'sku');
         if ($attribute->getIsUsedForPromoRules() == 0) {

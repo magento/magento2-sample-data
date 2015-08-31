@@ -33,6 +33,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->tax->run(['Magento_TaxSampleData::fixtures/tax_rate.csv']);
+        $this->tax->install(['Magento_TaxSampleData::fixtures/tax_rate.csv']);
     }
 }

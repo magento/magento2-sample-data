@@ -120,20 +120,30 @@ class GiftRegistry
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
-        foreach ($fixtures as $fixture) {
-            $fileName = $this->fixtureManager->getPath($fixture);
-            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
+        foreach ($fixtures as $fileName) {
+            $fileName = $this->fixtureManager->getFixture($fileName);
+            if (!file_exists($fileName)) {
+                continue;
+            }
+
             $rows = $this->csvReader->getData($fileName);
-            foreach ($rows as $giftRegistryData) {
+            $header = array_shift($rows);
+
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 /** @var \Magento\GiftRegistry\Model\Resource\Entity\Collection $collection */
                 $collection = $this->collectionFactory->create();
-                $collection->addFilter('title', $giftRegistryData['title']);
+                $collection->addFilter('title', $row['title']);
                 if ($collection->count() > 0) {
                     continue;
                 }
-                $data = $this->generateData($giftRegistryData);
+                $data = $this->generateData($row);
                 /** @var \Magento\GiftRegistry\Model\Entity $giftRegistry */
                 $giftRegistry = $this->giftRegistryFactory->create();
                 $address = $this->addressFactory->create();

@@ -53,7 +53,7 @@ class ProductLink
     /**
      * {@inheritdoc}
      */
-    public function run(array $related, array $upsell, array $crosssell)
+    public function install(array $related, array $upsell, array $crosssell)
     {
         $linkTypes = [
             'related' => $related,

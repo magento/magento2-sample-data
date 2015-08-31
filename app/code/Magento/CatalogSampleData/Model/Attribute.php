@@ -95,7 +95,7 @@ class Attribute
      * @param array $fixtures
      * @throws \Exception
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         $attributeCount = 0;
         foreach ($fixtures as $fileName) {

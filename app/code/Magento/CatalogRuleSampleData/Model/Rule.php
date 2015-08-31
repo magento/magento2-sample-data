@@ -7,6 +7,7 @@ namespace Magento\CatalogRuleSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\CatalogRule\Model\RuleFactory as RuleFactory;
+use Magento\CatalogRule\Model\Rule\JobFactory as JobFactory;
 
 /**
  *  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -44,9 +45,15 @@ class Rule
     protected $websiteFactory;
 
     /**
+     * @var JobFactory
+     */
+    protected $jobFactory;
+
+    /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Framework\File\Csv $csvReader
      * @param RuleFactory $ruleFactory
+     * @param JobFactory $jobFactory
      * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Customer\Model\GroupFactory $groupFactory
      * @param \Magento\Store\Model\WebsiteFactory $websiteFactory
@@ -55,6 +62,7 @@ class Rule
         SampleDataContext $sampleDataContext,
         \Magento\Framework\File\Csv $csvReader,
         RuleFactory $ruleFactory,
+        JobFactory $jobFactory,
         \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Customer\Model\GroupFactory $groupFactory,
         \Magento\Store\Model\WebsiteFactory $websiteFactory
@@ -62,6 +70,7 @@ class Rule
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $csvReader;
         $this->ruleFactory = $ruleFactory;
+        $this->jobFactory = $jobFactory;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->groupFactory = $groupFactory;
         $this->websiteFactory = $websiteFactory;
@@ -71,7 +80,7 @@ class Rule
      * @param array $fixtures
      * @throws \Exception
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         foreach ($fixtures as $fileName) {
             $fileName = $this->fixtureManager->getFixture($fileName);

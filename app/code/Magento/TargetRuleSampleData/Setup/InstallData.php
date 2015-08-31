@@ -39,7 +39,7 @@ class InstallData implements Setup\InstallDataInterface
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
 //        $this->removeSetupResourceType('Magento\CatalogSampleData\Setup\ProductLink');
-        $this->rule->run(
+        $this->rule->install(
             [
                 \Magento\TargetRule\Model\Rule::RELATED_PRODUCTS => 'Magento_TargetRuleSampleData::fixtures/crossel.csv',
                 \Magento\TargetRule\Model\Rule::UP_SELLS => 'Magento_TargetRuleSampleData::fixtures/related.csv',

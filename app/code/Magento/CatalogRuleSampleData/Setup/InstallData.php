@@ -31,6 +31,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->rule->run(['Magento_CatalogRule::fixtures/catalog_rules.csv']);
+        $this->rule->install(['Magento_CatalogRuleSampleData::fixtures/catalog_rules.csv']);
     }
 }

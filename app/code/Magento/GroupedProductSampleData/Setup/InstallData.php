@@ -32,7 +32,7 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->groupedProduct->run(
+        $this->groupedProduct->install(
             ['Magento_GroupedProductSampleData::fixtures/yoga_grouped.csv'],
             ['Magento_GroupedProductSampleData::fixtures/images_yoga_grouped.csv']
         );

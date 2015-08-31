@@ -8,7 +8,7 @@ namespace Magento\DownloadableSampleData\Model\Product;
 /**
  * Class Converter
  */
-class Converter extends \Magento\CatalogSampleData\Module\Product\Converter
+class Converter extends \Magento\CatalogSampleData\Model\Product\Converter
 {
     /**
      * Get downloadable data from array

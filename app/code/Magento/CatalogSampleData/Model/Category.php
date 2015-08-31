@@ -77,7 +77,7 @@ class Category
      * @param array $fixtures
      * @throws \Exception
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         $this->isMediaInstalled();
         foreach ($fixtures as $fileName) {
@@ -212,8 +212,7 @@ class Category
             $category = $this->categoryFactory->create();
             $category->setData($data)
                 ->setPath($parentCategory->getData('path'))
-                ->setAttributeSetId($category->getDefaultAttributeSetId())
-                ->setStoreId(\Magento\Store\Model\Store::DEFAULT_STORE_ID);
+                ->setAttributeSetId($category->getDefaultAttributeSetId());
             $this->setAdditionalData($row, $category);
             $category->save();
         }

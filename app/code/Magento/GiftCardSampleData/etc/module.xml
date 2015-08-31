@@ -11,6 +11,7 @@
             <module name="Magento_GiftCard"/>
             <module name="Magento_Catalog"/>
             <module name="Magento_SampleData"/>
+            <module name="Magento_CatalogSampleData"/>
         </sequence>
     </module>
 </config>

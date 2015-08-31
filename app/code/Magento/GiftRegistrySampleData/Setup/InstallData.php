@@ -3,10 +3,9 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\SampleDataGiftRegistry\Setup;
+namespace Magento\GiftRegistrySampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\GiftRegistrySampleData\Model\GiftRegistry;
 
 /**
  * Class Setup
@@ -15,14 +14,14 @@ use Magento\GiftRegistrySampleData\Model\GiftRegistry;
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var GiftRegistry $giftRegistry
+     * @var \Magento\GiftRegistrySampleData\Model\GiftRegistry $giftRegistry
      */
     protected $giftRegistry;
 
     /**
-     * @param GiftRegistry $giftRegistry
+     * @param \Magento\GiftRegistrySampleData\Model\GiftRegistry $giftRegistry
      */
-    public function __construct(GiftRegistry $giftRegistry)
+    public function __construct(\Magento\GiftRegistrySampleData\Model\GiftRegistry $giftRegistry)
     {
         $this->giftRegistry = $giftRegistry;
     }
@@ -32,6 +31,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->giftRegistry->run(['Magento_GiftRegistrySampleData::fixtures/gift_registry.csv']);
+        $this->giftRegistry->install(['Magento_GiftRegistrySampleData::fixtures/gift_registry.csv']);
     }
 }

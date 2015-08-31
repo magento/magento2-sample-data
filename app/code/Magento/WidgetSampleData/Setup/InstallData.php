@@ -30,7 +30,7 @@ class InstallSampleData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->cmsBlock->run(
+        $this->cmsBlock->install(
             [
                 'Magento_WidgetSampleData::fixtures/cmsblock.csv',
                 'Magento_WidgetSampleData::fixtures/cmsblock_giftcard.csv'

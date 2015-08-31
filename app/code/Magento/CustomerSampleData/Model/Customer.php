@@ -6,6 +6,7 @@
 namespace Magento\CustomerSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+use Magento\Customer\Api\Data\RegionInterface;
 
 /**
  * Class Customer
@@ -105,12 +106,18 @@ class Customer
     /**
      * {@inheritdoc}
      */
-    public function run($fixtures)
+    public function install($fixtures)
     {
-        foreach ($fixtures as $fileName) {
-            $filePath = $this->fixtureManager->getPath($fileName);
+        foreach ($fixtures as $fixture) {
+            $filePath = $this->fixtureManager->getFixture($fixture);
             $rows = $this->csvReader->getData($filePath);
+            $header = array_shift($rows);
             foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 // Collect customer profile and addresses data
                 $customerData['profile'] = $this->convertRowData($row, $this->getDefaultCustomerProfile());
                 if (!$this->accountManagement->isEmailAvailable($customerData['profile']['email'])) {

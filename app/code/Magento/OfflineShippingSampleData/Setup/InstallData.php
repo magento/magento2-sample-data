@@ -30,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->tablerate->run(['Magento_OfflineShippingSampleData::fixtures/tablerate.csv']);
+        $this->tablerate->install(['Magento_OfflineShippingSampleData::fixtures/tablerate.csv']);
     }
 }

@@ -6,7 +6,6 @@
 namespace Magento\CmsSampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\CmsSampleData\Model;
 
 /**
  * Class Setup
@@ -21,31 +20,31 @@ class InstallData implements Setup\InstallDataInterface
     /**
      * Setup class for css
      *
-     * @var Model\Css
+     * @var \Magento\CmsSampleData\Model\Css
      */
     private $css;
 
     /**
-     * @var Model\Page
+     * @var \Magento\CmsSampleData\Model\Page
      */
     private $page;
 
     /**
-     * @var Model\Block
+     * @var \Magento\CmsSampleData\Model\Block
      */
     private $block;
 
     /**
      * @param \Magento\CatalogSampleData\Model\Category $category
-     * @param Model\Css $css
-     * @param Model\Page $page
-     * @param Model\Block $block
+     * @param \Magento\CmsSampleData\Model\Css $css
+     * @param \Magento\CmsSampleData\Model\Page $page
+     * @param \Magento\CmsSampleData\Model\Block $block
      */
     public function __construct(
         \Magento\CatalogSampleData\Model\Category $category,
-        Model\Css $css,
-        Model\Page $page,
-        Model\Block $block
+        \Magento\CmsSampleData\Model\Css $css,
+        \Magento\CmsSampleData\Model\Page $page,
+        \Magento\CmsSampleData\Model\Block $block
     ) {
         $this->category = $category;
         $this->css = $css;
@@ -58,7 +57,7 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $context)
     {
-        $this->category->run(['Magento_CmsSampleData::fixtures/categories.csv']);
+        $this->category->install(['Magento_CmsSampleData::fixtures/categories.csv']);
         $this->css->install(['Magento_CmsSampleData::fixtures/styles.css' => 'styles.css']);
         $this->page->install(['Magento_CmsSampleData::fixtures/pages/pages.csv']);
         $this->block->install(

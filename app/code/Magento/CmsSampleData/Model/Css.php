@@ -6,7 +6,6 @@
 namespace Magento\CmsSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
-use Magento\ThemeSampleData\Model\HeadStyle;
 
 /**
  * Class Css

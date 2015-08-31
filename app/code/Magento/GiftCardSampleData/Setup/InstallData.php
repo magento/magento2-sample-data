@@ -32,7 +32,7 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->product->run(
+        $this->product->install(
             ['Magento_GiftCardSampleData::fixtures/products_giftcard.csv'],
             ['Magento_GiftCardSampleData::fixtures/images_giftcard.csv']
         );

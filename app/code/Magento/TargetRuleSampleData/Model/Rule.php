@@ -99,7 +99,7 @@ class Rule implements SetupInterface
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         foreach ($fixtures as $linkTypeId => $fileName) {
             $fileName = $this->fixtureManager->getPath($fileName);

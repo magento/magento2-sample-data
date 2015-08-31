@@ -53,7 +53,7 @@ class Tablerate
     protected $configWriter;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var \Magento\SampleData\Helper\StoreManager
      */
     protected $storeManager;
 
@@ -65,7 +65,7 @@ class Tablerate
      * @param \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\SampleData\Helper\StoreManager $storeManager
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -75,7 +75,7 @@ class Tablerate
         \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $csvReader;
@@ -90,18 +90,25 @@ class Tablerate
     /**
      * {@inheritdoc}
      */
-    public function run(array $fixtures)
+    public function install(array $fixtures)
     {
         /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter */
         $adapter = $this->resource->getConnection('core_write');
         $regions = $this->loadDirectoryRegions();
         foreach ($fixtures as $fileName) {
-            $fileName = $this->fixtureManager->getPath($fileName);
+            $fileName = $this->fixtureManager->getFixture($fileName);
             if (!file_exists($fileName)) {
                 continue;
             }
+
             $rows = $this->csvReader->getData($fileName);
-            foreach ($rows as $data) {
+            $header = array_shift($rows);
+
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
                 $regionId = ($data['region'] != '*')
                     ? $regions[$data['country']][$data['region']]
                     : 0;

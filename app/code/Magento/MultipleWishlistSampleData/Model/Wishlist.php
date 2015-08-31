@@ -25,20 +25,20 @@ class Wishlist
     protected $wishlistFactory;
 
     /**
-     * @var Helper\Wishlist
+     * @var Helper
      */
     protected $wishlistHelper;
 
     /**
      * @param SampleDataContext $optionalDataContext
      * @param \Magento\Framework\File\Csv $csvReader
-     * @param Helper\Wishlist $wishlistHelper
+     * @param Helper $wishlistHelper
      * @param \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
      */
     public function __construct(
         SampleDataContext $optionalDataContext,
         \Magento\Framework\File\Csv $csvReader,
-        Helper\Wishlist $wishlistHelper,
+        Helper $wishlistHelper,
         \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
     ) {
         $this->fixtureManager = $optionalDataContext->getFixtureManager();

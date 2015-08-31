@@ -10,6 +10,7 @@
         <sequence>
             <module name="Magento_MultipleWishlist"/>
             <module name="Magento_SampleData"/>
+            <module name="Magento_CatalogSampleData"/>
         </sequence>
     </module>
 </config>

@@ -31,6 +31,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->review->run(['Magento_ReviewSampleData::fixtures/products_reviews.csv']);
+        $this->review->install(['Magento_ReviewSampleData::fixtures/products_reviews.csv']);
     }
 }

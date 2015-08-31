@@ -31,8 +31,8 @@ class InstallData implements Setup\InstallDataInterface
     /**
      * {@inheritdoc}
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->msrp->run(['MsrpSampleData::fixtures/products_msrp.csv']);
+        $this->msrp->install(['MsrpSampleData::fixtures/products_msrp.csv']);
     }
 }
