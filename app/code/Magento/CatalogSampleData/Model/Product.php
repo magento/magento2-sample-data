@@ -167,7 +167,7 @@ class Product
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function kprepareProduct($product, $data)
+    protected function prepareProduct($product, $data)
     {
         return $this;
     }
