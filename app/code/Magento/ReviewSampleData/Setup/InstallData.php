@@ -23,7 +23,7 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function __construct(Review $review)
     {
-        $this->reviewSetup = $review;
+        $this->review = $review;
     }
 
     /**

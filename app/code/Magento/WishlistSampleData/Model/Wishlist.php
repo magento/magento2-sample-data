@@ -56,10 +56,20 @@ class Wishlist
     public function install(array $fixtures)
     {
         foreach ($fixtures as $fileName) {
-            $fileName = $this->fixtureManager->getPath($fileName);
-            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
+            $fileName = $this->fixtureManager->getFixture($fileName);
+            if (!file_exists($fileName)) {
+                continue;
+            }
+
             $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
             foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 /** @var \Magento\Customer\Model\Customer $customer */
                 $customer = $this->wishlistHelper->getCustomerByEmail($row['customer_email']);
                 if (!$customer) {

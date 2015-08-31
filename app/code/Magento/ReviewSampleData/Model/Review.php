@@ -119,13 +119,21 @@ class Review
     public function install(array $fixtures)
     {
         foreach ($fixtures as $fileName) {
-            $filePath = $this->fixtureManager->getPath($fileName);
+            $fileName = $this->fixtureManager->getFixture($fileName);
             if (!file_exists($fileName)) {
                 continue;
             }
-            $rows = $this->csvReader->getData($filePath);
+
+            $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
             foreach ($rows as $row) {
-                $storeId = [$this->storeManager->getStoreId()];
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
+                $storeId = [$this->storeManager->getDefaultStoreView()->getStoreId()];
                 $review = $this->prepareReview($row);
                 $this->createRating($row['rating_code'], $storeId);
                 $productId = $this->getProductIdBySku($row['sku']);
@@ -178,6 +186,7 @@ class Review
     {
         /** @var $review \Magento\Review\Model\Review */
         $review = $this->reviewFactory->create();
+        $storeId = $this->storeManager->getDefaultStoreView()->getStoreId();
         $review->setEntityId(
             $review->getEntityIdByCode(\Magento\Review\Model\Review::ENTITY_PRODUCT_CODE)
         )->setEntityPkValue(
@@ -191,9 +200,9 @@ class Review
         )->setStatusId(
             \Magento\Review\Model\Review::STATUS_APPROVED
         )->setStoreId(
-            $this->storeManager->getStoreId()
+            $storeId
         )->setStores(
-            [$this->storeManager->getStoreId()]
+            [$storeId]
         );
         return $review;
     }

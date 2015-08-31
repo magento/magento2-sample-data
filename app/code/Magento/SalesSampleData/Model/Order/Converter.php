@@ -23,7 +23,7 @@ class Converter
     protected $productFactory;
 
     /**
-     * @var \Magento\SampleData\Module\Catalog\Setup\Product\Converter
+     * @var \Magento\CatalogSampleData\Model\Product\Converter
      */
     protected $productConverter;
 
@@ -35,13 +35,13 @@ class Converter
     /**
      * @param CustomerRepositoryInterface $customerAccount
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter
+     * @param \Magento\CatalogSampleData\Model\Product\Converter $productConverter
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         CustomerRepositoryInterface $customerAccount,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter,
+        \Magento\CatalogSampleData\Model\Product\Converter $productConverter,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->customerRepository = $customerAccount;

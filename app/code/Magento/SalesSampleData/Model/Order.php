@@ -76,9 +76,17 @@ class Order
             if (!file_exists($fileName)) {
                 continue;
             }
-            $data = $this->csvReader->getData($fileName);
+
+            $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
             $isFirst = true;
-            foreach ($data as $row) {
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 if ($isFirst) {
                     $customer = $this->customerRepository->get($row['customer_email']);
                     if (!$customer->getId()) {

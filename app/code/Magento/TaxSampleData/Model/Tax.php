@@ -96,12 +96,19 @@ class Tax
     public function install(array $fixtures)
     {
         foreach ($fixtures as $fileName) {
-            $fileName = $this->fixtureManager->getPath($fileName);
-            if (!$fileName) {
+            $fileName = $this->fixtureManager->getFixture($fileName);
+            if (!file_exists($fileName)) {
                 continue;
             }
-            $csvReader = $this->csvReader->getData($fileName);
-            foreach ($csvReader as $data) {
+
+            $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
                 if ($this->rateFactory->create()->loadByCode($data['code'])->getId()) {
                     continue;
                 }
@@ -112,14 +119,22 @@ class Tax
                     ->setTaxPostcode($data['tax_postcode'])
                     ->setRate($data['rate']);
                 $this->taxRateRepository->save($taxRate);
-                $this->logger->logInline('.');
             }
 
-            $fixtureFile = 'Tax/tax_rule.csv';
-            $fixtureFilePath = $this->fixtureHelper->getPath($fixtureFile);
-            /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
-            $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
-            foreach ($csvReader as $data) {
+            $fixtureFile = 'Magento_TaxSampleData::fixtures/tax_rule.csv';
+            $fixtureFileName = $this->fixtureManager->getFixture($fixtureFile);
+            if (!file_exists($fileName)) {
+                continue;
+            }
+
+            $rows = $this->csvReader->getData($fixtureFileName);
+            $header = array_shift($rows);
+
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
                 $filter = $this->filterBuilder->setField('code')
                     ->setConditionType('=')
                     ->setValue($data['code'])

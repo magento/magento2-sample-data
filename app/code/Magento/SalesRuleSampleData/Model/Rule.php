@@ -36,7 +36,7 @@ class Rule
     protected $ruleCollectionFactory;
 
     /**
-     * @var CatalogRule
+     * @var \Magento\CatalogRuleSampleData\Model\Rule
      */
     protected $catalogRule;
 
@@ -50,7 +50,7 @@ class Rule
      * @param \Magento\Framework\File\Csv $csvReader
      * @param RuleFactory $ruleFactory
      * @param RuleCollectionFactory $ruleCollectionFactory
-     * @param CatalogRule $catalogRule
+     * @param \Magento\CatalogRuleSampleData\Model\Rule $catalogRule
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
@@ -58,7 +58,7 @@ class Rule
         \Magento\Framework\File\Csv $csvReader,
         RuleFactory $ruleFactory,
         RuleCollectionFactory $ruleCollectionFactory,
-        CatalogRule $catalogRule,
+        \Magento\CatalogRuleSampleData\Model\Rule $catalogRule,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->csvReader = $csvReader;
@@ -79,12 +79,20 @@ class Rule
             $attribute->setIsUsedForPromoRules('1')->save();
         }
         foreach ($fixtures as $fileName) {
-            $fileName = $this->fixtureManager->getPath($fileName);
+            $fileName = $this->fixtureManager->getFixture($fileName);
             if (!file_exists($fileName)) {
                 continue;
             }
+
             $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
             foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 /** @var \Magento\SalesRule\Model\Resource\Rule\Collection $ruleCollection */
                 $ruleCollection = $this->ruleCollectionFactory->create();
                 $ruleCollection->addFilter('name', $row['name']);

@@ -107,9 +107,20 @@ class CmsBlock
         ];
 
         foreach ($fixtures as $fileName) {
-            $fileName = $this->fixtureManager->getPath($fileName);
-            $csvReader = $this->csvReader->getData($fileName);
-            foreach ($csvReader as $row) {
+            $fileName = $this->fixtureManager->getFixture($fileName);
+            if (!file_exists($fileName)) {
+                continue;
+            }
+
+            $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 /** @var \Magento\Widget\Model\Resource\Widget\Instance\Collection $instanceCollection */
                 $instanceCollection = $this->appCollectionFactory->create();
                 $instanceCollection->addFilter('title', $row['title']);
