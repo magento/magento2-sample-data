@@ -46,22 +46,20 @@ class Gallery
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param ProductFactory $productFactory
      * @param GalleryAttribute $galleryAttribute
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         ProductFactory $productFactory,
         GalleryAttribute $galleryAttribute,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->galleryAttribute = $galleryAttribute;
         $this->productFactory = $productFactory;
-        $this->csvReader = $csvReader;
         $this->eavConfig = $eavConfig;
     }
 

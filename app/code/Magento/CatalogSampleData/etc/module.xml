@@ -12,6 +12,7 @@
             <module name="Magento_Eav"/>
             <module name="Magento_Weee"/>
             <module name="Magento_Catalog"/>
+            <module name="Magento_CatalogSearch"/>
             <module name="Magento_SampleData"/>
         </sequence>
     </module>

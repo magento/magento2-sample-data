@@ -51,7 +51,6 @@ class Rule
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param RuleFactory $ruleFactory
      * @param JobFactory $jobFactory
      * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
@@ -60,7 +59,6 @@ class Rule
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         RuleFactory $ruleFactory,
         JobFactory $jobFactory,
         \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
@@ -68,7 +66,7 @@ class Rule
         \Magento\Store\Model\WebsiteFactory $websiteFactory
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->ruleFactory = $ruleFactory;
         $this->jobFactory = $jobFactory;
         $this->categoryCollectionFactory = $categoryCollectionFactory;

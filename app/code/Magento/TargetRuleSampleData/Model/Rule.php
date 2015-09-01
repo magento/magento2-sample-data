@@ -7,6 +7,7 @@ namespace Magento\TargetRuleSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\TargetRule\Model\RuleFactory as RuleFactory;
+use Magento\TargetRule\Model\Actions\Condition\Product\Attributes as TargetRuleActionAttributes;
 
 /**
  * Class Setup
@@ -41,18 +42,16 @@ class Rule implements SetupInterface
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param RuleFactory $ruleFactory
      * @param \Magento\Catalog\Api\CategoryManagementInterface $categoryReadService
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         RuleFactory $ruleFactory,
         \Magento\Catalog\Api\CategoryManagementInterface $categoryReadService
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReaderFactory = $csvReader;
+        $this->csvReaderFactory = $sampleDataContext->getCsvReader();
         $this->ruleFactory = $ruleFactory;
         $this->categoryReadService = $categoryReadService;
     }
@@ -102,12 +101,12 @@ class Rule implements SetupInterface
     public function install(array $fixtures)
     {
         foreach ($fixtures as $linkTypeId => $fileName) {
-            $fileName = $this->fixtureManager->getPath($fileName);
+            $fileName = $this->fixtureManager->getFixture($fileName);
             if (!$fileName) {
                 continue;
             }
-            $csvReader = $this->csvReader->getData($fileName);
-            foreach ($csvReader as $row) {
+            $rows = $this->csvReader->getData($fileName);
+            foreach ($rows as $row) {
                 $rule = $this->ruleFactory->create();
                 if ($rule->getResourceCollection()->addFilter('name', $row['name'])->getSize() > 0) {
                     continue;

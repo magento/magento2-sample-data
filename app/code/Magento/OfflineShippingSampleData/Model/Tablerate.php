@@ -59,7 +59,6 @@ class Tablerate
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate
      * @param \Magento\Framework\App\Resource $resource
      * @param \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory
@@ -69,7 +68,6 @@ class Tablerate
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate,
         \Magento\Framework\App\Resource $resource,
         \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory,
@@ -78,7 +76,7 @@ class Tablerate
         \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->tablerate = $tablerate;
         $this->resource = $resource;
         $this->regionCollectionFactory = $regionCollectionFactory;

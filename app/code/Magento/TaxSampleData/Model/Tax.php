@@ -59,7 +59,6 @@ class Tax
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Tax\Api\TaxRuleRepositoryInterface $taxRuleRepository
      * @param \Magento\Tax\Api\Data\TaxRuleInterfaceFactory $ruleFactory
      * @param \Magento\Tax\Api\TaxRateRepositoryInterface $taxRateRepository
@@ -70,7 +69,6 @@ class Tax
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\Tax\Api\TaxRuleRepositoryInterface $taxRuleRepository,
         \Magento\Tax\Api\Data\TaxRuleInterfaceFactory $ruleFactory,
         \Magento\Tax\Api\TaxRateRepositoryInterface $taxRateRepository,
@@ -80,7 +78,7 @@ class Tax
         \Magento\Framework\Api\FilterBuilder $filterBuilder
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->taxRuleRepository = $taxRuleRepository;
         $this->ruleFactory = $ruleFactory;
         $this->taxRateRepository = $taxRateRepository;

@@ -39,20 +39,18 @@ class Block
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Cms\Model\BlockFactory $blockFactory
      * @param Block\Converter $converter
      * @param \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\Cms\Model\BlockFactory $blockFactory,
         Block\Converter $converter,
         \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->blockFactory = $blockFactory;
         $this->converter = $converter;
         $this->categoryRepository = $categoryRepository;

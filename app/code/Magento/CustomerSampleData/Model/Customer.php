@@ -71,7 +71,6 @@ class Customer
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader,
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
      * @param \Magento\Customer\Api\Data\CustomerInterfaceFactory $customerFactory
      * @param \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory
@@ -83,7 +82,6 @@ class Customer
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\Directory\Model\CountryFactory $countryFactory,
         \Magento\Customer\Api\Data\CustomerInterfaceFactory $customerFactory,
         \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory,
@@ -93,7 +91,7 @@ class Customer
         \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->countryFactory = $countryFactory;
         $this->customerFactory = $customerFactory;
         $this->addressFactory = $addressFactory;

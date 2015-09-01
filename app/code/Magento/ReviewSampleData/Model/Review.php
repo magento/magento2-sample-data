@@ -82,7 +82,6 @@ class Review
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Review\Model\ReviewFactory $reviewFactory
      * @param \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory
      * @param \Magento\Review\Model\RatingFactory $ratingFactory
@@ -93,7 +92,6 @@ class Review
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\Review\Model\ReviewFactory $reviewFactory,
         \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory,
         \Magento\Review\Model\RatingFactory $ratingFactory,
@@ -103,7 +101,7 @@ class Review
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->reviewFactory = $reviewFactory;
         $this->reviewCollectionFactory = $reviewCollectionFactory;
         $this->ratingFactory = $ratingFactory;

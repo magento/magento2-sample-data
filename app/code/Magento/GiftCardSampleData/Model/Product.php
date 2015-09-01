@@ -21,26 +21,23 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Config $catalogConfig
-     * @param \Magento\GiftCardSampleData\Model\Product\Converter $converter
-     * @param \Magento\Framework\File\Csv $csvReader
+     * @param Product\Converter $converter
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Config $catalogConfig,
         \Magento\GiftCardSampleData\Model\Product\Converter $converter,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
-        \Magento\SampleData\Helper\StoreManager $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         parent::__construct(
             $sampleDataContext,
             $productFactory,
             $catalogConfig,
             $converter,
-            $csvReader,
             $gallery,
             $storeManager
         );

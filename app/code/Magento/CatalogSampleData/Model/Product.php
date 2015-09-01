@@ -64,7 +64,6 @@ class Product
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Config $catalogConfig
      * @param Product\Converter $converter
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      *
@@ -76,7 +75,6 @@ class Product
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Config $catalogConfig,
         Product\Converter $converter,
-        \Magento\Framework\File\Csv $csvReader,
         Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
@@ -84,7 +82,7 @@ class Product
         $this->productFactory = $productFactory;
         $this->catalogConfig = $catalogConfig;
         $this->converter = $converter;
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->gallery = $gallery;
         $this->storeManager = $storeManager;
     }

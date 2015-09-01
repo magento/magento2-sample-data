@@ -37,7 +37,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Config $catalogConfig
      * @param \Magento\ConfigurableSampleData\Model\Product\Converter $converter
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler
@@ -48,7 +47,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Config $catalogConfig,
         \Magento\ConfigurableSampleData\Model\Product\Converter $converter,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler,
@@ -59,7 +57,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             $productFactory,
             $catalogConfig,
             $converter,
-            $csvReader,
             $gallery,
             $storeManager
         );

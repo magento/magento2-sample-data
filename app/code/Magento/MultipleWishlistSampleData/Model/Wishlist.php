@@ -30,19 +30,17 @@ class Wishlist
     protected $wishlistHelper;
 
     /**
-     * @param SampleDataContext $optionalDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
+     * @param SampleDataContext $sampleDataContext
      * @param Helper $wishlistHelper
      * @param \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
      */
     public function __construct(
-        SampleDataContext $optionalDataContext,
-        \Magento\Framework\File\Csv $csvReader,
+        SampleDataContext $sampleDataContext,
         Helper $wishlistHelper,
         \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
     ) {
-        $this->fixtureManager = $optionalDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->fixtureManager = $sampleDataContext->getFixtureManager();
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->wishlistHelper = $wishlistHelper;
         $this->wishlistFactory = $wishlistFactory;
     }

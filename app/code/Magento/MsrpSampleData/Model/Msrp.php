@@ -46,20 +46,18 @@ class Msrp
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
         \Magento\SampleData\Model\Logger $logger,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->productCollection = $productCollectionFactory->create()->addAttributeToSelect('sku');
         $this->logger = $logger;
         $this->configWriter = $configWriter;

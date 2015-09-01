@@ -9,7 +9,7 @@ use Magento\Framework\Setup;
 use Magento\SalesSampleData\Model;
 
 /**
- * Class PostInstallSampleData
+ * Class InstallData
  */
 class InstallData implements Setup\InstallDataInterface
 {

@@ -47,7 +47,6 @@ class Rule
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param RuleFactory $ruleFactory
      * @param RuleCollectionFactory $ruleCollectionFactory
      * @param \Magento\CatalogRuleSampleData\Model\Rule $catalogRule
@@ -55,14 +54,13 @@ class Rule
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         RuleFactory $ruleFactory,
         RuleCollectionFactory $ruleCollectionFactory,
         \Magento\CatalogRuleSampleData\Model\Rule $catalogRule,
         \Magento\Eav\Model\Config $eavConfig
     ) {
-        $this->csvReader = $csvReader;
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->ruleFactory = $ruleFactory;
         $this->ruleCollectionFactory = $ruleCollectionFactory;
         $this->catalogRule = $catalogRule;

@@ -76,7 +76,6 @@ class GiftRegistry
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
      * @param \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory
      * @param \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory $collectionFactory
@@ -91,7 +90,6 @@ class GiftRegistry
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\Directory\Model\CountryFactory $countryFactory,
         \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory,
         \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory $collectionFactory,
@@ -104,7 +102,7 @@ class GiftRegistry
         \Magento\SampleData\Helper\StoreManager $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->countryFactory = $countryFactory;
         $this->giftRegistryFactory = $giftRegistryFactory;
         $this->collectionFactory = $collectionFactory;

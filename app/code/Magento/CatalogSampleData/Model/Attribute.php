@@ -69,7 +69,6 @@ class Attribute
      * @param \Magento\Catalog\Helper\Product $productHelper
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param StoreManagerInterface $storeManager
-     * @param \Magento\Framework\File\Csv $csvReader
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -78,17 +77,16 @@ class Attribute
         \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
         \Magento\Catalog\Helper\Product $productHelper,
         \Magento\Eav\Model\Config $eavConfig,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\File\Csv $csvReader
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->attributeFactory = $attributeFactory;
         $this->attributeSetFactory = $attributeSetFactory;
         $this->attrOptionCollectionFactory = $attrOptionCollectionFactory;
         $this->productHelper = $productHelper;
         $this->eavConfig = $eavConfig;
         $this->storeManager = $storeManager;
-        $this->csvReader = $csvReader;
     }
 
     /**

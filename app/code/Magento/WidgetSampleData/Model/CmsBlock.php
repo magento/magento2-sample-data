@@ -50,7 +50,6 @@ class CmsBlock
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
      * @param \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory
      * @param \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
@@ -59,7 +58,6 @@ class CmsBlock
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Framework\File\Csv $csvReader,
         \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory,
         \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory,
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
@@ -67,7 +65,7 @@ class CmsBlock
         \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->widgetFactory = $widgetFactory;
         $this->themeCollectionFactory = $themeCollectionFactory;
         $this->cmsBlockFactory = $cmsBlockFactory;

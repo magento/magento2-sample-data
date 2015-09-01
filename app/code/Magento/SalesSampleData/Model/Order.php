@@ -43,23 +43,21 @@ class Order
     protected $customerRepository;
 
     /**
-     * @param SampleDataContext $optionalDataContext
-     * @param \Magento\Framework\File\Csv $csvReader
+     * @param SampleDataContext $sampleDataContext
      * @param Order\Converter $converter
      * @param Order\Processor $orderProcessor
      * @param \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
-        SampleDataContext $optionalDataContext,
-        \Magento\Framework\File\Csv $csvReader,
+        SampleDataContext $sampleDataContext,
         Order\Converter $converter,
         Order\Processor $orderProcessor,
         \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     ) {
-        $this->fixtureManager = $optionalDataContext->getFixtureManager();
-        $this->csvReader = $csvReader;
+        $this->fixtureManager = $sampleDataContext->getFixtureManager();
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->converter = $converter;
         $this->orderProcessor = $orderProcessor;
         $this->orderCollectionFactory = $orderCollectionFactory;
