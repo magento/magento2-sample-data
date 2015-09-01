@@ -28,21 +28,14 @@ class InstallData implements Setup\InstallDataInterface
     private $configurableProduct;
 
     /**
-     * @var \Magento\SalesSampleData\Model\Order
-     */
-    private $order;
-
-    /**
      * @param \Magento\CatalogSampleData\Model\Attribute $attribute
      * @param \Magento\CatalogSampleData\Model\Category $category
      * @param \Magento\ConfigurableSampleData\Model\Product $configurableProduct
-     * @param \Magento\SalesSampleData\Model\Order $order
      */
     public function __construct(
         \Magento\CatalogSampleData\Model\Attribute $attribute,
         \Magento\CatalogSampleData\Model\Category $category,
         \Magento\ConfigurableSampleData\Model\Product $configurableProduct
-        //\Magento\SalesSampleData\Model\Order $order
     ) {
         $this->attribute = $attribute;
         $this->category = $category;
@@ -74,8 +67,5 @@ class InstallData implements Setup\InstallDataInterface
                 'Magento_ConfigurableSampleData::fixtures/images_gear_fitness_equipment.csv',
             ]
         );
-
-        //@todo implement this
-        //$this->order->install(['Magento_ConfigurableProduct::fixtures/orders.csv']);
     }
 }

@@ -17,7 +17,7 @@ class Converter extends \Magento\CatalogSampleData\Model\Product\Converter
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory
      * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Product\Collection $productCollection
+     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollection
      * @param \Magento\ConfigurableProduct\Model\Product\Type\VariationMatrix $variationMatrix
      */
     public function __construct(
@@ -25,7 +25,7 @@ class Converter extends \Magento\CatalogSampleData\Model\Product\Converter
         \Magento\Eav\Model\Config $eavConfig,
         \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory,
         \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
-        \Magento\Catalog\Model\Resource\Product\Collection $productCollection,
+        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollection,
         \Magento\ConfigurableProduct\Model\Product\Type\VariationMatrix $variationMatrix
     ) {
         $this->variationMatrix = $variationMatrix;

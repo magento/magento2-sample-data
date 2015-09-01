@@ -35,18 +35,18 @@ class Converter
     /**
      * @param CustomerRepositoryInterface $customerAccount
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\CatalogSampleData\Model\Product\Converter $productConverter
+     * @param \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $productConverterFactory
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         CustomerRepositoryInterface $customerAccount,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\CatalogSampleData\Model\Product\Converter $productConverter,
+        \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $productConverterFactory,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->customerRepository = $customerAccount;
         $this->productFactory = $productFactory;
-        $this->productConverter = $productConverter;
+        $this->productConverter = $productConverterFactory->create();
         $this->eavConfig = $eavConfig;
     }
 

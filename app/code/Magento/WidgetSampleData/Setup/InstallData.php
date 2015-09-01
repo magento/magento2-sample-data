@@ -11,7 +11,7 @@ use Magento\Framework\Setup;
 /**
  * Launches setup of sample data for Widget module
  */
-class InstallSampleData implements Setup\InstallDataInterface
+class InstallData implements Setup\InstallDataInterface
 {
     /**
      * @var CmsBlock

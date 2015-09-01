@@ -36,7 +36,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\Config $catalogConfig
-     * @param \Magento\ConfigurableSampleData\Model\Product\Converter $converter
+     * @param \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $converterFactory
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler
@@ -46,7 +46,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Catalog\Model\Config $catalogConfig,
-        \Magento\ConfigurableSampleData\Model\Product\Converter $converter,
+        \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $converterFactory,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler,
@@ -56,7 +56,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             $sampleDataContext,
             $productFactory,
             $catalogConfig,
-            $converter,
+            $converterFactory->create(),
             $gallery,
             $storeManager
         );
