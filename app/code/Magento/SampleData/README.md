@@ -5,7 +5,8 @@ Installing sample data fills your database with a number of products of each typ
 
 #Deployment
 
-To deploy sample data, use Composer:
+##From Composer
+To deploy sample data from Composer, use:
 
 1. In your composer.json, specify the following:
     - repository:
@@ -29,6 +30,16 @@ To deploy sample data, use Composer:
         }
         ```
 2. From your Magento root directory, run composer update.
+
+##From repository
+To deploy sample data from repository, use:
+
+1. Clone Sample Data from `<sample-data-repository>` (e.g. [https://github.com/magento/magento2-sample-data](https://github.com/magento/magento2-sample-data))
+2. Link Sample Data and Magento Edition using console command 
+ ```
+  php -f <sample-data-root>/dev/tools/build-sample-data.php -- --ce-source="path/to/magento/ce/edition"
+ ```
+3. Copy media files from `<sample-data-root>/media/*` to `<magento-root>/pub/media/*`
 
 #Installation
 
