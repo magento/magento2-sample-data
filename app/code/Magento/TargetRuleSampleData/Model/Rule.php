@@ -6,20 +6,14 @@
 namespace Magento\TargetRuleSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
-use Magento\TargetRule\Model\RuleFactory as RuleFactory;
 use Magento\TargetRule\Model\Actions\Condition\Product\Attributes as TargetRuleActionAttributes;
 
 /**
  * Class Setup
  * Installation of related products rules
  */
-class Rule implements SetupInterface
+class Rule
 {
-    /**
-     * @var  SampleDataContext
-     */
-    protected $sampleDataContext;
-
     /**
      * @var \Magento\Framework\File\Csv
      */
@@ -31,7 +25,7 @@ class Rule implements SetupInterface
     protected $fixtureManager;
 
     /**
-     * @var RuleFactory
+     * @var \Magento\TargetRule\Model\RuleFactory
      */
     protected $ruleFactory;
 
@@ -42,16 +36,16 @@ class Rule implements SetupInterface
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param RuleFactory $ruleFactory
+     * @param \Magento\TargetRule\Model\RuleFactory $ruleFactory
      * @param \Magento\Catalog\Api\CategoryManagementInterface $categoryReadService
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        RuleFactory $ruleFactory,
+        \Magento\TargetRule\Model\RuleFactory $ruleFactory,
         \Magento\Catalog\Api\CategoryManagementInterface $categoryReadService
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
-        $this->csvReaderFactory = $sampleDataContext->getCsvReader();
+        $this->csvReader = $sampleDataContext->getCsvReader();
         $this->ruleFactory = $ruleFactory;
         $this->categoryReadService = $categoryReadService;
     }
@@ -102,11 +96,19 @@ class Rule implements SetupInterface
     {
         foreach ($fixtures as $linkTypeId => $fileName) {
             $fileName = $this->fixtureManager->getFixture($fileName);
-            if (!$fileName) {
+            if (!file_exists($fileName)) {
                 continue;
             }
+
             $rows = $this->csvReader->getData($fileName);
+            $header = array_shift($rows);
+
             foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $row = $data;
                 $rule = $this->ruleFactory->create();
                 if ($rule->getResourceCollection()->addFilter('name', $row['name'])->getSize() > 0) {
                     continue;

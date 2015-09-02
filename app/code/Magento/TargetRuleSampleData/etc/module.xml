@@ -11,6 +11,7 @@
             <module name="Magento_TargetRule"/>
             <module name="Magento_SampleData"/>
             <module name="Magento_CatalogSampleData"/>
+            <module name="Magento_ConfigurableSampleData"/>
         </sequence>
     </module>
 </config>
