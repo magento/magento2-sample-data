@@ -1,0 +1,1 @@
+Magento_CustomerBalanceSampleData module consists of installation scripts and fixtures.

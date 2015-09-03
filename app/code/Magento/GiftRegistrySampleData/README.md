@@ -1,0 +1,1 @@
+Magento_GiftRegistrySampleData module consists of installation scripts and fixtures.
