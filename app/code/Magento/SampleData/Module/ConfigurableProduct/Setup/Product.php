@@ -5,83 +5,64 @@
  */
 namespace Magento\SampleData\Module\ConfigurableProduct\Setup;
 
-use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
-use Magento\SampleData\Helper\Fixture as FixtureHelper;
 use Magento\SampleData\Model\SetupInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
  * Setup configurable product
  */
-class Product extends \Magento\SampleData\Module\Catalog\Setup\Product implements SetupInterface
+class Product implements SetupInterface
 {
     /**
-     * @var string
+     * @var \Magento\SampleData\Model\Logger
      */
-    protected $productType = \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE;
+    private $logger;
 
     /**
-     * @var \Magento\ConfigurableProduct\Model\Product\VariationHandler
+     * @var \Magento\ImportExport\Model\Import
      */
-    protected $variationHandler;
+    private $importModel;
 
     /**
-     * @var \Magento\Eav\Model\Config
+     * @var \Magento\ImportExport\Model\Import\Source\CsvFactory
      */
-    protected $eavConfig;
+    private $csvSourceFactory;
 
     /**
-     * @var string
+     * @var \Magento\Framework\Filesystem
      */
-    protected $attributeSet;
+    private $filesystem;
 
     /**
-     * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Config $catalogConfig
-     * @param Product\Converter $converter
-     * @param FixtureHelper $fixtureHelper
-     * @param CsvReaderFactory $csvReaderFactory
-     * @param Product\Gallery $gallery
+     * @var \Magento\Indexer\Model\Indexer\CollectionFactory
+     */
+    private $indexerCollectionFactory;
+
+    /**
      * @param \Magento\SampleData\Model\Logger $logger
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
-     * @param \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler
      * @param \Magento\Eav\Model\Config $eavConfig
-     * @param array $fixtures
+     * @param \Magento\ImportExport\Model\Import $importModel
+     * @param \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory
+     * @param \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory
+     * @param \Magento\Framework\Filesystem $filesystem
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      * @codingStandardsIgnoreStart
      */
     public function __construct(
-        \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Config $catalogConfig,
-        Product\Converter $converter,
-        FixtureHelper $fixtureHelper,
-        CsvReaderFactory $csvReaderFactory,
-        Product\Gallery $gallery,
         \Magento\SampleData\Model\Logger $logger,
-        \Magento\SampleData\Helper\StoreManager $storeManager,
-        \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler,
         \Magento\Eav\Model\Config $eavConfig,
-        $fixtures = [
-            'ConfigurableProduct/products_men_tops.csv',
-            'ConfigurableProduct/products_men_bottoms.csv',
-            'ConfigurableProduct/products_women_tops.csv',
-            'ConfigurableProduct/products_women_bottoms.csv',
-            'ConfigurableProduct/products_gear_fitness_equipment_ball.csv',
-            'ConfigurableProduct/products_gear_fitness_equipment_strap.csv',
-        ]
+        \Magento\ImportExport\Model\Import $importModel,
+        \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory,
+        \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory,
+        \Magento\Framework\Filesystem $filesystem
     ) {
+        $this->logger = $logger;
         $this->eavConfig = $eavConfig;
-        $this->variationHandler = $variationHandler;
-        parent::__construct(
-            $productFactory,
-            $catalogConfig,
-            $converter,
-            $fixtureHelper,
-            $csvReaderFactory,
-            $gallery,
-            $logger,
-            $storeManager,
-            $fixtures
-        );
+        $this->importModel = $importModel;
+        $this->csvSourceFactory = $csvSourceFactory;
+        $this->indexerCollectionFactory = $indexerCollectionFactory;
+        $this->filesystem = $filesystem;
+
     }
     // @codingStandardsIgnoreEnd
 
@@ -90,26 +71,35 @@ class Product extends \Magento\SampleData\Module\Catalog\Setup\Product implement
      */
     public function run()
     {
-        parent::run();
+        $this->logger->log('Installing configurable products:');
+
+        $importModel = $this->importModel;
+        $importModel->setData(['entity' => 'catalog_product', 'behavior' => 'append']);
+
+        $source = $this->csvSourceFactory->create(
+            [
+                'file' => 'Magento/SampleData/fixtures/ConfigurableProduct/import-export_products-img.csv',
+                'directory' => $this->filesystem->getDirectoryWrite(DirectoryList::MODULES)
+            ]
+        );
+
+        $importModel->validateSource($source);
+        $importModel->importSource();
+        $this->logger->logInline('.');
+
         $this->eavConfig->clear();
+        $this->reindex();
+
+        $this->logger->logInline('.');
     }
 
     /**
-     * @inheritdoc
+     * Perform full reindex
      */
-    protected function prepareProduct($product, $data)
+    private function reindex()
     {
-        if ($this->attributeSet !== $data['attribute_set']) {
-            $this->attributeSet = $data['attribute_set'];
-            $this->eavConfig->clear();
+        foreach ($this->indexerCollectionFactory->create()->getItems() as $indexer) {
+            $indexer->reindexAll();
         }
-        if (empty($data['associated_product_ids'])) {
-            $simpleIds = $this->variationHandler->generateSimpleProducts($product, $data['variations_matrix']);
-        } else {
-            $simpleIds = $data['associated_product_ids'];
-        }
-        $product->setAssociatedProductIds($simpleIds);
-        $product->setCanSaveConfigurableAttributes(true);
-        return $this;
     }
 }
