@@ -28,23 +28,23 @@ class Wishlist
     protected $wishlistFactory;
 
     /**
-     * @var Wishlist\Helper;
+     * @var Helper;
      */
-    protected $wishlistHelper;
+    protected $helper;
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param Wishlist\Helper $wishlistHelper
+     * @param Helper $wishlistHelper
      * @param \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        Wishlist\Helper $wishlistHelper,
+        Helper $wishlistHelper,
         \Magento\Wishlist\Model\WishlistFactory $wishlistFactory
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
-        $this->wishlistHelper = $wishlistHelper;
+        $this->helper = $wishlistHelper;
         $this->wishlistFactory = $wishlistFactory;
     }
 
@@ -69,7 +69,7 @@ class Wishlist
                 }
                 $row = $data;
                 /** @var \Magento\Customer\Model\Customer $customer */
-                $customer = $this->wishlistHelper->getCustomerByEmail($row['customer_email']);
+                $customer = $this->helper->getCustomerByEmail($row['customer_email']);
                 if (!$customer) {
                     continue;
                 }
@@ -81,7 +81,7 @@ class Wishlist
                     continue;
                 }
                 $productSkuList = explode("\n", $row['product_list']);
-                $this->wishlistHelper->addProductsToWishlist($wishlist, $productSkuList);
+                $this->helper->addProductsToWishlist($wishlist, $productSkuList);
             }
         }
     }

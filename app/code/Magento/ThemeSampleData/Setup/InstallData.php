@@ -3,8 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-namespace Magento\SampleData\Module\Theme;
+namespace Magento\ThemeSampleData\Setup;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Setup;
@@ -138,9 +137,9 @@ class InstallData implements Setup\InstallDataInterface
     {
         $styleContent = '';
         foreach ($this->moduleList->getNames() as $moduleName) {
-            $fileName = substr($moduleName, strpos($moduleName, "_") + 1) . '/styles.css';
-            $fileName = $this->fixtureManager->getPath($fileName);
-            if (!$fileName) {
+            $fileName = $moduleName . '::fixtures/styles.css';
+            $fileName = $this->fixtureManager->getFixture($fileName);
+            if (!file_exists($fileName)) {
                 continue;
             }
             $style = file_get_contents($fileName);

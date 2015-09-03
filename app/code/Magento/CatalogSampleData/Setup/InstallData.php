@@ -35,26 +35,18 @@ class InstallData implements Setup\InstallDataInterface
     protected $productSetup;
 
     /**
-     * @var \Magento\Framework\App\Cache\Manager
-     */
-    protected $cacheManager;
-
-    /**
      * @param \Magento\CatalogSampleData\Model\Category $categorySetup
      * @param \Magento\CatalogSampleData\Model\Attribute $attributeSetup
      * @param \Magento\CatalogSampleData\Model\Product $productSetup
-     * @param \Magento\Framework\App\Cache\Manager $cacheManager
      */
     public function __construct(
         \Magento\CatalogSampleData\Model\Category $categorySetup,
         \Magento\CatalogSampleData\Model\Attribute $attributeSetup,
-        \Magento\CatalogSampleData\Model\Product $productSetup,
-        \Magento\Framework\App\Cache\Manager $cacheManager
+        \Magento\CatalogSampleData\Model\Product $productSetup
     ) {
         $this->categorySetup = $categorySetup;
         $this->attributeSetup = $attributeSetup;
         $this->productSetup = $productSetup;
-        $this->cacheManager = $cacheManager;
     }
 
     /**
@@ -62,8 +54,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $context)
     {
-        $types = $this->cacheManager->getAvailableTypes();
-        $enabledTypes = $this->cacheManager->setEnabled($types, true);
         $this->attributeSetup->install(['Magento_CatalogSampleData::fixtures/attributes.csv']);
         $this->categorySetup->install(['Magento_CatalogSampleData::fixtures/categories.csv']);
         $this->productSetup->install(
@@ -80,7 +70,5 @@ class InstallData implements Setup\InstallDataInterface
                 'Magento_CatalogSampleData::fixtures/SimpleProduct/images_gear_watches.csv',
             ]
         );
-        $this->cacheManager->clean($enabledTypes);
-        $this->cacheManager->setEnabled($types, false);
     }
 }

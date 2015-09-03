@@ -53,7 +53,7 @@ class Tablerate
     protected $configWriter;
 
     /**
-     * @var \Magento\SampleData\Helper\StoreManager
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
 
@@ -64,7 +64,7 @@ class Tablerate
      * @param \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -73,7 +73,7 @@ class Tablerate
         \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
-        \Magento\SampleData\Helper\StoreManager $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -114,7 +114,7 @@ class Tablerate
                     $adapter->insert(
                         $this->tablerate->getMainTable(),
                         [
-                            'website_id' => $this->storeManager->getWebsiteId(),
+                            'website_id' => $this->storeManager->getWebsite()->getId(),
                             'dest_country_id' => $data['country'],
                             'dest_region_id' => $regionId,
                             'dest_zip' => $data['zip'],

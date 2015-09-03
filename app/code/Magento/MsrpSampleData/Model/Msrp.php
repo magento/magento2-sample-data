@@ -6,6 +6,7 @@
 namespace Magento\MsrpSampleData\Model;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use \Magento\Msrp\Model\Product\Attribute\Source\Type;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
@@ -35,11 +36,6 @@ class Msrp
     protected $productCollection;
 
     /**
-     * @var \Magento\SampleData\Model\Logger
-     */
-    protected $logger;
-
-    /**
      * @var \Magento\Framework\App\Config\Storage\WriterInterface
      */
     protected $configWriter;
@@ -47,19 +43,16 @@ class Msrp
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
-     * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
-        \Magento\SampleData\Model\Logger $logger,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
         $this->productCollection = $productCollectionFactory->create()->addAttributeToSelect('sku');
-        $this->logger = $logger;
         $this->configWriter = $configWriter;
     }
 
@@ -90,7 +83,7 @@ class Msrp
                 }
                 /** @var \Magento\Catalog\Model\Product $product */
                 $product = $this->productCollection->getItemById($productId);
-                $product->setMsrpDisplayActualPriceType(\Magento\Msrp\Model\Product\Attribute\Source\Type::TYPE_ON_GESTURE);
+                $product->setMsrpDisplayActualPriceType(Type::TYPE_ON_GESTURE);
                 if (!empty($row['msrp'])) {
                     $price = $row['msrp'];
                 } else {
@@ -98,7 +91,6 @@ class Msrp
                 }
                 $product->setMsrp($price);
                 $product->save();
-                $this->logger->logInline('.');
             }
         }
     }

@@ -60,7 +60,7 @@ class Customer
     protected $customerDataAddress;
 
     /**
-     * @var \Magento\SampleData\Helper\StoreManager
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
 
@@ -76,7 +76,7 @@ class Customer
      * @param \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory
      * @param \Magento\Customer\Api\Data\RegionInterfaceFactory $regionFactory
      * @param \Magento\Customer\Api\AccountManagementInterface $accountManagement
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -87,7 +87,7 @@ class Customer
         \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory,
         \Magento\Customer\Api\Data\RegionInterfaceFactory $regionFactory,
         \Magento\Customer\Api\AccountManagementInterface $accountManagement,
-        \Magento\SampleData\Helper\StoreManager $storeManager,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
@@ -167,8 +167,8 @@ class Customer
     {
         if (!$this->customerDataProfile) {
             $this->customerDataProfile = [
-                'website_id' => $this->storeManager->getWebsiteId(),
-                'group_id' => $this->storeManager->getGroupId(),
+                'website_id' => $this->storeManager->getWebsite()->getId(),
+                'group_id' => $this->storeManager->getGroup()->getId(),
                 'disable_auto_group_change' => '0',
                 'prefix',
                 'firstname' => '',

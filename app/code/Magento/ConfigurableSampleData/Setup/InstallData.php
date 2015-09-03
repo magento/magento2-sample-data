@@ -28,18 +28,31 @@ class InstallData implements Setup\InstallDataInterface
     private $configurableProduct;
 
     /**
+     * @var \Magento\SalesSampleData\Model\Order
+     */
+    private $order;
+
+    /**
+     * @var
+     */
+    protected $productLinkSetup;
+
+    /**
      * @param \Magento\CatalogSampleData\Model\Attribute $attribute
      * @param \Magento\CatalogSampleData\Model\Category $category
      * @param \Magento\ConfigurableSampleData\Model\Product $configurableProduct
+     * @param \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
      */
     public function __construct(
         \Magento\CatalogSampleData\Model\Attribute $attribute,
         \Magento\CatalogSampleData\Model\Category $category,
-        \Magento\ConfigurableSampleData\Model\Product $configurableProduct
+        \Magento\ConfigurableSampleData\Model\Product $configurableProduct,
+        \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
     ) {
         $this->attribute = $attribute;
         $this->category = $category;
         $this->configurableProduct = $configurableProduct;
+        $this->productLinkSetup = $productLinkSetup;
     }
 
     /**
@@ -49,23 +62,11 @@ class InstallData implements Setup\InstallDataInterface
     {
         $this->attribute->install(['Magento_ConfigurableSampleData::fixtures/attributes.csv']);
         $this->category->install(['Magento_ConfigurableSampleData::fixtures/categories.csv']);
-        $this->configurableProduct->install(
-            [
-                'Magento_ConfigurableSampleData::fixtures/products_men_tops.csv',
-                'Magento_ConfigurableSampleData::fixtures/products_men_bottoms.csv',
-                'Magento_ConfigurableSampleData::fixtures/products_women_tops.csv',
-                'Magento_ConfigurableSampleData::fixtures/products_women_bottoms.csv',
-                'Magento_ConfigurableSampleData::fixtures/products_gear_fitness_equipment_ball.csv',
-                'Magento_ConfigurableSampleData::fixtures/products_gear_fitness_equipment_strap.csv',
-                'Magento_ConfigurableSampleData::fixtures/products_women_tops_required.csv',
-            ],
-            [
-                'Magento_ConfigurableSampleData::fixtures/images_men_bottoms.csv',
-                'Magento_ConfigurableSampleData::fixtures/images_men_tops.csv',
-                'Magento_ConfigurableSampleData::fixtures/images_women_bottoms.csv',
-                'Magento_ConfigurableSampleData::fixtures/images_women_tops.csv',
-                'Magento_ConfigurableSampleData::fixtures/images_gear_fitness_equipment.csv',
-            ]
+        $this->configurableProduct->install();
+        $this->productLinkSetup->install(
+            ['Magento_ConfigurableSampleData::fixtures/Links/related.csv'],
+            ['Magento_ConfigurableSampleData::fixtures/Links/upsell.csv'],
+            ['Magento_ConfigurableSampleData::fixtures/Links/crossell.csv']
         );
     }
 }

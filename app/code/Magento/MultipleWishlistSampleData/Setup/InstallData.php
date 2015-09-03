@@ -3,11 +3,10 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento\MultipleWishlistSampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\MultipleWishlistSampleData\Model;
+use Magento\MultipleWishlistSampleData\Model\Wishlist;
 
 /**
  * @codeCoverageIgnore
@@ -15,14 +14,14 @@ use Magento\MultipleWishlistSampleData\Model;
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Model\Wishlist
+     * @var Wishlist
      */
     private $wishlist;
 
     /**
-     * @param Model\Wishlist $wishlist
+     * @param Wishlist $wishlist
      */
-    public function __construct(Model\Wishlist $wishlist) {
+    public function __construct(Wishlist $wishlist) {
         $this->wishlist = $wishlist;
     }
 
@@ -31,9 +30,16 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $context)
     {
+        $this->wishlist->delete(
+            [
+                'Magento_WishlistSampleData::fixtures/wishlist.csv',
+                'Magento_MultipleWishlistSampleData::fixtures/wishlist.csv'
+            ]
+        );
         $this->wishlist->install(
             [
-                'Magento_MultipleWishlistSampleData::fixtures/wishlist.csv',
+                'Magento_WishlistSampleData::fixtures/wishlist.csv',
+                'Magento_MultipleWishlistSampleData::fixtures/wishlist.csv'
             ]
         );
     }

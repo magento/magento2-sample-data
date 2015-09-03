@@ -5,103 +5,88 @@
  */
 namespace Magento\ConfigurableSampleData\Model;
 
-use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
  * Setup configurable product
  */
-class Product extends \Magento\CatalogSampleData\Model\Product
+class Product
 {
     /**
-     * @var string
+     * @var \Magento\ImportExport\Model\Import
      */
-    protected $productType = \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE;
+    private $importModel;
 
     /**
-     * @var \Magento\ConfigurableProduct\Model\Product\VariationHandler
+     * @var \Magento\ImportExport\Model\Import\Source\CsvFactory
      */
-    protected $variationHandler;
+    private $csvSourceFactory;
 
     /**
-     * @var \Magento\Eav\Model\Config
+     * @var \Magento\Framework\Filesystem
      */
-    protected $eavConfig;
+    private $filesystem;
 
     /**
-     * @var string
+     * @var \Magento\Indexer\Model\Indexer\CollectionFactory
      */
-    protected $attributeSet;
+    private $indexerCollectionFactory;
 
     /**
-     * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Config $catalogConfig
-     * @param \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $converterFactory
-     * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler
      * @param \Magento\Eav\Model\Config $eavConfig
+     * @param \Magento\ImportExport\Model\Import $importModel
+     * @param \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory
+     * @param \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory
+     * @param \Magento\Framework\Filesystem $filesystem
      */
     public function __construct(
-        SampleDataContext $sampleDataContext,
-        \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Config $catalogConfig,
-        \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $converterFactory,
-        \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\ConfigurableProduct\Model\Product\VariationHandler $variationHandler,
-        \Magento\Eav\Model\Config $eavConfig
+        \Magento\Eav\Model\Config $eavConfig,
+        \Magento\ImportExport\Model\Import $importModel,
+        \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory,
+        \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory,
+        \Magento\Framework\Filesystem $filesystem
     ) {
-        parent::__construct(
-            $sampleDataContext,
-            $productFactory,
-            $catalogConfig,
-            $converterFactory->create(),
-            $gallery,
-            $storeManager
-        );
-        $this->variationHandler = $variationHandler;
         $this->eavConfig = $eavConfig;
+        $this->importModel = $importModel;
+        $this->csvSourceFactory = $csvSourceFactory;
+        $this->indexerCollectionFactory = $indexerCollectionFactory;
+        $this->filesystem = $filesystem;
     }
 
     /**
      * @inheritdoc
      */
-    public function install(array $productFixtures, array $galleryFixtures)
+    public function install()
     {
-        parent::install($productFixtures, $galleryFixtures);
+        $importModel = $this->importModel;
+        $importModel->setData(
+            [
+                'entity' => 'catalog_product',
+                'behavior' => 'append',
+                'import_images_file_dir' => 'pub/media/catalog/product'
+            ]
+        );
+
+        $source = $this->csvSourceFactory->create(
+            [
+                'file' => 'Magento/ConfigurableSampleData/fixtures/products.csv',
+                'directory' => $this->filesystem->getDirectoryWrite(DirectoryList::MODULES)
+            ]
+        );
+
+        $importModel->validateSource($source);
+        $importModel->importSource();
         $this->eavConfig->clear();
+        $this->reindex();
     }
 
     /**
-     * @inheritdoc
+     * Perform full reindex
      */
-    protected function installGallery($product)
+    private function reindex()
     {
-        parent::installGallery($product);
-        foreach ($product->getAssociatedProductIds() as $id) {
-            $product = $this->productFactory->create()->load($id);
-            parent::installGallery($product);
+        foreach ($this->indexerCollectionFactory->create()->getItems() as $indexer) {
+            $indexer->reindexAll();
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function prepareProduct($product, $data)
-    {
-        if ($this->attributeSet !== $data['attribute_set']) {
-            $this->attributeSet = $data['attribute_set'];
-            $this->eavConfig->clear();
-        }
-        if (empty($data['associated_product_ids'])) {
-            $simpleIds = $this->variationHandler
-                ->generateSimpleProducts($product, $data['variations_matrix']);
-        } else {
-            $simpleIds = $data['associated_product_ids'];
-        }
-        $product->setAssociatedProductIds($simpleIds);
-        $product->setCanSaveConfigurableAttributes(true);
-        return $this;
     }
 }

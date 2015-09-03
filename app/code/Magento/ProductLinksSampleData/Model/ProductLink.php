@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\CatalogSampleData\Model;
+namespace Magento\ProductLinksSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 

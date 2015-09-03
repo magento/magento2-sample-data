@@ -3,10 +3,10 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\MultipleWishlistSampleData\Model;
+namespace Magento\WishlistSampleData\Model;
 
 /**
- * Common functionality for installation of optional data for Wishlist
+ * Common functionality for installation of sample data for Wishlists
  */
 class Helper
 {
@@ -56,7 +56,7 @@ class Helper
     {
         /** @var \Magento\Customer\Model\Customer $customer */
         $customer = $this->customerFactory->create();
-        $customer->setWebsiteId($this->storeManager->getDefaultStoreView()->getWebsiteId());
+        $customer->setWebsiteId($this->storeManager->getWebsite()->getId());
         $customer->loadByEmail($email);
         if ($customer->getId()) {
             return $customer;

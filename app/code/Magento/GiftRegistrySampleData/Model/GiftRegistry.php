@@ -70,7 +70,7 @@ class GiftRegistry
     protected $productIndexer;
 
     /**
-     * @var \Magento\SampleData\Helper\StoreManager
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
 
@@ -85,7 +85,7 @@ class GiftRegistry
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\GiftRegistry\Model\ItemFactory $itemFactory
      * @param \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -99,7 +99,7 @@ class GiftRegistry
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\GiftRegistry\Model\ItemFactory $itemFactory,
         \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer,
-        \Magento\SampleData\Helper\StoreManager $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -151,7 +151,7 @@ class GiftRegistry
                 $giftRegistry->addData(
                     [
                         'customer_id' => $data['customer_id'],
-                        'website_id' => $this->storeManager->getWebsiteId(),
+                        'website_id' => $this->storeManager->getWebsite()->getId(),
                         'url_key' => $giftRegistry->getGenerateKeyId(),
                         'created_at' => $this->dateFactory->create()->date(),
                         'is_add_action' => true,
@@ -185,7 +185,7 @@ class GiftRegistry
     {
         $giftRegistryData['sku'] = explode("\n", $giftRegistryData['sku']);
         $customer = $this->customerFactory->create();
-        $customer->setWebsiteId($this->storeManager->getWebsiteId())
+        $customer->setWebsiteId($this->storeManager->getWebsite()->getId())
             ->loadByEmail($giftRegistryData['customer_email']);
         $address = $customer->getDefaultBillingAddress()->getData();
         return [

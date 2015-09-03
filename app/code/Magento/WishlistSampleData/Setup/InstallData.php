@@ -3,7 +3,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\SampleData\Module\Wishlist;
+namespace Magento\WishlistSampleData\Setup;
 
 use Magento\Framework\Setup;
 use Magento\WishlistSampleData\Model\Wishlist;
@@ -13,7 +13,6 @@ use Magento\WishlistSampleData\Model\Wishlist;
  */
 class InstallData implements Setup\InstallDataInterface
 {
-
     /**
      * @var Wishlist
      */
@@ -31,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->wishlist->install(['Magento_Wishlist::fixtures\wishlist.csv']);
+        $this->wishlist->install(['Magento_WishlistSampleData::fixtures\wishlist.csv']);
     }
 }

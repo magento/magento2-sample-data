@@ -60,14 +60,9 @@ class Processor
     protected $creditmemoLoaderFactory;
 
     /**
-     * @var \Magento\SampleData\Helper\StoreManager
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
-
-    /**
-     * @var \Magento\SampleData\Model\ObserverManager
-     */
-    protected $observerManager;
 
     /**
      * @var \Magento\Sales\Api\CreditmemoManagementInterface
@@ -85,8 +80,7 @@ class Processor
      * @param \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement
      * @param \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory
      * @param \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory
-     * @param \Magento\SampleData\Helper\StoreManager $storeManager
-     * @param \Magento\SampleData\Model\ObserverManager $observerManager
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Sales\Api\CreditmemoManagementInterface $creditmemoManagement
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -101,8 +95,7 @@ class Processor
         \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement,
         \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory,
         \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory,
-        \Magento\SampleData\Helper\StoreManager $storeManager,
-        \Magento\SampleData\Model\ObserverManager $observerManager,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Sales\Api\CreditmemoManagementInterface $creditmemoManagement
     ) {
         $this->coreRegistry = $coreRegistry;
@@ -116,7 +109,6 @@ class Processor
         $this->shipmentLoaderFactory = $shipmentLoaderFactory;
         $this->creditmemoLoaderFactory = $creditmemoLoaderFactory;
         $this->storeManager = $storeManager;
-        $this->observerManager = $observerManager;
         $this->creditmemoManagement = $creditmemoManagement;
     }
 
@@ -135,7 +127,7 @@ class Processor
             }
             $customer = $this->customerRepository->get(
                 $orderData['order']['account']['email'],
-                $this->storeManager->getWebsiteId()
+                $this->storeManager->getWebsite()->getId()
             );
             $orderCreateModel->getQuote()->setCustomer($customer);
             $orderCreateModel->getSession()->setCustomerId($customer->getId());
@@ -284,15 +276,15 @@ class Processor
     public function getCreditmemoData(\Magento\Sales\Model\Order\Item $orderItem)
     {
         $data = [$orderItem->getId() => $orderItem->getQtyToRefund()];
-        foreach ($this->observerManager->getObservers() as $observer) {
-            if (is_callable([$observer, 'getCreditmemoData'])) {
-                $params = new DataObject([
-                    'order_item' => $orderItem,
-                    'credit_memo' => $data
-                ]);
-                $data = $observer->getCreditmemoData($params);
-            }
-        }
+//        foreach ($this->observerManager->getObservers() as $observer) {
+//            if (is_callable([$observer, 'getCreditmemoData'])) {
+//                $params = new DataObject([
+//                    'order_item' => $orderItem,
+//                    'credit_memo' => $data
+//                ]);
+//                $data = $observer->getCreditmemoData($params);
+//            }
+//        }
 
         return $data;
     }

@@ -14,17 +14,15 @@ use Magento\Framework\Setup;
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * Setup class for products
-     *
-     * @var \Magento\CatalogSampleData\Model\ProductLink
+     * @var \Magento\ProductLinksSampleData\Model\ProductLink
      */
     protected $productLink;
 
     /**
-     * @param \Magento\CatalogSampleData\Model\ProductLink $productLinkSetup
+     * @param \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
      */
     public function __construct(
-        \Magento\CatalogSampleData\Model\ProductLink $productLinkSetup
+        \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
     ) {
         $this->productLink = $productLinkSetup;
     }

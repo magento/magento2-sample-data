@@ -5,6 +5,9 @@
  */
 namespace Magento\ConfigurableSampleData\Model\Product;
 
+/**
+ * Class Converter
+ */
 class Converter extends \Magento\CatalogSampleData\Model\Product\Converter
 {
     /**
