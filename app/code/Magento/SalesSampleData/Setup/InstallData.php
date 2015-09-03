@@ -34,7 +34,7 @@ class InstallData implements Setup\InstallDataInterface
         $this->order->install(
             [
                 'Magento_SalesSampleData::fixtures/orders.csv',
-                'Magento_ConfigurableProduct::fixtures/orders.csv'
+                'Magento_ConfigurableSampleData::fixtures/orders.csv'
             ]
         );
     }
