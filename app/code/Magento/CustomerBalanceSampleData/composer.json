@@ -1,12 +1,12 @@
 {
-    "name": "magento/module-wishlist-sample-data",
+    "name": "magento/module-customer-balance-sample-data",
     "description": "N/A",
     "require": {
         "php": "~5.5.0|~5.6.0",
-        "magento/module-wishlist": "1.0.0-beta",
-        "magento/module-sample-data": "1.0.0-beta"
+      "magento/module-sample-data": "1.0.0-beta",
+      "magento/module-customer-balance": "1.0.0-beta"
     },
-    "type": "magento2-module",
+    "type": "magento2-module-customer-balance",
     "version": "1.0.0-beta",
     "license": [
         "OSL-3.0",
@@ -16,7 +16,7 @@
         "map": [
             [
                 "*",
-                "Magento/WishlistSampleData"
+                "Magento/CustomerBalanceSampleData"
             ]
         ]
     }

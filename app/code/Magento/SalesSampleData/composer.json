@@ -1,10 +1,8 @@
 {
-    "name": "magento/module-product-links-sample-data",
+    "name": "magento/module-sales-sample-data",
     "description": "N/A",
     "require": {
         "php": "~5.5.0|~5.6.0",
-        "magento/module-product-link": "1.0.0-beta",
-        "magento/module-catalog-sample-data": "1.0.0-beta",
         "magento/module-sample-data": "1.0.0-beta"
     },
     "type": "magento2-module",
@@ -17,7 +15,7 @@
         "map": [
             [
                 "*",
-                "Magento/ProductLinksSampleData"
+                "Magento/SalesSampleData"
             ]
         ]
     }

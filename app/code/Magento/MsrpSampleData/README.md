@@ -1,1 +1,1 @@
-Magento_MultipleWishlistSampleData module consists of installation scripts and fixtures.
+Magento_MsrpSampleData module consists of installation scripts and fixtures.

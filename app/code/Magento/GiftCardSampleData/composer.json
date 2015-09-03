@@ -1,12 +1,11 @@
 {
-    "name": "magento/module-product-links-sample-data",
+    "name": "magento/module-gift-card-sample-data",
     "description": "N/A",
     "require": {
         "php": "~5.5.0|~5.6.0",
-        "magento/module-product-link": "1.0.0-beta",
+        "magento/module-sample-data": "1.0.0-beta",
         "magento/module-catalog-sample-data": "1.0.0-beta",
-        "magento/module-sample-data": "1.0.0-beta"
-    },
+        "magento/module-gift-card": "1.0.0-beta"},
     "type": "magento2-module",
     "version": "1.0.0-beta",
     "license": [
@@ -17,7 +16,7 @@
         "map": [
             [
                 "*",
-                "Magento/ProductLinksSampleData"
+                "Magento/GiftCardSampleData"
             ]
         ]
     }
