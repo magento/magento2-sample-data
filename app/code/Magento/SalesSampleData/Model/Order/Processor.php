@@ -45,7 +45,7 @@ class Processor
     protected $orderFactory;
 
     /**
-     * @var \Magento\Sales\Api\InvoiceManagementInterface
+     * @var \Magento\Sales\Model\Service\InvoiceService
      */
     protected $invoiceManagement;
 
@@ -77,7 +77,7 @@ class Processor
      * @param \Magento\Backend\Model\Session\QuoteFactory $sessionQuoteFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
-     * @param \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement
+     * @param \Magento\Sales\Model\Service\InvoiceService $invoiceManagement
      * @param \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory
      * @param \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -92,7 +92,7 @@ class Processor
         \Magento\Backend\Model\Session\QuoteFactory $sessionQuoteFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
         \Magento\Sales\Model\OrderFactory $orderFactory,
-        \Magento\Sales\Api\InvoiceManagementInterface $invoiceManagement,
+        \Magento\Sales\Model\Service\InvoiceService $invoiceManagement,
         \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoaderFactory $shipmentLoaderFactory,
         \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoaderFactory $creditmemoLoaderFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -224,7 +224,7 @@ class Processor
         if (!$order) {
             return false;
         }
-        $invoice = $this->invoiceManagement->prepareInvoice($order->getId(), $invoiceData);
+        $invoice = $this->invoiceManagement->prepareInvoice($order, $invoiceData);
         return $invoice;
     }
 
