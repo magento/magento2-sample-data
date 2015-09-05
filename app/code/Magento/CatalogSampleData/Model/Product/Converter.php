@@ -8,9 +8,9 @@ namespace Magento\CatalogSampleData\Model\Product;
 class Converter
 {
     /**
-     * @var \Magento\Catalog\Api\CategoryManagementInterfaceFactory
+     * @var \Magento\Catalog\Model\Category\Tree
      */
-    protected $categoryTreeFactory;
+    protected $categoryTree;
 
     /**
      * @var \Magento\Eav\Model\Config
@@ -53,20 +53,29 @@ class Converter
     protected $productIds;
 
     /**
-     * @param \Magento\Catalog\Api\CategoryManagementInterfaceFactory $categoryTreeFactory
+     * @param \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory
+     * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory
      * @param \Magento\Eav\Model\Config $eavConfig
+     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory
      * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
      * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
      */
     public function __construct(
-        \Magento\Catalog\Api\CategoryManagementInterfaceFactory $categoryTreeFactory,
+        \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory,
+        \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory,
         \Magento\Eav\Model\Config $eavConfig,
+        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory,
         \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
         \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
     ) {
-        $this->categoryTreeFactory = $categoryTreeFactory;
+         $this->categoryTree = $categoryTreeFactory->create(
+            [
+                'categoryTree' => $categoryResourceTreeFactory->create(),
+                'categoryCollection' => $categoryCollectionFactory->create()
+            ]
+        );
         $this->eavConfig = $eavConfig;
         $this->attributeCollectionFactory = $attributeCollectionFactory;
         $this->attrOptionCollectionFactory = $attrOptionCollectionFactory;
@@ -166,9 +175,7 @@ class Converter
     protected function getCategoryIds($categories)
     {
         $ids = [];
-        /** @var \Magento\Catalog\Api\CategoryManagementInterface $categoryTree */
-        $categoryTree = $this->categoryTreeFactory->create();
-        $tree = $categoryTree->getTree(null, null);
+        $tree = $this->categoryTree->getTree($this->categoryTree->getRootNode(null), null);
         foreach ($categories as $name) {
             foreach ($tree->getChildrenData() as $child) {
                 if ($child->getName() == $name) {
@@ -176,7 +183,7 @@ class Converter
                     $tree = $child;
                     $ids[] = $child->getId();
                     if (!$tree->getChildrenData()) {
-                        $tree = $categoryTree->getTree(null, null);
+                        $tree = $this->categoryTree->getTree($this->categoryTree->getRootNode(null), null);
                     }
                     break;
                 }

@@ -62,7 +62,7 @@ class Product
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Config $catalogConfig
+     * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
      * @param Product\Converter $converter
      * @param Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -73,14 +73,14 @@ class Product
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Config $catalogConfig,
+        \Magento\Catalog\Model\ConfigFactory $catalogConfig,
         Product\Converter $converter,
         Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->productFactory = $productFactory;
-        $this->catalogConfig = $catalogConfig;
+        $this->catalogConfig = $catalogConfig->create();
         $this->converter = $converter;
         $this->csvReader = $sampleDataContext->getCsvReader();
         $this->gallery = $gallery;

@@ -20,7 +20,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Config $catalogConfig
+     * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
      * @param \Magento\GroupedProductSampleData\Model\Product\Converter $converter
      * @param \Magento\Framework\Setup\SampleData\FixtureManager $fixtureManager
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
@@ -29,7 +29,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Config $catalogConfig,
+        \Magento\Catalog\Model\ConfigFactory $catalogConfig,
         \Magento\GroupedProductSampleData\Model\Product\Converter $converter,
         \Magento\Framework\Setup\SampleData\FixtureManager $fixtureManager,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,

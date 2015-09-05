@@ -194,7 +194,7 @@ class Category
             $parentCategory = $this->getCategoryByPath($row['path']);
             $active = $row['active']
                 && (!isset($row['require_media']) || $this->isMediaInstalled() || !$row['require_media']);
-            if (isset($row['require_media']) && $row['require_media'] == 2) {
+            if (isset($row['require_media']) && $row['require_media'] == 2 && !$this->isMediaInstalled()) {
                 $active = 1;
                 $row['display_mode'] = '';
                 $row['page_layout'] = '';

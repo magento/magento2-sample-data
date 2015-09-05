@@ -60,7 +60,7 @@ class Swatches
     /**
      * {@inheritdoc}
      */
-    public function run()
+    public function install()
     {
         $this->convertColorToSwatches();
         $this->convertSizeToSwatches();

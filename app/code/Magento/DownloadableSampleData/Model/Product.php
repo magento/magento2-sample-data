@@ -35,7 +35,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Config $catalogConfig
+     * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
      * @param \Magento\DownloadableSampleData\Model\Product\Converter $converter
      * @param \Magento\CatalogSampleData\model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -43,7 +43,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Config $catalogConfig,
+        \Magento\Catalog\Model\ConfigFactory $catalogConfig,
         \Magento\DownloadableSampleData\Model\Product\Converter $converter,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -66,9 +66,10 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      */
     public function install(array $productFixtures, array $galleryFixtures, array $downloadableFixtures = [])
     {
-        if (!$this->deployHelper->isMediaPresent()) {
-            return;
-        }
+        //@todo
+//        if (!$this->deployHelper->isMediaPresent()) {
+//            return;
+//        }
         foreach ($downloadableFixtures as $fileName) {
             $fileName = $this->fixtureManager->getFixture($fileName);
             if (!file_exists($fileName)) {
