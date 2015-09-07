@@ -74,6 +74,19 @@ switch ($command) {
             }
         }
 
+        //link media
+        $filename = '/media';
+        $target = '/vendor/magento/sample-data-media';
+
+        if (!file_exists(dirname($ceSource . $target))) {
+            mkdir(dirname($ceSource . $target), 0755, true);
+            @symlink($sampleDataSource . $filename, $ceSource . $target);
+            $excludePaths[] = resolvePath($target);
+        } else if (!file_exists($ceSource . $target)) {
+            @symlink($sampleDataSource . $filename, $ceSource . $target);
+            $excludePaths[] = resolvePath($target);
+        }
+
         setExcludePaths($excludePaths, $unusedPaths, ($isExclude)?$excludeFile:false);
 
         echo "All symlinks you can see at files:" . PHP_EOL
