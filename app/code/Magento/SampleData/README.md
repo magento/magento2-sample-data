@@ -42,7 +42,6 @@ To deploy sample data from repository, use:
  ```
   php -f <sample-data-root>/dev/tools/build-sample-data.php -- --ce-source="path/to/magento/ce/edition"
  ```
-3. Copy media files from `<sample-data-root>/media/*` to `<magento-root>/pub/media/*`
 
 #Installation
 
