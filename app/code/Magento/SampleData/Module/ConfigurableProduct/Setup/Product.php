@@ -74,7 +74,13 @@ class Product implements SetupInterface
         $this->logger->log('Installing configurable products:');
 
         $importModel = $this->importModel;
-        $importModel->setData(['entity' => 'catalog_product', 'behavior' => 'append']);
+        $importModel->setData(
+            [
+                'entity' => 'catalog_product',
+                'behavior' => 'append',
+                'import_images_file_dir' => 'pub/media/catalog/product'
+            ]
+        );
 
         $source = $this->csvSourceFactory->create(
             [
