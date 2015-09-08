@@ -89,8 +89,14 @@ class Product implements SetupInterface
             ]
         );
 
+        $currentPath = getcwd();
+        chdir($this->filesystem->getDirectoryRead(DirectoryList::ROOT)->getAbsolutePath());
+
         $importModel->validateSource($source);
         $importModel->importSource();
+
+        chdir($currentPath);
+
         $this->logger->logInline('.');
 
         $this->eavConfig->clear();
