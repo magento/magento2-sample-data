@@ -1,11 +1,13 @@
 #Introduction
 
-Sample data consists of installation scripts, fixtures and media files. 
-Installing sample data fills your database with a number of products of each type, price rules, CMS pages, banners and more.
+Magento sample data uses the responsive Luma theme to display a sample store, complete with products, categories, promotional price rules, CMS pages, banners, and so on. You can use the sample data to come up to speed quickly and see the power and flexibility of the Magento storefront.
+
+Installing sample data is optional; you can install it before or after you install the Magento software.
 
 #Deployment
 
-To deploy sample data, use Composer:
+##From Composer
+To deploy sample data from Composer, use:
 
 1. In your composer.json, specify the following:
     - repository:
@@ -28,15 +30,26 @@ To deploy sample data, use Composer:
             }
         }
         ```
+    
+    where version is either an exact version or semantic version syntax.
 2. From your Magento root directory, run composer update.
+
+##From repository
+To deploy sample data from repository, use:
+
+1. Clone the sample data repository. For example, git clone [https://github.com/magento/magento2-sample-data.git](https://github.com/magento/magento2-sample-data.git)
+2. Link the sample data repository with your Magento CE repository as follows: 
+ ```
+  php -f <sample-data-root>/dev/tools/build-sample-data.php -- --ce-source="path/to/magento/ce/edition"
+ ```
 
 #Installation
 
-Once deployed, the sample data can be installed using the Magento Installation Wizard (web installation) or using CLI (console installation).
+Once deployed, the sample data can be installed using the Magento Setup Wizard (web installation) or using CLI (console installation).
 
 ###Web Installation
 
-When installing the Magento application using the Magento Installation Wizard, you can choose to install the sample data at once. To do this, during installation, on the **Customize Your Store** step, select the **Use Sample Data** checkbox.
+When installing the Magento application using the Magento Setup Wizard, you can choose to install the sample data at Step 4. Customize Your Store by selecting the *Use Sample Data* check box.
 
 ###Console Installation
 

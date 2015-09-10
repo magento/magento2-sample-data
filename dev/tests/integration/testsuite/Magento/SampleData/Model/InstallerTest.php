@@ -16,6 +16,8 @@ class InstallerTest extends \PHPUnit_Framework_TestCase
      */
     public function testLaunch()
     {
+        $this->markTestSkipped("MAGETWO-42710: Improve Sample Data Integration Test (InstallerTest)");
+
         $setupFactory = $this->getMockBuilder('Magento\SampleData\Model\SetupFactory')
             ->disableOriginalConstructor()
             ->setMethods(['create'])
