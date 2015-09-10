@@ -81,7 +81,7 @@ Orange
 Purple
 Red
 White
-Yellow",,color,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Top
+Yellow",,color,1,,0,,,0,0,0,,1,0,,1,1,0,1,0,"Top
 Bottom
 Bag
 Gear
@@ -128,7 +128,7 @@ Size",select,0,"55 cm
 75 cm
 6 foot
 8 foot
-10 foot",,size,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Sprite Stasis Ball
+10 foot",,size,1,,0,,,0,0,0,,1,0,,1,1,0,1,0,"Sprite Stasis Ball
 Sprite Yoga Strap"
 "Eco Collection",boolean,0,,,eco_collection,1,,0,,,0,0,0,,1,0,,1,1,0,0,0,"Gear
 Bag
