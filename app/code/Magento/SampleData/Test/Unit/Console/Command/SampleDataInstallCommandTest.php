@@ -15,7 +15,7 @@ class SampleDataInstallCommandTest extends \PHPUnit_Framework_TestCase
         $objectManagerFactory = $this->getMock('Magento\Framework\App\ObjectManagerFactory', [], [], '', false);
         $objectManager = $this->getMock('Magento\Framework\ObjectManagerInterface', [], [], '', false);
 
-        $sampleData = $this->getMock('Magento\Setup\Model\SampleData', ['install'], [], '', false);
+        $sampleData = $this->getMock('Magento\SampleData\Model\SampleData', ['install'], [], '', false);
         $sampleData->expects($this->once())
             ->method('install')
             ->with(

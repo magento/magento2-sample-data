@@ -17,7 +17,7 @@ use Magento\Framework\Console\Cli;
 use Magento\Setup\Model\AdminAccount;
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\State;
-use Magento\Setup\Model\SampleData;
+use Magento\SampleData\Model\SampleData;
 use Magento\Framework\Setup\ConsoleLogger;
 
 /**
