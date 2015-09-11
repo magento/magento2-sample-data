@@ -7,6 +7,8 @@ namespace Magento\SampleData\Module\ConfigurableProduct\Setup;
 
 use Magento\SampleData\Model\SetupInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\ImportExport\Model\Import;
+use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
 
 /**
  * Setup configurable product
@@ -78,7 +80,9 @@ class Product implements SetupInterface
             [
                 'entity' => 'catalog_product',
                 'behavior' => 'append',
-                'import_images_file_dir' => 'pub/media/catalog/product'
+                'import_images_file_dir' => 'pub/media/catalog/product',
+                Import::FIELD_NAME_VALIDATION_STRATEGY =>
+                    ProcessingErrorAggregatorInterface::VALIDATION_STRATEGY_SKIP_ERRORS
             ]
         );
 
