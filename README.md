@@ -73,8 +73,8 @@ php -f index.php install --base-url=http://localhost/magento2/ \
 
 For example,
 ```
-/var/www/magento2/bin magento setup:upgrade
-/var/www/magento2/bin magento sampledata:install admin
+/var/www/magento2/bin/magento setup:upgrade
+/var/www/magento2/bin/magento sampledata:install admin
 ```
 
 #Removing Sample Data
