@@ -74,8 +74,14 @@ class Product
             ]
         );
 
+        $currentPath = getcwd();
+        chdir($this->filesystem->getDirectoryRead(DirectoryList::ROOT)->getAbsolutePath());
+
         $importModel->validateSource($source);
         $importModel->importSource();
+
+        chdir($currentPath);
+
         $this->eavConfig->clear();
         $this->reindex();
     }
