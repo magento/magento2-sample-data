@@ -7,12 +7,10 @@
         "magento/magento-composer-installer": "*"
     },
     "type": "magento2-module",
-    "extra": {
-        "map": [
-            [
-                "*",
-                "Magento/SampleData"
-            ]
-        ]
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Magento\\SampleData\\": ""
+        }
     }
 }
