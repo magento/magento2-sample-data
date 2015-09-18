@@ -97,7 +97,7 @@ class Product implements SetupInterface
 
         $source = $this->csvSourceFactory->create(
             [
-                'file' => 'Magento/SampleData/fixtures/ConfigurableProduct/import-export_products-img.csv',
+                'file' => '/fixtures/ConfigurableProduct/import-export_products-img.csv',
                 'directory' => $this->readFactory->create(
                     $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_SampleData')
                 )
