@@ -6,10 +6,10 @@
 namespace Magento\SampleData\Module\ConfigurableProduct\Setup;
 
 use Magento\Framework\Component\ComponentRegistrar;
-use Magento\SampleData\Model\SetupInterface;
 use Magento\Framework\Filesystem\Directory\ReadFactory;
 use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Setup configurable product
