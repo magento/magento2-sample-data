@@ -80,9 +80,7 @@ class Product implements SetupInterface
             [
                 'entity' => 'catalog_product',
                 'behavior' => 'append',
-                'import_images_file_dir' => 'pub/media/catalog/product',
-                Import::FIELD_NAME_VALIDATION_STRATEGY =>
-                    ProcessingErrorAggregatorInterface::VALIDATION_STRATEGY_SKIP_ERRORS
+                'import_images_file_dir' => 'pub/media/catalog/product'
             ]
         );
 
