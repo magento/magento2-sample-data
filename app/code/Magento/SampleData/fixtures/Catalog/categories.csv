@@ -1,5 +1,5 @@
 name,url_key,path,active,is_anchor,include_in_menu,position,display_mode,custom_layout_update
-Gear,gear,,1,0,1,4,PAGE,"<remove name=""catalog.leftnav""/>"
+Gear,gear,,1,0,1,4,PAGE,"<referenceContainer name=""catalog.leftnav"" remove=""true""/>"
 Bags,bags,Gear,1,1,1,,,
 "Fitness Equipment",fitness-equipment,Gear,1,1,1,,,
 Watches,watches,Gear,1,1,1,,,
