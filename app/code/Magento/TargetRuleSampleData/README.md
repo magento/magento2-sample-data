@@ -1,0 +1,1 @@
+Magento_TargetRuleSampleData module consists of installation scripts.

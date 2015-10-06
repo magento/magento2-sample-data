@@ -1,0 +1,23 @@
+{
+    "name": "magento/module-customer-balance-sample-data",
+    "description": "N/A",
+    "require": {
+        "php": "~5.5.0|~5.6.0",
+      "magento/module-sample-data": "1.0.0-beta",
+      "magento/module-customer-balance": "1.0.0-beta"
+    },
+    "type": "magento2-module-customer-balance",
+    "version": "1.0.0-beta",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "extra": {
+        "map": [
+            [
+                "*",
+                "Magento/CustomerBalanceSampleData"
+            ]
+        ]
+    }
+}

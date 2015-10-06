@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright В© 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+    <module name="Magento_ConfigurableSampleData" setup_version="2.0.0">
+        <sequence>
+            <module name="Magento_ConfigurableProduct"/>
+            <module name="Magento_SampleData"/>
+            <module name="Magento_CatalogSampleData"/>
+        </sequence>
+    </module>
+</config>
