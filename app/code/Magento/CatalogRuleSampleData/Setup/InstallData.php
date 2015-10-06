@@ -7,23 +7,22 @@ namespace Magento\CatalogRuleSampleData\Setup;
 
 use Magento\Framework\Setup;
 
-/**
- * Class Setup
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var \Magento\CatalogRuleSampleData\Model\Rule
+     * @var Setup\SampleData\Executor
      */
-    protected $rule;
+    protected $executor;
 
     /**
-     * @param \Magento\CatalogRuleSampleData\Model\Rule $rule
+     * @var Installer
      */
-    public function __construct(
-        \Magento\CatalogRuleSampleData\Model\Rule $rule
-    ) {
-        $this->rule = $rule;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -31,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->rule->install(['Magento_CatalogRuleSampleData::fixtures/catalog_rules.csv']);
+        $this->executor->exec($this->installer);
     }
 }

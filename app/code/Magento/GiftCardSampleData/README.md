@@ -1,1 +1,0 @@
-Magento_GiftCardSampleData module consists of installation scripts and fixtures.

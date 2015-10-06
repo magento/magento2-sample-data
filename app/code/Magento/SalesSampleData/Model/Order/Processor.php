@@ -176,7 +176,7 @@ class Processor
             $payment->addData($data['payment']);
             $payment->setQuote($orderCreateModel->getQuote());
         }
-        $orderCreateModel->initRuleData()->saveQuote();
+        $orderCreateModel->initRuleData();
         return $orderCreateModel;
     }
 
@@ -262,6 +262,10 @@ class Processor
         if ($creditmemo && $creditmemo->isValidGrandTotal()) {
             $creditmemo->setOfflineRequested(true);
             $this->creditmemoManagement->refund($creditmemo, true);
+            $creditmemoTransaction = $this->transactionFactory->create()
+                ->addObject($creditmemo)
+                ->addObject($creditmemo->getOrder());
+            $creditmemoTransaction->save();
         }
     }
 

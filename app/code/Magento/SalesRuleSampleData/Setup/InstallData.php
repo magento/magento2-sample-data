@@ -5,32 +5,31 @@
  */
 namespace Magento\SalesRuleSampleData\Setup;
 
-use Magento\SalesRuleSampleData\Model;
 use Magento\Framework\Setup;
 
-/**
- * Class InstallData
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Model\Rule;
+     * @var Setup\SampleData\Executor
      */
-    protected $rule;
+    protected $executor;
 
     /**
-     * @param Model\Rule $rule
+     * @var Installer
      */
-    public function __construct(Model\Rule $rule)
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
     {
-        $this->rule = $rule;
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->rule->install(['Magento_SalesRuleSampleData::fixtures/sales_rules.csv']);
+        $this->executor->exec($this->installer);
     }
 }

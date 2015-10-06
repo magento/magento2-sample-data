@@ -6,36 +6,30 @@
 namespace Magento\SalesSampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\SalesSampleData\Model;
 
-/**
- * Class InstallData
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Model\Order;
+     * @var Setup\SampleData\Executor
      */
-    protected $order;
+    protected $executor;
 
     /**
-     * @param Model\Order $order
+     * @var Installer
      */
-    public function __construct(Model\Order $order)
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
     {
-        $this->order = $order;
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->order->install(
-            [
-                'Magento_SalesSampleData::fixtures/orders.csv',
-                'Magento_ConfigurableSampleData::fixtures/orders.csv'
-            ]
-        );
+        $this->executor->exec($this->installer);
     }
 }

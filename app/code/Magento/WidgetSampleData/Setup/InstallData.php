@@ -5,24 +5,24 @@
  */
 namespace Magento\WidgetSampleData\Setup;
 
-use Magento\WidgetSampleData\Model\CmsBlock;
 use Magento\Framework\Setup;
 
-/**
- * Launches setup of sample data for Widget module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var CmsBlock
+     * @var Setup\SampleData\Executor
      */
-    protected $cmsBlock;
+    protected $executor;
 
     /**
-     * @param CmsBlock $cmsBlock
+     * @var Installer
      */
-    public function __construct(CmsBlock $cmsBlock) {
-        $this->cmsBlock = $cmsBlock;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -30,11 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->cmsBlock->install(
-            [
-                'Magento_WidgetSampleData::fixtures/cmsblock.csv',
-                'Magento_WidgetSampleData::fixtures/cmsblock_giftcard.csv'
-            ]
-        );
+        $this->executor->exec($this->installer);
     }
 }

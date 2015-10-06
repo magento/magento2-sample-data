@@ -7,35 +7,29 @@ namespace Magento\ProductLinksSampleData\Setup;
 
 use Magento\Framework\Setup;
 
-/**
- * Class Setup
- * Launches setup of sample data for catalog module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var \Magento\ProductLinksSampleData\Model\ProductLink
+     * @var Setup\SampleData\Executor
      */
-    protected $productLink;
+    protected $executor;
 
     /**
-     * @param \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
+     * @var Installer
      */
-    public function __construct(
-        \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
-    ) {
-        $this->productLink = $productLinkSetup;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $context)
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->productLink->install(
-            ['Magento_ProductLinksSampleData::fixtures/related.csv'],
-            ['Magento_ProductLinksSampleData::fixtures/upsell.csv'],
-            ['Magento_ProductLinksSampleData::fixtures/crossell.csv']
-        );
+        $this->executor->exec($this->installer);
     }
 }

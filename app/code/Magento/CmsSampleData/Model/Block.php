@@ -58,11 +58,6 @@ class Block
 
     public function install(array $fixtures)
     {
-        //@todo implement this
-//        if (!$this->deployHelper->isMediaPresent()) {
-//            $this->logger->log('Sample Data Media was not installed. Skipping CMS blocks installation');
-//            return;
-//        }
         foreach ($fixtures as $fileName) {
             $fileName = $this->fixtureManager->getFixture($fileName);
             if (!file_exists($fileName)) {

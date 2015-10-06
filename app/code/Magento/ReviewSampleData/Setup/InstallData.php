@@ -5,32 +5,31 @@
  */
 namespace Magento\ReviewSampleData\Setup;
 
-use Magento\ReviewSampleData\Model\Review;
 use Magento\Framework\Setup;
 
-/**
- * Class InstallSampleData
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Review
+     * @var Setup\SampleData\Executor
      */
-    protected $review;
+    protected $executor;
 
     /**
-     * @param Review $review
+     * @var Installer
      */
-    public function __construct(Review $review)
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
     {
-        $this->review = $review;
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->review->install(['Magento_ReviewSampleData::fixtures/products_reviews.csv']);
+        $this->executor->exec($this->installer);
     }
 }

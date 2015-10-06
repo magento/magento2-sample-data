@@ -6,23 +6,23 @@
 namespace Magento\WishlistSampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\WishlistSampleData\Model\Wishlist;
 
-/**
- * Launches setup of sample data for Wishlist module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Wishlist
+     * @var Setup\SampleData\Executor
      */
-    protected $wishlist;
+    protected $executor;
 
     /**
-     * @param Wishlist $wishlist
+     * @var Installer
      */
-    public function __construct(Wishlist $wishlist) {
-        $this->wishlist = $wishlist;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -30,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->wishlist->install(['Magento_WishlistSampleData::fixtures\wishlist.csv']);
+        $this->executor->exec($this->installer);
     }
 }

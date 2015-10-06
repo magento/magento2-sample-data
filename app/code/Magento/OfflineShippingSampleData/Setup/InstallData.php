@@ -6,23 +6,23 @@
 namespace Magento\OfflineShippingSampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\OfflineShippingSampleData\Model\Tablerate;
 
-/**
- * Class InstallSampleData
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Tablerate
+     * @var Setup\SampleData\Executor
      */
-    private $tablerate;
+    protected $executor;
 
     /**
-     * @param Tablerate $tablerate
+     * @var Installer
      */
-    public function __construct(Tablerate $tablerate) {
-        $this->tablerate = $tablerate;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -30,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->tablerate->install(['Magento_OfflineShippingSampleData::fixtures/tablerate.csv']);
+        $this->executor->exec($this->installer);
     }
 }

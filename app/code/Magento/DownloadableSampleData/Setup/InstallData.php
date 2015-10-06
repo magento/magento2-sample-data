@@ -7,31 +7,22 @@ namespace Magento\DownloadableSampleData\Setup;
 
 use Magento\Framework\Setup;
 
-/**
- * Launches setup of sample data for downloadable module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * Setup class for products
-     *
-     * @var \Magento\DownloadableSampleData\Model\Product
+     * @var Setup\SampleData\Executor
      */
-    protected $productSetup;
+    protected $executor;
 
     /**
-     * @param \Magento\CatalogSampleData\Model\Category $category
-     * @param \Magento\CatalogSampleData\Model\Attribute $attribute
-     * @param \Magento\DownloadableSampleData\Model\Product $product
+     * @var Installer
      */
-    public function __construct(
-        \Magento\CatalogSampleData\Model\Category $category,
-        \Magento\CatalogSampleData\Model\Attribute $attribute,
-        \Magento\DownloadableSampleData\Model\Product $product
-    ) {
-        $this->category = $category;
-        $this->attribute = $attribute;
-        $this->downloadableProduct = $product;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -39,12 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->attribute->install(['Magento_DownloadableSampleData::fixtures/attributes.csv']);
-        $this->category->install(['Magento_DownloadableSampleData::fixtures/categories.csv']);
-        $this->downloadableProduct->install(
-            ['Magento_DownloadableSampleData::fixtures/products_training_video_download.csv'],
-            ['Magento_DownloadableSampleData::fixtures/images_products_training_video.csv'],
-            ['Magento_DownloadableSampleData::fixtures/downloadable_data_training_video_download.csv']
-        );
+        $this->executor->exec($this->installer);
     }
 }

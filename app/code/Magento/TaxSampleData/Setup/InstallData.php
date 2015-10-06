@@ -6,26 +6,23 @@
 namespace Magento\TaxSampleData\Setup;
 
 use Magento\Framework\Setup;
-use Magento\TaxSampleData\Model\Tax;
 
-/**
- * Class Setup
- * Launches setup of sample data for Tax module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Tax
+     * @var Setup\SampleData\Executor
      */
-    protected $tax;
+    protected $executor;
 
     /**
-     * @param Tax $tax
+     * @var Installer
      */
-    public function __construct(
-        Tax $tax
-    ) {
-        $this->tax = $tax;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -33,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->tax->install(['Magento_TaxSampleData::fixtures/tax_rate.csv']);
+        $this->executor->exec($this->installer);
     }
 }

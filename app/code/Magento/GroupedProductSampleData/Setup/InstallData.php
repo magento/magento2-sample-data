@@ -5,26 +5,24 @@
  */
 namespace Magento\GroupedProductSampleData\Setup;
 
-use Magento\GroupedProductSampleData\Model\Product;
 use Magento\Framework\Setup;
 
-/**
- * Launches setup of sample data for GroupedProduct module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * Setup class for grouped products
-     *
-     * @var Product
+     * @var Setup\SampleData\Executor
      */
-    protected $groupedProduct;
+    protected $executor;
 
     /**
-     * @param Product $groupedProduct
+     * @var Installer
      */
-    public function __construct(Product $groupedProduct) {
-        $this->groupedProduct = $groupedProduct;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -32,9 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->groupedProduct->install(
-            ['Magento_GroupedProductSampleData::fixtures/yoga_grouped.csv'],
-            ['Magento_GroupedProductSampleData::fixtures/images_yoga_grouped.csv']
-        );
+        $this->executor->exec($this->installer);
     }
 }

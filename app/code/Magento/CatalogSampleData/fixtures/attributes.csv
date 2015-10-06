@@ -1,6 +1,5 @@
 frontend_label,frontend_input,is_required,option,default,attribute_code,is_global,default_value_text,default_value_yesno,default_value_date,default_value_textarea,is_unique,is_searchable,is_visible_in_advanced_search,is_comparable,is_filterable,is_filterable_in_search,position,is_used_for_promo_rules,is_html_allowed_on_front,is_visible_on_front,used_in_product_listing,used_for_sort_by,attribute_set
-"Activity General
-Activity",multiselect,0,"Hike
+Activity,multiselect,0,"Hike
 Outdoor
 Running
 Warmup
@@ -13,22 +12,19 @@ Crosstraining
 Post-workout
 Cycling
 Athletic
-Sports",,activity_general,1,,0,,,0,0,0,1,1,0,,1,1,1,0,0,"Top
-Bottom
-Gear
-Sprite Stasis Ball
-Sprite Yoga Strap
-Downloadable"
-"Activity Bags
-Activity",multiselect,0,"Gym
+Sports
 Hiking
 Overnight
 School
 Trail
 Travel
-Urban
-Warmup
-Yoga",,activity_bags,1,,0,,,0,0,0,1,1,0,,1,1,1,0,0,Bag
+Urban",,activity,1,,0,,,0,0,0,1,1,0,,1,1,1,0,0,"Top
+Bottom
+Gear
+Sprite Stasis Ball
+Sprite Yoga Strap
+Downloadable
+Bag"
 "Style Bags
 Style",multiselect,0,"Backpack
 Luggage
@@ -37,8 +33,7 @@ Messenger
 Laptop
 Exercise
 Tote",,style_bags,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Bag
-"Material Bag
-Material",multiselect,0,"Burlap
+Material,multiselect,0,"Burlap
 Canvas
 Cotton
 Faux Leather
@@ -48,28 +43,19 @@ Nylon
 Polyester
 Rayon
 Ripstop
-Suede",,material_bag,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Bag
-"Material Gear
-Material",multiselect,0,"Burlap
-Canvas
-Cotton
-Faux Leather
+Suede
 Foam
-Leather
-Mesh
 Metal
-Nylon
-Polyester
 Plastic
-Rayon
-Ripstop
 Rubber
 Synthetic
 Stainless Steel
-Suede
-Silicone",,material_gear,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Gear
+Silicone",,material,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,"Gear
 Sprite Stasis Ball
-Sprite Yoga Strap"
+Sprite Yoga Strap
+Top
+Bottom
+Bag"
 Color,select,,"Black
 Blue
 Brown

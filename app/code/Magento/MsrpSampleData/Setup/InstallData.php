@@ -5,27 +5,24 @@
  */
 namespace Magento\MsrpSampleData\Setup;
 
-use Magento\MsrpSampleData\Model\Msrp;
 use Magento\Framework\Setup;
 
-/**
- * Class Setup
- * Launches setup of sample data for Msrp module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * Setup class for Msrp
-     *
-     * @var Msrp
+     * @var Setup\SampleData\Executor
      */
-    protected $msrp;
+    protected $executor;
 
     /**
-     * @param Msrp $msrp
+     * @var Installer
      */
-    public function __construct(Msrp $msrp) {
-        $this->msrp = $msrp;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -33,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->msrp->install(['MsrpSampleData::fixtures/products_msrp.csv']);
+        $this->executor->exec($this->installer);
     }
 }

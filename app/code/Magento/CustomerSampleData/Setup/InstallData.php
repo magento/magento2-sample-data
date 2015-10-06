@@ -7,25 +7,22 @@ namespace Magento\CustomerSampleData\Setup;
 
 use Magento\Framework\Setup;
 
-/**
- * Class Setup
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * Setup class for customer
-     *
-     * @var \Magento\CustomerSampleData\Model\Customer
+     * @var Setup\SampleData\Executor
      */
-    protected $customerSetup;
+    protected $executor;
 
     /**
-     * @param \Magento\CustomerSampleData\Model\Customer $customerSetup
+     * @var Installer
      */
-    public function __construct(
-        \Magento\CustomerSampleData\Model\Customer $customerSetup
-    ) {
-        $this->customerSetup = $customerSetup;
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -33,6 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->customerSetup->install(['Magento_CustomerSampleData::fixtures/customer_profile.csv']);
+        $this->executor->exec($this->installer);
     }
 }

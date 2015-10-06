@@ -7,52 +7,22 @@ namespace Magento\ConfigurableSampleData\Setup;
 
 use Magento\Framework\Setup;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var \Magento\CatalogSampleData\Model\Attribute
+     * @var Setup\SampleData\Executor
      */
-    private $attribute;
+    protected $executor;
 
     /**
-     * @var \Magento\CatalogSampleData\Model\Category
+     * @var Installer
      */
-    private $category;
+    protected $installer;
 
-    /**
-     * @var \Magento\ConfigurableSampleData\Model\Product
-     */
-    private $configurableProduct;
-
-    /**
-     * @var \Magento\SalesSampleData\Model\Order
-     */
-    private $order;
-
-    /**
-     * @var
-     */
-    protected $productLinkSetup;
-
-    /**
-     * @param \Magento\CatalogSampleData\Model\Attribute $attribute
-     * @param \Magento\CatalogSampleData\Model\Category $category
-     * @param \Magento\ConfigurableSampleData\Model\Product $configurableProduct
-     * @param \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
-     */
-    public function __construct(
-        \Magento\CatalogSampleData\Model\Attribute $attribute,
-        \Magento\CatalogSampleData\Model\Category $category,
-        \Magento\ConfigurableSampleData\Model\Product $configurableProduct,
-        \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
-    ) {
-        $this->attribute = $attribute;
-        $this->category = $category;
-        $this->configurableProduct = $configurableProduct;
-        $this->productLinkSetup = $productLinkSetup;
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
@@ -60,13 +30,6 @@ class InstallData implements Setup\InstallDataInterface
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->attribute->install(['Magento_ConfigurableSampleData::fixtures/attributes.csv']);
-        $this->category->install(['Magento_ConfigurableSampleData::fixtures/categories.csv']);
-        $this->configurableProduct->install();
-        $this->productLinkSetup->install(
-            ['Magento_ConfigurableSampleData::fixtures/Links/related.csv'],
-            ['Magento_ConfigurableSampleData::fixtures/Links/upsell.csv'],
-            ['Magento_ConfigurableSampleData::fixtures/Links/crossell.csv']
-        );
+        $this->executor->exec($this->installer);
     }
 }

@@ -1,1 +1,0 @@
-Magento_MultipleWishlistSampleData module consists of installation scripts and fixtures.

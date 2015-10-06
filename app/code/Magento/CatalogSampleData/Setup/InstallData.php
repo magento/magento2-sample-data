@@ -7,68 +7,29 @@ namespace Magento\CatalogSampleData\Setup;
 
 use Magento\Framework\Setup;
 
-/**
- * Class Setup
- * Launches setup of sample data for catalog module
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * Setup class for category
-     *
-     * @var \Magento\CatalogSampleData\Model\Category
+     * @var Setup\SampleData\Executor
      */
-    protected $categorySetup;
+    protected $executor;
 
     /**
-     * Setup class for product attributes
-     *
-     * @var \Magento\CatalogSampleData\Model\Attribute
+     * @var Installer
      */
-    protected $attributeSetup;
+    protected $installer;
 
-    /**
-     * Setup class for products
-     *
-     * @var \Magento\CatalogSampleData\Model\Product
-     */
-    protected $productSetup;
-
-    /**
-     * @param \Magento\CatalogSampleData\Model\Category $categorySetup
-     * @param \Magento\CatalogSampleData\Model\Attribute $attributeSetup
-     * @param \Magento\CatalogSampleData\Model\Product $productSetup
-     */
-    public function __construct(
-        \Magento\CatalogSampleData\Model\Category $categorySetup,
-        \Magento\CatalogSampleData\Model\Attribute $attributeSetup,
-        \Magento\CatalogSampleData\Model\Product $productSetup
-    ) {
-        $this->categorySetup = $categorySetup;
-        $this->attributeSetup = $attributeSetup;
-        $this->productSetup = $productSetup;
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
+    {
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $context)
+    public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->attributeSetup->install(['Magento_CatalogSampleData::fixtures/attributes.csv']);
-        $this->categorySetup->install(['Magento_CatalogSampleData::fixtures/categories.csv']);
-        $this->productSetup->install(
-            [
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/products_gear_bags.csv',
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/products_gear_fitness_equipment.csv',
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/products_gear_fitness_equipment_ball.csv',
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/products_gear_fitness_equipment_strap.csv',
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/products_gear_watches.csv',
-            ],
-            [
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/images_gear_bags.csv',
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/images_gear_fitness_equipment.csv',
-                'Magento_CatalogSampleData::fixtures/SimpleProduct/images_gear_watches.csv',
-            ]
-        );
+        $this->executor->exec($this->installer);
     }
 }

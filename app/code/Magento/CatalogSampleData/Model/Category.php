@@ -5,8 +5,6 @@
  */
 namespace Magento\CatalogSampleData\Model;
 
-namespace Magento\CatalogSampleData\Model;
-
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
@@ -77,7 +75,6 @@ class Category
      */
     public function install(array $fixtures)
     {
-        $this->isMediaInstalled();
         foreach ($fixtures as $fileName) {
             $fileName = $this->fixtureManager->getFixture($fileName);
             if (!file_exists($fileName)) {
@@ -192,17 +189,10 @@ class Category
         $category = $this->getCategoryByPath($row['path'] . '/' . $row['name']);
         if (!$category) {
             $parentCategory = $this->getCategoryByPath($row['path']);
-            $active = $row['active']
-                && (!isset($row['require_media']) || $this->isMediaInstalled() || !$row['require_media']);
-            if (isset($row['require_media']) && $row['require_media'] == 2 && !$this->isMediaInstalled()) {
-                $active = 1;
-                $row['display_mode'] = '';
-                $row['page_layout'] = '';
-            }
             $data = [
                 'parent_id' => $parentCategory->getId(),
                 'name' => $row['name'],
-                'is_active' => $active,
+                'is_active' => $row['active'],
                 'is_anchor' => $row['is_anchor'],
                 'include_in_menu' => $row['include_in_menu'],
                 'url_key' => $row['url_key'],
@@ -214,17 +204,5 @@ class Category
             $this->setAdditionalData($row, $category);
             $category->save();
         }
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isMediaInstalled()
-    {
-        if (!isset($this->mediaInstalled)) {
-            //@todo implement this check
-            $this->mediaInstalled = true; //$this->deployHelper->isMediaPresent();
-        }
-        return $this->mediaInstalled;
     }
 }

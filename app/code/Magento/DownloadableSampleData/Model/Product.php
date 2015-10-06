@@ -66,10 +66,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      */
     public function install(array $productFixtures, array $galleryFixtures, array $downloadableFixtures = [])
     {
-        //@todo
-//        if (!$this->deployHelper->isMediaPresent()) {
-//            return;
-//        }
         foreach ($downloadableFixtures as $fileName) {
             $fileName = $this->fixtureManager->getFixture($fileName);
             if (!file_exists($fileName)) {

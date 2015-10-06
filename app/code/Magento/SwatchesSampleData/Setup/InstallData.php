@@ -5,32 +5,31 @@
  */
 namespace Magento\SwatchesSampleData\Setup;
 
-use Magento\SwatchesSampleData\Model;
 use Magento\Framework\Setup;
 
-/**
- * Class InstallData
- */
 class InstallData implements Setup\InstallDataInterface
 {
     /**
-     * @var Model\Swatches;
+     * @var Setup\SampleData\Executor
      */
-    protected $swatches;
+    protected $executor;
 
     /**
-     * @param Model\Swatches $swatches
+     * @var Installer
      */
-    public function __construct(Model\Swatches $swatches)
+    protected $installer;
+
+    public function __construct(Setup\SampleData\Executor $executor, Installer $installer)
     {
-        $this->swatches = $swatches;
+        $this->executor = $executor;
+        $this->installer = $installer;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function install(Setup\ModuleDataSetupInterface $setup, Setup\ModuleContextInterface $moduleContext)
     {
-        $this->swatches->install();
+        $this->executor->exec($this->installer);
     }
 }

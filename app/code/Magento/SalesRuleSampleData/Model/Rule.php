@@ -8,7 +8,6 @@ namespace Magento\SalesRuleSampleData\Model;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\SalesRule\Model\RuleFactory as RuleFactory;
 use Magento\SalesRule\Model\Resource\Rule\CollectionFactory as RuleCollectionFactory;
-use Magento\SampleData\Module\CatalogRule\Setup\Rule as CatalogRule;
 
 /**
  * Class Rule
