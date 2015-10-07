@@ -5,6 +5,8 @@
  */
 namespace Magento\DownloadableSampleData\Model;
 
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+
 /**
  * Setup downloadable product
  */
@@ -24,6 +26,33 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @var array
      */
     protected $downloadableData = [];
+
+    /**
+     * @param SampleDataContext $sampleDataContext
+     * @param \Magento\Catalog\Model\ProductFactory $productFactory
+     * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
+     * @param Product\Converter $converter
+     * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     */
+    public function __construct(
+        SampleDataContext $sampleDataContext,
+        \Magento\Catalog\Model\ProductFactory $productFactory,
+        \Magento\Catalog\Model\ConfigFactory $catalogConfig,
+        \Magento\DownloadableSampleData\Model\Product\Converter $converter,
+        \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    )
+    {
+        parent::__construct(
+            $sampleDataContext,
+            $productFactory,
+            $catalogConfig,
+            $converter,
+            $gallery,
+            $storeManager
+        );
+    }
 
     /**
      * {@inheritdoc}

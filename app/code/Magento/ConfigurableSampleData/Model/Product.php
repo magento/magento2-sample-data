@@ -60,7 +60,7 @@ class Product
         $this->importModel = $importModel;
         $this->csvSourceFactory = $csvSourceFactory;
         $this->indexerCollectionFactory = $indexerCollectionFactory;
-        $this->filesystem = $readFactory;
+        $this->readFactory = $readFactory;
         $this->componentRegistrar = $componentRegistrar;
     }
 
@@ -84,7 +84,7 @@ class Product
             [
                 'file' => 'fixtures/products.csv',
                 'directory' => $this->readFactory->create(
-                    $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_SampleData')
+                    $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_ConfigurableSampleData')
                 )
             ]
         );
