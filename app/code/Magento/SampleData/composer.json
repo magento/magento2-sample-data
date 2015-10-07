@@ -3,16 +3,13 @@
     "description": "Sample Data fixtures",
     "version": "1.0.0-beta",
     "require": {
-        "magento/framework": "~1.0.0-beta",
-        "magento/magento-composer-installer": "*"
+        "magento/framework": "~1.0.0-beta"
     },
     "type": "magento2-module",
-    "extra": {
-        "map": [
-            [
-                "*",
-                "Magento/SampleData"
-            ]
-        ]
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Magento\\SampleData\\": ""
+        }
     }
 }

@@ -5,10 +5,11 @@
  */
 namespace Magento\SampleData\Module\ConfigurableProduct\Setup;
 
-use Magento\SampleData\Model\SetupInterface;
-use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Component\ComponentRegistrar;
+use Magento\Framework\Filesystem\Directory\ReadFactory;
 use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
+use Magento\SampleData\Model\SetupInterface;
 
 /**
  * Setup configurable product
@@ -31,9 +32,9 @@ class Product implements SetupInterface
     private $csvSourceFactory;
 
     /**
-     * @var \Magento\Framework\Filesystem
+     * @var \Magento\Framework\Filesystem\Directory\ReadFactory
      */
-    private $filesystem;
+    private $readFactory;
 
     /**
      * @var \Magento\Indexer\Model\Indexer\CollectionFactory
@@ -41,12 +42,18 @@ class Product implements SetupInterface
     private $indexerCollectionFactory;
 
     /**
+     * @var \Magento\Framework\Component\ComponentRegistrar
+     */
+    private $componentRegistrar;
+
+    /**
      * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param \Magento\ImportExport\Model\Import $importModel
      * @param \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory
      * @param \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory
-     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
+     * @param \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      * @codingStandardsIgnoreStart
      */
@@ -56,14 +63,16 @@ class Product implements SetupInterface
         \Magento\ImportExport\Model\Import $importModel,
         \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory,
         \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory,
-        \Magento\Framework\Filesystem $filesystem
+        \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory,
+        \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
     ) {
         $this->logger = $logger;
         $this->eavConfig = $eavConfig;
         $this->importModel = $importModel;
         $this->csvSourceFactory = $csvSourceFactory;
         $this->indexerCollectionFactory = $indexerCollectionFactory;
-        $this->filesystem = $filesystem;
+        $this->readFactory = $readFactory;
+        $this->componentRegistrar = $componentRegistrar;
 
     }
     // @codingStandardsIgnoreEnd
@@ -88,13 +97,15 @@ class Product implements SetupInterface
 
         $source = $this->csvSourceFactory->create(
             [
-                'file' => 'Magento/SampleData/fixtures/ConfigurableProduct/import-export_products-img.csv',
-                'directory' => $this->filesystem->getDirectoryWrite(DirectoryList::MODULES)
+                'file' => 'fixtures/ConfigurableProduct/import-export_products-img.csv',
+                'directory' => $this->readFactory->create(
+                    $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_SampleData')
+                )
             ]
         );
 
         $currentPath = getcwd();
-        chdir($this->filesystem->getDirectoryRead(DirectoryList::ROOT)->getAbsolutePath());
+        chdir(BP);
 
         $importModel->validateSource($source);
         $importModel->importSource();
