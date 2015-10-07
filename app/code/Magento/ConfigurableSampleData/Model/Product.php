@@ -5,7 +5,8 @@
  */
 namespace Magento\ConfigurableSampleData\Model;
 
-use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Component\ComponentRegistrar;
+use Magento\Framework\Filesystem\Directory\ReadFactory;
 use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
 
@@ -25,9 +26,9 @@ class Product
     private $csvSourceFactory;
 
     /**
-     * @var \Magento\Framework\Filesystem
+     * @var \Magento\Framework\Filesystem\Directory\ReadFactory
      */
-    private $filesystem;
+    private $readFactory;
 
     /**
      * @var \Magento\Indexer\Model\Indexer\CollectionFactory
@@ -35,24 +36,32 @@ class Product
     private $indexerCollectionFactory;
 
     /**
+     * @var \Magento\Framework\Component\ComponentRegistrar
+     */
+    private $componentRegistrar;
+
+    /**
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param \Magento\ImportExport\Model\Import $importModel
      * @param \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory
      * @param \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory
-     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
+     * @param \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
      */
     public function __construct(
         \Magento\Eav\Model\Config $eavConfig,
         \Magento\ImportExport\Model\Import $importModel,
         \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory,
         \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory,
-        \Magento\Framework\Filesystem $filesystem
+        \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory,
+        \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
     ) {
         $this->eavConfig = $eavConfig;
         $this->importModel = $importModel;
         $this->csvSourceFactory = $csvSourceFactory;
         $this->indexerCollectionFactory = $indexerCollectionFactory;
-        $this->filesystem = $filesystem;
+        $this->filesystem = $readFactory;
+        $this->componentRegistrar = $componentRegistrar;
     }
 
     /**
@@ -73,14 +82,15 @@ class Product
 
         $source = $this->csvSourceFactory->create(
             [
-                'file' => 'Magento/ConfigurableSampleData/fixtures/products.csv',
-                'directory' => $this->filesystem->getDirectoryWrite(DirectoryList::MODULES)
+                'file' => 'fixtures/products.csv',
+                'directory' => $this->readFactory->create(
+                    $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_SampleData')
+                )
             ]
         );
 
         $currentPath = getcwd();
-        chdir($this->filesystem->getDirectoryRead(DirectoryList::ROOT)->getAbsolutePath());
-
+        chdir(BP);
         $importModel->validateSource($source);
         $importModel->importSource();
 

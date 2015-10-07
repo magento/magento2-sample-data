@@ -262,10 +262,6 @@ class Processor
         if ($creditmemo && $creditmemo->isValidGrandTotal()) {
             $creditmemo->setOfflineRequested(true);
             $this->creditmemoManagement->refund($creditmemo, true);
-            $creditmemoTransaction = $this->transactionFactory->create()
-                ->addObject($creditmemo)
-                ->addObject($creditmemo->getOrder());
-            $creditmemoTransaction->save();
         }
     }
 
@@ -276,15 +272,6 @@ class Processor
     public function getCreditmemoData(\Magento\Sales\Model\Order\Item $orderItem)
     {
         $data = [$orderItem->getId() => $orderItem->getQtyToRefund()];
-//        foreach ($this->observerManager->getObservers() as $observer) {
-//            if (is_callable([$observer, 'getCreditmemoData'])) {
-//                $params = new DataObject([
-//                    'order_item' => $orderItem,
-//                    'credit_memo' => $data
-//                ]);
-//                $data = $observer->getCreditmemoData($params);
-//            }
-//        }
 
         return $data;
     }
