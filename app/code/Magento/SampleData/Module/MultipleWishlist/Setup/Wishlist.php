@@ -36,7 +36,7 @@ class Wishlist implements SetupInterface
     protected $wishlistEditor;
 
     /**
-     * @var \Magento\Wishlist\Model\Resource\Wishlist\CollectionFactory
+     * @var \Magento\Wishlist\Model\ResourceModel\Wishlist\CollectionFactory
      */
     protected $wishlistColFactory;
 
@@ -65,7 +65,7 @@ class Wishlist implements SetupInterface
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\SampleData\Module\Wishlist\Setup\Wishlist\Helper $wishlistHelper
      * @param \Magento\MultipleWishlist\Model\WishlistEditor $wishlistEditor
-     * @param \Magento\Wishlist\Model\Resource\Wishlist\CollectionFactory $wishlistColFactory
+     * @param \Magento\Wishlist\Model\ResourceModel\Wishlist\CollectionFactory $wishlistColFactory
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      * @param \Magento\Framework\App\Cache\Type\Config $configCacheType
@@ -76,7 +76,7 @@ class Wishlist implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         \Magento\SampleData\Module\Wishlist\Setup\Wishlist\Helper $wishlistHelper,
         \Magento\MultipleWishlist\Model\WishlistEditor $wishlistEditor,
-        \Magento\Wishlist\Model\Resource\Wishlist\CollectionFactory $wishlistColFactory,
+        \Magento\Wishlist\Model\ResourceModel\Wishlist\CollectionFactory $wishlistColFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
         \Magento\Framework\App\Cache\Type\Config $configCacheType,
@@ -118,7 +118,7 @@ class Wishlist implements SetupInterface
                 }
 
                 $wishlistName = $row['name'];
-                /** @var \Magento\Wishlist\Model\Resource\Wishlist\Collection $wishlistCollection */
+                /** @var \Magento\Wishlist\Model\ResourceModel\Wishlist\Collection $wishlistCollection */
                 $wishlistCollection = $this->wishlistColFactory->create();
                 $wishlistCollection->filterByCustomerId($customer->getId())->addFieldToFilter('name', $wishlistName);
                 /** @var \Magento\Wishlist\Model\Wishlist $wishlist */

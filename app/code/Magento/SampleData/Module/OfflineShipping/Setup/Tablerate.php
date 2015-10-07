@@ -21,7 +21,7 @@ class Tablerate implements SetupInterface
     const ERROR_CODE_DUPLICATE_ENTRY = 23000;
 
     /**
-     * @var \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate
+     * @var \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate
      */
     protected $tablerate;
 
@@ -41,7 +41,7 @@ class Tablerate implements SetupInterface
     protected $resource;
 
     /**
-     * @var \Magento\Directory\Model\Resource\Region\CollectionFactory
+     * @var \Magento\Directory\Model\ResourceModel\Region\CollectionFactory
      */
     protected $regionCollectionFactory;
 
@@ -56,7 +56,7 @@ class Tablerate implements SetupInterface
     protected $configWriter;
 
     /**
-     * @param \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate
+     * @param \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate $tablerate
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @var \Magento\SampleData\Helper\StoreManager
@@ -69,22 +69,22 @@ class Tablerate implements SetupInterface
     protected $logger;
 
     /**
-     * @param \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate
+     * @param \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate $tablerate
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Framework\App\Resource $resource
-     * @param \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory
+     * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param Logger $logger
      */
     public function __construct(
-        \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate,
+        \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate $tablerate,
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         \Magento\Framework\App\Resource $resource,
-        \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory,
+        \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
         \Magento\SampleData\Helper\StoreManager $storeManager,
@@ -155,7 +155,7 @@ class Tablerate implements SetupInterface
     protected function loadDirectoryRegions()
     {
         $importRegions = [];
-        /** @var $collection \Magento\Directory\Model\Resource\Region\Collection */
+        /** @var $collection \Magento\Directory\Model\ResourceModel\Region\Collection */
         $collection = $this->regionCollectionFactory->create();
         foreach ($collection->getData() as $row) {
             $importRegions[$row['country_id']][$row['code']] = (int)$row['region_id'];

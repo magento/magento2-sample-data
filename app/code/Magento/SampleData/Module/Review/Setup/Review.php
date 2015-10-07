@@ -23,7 +23,7 @@ class Review implements SetupInterface
     protected $reviewFactory;
 
     /**
-     * @var \Magento\Review\Model\Resource\Review\CollectionFactory
+     * @var \Magento\Review\Model\ResourceModel\Review\CollectionFactory
      */
     protected $reviewCollectionFactory;
 
@@ -48,7 +48,7 @@ class Review implements SetupInterface
     protected $productIds;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Collection
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     protected $productCollection;
 
@@ -89,11 +89,11 @@ class Review implements SetupInterface
 
     /**
      * @param \Magento\Review\Model\ReviewFactory $reviewFactory
-     * @param \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory
+     * @param \Magento\Review\Model\ResourceModel\Review\CollectionFactory $reviewCollectionFactory
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Review\Model\RatingFactory $ratingFactory
-     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param CustomerRepositoryInterface $customerAccount
      * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory
@@ -101,11 +101,11 @@ class Review implements SetupInterface
      */
     public function __construct(
         \Magento\Review\Model\ReviewFactory $reviewFactory,
-        \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory,
+        \Magento\Review\Model\ResourceModel\Review\CollectionFactory $reviewCollectionFactory,
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         \Magento\Review\Model\RatingFactory $ratingFactory,
-        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         CustomerRepositoryInterface $customerAccount,
         \Magento\SampleData\Model\Logger $logger,
         \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory,
@@ -142,7 +142,7 @@ class Review implements SetupInterface
             if (empty($productId)) {
                 continue;
             }
-            /** @var \Magento\Review\Model\Resource\Review\Collection $reviewCollection */
+            /** @var \Magento\Review\Model\ResourceModel\Review\Collection $reviewCollection */
             $reviewCollection = $this->reviewCollectionFactory->create();
             $reviewCollection->addFilter('entity_pk_value', $productId)
                 ->addFilter('entity_id', $this->getReviewEntityId())

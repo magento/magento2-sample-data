@@ -127,7 +127,7 @@ class Product implements SetupInterface
             $fileName = $this->fixtureHelper->getPath($file);
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {
-                /** @var \Magento\Catalog\Model\Resource\Product $productResource */
+                /** @var \Magento\Catalog\Model\ResourceModel\Product $productResource */
                 $productResource = $product->getResource();
                 if ($productResource->getIdBySku($row['sku'])) {
                     continue;

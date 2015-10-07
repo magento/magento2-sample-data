@@ -11,7 +11,7 @@ namespace Magento\SampleData\Module\Cms\Setup\Block;
 class Converter
 {
     /**
-     * @var \Magento\Catalog\Model\Resource\Category\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $categoryFactory;
 
@@ -21,12 +21,12 @@ class Converter
     protected $productConverter;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory
      */
     protected $attributeCollectionFactory;
 
     /**
-     * @var \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory
+     * @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory
      */
     protected $attrOptionCollectionFactory;
 
@@ -41,25 +41,25 @@ class Converter
     protected $attributeCodeOptionValueIdsPair;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
      */
     protected $productCollectionFactory;
 
     /**
-     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter
-     * @param \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory
-     * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory
+     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      */
     public function __construct(
-        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory,
         \Magento\Eav\Model\Config $eavConfig,
         \Magento\SampleData\Module\Catalog\Setup\Product\Converter $productConverter,
-        \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory,
-        \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
-        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory,
+        \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
     ) {
         $this->categoryFactory = $categoryFactory;
         $this->eavConfig = $eavConfig;
@@ -194,7 +194,7 @@ class Converter
      * Get attribute options by attribute code
      *
      * @param string $attributeCode
-     * @return \Magento\Eav\Model\Resource\Entity\Attribute\Option\Collection|null
+     * @return \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\Collection|null
      */
     protected function getAttributeOptions($attributeCode)
     {
@@ -214,7 +214,7 @@ class Converter
      */
     protected function loadAttributeOptions($attributeCode)
     {
-        /** @var \Magento\Catalog\Model\Resource\Product\Attribute\Collection $collection */
+        /** @var \Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection $collection */
         $collection = $this->attributeCollectionFactory->create();
         $collection->addFieldToSelect(['attribute_code', 'attribute_id']);
         $collection->addFieldToFilter('attribute_code', $attributeCode);

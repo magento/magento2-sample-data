@@ -25,7 +25,7 @@ class Setup implements SetupInterface
     private $config;
 
     /**
-     * @var \Magento\Theme\Model\Resource\Theme\CollectionFactory
+     * @var \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory
      */
     private $collectionFactory;
 
@@ -73,7 +73,7 @@ class Setup implements SetupInterface
 
     /**
      * @param \Magento\Theme\Model\Config $config
-     * @param \Magento\Theme\Model\Resource\Theme\CollectionFactory $collectionFactory
+     * @param \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $collectionFactory
      * @param \Magento\Framework\UrlInterface $baseUrl
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
@@ -86,7 +86,7 @@ class Setup implements SetupInterface
      */
     public function __construct(
         \Magento\Theme\Model\Config $config,
-        \Magento\Theme\Model\Resource\Theme\CollectionFactory $collectionFactory,
+        \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $collectionFactory,
         \Magento\Framework\UrlInterface $baseUrl,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,

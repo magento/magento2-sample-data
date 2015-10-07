@@ -6,7 +6,7 @@
 namespace Magento\SampleData\Module\Catalog\Setup\Product;
 
 use Magento\Catalog\Model\ProductFactory;
-use Magento\Catalog\Model\Resource\Product\Attribute\Backend\Media as GalleryAttribute;
+use Magento\Catalog\Model\ResourceModel\Product\Attribute\Backend\Media as GalleryAttribute;
 use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
 use Magento\SampleData\Helper\Fixture as FixtureHelper;
 use Magento\SampleData\Model\Logger;

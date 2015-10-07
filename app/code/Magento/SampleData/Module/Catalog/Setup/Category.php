@@ -25,7 +25,7 @@ class Category implements SetupInterface
     protected $storeManager;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Category\TreeFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Category\TreeFactory
      */
     protected $resourceCategoryTreeFactory;
 
@@ -66,7 +66,7 @@ class Category implements SetupInterface
 
     /**
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
-     * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $resourceCategoryTreeFactory
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param FixtureHelper $fixtureHelper
@@ -76,7 +76,7 @@ class Category implements SetupInterface
      */
     public function __construct(
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
-        \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $resourceCategoryTreeFactory,
         \Magento\Framework\Module\ModuleListInterface $moduleList,
         \Magento\SampleData\Helper\StoreManager $storeManager,
         FixtureHelper $fixtureHelper,

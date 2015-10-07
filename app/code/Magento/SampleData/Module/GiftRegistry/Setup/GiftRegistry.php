@@ -38,7 +38,7 @@ class GiftRegistry implements SetupInterface
     protected $giftRegistryFactory;
 
     /**
-     * @var \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory
+     * @var \Magento\GiftRegistry\Model\ResourceModel\Entity\CollectionFactory
      */
     protected $collectionFactory;
 
@@ -68,7 +68,7 @@ class GiftRegistry implements SetupInterface
     protected $itemFactory;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\Source
      */
     protected $productIndexer;
 
@@ -87,13 +87,13 @@ class GiftRegistry implements SetupInterface
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
      * @param \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory
-     * @param \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory $collectionFactory
+     * @param \Magento\GiftRegistry\Model\ResourceModel\Entity\CollectionFactory $collectionFactory
      * @param \Magento\Customer\Model\AddressFactory $addressFactory
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param \Magento\Framework\Stdlib\DateTime\DateTimeFactory $dateFactory
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\GiftRegistry\Model\ItemFactory $itemFactory
-     * @param \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer
+     * @param \Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\Source $productIndexer
      * @param \Magento\SampleData\Helper\StoreManager $storeManager
      * @param Logger $logger
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
@@ -103,13 +103,13 @@ class GiftRegistry implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         \Magento\Directory\Model\CountryFactory $countryFactory,
         \Magento\GiftRegistry\Model\EntityFactory $giftRegistryFactory,
-        \Magento\GiftRegistry\Model\Resource\Entity\CollectionFactory $collectionFactory,
+        \Magento\GiftRegistry\Model\ResourceModel\Entity\CollectionFactory $collectionFactory,
         \Magento\Customer\Model\AddressFactory $addressFactory,
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Framework\Stdlib\DateTime\DateTimeFactory $dateFactory,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\GiftRegistry\Model\ItemFactory $itemFactory,
-        \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer,
+        \Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\Source $productIndexer,
         \Magento\SampleData\Helper\StoreManager $storeManager,
         Logger $logger
     ) {
@@ -139,7 +139,7 @@ class GiftRegistry implements SetupInterface
         /** @var \Magento\SampleData\Helper\Csv\Reader $csvReader */
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fixtureFilePath, 'mode' => 'r']);
         foreach ($csvReader as $giftRegistryData) {
-            /** @var \Magento\GiftRegistry\Model\Resource\Entity\Collection $collection */
+            /** @var \Magento\GiftRegistry\Model\ResourceModel\Entity\Collection $collection */
             $collection = $this->collectionFactory->create();
             $collection->addFilter('title', $giftRegistryData['title']);
             if ($collection->count() > 0) {

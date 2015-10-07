@@ -16,7 +16,7 @@ use Magento\SampleData\Model\SetupInterface;
 class CmsBlock implements SetupInterface
 {
     /**
-     * @var \Magento\Catalog\Model\Resource\Category\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $categoryFactory;
 
@@ -41,7 +41,7 @@ class CmsBlock implements SetupInterface
     protected $widgetFactory;
 
     /**
-     * @var \Magento\Theme\Model\Resource\Theme\CollectionFactory
+     * @var \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory
      */
     protected $themeCollectionFactory;
 
@@ -51,7 +51,7 @@ class CmsBlock implements SetupInterface
     protected $cmsBlockFactory;
 
     /**
-     * @var \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory
+     * @var \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory
      */
     protected $appCollectionFactory;
 
@@ -64,10 +64,10 @@ class CmsBlock implements SetupInterface
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
      * @param \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory
-     * @param \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory
+     * @param \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
-     * @param \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory $appCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
+     * @param \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
      * @param \Magento\SampleData\Model\Logger $logger
      * @param array $fixtures
      */
@@ -75,10 +75,10 @@ class CmsBlock implements SetupInterface
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
         \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory,
-        \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory,
+        \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory,
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
-        \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory $appCollectionFactory,
-        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory,
+        \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory,
         \Magento\SampleData\Model\Logger $logger,
         $fixtures = []
     ) {
@@ -133,7 +133,7 @@ class CmsBlock implements SetupInterface
             /** @var \Magento\Tools\SampleData\Helper\Csv\Reader $csvReader */
             $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
             foreach ($csvReader as $row) {
-                /** @var \Magento\Widget\Model\Resource\Widget\Instance\Collection $instanceCollection */
+                /** @var \Magento\Widget\Model\ResourceModel\Widget\Instance\Collection $instanceCollection */
                 $instanceCollection = $this->appCollectionFactory->create();
                 $instanceCollection->addFilter('title', $row['title']);
                 if ($instanceCollection->count() > 0) {

@@ -6,7 +6,7 @@
 namespace Magento\SampleData\Module\CatalogRule\Setup;
 
 use Magento\CatalogRule\Model\RuleFactory as RuleFactory;
-use Magento\CatalogRule\Model\Resource\Rule\CollectionFactory as RuleCollectionFactory;
+use Magento\CatalogRule\Model\ResourceModel\Rule\CollectionFactory as RuleCollectionFactory;
 use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
 use Magento\SampleData\Helper\Fixture as FixtureHelper;
 use Magento\SampleData\Model\Logger;
@@ -43,7 +43,7 @@ class Rule implements SetupInterface
     protected $jobFactory;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Category\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $categoryCollectionFactory;
 
@@ -68,7 +68,7 @@ class Rule implements SetupInterface
      * @param RuleFactory $ruleFactory
      * @param RuleCollectionFactory $ruleCollectionFactory
      * @param \Magento\CatalogRule\Model\Rule\JobFactory $jobFactory
-     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Customer\Model\GroupFactory $groupFactory
      * @param \Magento\Store\Model\WebsiteFactory $websiteFactory
      * @param Logger $logger
@@ -79,7 +79,7 @@ class Rule implements SetupInterface
         RuleFactory $ruleFactory,
         RuleCollectionFactory $ruleCollectionFactory,
         \Magento\CatalogRule\Model\Rule\JobFactory $jobFactory,
-        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Customer\Model\GroupFactory $groupFactory,
         \Magento\Store\Model\WebsiteFactory $websiteFactory,
         Logger $logger
@@ -105,7 +105,7 @@ class Rule implements SetupInterface
         $fileName = $this->fixtureHelper->getPath($file);
         $csvReader = $this->csvReaderFactory->create(['fileName' => $fileName, 'mode' => 'r']);
         foreach ($csvReader as $row) {
-            /** @var \Magento\CatalogRule\Model\Resource\Rule\Collection $ruleCollection */
+            /** @var \Magento\CatalogRule\Model\ResourceModel\Rule\Collection $ruleCollection */
             $ruleCollection = $this->ruleCollectionFactory->create();
             $ruleCollection->addFilter('name', $row['name']);
             if ($ruleCollection->count() > 0) {

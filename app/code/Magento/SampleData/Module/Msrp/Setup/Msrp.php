@@ -33,7 +33,7 @@ class Msrp implements SetupInterface
     protected $productIds;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Collection
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     protected $productCollection;
 
@@ -50,14 +50,14 @@ class Msrp implements SetupInterface
     /**
      * @param FixtureHelper $fixtureHelper
      * @param CsvReaderFactory $csvReaderFactory
-     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\SampleData\Model\Logger $logger
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      */
     public function __construct(
         FixtureHelper $fixtureHelper,
         CsvReaderFactory $csvReaderFactory,
-        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\SampleData\Model\Logger $logger,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
     ) {

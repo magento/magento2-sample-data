@@ -18,7 +18,7 @@ use Magento\SampleData\Model\SetupInterface;
 class Attribute implements SetupInterface
 {
     /**
-     * @var \Magento\Catalog\Model\Resource\Eav\AttributeFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Eav\AttributeFactory
      */
     protected $attributeFactory;
 
@@ -28,7 +28,7 @@ class Attribute implements SetupInterface
     protected $attributeSetFactory;
 
     /**
-     * @var \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory
+     * @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory
      */
     protected $attrOptionCollectionFactory;
 
@@ -73,9 +73,9 @@ class Attribute implements SetupInterface
     protected $storeManager;
 
     /**
-     * @param \Magento\Catalog\Model\Resource\Eav\AttributeFactory $attributeFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Eav\AttributeFactory $attributeFactory
      * @param \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory
-     * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
+     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
      * @param \Magento\Catalog\Helper\Product $productHelper
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param \Magento\Framework\Module\ModuleListInterface $moduleList
@@ -86,9 +86,9 @@ class Attribute implements SetupInterface
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        \Magento\Catalog\Model\Resource\Eav\AttributeFactory $attributeFactory,
+        \Magento\Catalog\Model\ResourceModel\Eav\AttributeFactory $attributeFactory,
         \Magento\Eav\Model\Entity\Attribute\SetFactory $attributeSetFactory,
-        \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
+        \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
         \Magento\Catalog\Helper\Product $productHelper,
         \Magento\Eav\Model\Config $eavConfig,
         \Magento\Framework\Module\ModuleListInterface $moduleList,
@@ -127,7 +127,7 @@ class Attribute implements SetupInterface
             foreach ($csvReader as $data) {
                 $data['attribute_set'] = explode("\n", $data['attribute_set']);
 
-                /** @var \Magento\Catalog\Model\Resource\Eav\Attribute $attribute */
+                /** @var \Magento\Catalog\Model\ResourceModel\Eav\Attribute $attribute */
                 $attribute = $this->eavConfig->getAttribute('catalog_product', $data['attribute_code']);
                 if (!$attribute) {
                     $attribute = $this->attributeFactory->create();
@@ -182,7 +182,7 @@ class Attribute implements SetupInterface
     }
 
     /**
-     * @param \Magento\Catalog\Model\Resource\Eav\Attribute $attribute
+     * @param \Magento\Catalog\Model\ResourceModel\Eav\Attribute $attribute
      * @param array $data
      * @return array
      */
@@ -190,7 +190,7 @@ class Attribute implements SetupInterface
     {
         $result = [];
         $data['option'] = explode("\n", $data['option']);
-        /** @var \Magento\Eav\Model\Resource\Entity\Attribute\Option\Collection $options */
+        /** @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\Collection $options */
         $options = $this->attrOptionCollectionFactory->create()
             ->setAttributeFilter($attribute->getId())
             ->setPositionOrder('asc', true)

@@ -40,7 +40,7 @@ class Order implements SetupInterface
     protected $logger;
 
     /**
-     * @var \Magento\Sales\Model\Resource\Order\CollectionFactory
+     * @var \Magento\Sales\Model\ResourceModel\Order\CollectionFactory
      */
     protected $orderCollectionFactory;
 
@@ -54,7 +54,7 @@ class Order implements SetupInterface
      * @param CsvReaderFactory $csvReaderFactory
      * @param Order\Converter $converter
      * @param Order\Processor $orderProcessor
-     * @param \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory
+     * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\SampleData\Model\Logger $logger
      * @param array $fixtures
@@ -64,7 +64,7 @@ class Order implements SetupInterface
         CsvReaderFactory $csvReaderFactory,
         Order\Converter $converter,
         Order\Processor $orderProcessor,
-        \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory,
+        \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\SampleData\Model\Logger $logger,
         $fixtures = ['Sales/orders.csv']
@@ -95,7 +95,7 @@ class Order implements SetupInterface
                     if (!$customer->getId()) {
                         continue;
                     }
-                    /** @var \Magento\Sales\Model\Resource\Collection $orderCollection */
+                    /** @var \Magento\Sales\Model\ResourceModel\Collection $orderCollection */
                     $orderCollection = $this->orderCollectionFactory->create();
                     $orderCollection->addFilter('customer_id', $customer->getId());
                     if ($orderCollection->count() > 0) {

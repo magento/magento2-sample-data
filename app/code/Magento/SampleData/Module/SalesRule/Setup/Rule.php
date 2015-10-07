@@ -6,7 +6,7 @@
 namespace Magento\SampleData\Module\SalesRule\Setup;
 
 use Magento\SalesRule\Model\RuleFactory as RuleFactory;
-use Magento\SalesRule\Model\Resource\Rule\CollectionFactory as RuleCollectionFactory;
+use Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory as RuleCollectionFactory;
 use Magento\SampleData\Helper\Csv\ReaderFactory as CsvReaderFactory;
 use Magento\SampleData\Helper\Fixture as FixtureHelper;
 use Magento\SampleData\Model\Logger;
@@ -94,7 +94,7 @@ class Rule implements SetupInterface
             $attribute->setIsUsedForPromoRules('1')->save();
         }
         foreach ($csvReader as $row) {
-            /** @var \Magento\SalesRule\Model\Resource\Rule\Collection $ruleCollection */
+            /** @var \Magento\SalesRule\Model\ResourceModel\Rule\Collection $ruleCollection */
             $ruleCollection = $this->ruleCollectionFactory->create();
             $ruleCollection->addFilter('name', $row['name']);
             if ($ruleCollection->count() > 0) {
