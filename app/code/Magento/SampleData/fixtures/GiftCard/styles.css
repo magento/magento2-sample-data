@@ -1,5 +1,0 @@
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-.giftcard-mailed{background:#fedd16}.giftcard-mailed .content{position:static}.giftcard-mailed img{max-width:100% !important;margin-left:20px;position:absolute;z-index:0;bottom:0}.giftcard-virtual .content{left:0;top:0;width:65%}.giftcard-virtual img{position:absolute;z-index:0;bottom:0;right:0;max-width:100% !important}@media only screen and (max-width:767px){.giftcard-mailed,.giftcard-virtual{min-height:275px}.giftcard-virtual img{max-width:80% !important}}@media all and (min-width:768px),print{.giftcard-virtual,.giftcard-mailed{height:420px}.womens-erin{height:164px}.womens-erin .content{width:70%}.womens-erin .image{width:30%}}
