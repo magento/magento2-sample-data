@@ -52,21 +52,18 @@ class Category
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\SampleData\Helper\Deploy $deployHelper
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\SampleData\Helper\Deploy $deployHelper
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
         $this->categoryFactory = $categoryFactory;
         $this->resourceCategoryTreeFactory = $resourceCategoryTreeFactory;
         $this->storeManager = $storeManager;
-        $this->deployHelper = $deployHelper;
     }
 
     /**
