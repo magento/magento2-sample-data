@@ -61,7 +61,7 @@ class Gallery
     protected $logger;
 
     /**
-     * @var \Magento\Framework\App\Resource
+     * @var \Magento\Framework\App\ResourceConnection
      */
     protected $resource;
 
@@ -71,7 +71,7 @@ class Gallery
      * @param ProductFactory $productFactory
      * @param GalleryAttribute $galleryAttribute
      * @param \Magento\Eav\Model\Config $eavConfig
-     * @param \Magento\Framework\App\Resource $resource
+     * @param \Magento\Framework\App\ResourceConnection $resource
      * @param Logger $logger
      */
     public function __construct(
@@ -80,7 +80,7 @@ class Gallery
         ProductFactory $productFactory,
         GalleryAttribute $galleryAttribute,
         \Magento\Eav\Model\Config $eavConfig,
-        \Magento\Framework\App\Resource $resource,
+        \Magento\Framework\App\ResourceConnection $resource,
         Logger $logger
     ) {
         $this->fixtureHelper = $fixtureHelper;
