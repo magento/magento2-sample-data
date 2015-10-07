@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Magento. All rights reserved.
+ * Copyright ï¿½ 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\MsrpSampleData\Setup;
@@ -28,6 +28,6 @@ class Installer implements Setup\SampleData\InstallerInterface
      */
     public function install()
     {
-        $this->msrp->install(['MsrpSampleData::fixtures/products_msrp.csv']);
+        $this->msrp->install(['Magento_MsrpSampleData::fixtures/products_msrp.csv']);
     }
 }
