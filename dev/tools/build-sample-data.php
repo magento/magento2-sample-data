@@ -46,11 +46,10 @@ if (!file_exists($sampleDataSource)) {
 
 $excludePaths = [];
 $unusedPaths = [];
-$ignorePath = include __DIR__ . '/build-sample-data-ignore.php';
 
 switch ($command) {
     case 'link':
-        foreach (scanFiles($sampleDataSource, $ignorePath) as $filename) {
+        foreach (scanFiles($sampleDataSource) as $filename) {
             $target = preg_replace('#^' . preg_quote($sampleDataSource) . "#", '', $filename);
 
             if (!file_exists(dirname($ceSource . $target))) {
