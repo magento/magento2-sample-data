@@ -54,7 +54,7 @@ class Converter
 
     /**
      * @param \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory
-     * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $categoryResourceTreeFactory
      * @param \Magento\Eav\Model\Config $eavConfig
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory
@@ -63,7 +63,7 @@ class Converter
      */
     public function __construct(
         \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory,
-        \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $categoryResourceTreeFactory,
         \Magento\Eav\Model\Config $eavConfig,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory,

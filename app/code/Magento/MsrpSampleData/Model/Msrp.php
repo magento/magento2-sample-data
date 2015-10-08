@@ -31,7 +31,7 @@ class Msrp
     protected $productIds;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Collection
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     protected $productCollection;
 
@@ -42,12 +42,12 @@ class Msrp
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();

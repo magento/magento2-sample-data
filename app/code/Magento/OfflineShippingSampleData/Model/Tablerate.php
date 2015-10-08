@@ -28,7 +28,7 @@ class Tablerate
     protected $csvReader;
 
     /**
-     * @var \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate
+     * @var \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate
      */
     protected $tablerate;
 

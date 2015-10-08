@@ -31,7 +31,7 @@ class Review
     protected $reviewFactory;
 
     /**
-     * @var \Magento\Review\Model\Resource\Review\CollectionFactory
+     * @var \Magento\Review\Model\ResourceModel\Review\CollectionFactory
      */
     protected $reviewCollectionFactory;
 
@@ -139,7 +139,7 @@ class Review
                 if (empty($productId)) {
                     continue;
                 }
-                /** @var \Magento\Review\Model\Resource\Review\Collection $reviewCollection */
+                /** @var \Magento\Review\Model\ResourceModel\Review\Collection $reviewCollection */
                 $reviewCollection = $this->reviewCollectionFactory->create();
                 $reviewCollection->addFilter('entity_pk_value', $productId)
                     ->addFilter('entity_id', $this->getReviewEntityId())
