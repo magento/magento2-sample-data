@@ -17,22 +17,22 @@ class Converter extends \Magento\CatalogSampleData\Model\Product\Converter
 
     /**
      * @param \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory
-     * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $categoryResourceTreeFactory
      * @param \Magento\Eav\Model\Config $eavConfig
-     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory
-     * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory
+     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param \Magento\ConfigurableProduct\Model\Product\Type\VariationMatrix $variationMatrix
      */
     public function __construct(
         \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory,
-        \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $categoryResourceTreeFactory,
         \Magento\Eav\Model\Config $eavConfig,
-        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
-        \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory,
-        \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
-        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory,
+        \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         \Magento\ConfigurableProduct\Model\Product\Type\VariationMatrix $variationMatrix
     ) {
         $this->variationMatrix = $variationMatrix;

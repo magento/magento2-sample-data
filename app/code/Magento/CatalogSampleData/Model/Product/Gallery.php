@@ -6,7 +6,7 @@
 namespace Magento\CatalogSampleData\Model\Product;
 
 use Magento\Catalog\Model\ProductFactory;
-use Magento\Catalog\Model\Resource\Product\Attribute\Backend\Media as GalleryAttribute;
+use Magento\Catalog\Model\ResourceModel\Product\Attribute\Backend\Media as GalleryAttribute;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**

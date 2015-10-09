@@ -7,7 +7,7 @@ namespace Magento\SalesRuleSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\SalesRule\Model\RuleFactory as RuleFactory;
-use Magento\SalesRule\Model\Resource\Rule\CollectionFactory as RuleCollectionFactory;
+use Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory as RuleCollectionFactory;
 
 /**
  * Class Rule
@@ -90,7 +90,7 @@ class Rule
                     $data[$header[$key]] = $value;
                 }
                 $row = $data;
-                /** @var \Magento\SalesRule\Model\Resource\Rule\Collection $ruleCollection */
+                /** @var \Magento\SalesRule\Model\ResourceModel\Rule\Collection $ruleCollection */
                 $ruleCollection = $this->ruleCollectionFactory->create();
                 $ruleCollection->addFilter('name', $row['name']);
                 if ($ruleCollection->count() > 0) {

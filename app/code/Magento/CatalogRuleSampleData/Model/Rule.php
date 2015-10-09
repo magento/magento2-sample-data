@@ -30,7 +30,7 @@ class Rule
     protected $ruleFactory;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Category\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $categoryCollectionFactory;
 
@@ -53,7 +53,7 @@ class Rule
      * @param SampleDataContext $sampleDataContext
      * @param RuleFactory $ruleFactory
      * @param JobFactory $jobFactory
-     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Customer\Model\GroupFactory $groupFactory
      * @param \Magento\Store\Model\WebsiteFactory $websiteFactory
      */
@@ -61,7 +61,7 @@ class Rule
         SampleDataContext $sampleDataContext,
         RuleFactory $ruleFactory,
         JobFactory $jobFactory,
-        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Customer\Model\GroupFactory $groupFactory,
         \Magento\Store\Model\WebsiteFactory $websiteFactory
     ) {

@@ -28,7 +28,7 @@ class Category
     protected $storeManager;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Category\TreeFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Category\TreeFactory
      */
     protected $resourceCategoryTreeFactory;
 
@@ -50,13 +50,13 @@ class Category
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
-     * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $resourceCategoryTreeFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
-        \Magento\Catalog\Model\Resource\Category\TreeFactory $resourceCategoryTreeFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $resourceCategoryTreeFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();

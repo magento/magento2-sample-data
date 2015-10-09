@@ -5,7 +5,7 @@
  */
 namespace Magento\SwatchesSampleData\Model;
 
-use Magento\Catalog\Model\Resource\Eav\Attribute as eavAttribute;
+use Magento\Catalog\Model\ResourceModel\Eav\Attribute as eavAttribute;
 
 /**
  * Class Swatches
@@ -36,7 +36,7 @@ class Swatches
     ];
 
     /**
-     * @var \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory
+     * @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory
      */
     protected $attrOptionCollectionFactory;
 
@@ -46,11 +46,11 @@ class Swatches
     protected $eavConfig;
 
     /**
-     * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
+     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
-        \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
+        \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->attrOptionCollectionFactory = $attrOptionCollectionFactory;

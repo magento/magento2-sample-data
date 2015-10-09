@@ -33,7 +33,7 @@ class Order
     protected $orderProcessor;
 
     /**
-     * @var \Magento\Sales\Model\Resource\Order\CollectionFactory
+     * @var \Magento\Sales\Model\ResourceModel\Order\CollectionFactory
      */
     protected $orderCollectionFactory;
 
@@ -46,14 +46,14 @@ class Order
      * @param SampleDataContext $sampleDataContext
      * @param Order\Converter $converter
      * @param Order\Processor $orderProcessor
-     * @param \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory
+     * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         Order\Converter $converter,
         Order\Processor $orderProcessor,
-        \Magento\Sales\Model\Resource\Order\CollectionFactory $orderCollectionFactory,
+        \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
@@ -90,7 +90,7 @@ class Order
                     if (!$customer->getId()) {
                         continue;
                     }
-                    /** @var \Magento\Sales\Model\Resource\Collection $orderCollection */
+                    /** @var \Magento\Sales\Model\ResourceModel\Collection $orderCollection */
                     $orderCollection = $this->orderCollectionFactory->create();
                     $orderCollection->addFilter('customer_id', $customer->getId());
                     if ($orderCollection->count() > 0) {

@@ -28,17 +28,17 @@ class Tablerate
     protected $csvReader;
 
     /**
-     * @var \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate
+     * @var \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate
      */
     protected $tablerate;
 
     /**
-     * @var \Magento\Framework\App\Resource
+     * @var \Magento\Framework\App\ResourceConnection
      */
     protected $resource;
 
     /**
-     * @var \Magento\Directory\Model\Resource\Region\CollectionFactory
+     * @var \Magento\Directory\Model\ResourceModel\Region\CollectionFactory
      */
     protected $regionCollectionFactory;
 
@@ -59,18 +59,18 @@ class Tablerate
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate
-     * @param \Magento\Framework\App\Resource $resource
-     * @param \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory
+     * @param \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate $tablerate
+     * @param \Magento\Framework\App\ResourceModel $resource
+     * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
      * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\OfflineShipping\Model\Resource\Carrier\Tablerate $tablerate,
-        \Magento\Framework\App\Resource $resource,
-        \Magento\Directory\Model\Resource\Region\CollectionFactory $regionCollectionFactory,
+        \Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate $tablerate,
+        \Magento\Framework\App\ResourceConnection $resource,
+        \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory,
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
         \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -148,7 +148,7 @@ class Tablerate
     protected function loadDirectoryRegions()
     {
         $importRegions = [];
-        /** @var $collection \Magento\Directory\Model\Resource\Region\Collection */
+        /** @var $collection \Magento\Directory\Model\ResourceModel\Region\Collection */
         $collection = $this->regionCollectionFactory->create();
         foreach ($collection->getData() as $row) {
             $importRegions[$row['country_id']][$row['code']] = (int)$row['region_id'];

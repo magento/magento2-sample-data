@@ -18,12 +18,12 @@ class Converter
     protected $eavConfig;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory
      */
     protected $attributeCollectionFactory;
 
     /**
-     * @var \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory
+     * @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory
      */
     protected $attrOptionCollectionFactory;
 
@@ -43,7 +43,7 @@ class Converter
     protected $attributeSetId;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Collection
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     protected $productCollection;
 
@@ -54,21 +54,21 @@ class Converter
 
     /**
      * @param \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory
-     * @param \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $categoryResourceTreeFactory
      * @param \Magento\Eav\Model\Config $eavConfig
-     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory
-     * @param \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory
+     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      */
     public function __construct(
         \Magento\Catalog\Model\Category\TreeFactory $categoryTreeFactory,
-        \Magento\Catalog\Model\Resource\Category\TreeFactory $categoryResourceTreeFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $categoryResourceTreeFactory,
         \Magento\Eav\Model\Config $eavConfig,
-        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryCollectionFactory,
-        \Magento\Catalog\Model\Resource\Product\Attribute\CollectionFactory $attributeCollectionFactory,
-        \Magento\Eav\Model\Resource\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
-        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory $attributeCollectionFactory,
+        \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
     ) {
          $this->categoryTree = $categoryTreeFactory->create(
             [
@@ -196,7 +196,7 @@ class Converter
      * Get attribute options by attribute code
      *
      * @param string $attributeCode
-     * @return \Magento\Eav\Model\Resource\Entity\Attribute\Option\Collection|null
+     * @return \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\Collection|null
      */
     public function getAttributeOptions($attributeCode)
     {
@@ -215,7 +215,7 @@ class Converter
      */
     protected function loadAttributeOptions()
     {
-        /** @var \Magento\Catalog\Model\Resource\Product\Attribute\Collection $collection */
+        /** @var \Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection $collection */
         $collection = $this->attributeCollectionFactory->create();
         $collection->addFieldToSelect(['attribute_code', 'attribute_id']);
         $collection->setAttributeSetFilter($this->getAttributeSetId());

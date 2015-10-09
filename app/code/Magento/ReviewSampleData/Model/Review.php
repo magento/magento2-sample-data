@@ -31,7 +31,7 @@ class Review
     protected $reviewFactory;
 
     /**
-     * @var \Magento\Review\Model\Resource\Review\CollectionFactory
+     * @var \Magento\Review\Model\ResourceModel\Review\CollectionFactory
      */
     protected $reviewCollectionFactory;
 
@@ -46,7 +46,7 @@ class Review
     protected $productIds;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Collection
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     protected $productCollection;
 
@@ -83,9 +83,9 @@ class Review
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Review\Model\ReviewFactory $reviewFactory
-     * @param \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory
+     * @param \Magento\Review\Model\ResourceModel\Review\CollectionFactory $reviewCollectionFactory
      * @param \Magento\Review\Model\RatingFactory $ratingFactory
-     * @param \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
      * @param CustomerRepositoryInterface $customerAccount
      * @param \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -93,9 +93,9 @@ class Review
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Review\Model\ReviewFactory $reviewFactory,
-        \Magento\Review\Model\Resource\Review\CollectionFactory $reviewCollectionFactory,
+        \Magento\Review\Model\ResourceModel\Review\CollectionFactory $reviewCollectionFactory,
         \Magento\Review\Model\RatingFactory $ratingFactory,
-        \Magento\Catalog\Model\Resource\Product\CollectionFactory $productCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
         CustomerRepositoryInterface $customerAccount,
         \Magento\Review\Model\Rating\OptionFactory $ratingOptionsFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -139,7 +139,7 @@ class Review
                 if (empty($productId)) {
                     continue;
                 }
-                /** @var \Magento\Review\Model\Resource\Review\Collection $reviewCollection */
+                /** @var \Magento\Review\Model\ResourceModel\Review\Collection $reviewCollection */
                 $reviewCollection = $this->reviewCollectionFactory->create();
                 $reviewCollection->addFilter('entity_pk_value', $productId)
                     ->addFilter('entity_id', $this->getReviewEntityId())

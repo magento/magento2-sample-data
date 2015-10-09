@@ -14,7 +14,7 @@ use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 class CmsBlock
 {
     /**
-     * @var \Magento\Catalog\Model\Resource\Category\CollectionFactory
+     * @var \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory
      */
     protected $categoryFactory;
 
@@ -24,7 +24,7 @@ class CmsBlock
     protected $widgetFactory;
 
     /**
-     * @var \Magento\Theme\Model\Resource\Theme\CollectionFactory
+     * @var \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory
      */
     protected $themeCollectionFactory;
 
@@ -34,7 +34,7 @@ class CmsBlock
     protected $cmsBlockFactory;
 
     /**
-     * @var \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory
+     * @var \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory
      */
     protected $appCollectionFactory;
 
@@ -51,18 +51,18 @@ class CmsBlock
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory
-     * @param \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory
+     * @param \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
-     * @param \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory $appCollectionFactory
-     * @param \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
+     * @param \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory
+     * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory,
-        \Magento\Theme\Model\Resource\Theme\CollectionFactory $themeCollectionFactory,
+        \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory,
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
-        \Magento\Widget\Model\Resource\Widget\Instance\CollectionFactory $appCollectionFactory,
-        \Magento\Catalog\Model\Resource\Category\CollectionFactory $categoryFactory
+        \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -119,7 +119,7 @@ class CmsBlock
                     $data[$header[$key]] = $value;
                 }
                 $row = $data;
-                /** @var \Magento\Widget\Model\Resource\Widget\Instance\Collection $instanceCollection */
+                /** @var \Magento\Widget\Model\ResourceModel\Widget\Instance\Collection $instanceCollection */
                 $instanceCollection = $this->appCollectionFactory->create();
                 $instanceCollection->addFilter('title', $row['title']);
                 if ($instanceCollection->count() > 0) {

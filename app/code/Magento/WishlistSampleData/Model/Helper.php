@@ -21,7 +21,7 @@ class Helper
     protected $productFactory;
 
     /**
-     * @var \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\Source
      */
     protected $productIndexer;
 
@@ -33,13 +33,13 @@ class Helper
     /**
      * @param \Magento\Customer\Model\CustomerFactory $customerFactory
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer
+     * @param \Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\Source $productIndexer
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
     public function __construct(
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Resource\Product\Indexer\Eav\Source $productIndexer,
+        \Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav\Source $productIndexer,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->customerFactory = $customerFactory;
