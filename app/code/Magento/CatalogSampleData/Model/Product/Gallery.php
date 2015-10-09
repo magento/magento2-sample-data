@@ -135,6 +135,7 @@ class Gallery
                 'position' => $i,
                 'disables' => 0,
             ]);
+            $this->galleryAttribute->bindValueToEntity($id, $product->getId());
             $i++;
         }
 
