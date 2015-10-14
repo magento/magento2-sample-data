@@ -69,6 +69,9 @@ class Customer
      */
     protected $dataObjectHelper;
 
+
+    protected $appState;
+
     /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
@@ -78,6 +81,7 @@ class Customer
      * @param \Magento\Customer\Api\AccountManagementInterface $accountManagement
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
+     * @param \Magento\Framework\App\State $appState
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -88,7 +92,8 @@ class Customer
         \Magento\Customer\Api\Data\RegionInterfaceFactory $regionFactory,
         \Magento\Customer\Api\AccountManagementInterface $accountManagement,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
+        \Magento\Framework\Api\DataObjectHelper $dataObjectHelper,
+        \Magento\Framework\App\State $appState
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -99,6 +104,7 @@ class Customer
         $this->accountManagement = $accountManagement;
         $this->storeManager = $storeManager;
         $this->dataObjectHelper = $dataObjectHelper;
+        $this->appState = $appState;
     }
 
     /**
@@ -155,7 +161,11 @@ class Customer
                     '\Magento\Customer\Api\Data\CustomerInterface'
                 );
                 $customer->setAddresses([$addresses]);
-                $this->accountManagement->createAccount($customer, $row['password']);
+                $this->appState->emulateAreaCode(
+                    'frontend',
+                    [$this->accountManagement, 'createAccount'],
+                    [$customer, $row['password']]
+                );
             }
         }
     }

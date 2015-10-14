@@ -23,12 +23,13 @@ Rain Coat
 Hard Shell
 Soft Shell
 Windbreaker
-1/2 zip
-1/4 zip
+&frac12; zip
+&frac14; zip
 Full Zip
 Reversible
 Bra
-Hoodies & Sweatshirts
+Hoodie
+Sweatshirt
 Polo
 Tank
 Tee
@@ -38,24 +39,25 @@ Cardigan
 Henley
 Tunic
 Camisole",,style_general,1,,0,,,0,0,0,,1,0,,1,1,1,0,0,Top
-Material,multiselect,0,"Cocona&reg, performance fabric
+Material,multiselect,0,"Cocona&reg; performance fabric
 Wool
 Fleece
 Hemp
 Jersey
-LumaTech&trade,
-Lycra&reg,
+LumaTech&trade;
+Lycra&reg;
 Mesh
+Microfiber
 Nylon
 Polyester
 Spandex
 Cotton
-HeatTec&reg,
-EverCool&trade,
+HeatTec&reg;
+EverCool&trade;
 Organic Cotton
 Rayon
 TENCEL
-CoolTech&trade,
+CoolTech&trade;
 Khaki
 Linen
 Wool
