@@ -3,7 +3,7 @@
     "description": "Sample Data fixtures",
     "version": "1.0.0-beta5",
     "require": {
-        "magento/framework": "1.0.0-beta5",
+        "magento/framework": "~1.0.0-beta5",
         "magento/magento-composer-installer": "*"
     },
     "type": "magento2-module",
