@@ -43,6 +43,11 @@ class Converter
     protected $attributeSetId;
 
     /**
+     * @var array
+     */
+    protected $loadedAttributeSets;
+
+    /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     protected $productCollection;
@@ -215,6 +220,14 @@ class Converter
      */
     protected function loadAttributeOptions()
     {
+        $attributeSetIdCache = $this->getAttributeSetId();
+        if (empty($attributeSetIdCache)) {
+            $attributeSetIdCache = 0;
+        }
+        if (isset($this->loadedAttributeSets[$attributeSetIdCache])) {
+            return $this;
+        }
+
         /** @var \Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection $collection */
         $collection = $this->attributeCollectionFactory->create();
         $collection->addFieldToSelect(['attribute_code', 'attribute_id']);
@@ -225,6 +238,7 @@ class Converter
                 ->setAttributeFilter($item->getAttributeId())->setPositionOrder('asc', true)->load();
             $this->attributeCodeOptionsPair[$item->getAttributeCode()] = $options;
         }
+        $this->loadedAttributeSets[$attributeSetIdCache] = true;
         return $this;
     }
 
