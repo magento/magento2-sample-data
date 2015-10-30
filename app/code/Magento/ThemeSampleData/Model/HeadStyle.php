@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\CmsSampleData\Model;
+namespace Magento\ThemeSampleData\Model;
 
 use Magento\Framework\Setup;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -16,13 +16,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
  */
 class HeadStyle
 {
-    /**
-     * Url configuration
-     *
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $baseUrl;
-
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
@@ -44,7 +37,6 @@ class HeadStyle
     private $directoryList;
 
     /**
-     * @param \Magento\Framework\UrlInterface $baseUrl
      * @param ScopeConfigInterface $scopeConfig
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      * @param \Magento\Framework\App\Cache\Type\Config $configCacheType
@@ -52,13 +44,11 @@ class HeadStyle
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        \Magento\Framework\UrlInterface $baseUrl,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
         \Magento\Framework\App\Cache\Type\Config $configCacheType,
         \Magento\Framework\App\Filesystem\DirectoryList $directoryList
         ) {
-            $this->baseUrl = $baseUrl;
             $this->scopeConfig = $scopeConfig;
             $this->configWriter = $configWriter;
             $this->configCacheType = $configCacheType;
@@ -76,8 +66,7 @@ class HeadStyle
         file_put_contents("{$mediaDir}/{$cssFile}", $styleContent, FILE_APPEND);
 
         $linkText = sprintf(
-            '<link  rel="stylesheet" type="text/css"  media="all" href="%s%s" />',
-            $this->baseUrl->getBaseUrl(['_type' => \Magento\Framework\UrlInterface::URL_TYPE_MEDIA]),
+            '<link  rel="stylesheet" type="text/css"  media="all" href="{{MEDIA_URL}}%s" />',
             $cssFile
         );
 
