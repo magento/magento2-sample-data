@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Magento. All rights reserved.
+ * Copyright ï¿½ 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\CmsSampleData\Setup;
@@ -17,7 +17,7 @@ class Installer implements Setup\SampleData\InstallerInterface
     /**
      * Setup class for css
      *
-     * @var \Magento\CmsSampleData\Model\Css
+     * @var \Magento\ThemeSampleData\Model\Css
      */
     private $css;
 
@@ -33,13 +33,13 @@ class Installer implements Setup\SampleData\InstallerInterface
 
     /**
      * @param \Magento\CatalogSampleData\Model\Category $category
-     * @param \Magento\CmsSampleData\Model\Css $css
+     * @param \Magento\ThemeSampleData\Model\Css $css
      * @param \Magento\CmsSampleData\Model\Page $page
      * @param \Magento\CmsSampleData\Model\Block $block
      */
     public function __construct(
         \Magento\CatalogSampleData\Model\Category $category,
-        \Magento\CmsSampleData\Model\Css $css,
+        \Magento\ThemeSampleData\Model\Css $css,
         \Magento\CmsSampleData\Model\Page $page,
         \Magento\CmsSampleData\Model\Block $block
     ) {
