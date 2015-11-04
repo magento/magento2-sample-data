@@ -5,7 +5,8 @@
         "php": "~5.5.0|~5.6.0|~7.0.0",
         "magento/module-configurable-product": "1.0.0-beta",
         "magento/module-sample-data": "1.0.0-beta",
-        "magento/module-product-links-sample-data": "1.0.0-beta"
+        "magento/module-product-links-sample-data": "1.0.0-beta",
+        "magento/module-sales-sample-data": "1.0.0-beta"
     },
     "type": "magento2-module",
     "version": "1.0.0-beta",
