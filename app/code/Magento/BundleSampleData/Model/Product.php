@@ -18,12 +18,14 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     protected $productType = \Magento\Catalog\Model\Product\Type::TYPE_BUNDLE;
 
     /**
+     * Product constructor.
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
      * @param Product\Converter $converter
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -31,15 +33,18 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\Catalog\Model\ConfigFactory $catalogConfig,
         \Magento\BundleSampleData\Model\Product\Converter $converter,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Eav\Model\Config $eavConfig
     ) {
+        $this->eavConfig = $eavConfig;
         parent::__construct(
             $sampleDataContext,
             $productFactory,
             $catalogConfig,
             $converter,
             $gallery,
-            $storeManager
+            $storeManager,
+            $eavConfig
         );
     }
 
