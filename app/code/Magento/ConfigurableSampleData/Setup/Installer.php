@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright � 2015 Magento. All rights reserved.
+ * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\ConfigurableSampleData\Setup;
@@ -67,6 +67,5 @@ class Installer implements Setup\SampleData\InstallerInterface
             ['Magento_ConfigurableSampleData::fixtures/Links/upsell.csv'],
             ['Magento_ConfigurableSampleData::fixtures/Links/crossell.csv']
         );
-        $this->order->install(['Magento_ConfigurableSampleData::fixtures/orders.csv']);
     }
 }
