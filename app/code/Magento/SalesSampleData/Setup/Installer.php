@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright � 2015 Magento. All rights reserved.
+ * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\SalesSampleData\Setup;
@@ -27,6 +27,6 @@ class Installer implements Setup\SampleData\InstallerInterface
      */
     public function install()
     {
-        return;
+        $this->order->install(['Magento_SalesSampleData::fixtures/orders.csv']);
     }
 }

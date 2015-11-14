@@ -60,15 +60,19 @@ class Product
     protected $storeManager;
 
     /**
+     * @var \Magento\Eav\Model\Config
+     */
+    protected $eavConfig;
+
+    /**
+     * Product constructor.
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
      * @param Product\Converter $converter
      * @param Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     *
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     * @codingStandardsIgnoreStart
+     * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -76,7 +80,8 @@ class Product
         \Magento\Catalog\Model\ConfigFactory $catalogConfig,
         Product\Converter $converter,
         Product\Gallery $gallery,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->productFactory = $productFactory;
@@ -85,8 +90,8 @@ class Product
         $this->csvReader = $sampleDataContext->getCsvReader();
         $this->gallery = $gallery;
         $this->storeManager = $storeManager;
+        $this->eavConfig = $eavConfig;
     }
-    // @codingStandardsIgnoreEnd
 
     /**
      * @param array $productFixtures
@@ -95,6 +100,7 @@ class Product
      */
     public function install(array $productFixtures, array $galleryFixtures)
     {
+        $this->eavConfig->clear();
         $this->setGalleryFixtures($galleryFixtures);
 
         $product = $this->productFactory->create();

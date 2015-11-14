@@ -70,6 +70,16 @@ class Processor
     protected $creditmemoManagement;
 
     /**
+     * @var \Magento\Backend\Model\Session\QuoteFactory
+     */
+    protected $sessionQuoteFactory;
+
+    /**
+     * @var \Magento\Backend\Model\Session\Quote
+     */
+    protected $currentSession;
+
+    /**
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\Phrase\Renderer\CompositeFactory $rendererCompositeFactory
      * @param \Magento\Sales\Model\AdminOrder\CreateFactory $createOrderFactory
@@ -147,6 +157,9 @@ class Processor
                 'current_shipment',
             ];
             $this->unsetRegistryData($registryItems);
+            $this->currentSession->unsQuoteId();
+            $this->currentSession->unsStoreId();
+            $this->currentSession->unsCustomerId();
         }
     }
 
@@ -156,9 +169,10 @@ class Processor
      */
     protected function processQuote($data = [])
     {
+        $this->currentSession = $this->sessionQuoteFactory->create();
         /** @var \Magento\Sales\Model\AdminOrder\Create $orderCreateModel */
         $orderCreateModel = $this->createOrderFactory->create(
-            ['quoteSession' => $this->sessionQuoteFactory->create()]
+            ['quoteSession' => $this->currentSession]
         );
         if (!empty($data['order'])) {
             $orderCreateModel->importPostData($data['order']);
@@ -216,7 +230,7 @@ class Processor
     /**
      * @param int $orderId
      * @param array $invoiceData
-     * @return bool
+     * @return bool | \Magento\Sales\Model\Order\Invoice
      */
     protected function createInvoice($orderId, $invoiceData)
     {

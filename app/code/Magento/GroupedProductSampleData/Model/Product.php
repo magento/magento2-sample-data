@@ -18,6 +18,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     protected $productType = \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE;
 
     /**
+     * Product constructor.
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
@@ -25,6 +26,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param \Magento\Framework\Setup\SampleData\FixtureManager $fixtureManager
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -33,16 +35,17 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\GroupedProductSampleData\Model\Product\Converter $converter,
         \Magento\Framework\Setup\SampleData\FixtureManager $fixtureManager,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
-    )
-    {
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Eav\Model\Config $eavConfig
+    ) {
         parent::__construct(
             $sampleDataContext,
             $productFactory,
             $catalogConfig,
             $converter,
             $gallery,
-            $storeManager
+            $storeManager,
+            $eavConfig
         );
     }
 }

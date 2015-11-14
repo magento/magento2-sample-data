@@ -69,6 +69,7 @@ class Product
      */
     public function install()
     {
+        $this->eavConfig->clear();
         $importModel = $this->importModel;
         $importModel->setData(
             [
