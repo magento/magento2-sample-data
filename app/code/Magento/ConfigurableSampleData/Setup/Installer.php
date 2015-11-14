@@ -30,11 +30,6 @@ class Installer implements Setup\SampleData\InstallerInterface
     protected $productLinkSetup;
 
     /**
-     * @var \Magento\SalesSampleData\Model\Order
-     */
-    protected $order;
-
-    /**
      * @param \Magento\CatalogSampleData\Model\Attribute $attribute
      * @param \Magento\CatalogSampleData\Model\Category $category
      * @param \Magento\ConfigurableSampleData\Model\Product $configurableProduct
@@ -44,14 +39,12 @@ class Installer implements Setup\SampleData\InstallerInterface
         \Magento\CatalogSampleData\Model\Attribute $attribute,
         \Magento\CatalogSampleData\Model\Category $category,
         \Magento\ConfigurableSampleData\Model\Product $configurableProduct,
-        \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup,
-        \Magento\SalesSampleData\Model\Order $order
+        \Magento\ProductLinksSampleData\Model\ProductLink $productLinkSetup
     ) {
         $this->attribute = $attribute;
         $this->category = $category;
         $this->configurableProduct = $configurableProduct;
         $this->productLinkSetup = $productLinkSetup;
-        $this->order = $order;
     }
 
     /**
