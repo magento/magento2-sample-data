@@ -14,6 +14,7 @@
             <data name="prices" xsi:type="array">
                 <item name="grandTotal" xsi:type="string">53.71</item>
             </data>
+            <data name="taxRule" xsi:type="string">us_ca_ny_rule</data>
             <data name="status" xsi:type="string">Pending</data>
             <data name="orderButtonsAvailable" xsi:type="string">Back, Cancel, Hold, Ship, Invoice, Edit</data>
             <data name="payment/method" xsi:type="string">checkmo</data>
