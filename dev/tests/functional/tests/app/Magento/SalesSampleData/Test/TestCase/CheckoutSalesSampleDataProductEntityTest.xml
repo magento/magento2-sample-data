@@ -12,9 +12,8 @@
             <data name="id" xsi:type="string">1</data>
             <data name="salesRule" xsi:type="string">active_sales_rule_for_all_groups</data>
             <data name="prices" xsi:type="array">
-                <item name="grandTotal" xsi:type="string">53.71</item>
+                <item name="grandTotal" xsi:type="string">50.00</item>
             </data>
-            <data name="taxRule" xsi:type="string">us_ca_ny_rule</data>
             <data name="status" xsi:type="string">Pending</data>
             <data name="orderButtonsAvailable" xsi:type="string">Back, Cancel, Hold, Ship, Invoice, Edit</data>
             <data name="payment/method" xsi:type="string">checkmo</data>
@@ -24,10 +23,6 @@
             <data name="shipping/shipping_method" xsi:type="string">Fixed</data>
             <data name="configData" xsi:type="string">checkmo</data>
             <constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage"/>
-            <constraint name="Magento\Sales\Test\Constraint\AssertOrderStatusIsCorrect"/>
-            <constraint name="Magento\Sales\Test\Constraint\AssertOrderButtonsAvailable"/>
-            <constraint name="Magento\Sales\Test\Constraint\AssertOrderGrandTotal"/>
-            <constraint name="Magento\Sales\Test\Constraint\AssertOrderInOrdersGrid" />
             <constraint name="Magento\Sales\Test\Constraint\AssertOrderInOrdersGridOnFrontend"/>
         </variation>
     </testCase>
