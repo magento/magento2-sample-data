@@ -6,7 +6,7 @@
 namespace Magento\CatalogSampleData\Model\Product;
 
 use Magento\Catalog\Model\ProductFactory;
-use Magento\Catalog\Model\ResourceModel\Product\Attribute\Backend\Media as GalleryAttribute;
+use Magento\Catalog\Model\ResourceModel\Product\Gallery as GalleryResource;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
@@ -47,18 +47,18 @@ class Gallery
     /**
      * @param SampleDataContext $sampleDataContext
      * @param ProductFactory $productFactory
-     * @param GalleryAttribute $galleryAttribute
+     * @param GalleryResource $galleryResource
      * @param \Magento\Eav\Model\Config $eavConfig
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         ProductFactory $productFactory,
-        GalleryAttribute $galleryAttribute,
+        GalleryResource $galleryResource,
         \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
-        $this->galleryAttribute = $galleryAttribute;
+        $this->galleryResource = $galleryResource;
         $this->productFactory = $productFactory;
         $this->eavConfig = $eavConfig;
     }
@@ -122,12 +122,12 @@ class Gallery
             if (strpos($image, '_main') !== false) {
                 $baseImage = $image;
             }
-            $id = $this->galleryAttribute->insertGallery([
+            $id = $this->galleryResource->insertGallery([
                 'attribute_id' => $mediaAttribute->getAttributeId(),
                 'entity_id' => $product->getId(),
                 'value' => $image,
             ]);
-            $this->galleryAttribute->insertGalleryValueInStore([
+            $this->galleryResource->insertGalleryValueInStore([
                 'value_id' => $id,
                 'store_id' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
                 'entity_id' => $product->getId(),
@@ -135,7 +135,7 @@ class Gallery
                 'position' => $i,
                 'disables' => 0,
             ]);
-            $this->galleryAttribute->bindValueToEntity($id, $product->getId());
+            $this->galleryResource->bindValueToEntity($id, $product->getId());
             $i++;
         }
 
