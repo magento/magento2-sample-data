@@ -1,9 +1,9 @@
 {
     "name": "magento/sample-data",
-    "version": "1.0.0-beta9",
+    "version": "1.0.0-beta10",
     "type": "metapackage",
     "require": {
         "magento/module-sample-data": "self.version",
-        "magento/sample-data-media": "~1.0.0-beta9"
+        "magento/sample-data-media": "~1.0.0-beta10"
     }
 }
