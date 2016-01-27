@@ -152,7 +152,7 @@ class Gallery
                 $table = $imageAttribute->getBackend()->getTable();
                 /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter*/
                 $data = [
-                    $attribute->getBackend()->getEntityIdField() => $product->getId(),
+                    $attribute->getEntity()->getLinkField() => $product->getId(),
                     'attribute_id' => $attribute->getId(),
                     'value' => $baseImage,
                 ];
