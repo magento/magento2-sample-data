@@ -49,7 +49,7 @@ class Installer implements Setup\SampleData\InstallerInterface
     public function install()
     {
         $this->assignTheme();
-        $this->css->install(['Magento_CmsSampleData::fixtures/styles.css' => 'styles.css']);
+        $this->css->install(['Magento_ThemeSampleData::fixtures/styles.css' => 'styles.css']);
     }
 
     /**
