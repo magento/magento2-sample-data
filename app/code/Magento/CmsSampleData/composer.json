@@ -6,6 +6,7 @@
         "magento/module-cms": "100.0.*",
         "magento/module-sample-data": "100.0.*",
         "magento/module-theme-sample-data": "100.0.*",
+        "magento/module-catalog-sample-data": "100.0.*",
         "magento/sample-data-media": "100.0.*"
     },
     "type": "magento2-module",
