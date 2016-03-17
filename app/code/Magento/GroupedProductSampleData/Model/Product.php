@@ -6,6 +6,7 @@
 namespace Magento\GroupedProductSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+use Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks;
 
 /**
  * Setup grouped product
@@ -18,6 +19,11 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     protected $productType = \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE;
 
     /**
+     * @var \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks
+     */
+    protected $productLinksHelper;
+
+    /**
      * Product constructor.
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
@@ -27,6 +33,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Eav\Model\Config $eavConfig
+     * @param \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks $productLinksHelper
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -36,7 +43,8 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\Framework\Setup\SampleData\FixtureManager $fixtureManager,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Eav\Model\Config $eavConfig
+        \Magento\Eav\Model\Config $eavConfig,
+        \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks $productLinksHelper
     ) {
         parent::__construct(
             $sampleDataContext,
@@ -47,5 +55,18 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             $storeManager,
             $eavConfig
         );
+        $this->productLinksHelper = $productLinksHelper;
+    }
+
+    /**
+     * @param \Magento\Catalog\Model\Product $product
+     * @param array $data
+     * @return $this
+     */
+    protected function prepareProduct($product, $data)
+    {
+        $this->productLinksHelper->initializeLinks($product, $data['grouped_link_data']);
+        $product->unsetData('grouped_link_data');
+        return $this;
     }
 }
