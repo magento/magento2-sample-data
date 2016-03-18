@@ -6,6 +6,9 @@
 namespace Magento\BundleSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+use Magento\Bundle\Api\Data\OptionInterfaceFactory as OptionFactory;
+use Magento\Bundle\Api\Data\LinkInterfaceFactory as LinkFactory;
+use Magento\Catalog\Api\ProductRepositoryInterface as ProductRepository;
 
 /**
  * Setup bundle product
@@ -16,6 +19,21 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @var string
      */
     protected $productType = \Magento\Catalog\Model\Product\Type::TYPE_BUNDLE;
+
+    /**
+     * @var OptionFactory
+     */
+    protected $optionFactory;
+
+    /**
+     * @var LinkFactory
+     */
+    protected $linkFactory;
+
+    /**
+     * @var ProductRepository
+     */
+    protected $productRepository;
 
     /**
      * Product constructor.
@@ -34,7 +52,10 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\BundleSampleData\Model\Product\Converter $converter,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Eav\Model\Config $eavConfig
+        \Magento\Eav\Model\Config $eavConfig,
+        OptionFactory $optionFactory,
+        LinkFactory $linkFactory,
+        ProductRepository $productRepository
     ) {
         $this->eavConfig = $eavConfig;
         parent::__construct(
@@ -46,6 +67,9 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             $storeManager,
             $eavConfig
         );
+        $this->optionFactory = $optionFactory;
+        $this->linkFactory = $linkFactory;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -57,6 +81,34 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             ->setCanSaveConfigurableAttributes(true)
             ->setCanSaveBundleSelections(true)
             ->setPriceType(0);
+        $bundleOptionsData = $product->getBundleOptionsData();
+        $options = [];
+        foreach ($bundleOptionsData as $key => $optionData) {
+
+            $option = $this->optionFactory->create(['data' => $optionData]);
+            $option->setSku($product->getSku());
+            $option->setOptionId(null);
+
+            $links = [];
+            $bundleLinks = $product->getBundleSelectionsData();
+            foreach ($bundleLinks[$key] as $linkData) {
+                $linkProduct = $this->productRepository->getById($linkData['product_id']);
+                $link = $this->linkFactory->create(['data' => $linkData]);
+                $link->setSku($linkProduct->getSku());
+                $link->setQty($linkData['selection_qty']);
+
+                if (array_key_exists('selection_can_change_qty', $linkData)) {
+                    $link->setCanChangeQuantity($linkData['selection_can_change_qty']);
+                }
+                $links[] = $link;
+            }
+            $option->setProductLinks($links);
+            $options[] = $option;
+        }
+
+        $extension = $product->getExtensionAttributes();
+        $extension->setBundleProductOptions($options);
+        $product->setExtensionAttributes($extension);
 
         return $this;
     }
