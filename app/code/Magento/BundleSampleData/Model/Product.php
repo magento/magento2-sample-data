@@ -5,10 +5,10 @@
  */
 namespace Magento\BundleSampleData\Model;
 
-use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\Bundle\Api\Data\OptionInterfaceFactory as OptionFactory;
 use Magento\Bundle\Api\Data\LinkInterfaceFactory as LinkFactory;
 use Magento\Catalog\Api\ProductRepositoryInterface as ProductRepository;
+use \Magento\Framework\App\ObjectManager;
 
 /**
  * Setup bundle product
@@ -23,54 +23,17 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     /**
      * @var OptionFactory
      */
-    protected $optionFactory;
+    private $optionFactory;
 
     /**
      * @var LinkFactory
      */
-    protected $linkFactory;
+    private $linkFactory;
 
     /**
      * @var ProductRepository
      */
-    protected $productRepository;
-
-    /**
-     * Product constructor.
-     * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
-     * @param Product\Converter $converter
-     * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Eav\Model\Config $eavConfig
-     */
-    public function __construct(
-        SampleDataContext $sampleDataContext,
-        \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\ConfigFactory $catalogConfig,
-        \Magento\BundleSampleData\Model\Product\Converter $converter,
-        \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Eav\Model\Config $eavConfig,
-        OptionFactory $optionFactory,
-        LinkFactory $linkFactory,
-        ProductRepository $productRepository
-    ) {
-        $this->eavConfig = $eavConfig;
-        parent::__construct(
-            $sampleDataContext,
-            $productFactory,
-            $catalogConfig,
-            $converter,
-            $gallery,
-            $storeManager,
-            $eavConfig
-        );
-        $this->optionFactory = $optionFactory;
-        $this->linkFactory = $linkFactory;
-        $this->productRepository = $productRepository;
-    }
+    private $productRepository;
 
     /**
      * @inheritdoc
@@ -85,15 +48,15 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         $options = [];
         foreach ($bundleOptionsData as $key => $optionData) {
 
-            $option = $this->optionFactory->create(['data' => $optionData]);
+            $option = $this->getOptionFactory()->create(['data' => $optionData]);
             $option->setSku($product->getSku());
             $option->setOptionId(null);
 
             $links = [];
             $bundleLinks = $product->getBundleSelectionsData();
             foreach ($bundleLinks[$key] as $linkData) {
-                $linkProduct = $this->productRepository->getById($linkData['product_id']);
-                $link = $this->linkFactory->create(['data' => $linkData]);
+                $linkProduct = $this->getProductRepository()->getById($linkData['product_id']);
+                $link = $this->getLinkFactory()->create(['data' => $linkData]);
                 $link->setSku($linkProduct->getSku());
                 $link->setQty($linkData['selection_qty']);
 
@@ -111,5 +74,59 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         $product->setExtensionAttributes($extension);
 
         return $this;
+    }
+
+    /**
+     * Get option interface factory
+     *
+     * @deprecated
+     * @return \Magento\Bundle\Api\Data\OptionInterfaceFactory
+     */
+    private function getOptionFactory()
+    {
+
+        if (!($this->optionFactory)) {
+            return ObjectManager::getInstance()->get(
+                '\Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks'
+            );
+        } else {
+            return $this->optionFactory;
+        }
+    }
+
+    /**
+     * Get bundle link interface factory
+     *
+     * @deprecated
+     * @return \Magento\Bundle\Api\Data\LinkInterfaceFactory
+     */
+    private function getLinkFactory()
+    {
+
+        if (!($this->linkFactory)) {
+            return ObjectManager::getInstance()->get(
+                '\Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks'
+            );
+        } else {
+            return $this->linkFactory;
+        }
+    }
+
+    /**
+     * Get product repository
+     *
+     * @deprecated
+     * @return \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    private function getProductRepository()
+    {
+
+        if (!($this->productRepository)) {
+            return ObjectManager::getInstance()->get(
+                '\Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks'
+            );
+        } else {
+            return $this->productRepository;
+        }
     }
 }
