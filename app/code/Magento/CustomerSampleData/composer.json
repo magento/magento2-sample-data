@@ -6,13 +6,15 @@
         "magento/module-sample-data": "100.0.*"
     },
     "type": "magento2-module",
-    "version": "100.0.3",
+    "version": "100.0.4",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
     ],
     "autoload": {
-        "files": [ "registration.php" ],
+        "files": [
+            "registration.php"
+        ],
         "psr-4": {
             "Magento\\CustomerSampleData\\": ""
         }
