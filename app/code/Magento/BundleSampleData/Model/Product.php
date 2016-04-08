@@ -5,6 +5,7 @@
  */
 namespace Magento\BundleSampleData\Model;
 
+use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\Bundle\Api\Data\OptionInterfaceFactory as OptionFactory;
 use Magento\Bundle\Api\Data\LinkInterfaceFactory as LinkFactory;
 use Magento\Catalog\Api\ProductRepositoryInterface as ProductRepository;
@@ -24,6 +25,37 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @var OptionFactory
      */
     private $optionFactory;
+
+    /**
+     * Product constructor.
+     * @param SampleDataContext $sampleDataContext
+     * @param \Magento\Catalog\Model\ProductFactory $productFactory
+     * @param \Magento\Catalog\Model\ConfigFactory $catalogConfig
+     * @param Product\Converter $converter
+     * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Eav\Model\Config $eavConfig
+     */
+    public function __construct(
+        SampleDataContext $sampleDataContext,
+        \Magento\Catalog\Model\ProductFactory $productFactory,
+        \Magento\Catalog\Model\ConfigFactory $catalogConfig,
+        \Magento\BundleSampleData\Model\Product\Converter $converter,
+        \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Eav\Model\Config $eavConfig
+    ) {
+        $this->eavConfig = $eavConfig;
+        parent::__construct(
+            $sampleDataContext,
+            $productFactory,
+            $catalogConfig,
+            $converter,
+            $gallery,
+            $storeManager,
+            $eavConfig
+        );
+    }
 
     /**
      * @var LinkFactory
@@ -47,7 +79,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         $bundleOptionsData = $product->getBundleOptionsData();
         $options = [];
         foreach ($bundleOptionsData as $key => $optionData) {
-
             $option = $this->getOptionFactory()->create(['data' => $optionData]);
             $option->setSku($product->getSku());
             $option->setOptionId(null);
@@ -87,7 +118,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
 
         if (!($this->optionFactory)) {
             return ObjectManager::getInstance()->get(
-                '\Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks'
+                '\Magento\Bundle\Api\Data\OptionInterfaceFactory'
             );
         } else {
             return $this->optionFactory;
@@ -105,7 +136,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
 
         if (!($this->linkFactory)) {
             return ObjectManager::getInstance()->get(
-                '\Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks'
+                '\Magento\Bundle\Api\Data\LinkInterfaceFactory'
             );
         } else {
             return $this->linkFactory;
@@ -123,7 +154,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
 
         if (!($this->productRepository)) {
             return ObjectManager::getInstance()->get(
-                '\Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks'
+                '\Magento\Catalog\Api\ProductRepositoryInterface'
             );
         } else {
             return $this->productRepository;
