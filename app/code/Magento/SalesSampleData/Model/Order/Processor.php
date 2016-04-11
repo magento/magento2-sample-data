@@ -131,19 +131,13 @@ class Processor
         $this->setPhraseRenderer();
         if (!empty($orderData)) {
             $orderCreateModel = $this->processQuote($orderData);
-            if (!empty($orderData['payment'])) {
-                $orderCreateModel->setPaymentData($orderData['payment']);
-                $orderCreateModel->getQuote()->getPayment()->addData($orderData['payment']);
-            }
             $customer = $this->customerRepository->get(
                 $orderData['order']['account']['email'],
                 $this->storeManager->getWebsite()->getId()
             );
             $orderCreateModel->getQuote()->setCustomer($customer);
             $orderCreateModel->getSession()->setCustomerId($customer->getId());
-            $order = $orderCreateModel
-                ->importPostData($orderData['order'])
-                ->createOrder();
+            $order = $orderCreateModel->createOrder();
             $orderItem = $this->getOrderItemForTransaction($order);
             $this->invoiceOrder($orderItem);
             $this->shipOrder($orderItem);
@@ -174,23 +168,14 @@ class Processor
         $orderCreateModel = $this->createOrderFactory->create(
             ['quoteSession' => $this->currentSession]
         );
-        if (!empty($data['order'])) {
-            $orderCreateModel->importPostData($data['order']);
-        }
-        $orderCreateModel->getQuote()->setReservedOrderId(null);
+        $orderCreateModel->importPostData($data['order'])->initRuleData();
         $orderCreateModel->getBillingAddress();
-        $orderCreateModel->setShippingAsBilling(true);
-        if (!empty($data['add_products'])) {
-            $orderCreateModel->addProducts($data['add_products']);
-        }
+        $orderCreateModel->setShippingAsBilling(1);
+        $orderCreateModel->addProducts($data['add_products']);
+        $orderCreateModel->getQuote()->getShippingAddress()->unsetData('cached_items_all');
+        $orderCreateModel->getQuote()->setTotalsCollectedFlag(false);
         $orderCreateModel->collectShippingRates();
-        if (!empty($data['payment'])) {
-            /** @var \Magento\Quote\Model\Quote\Payment $payment */
-            $payment = $orderCreateModel->getQuote()->getPayment();
-            $payment->addData($data['payment']);
-            $payment->setQuote($orderCreateModel->getQuote());
-        }
-        $orderCreateModel->initRuleData();
+        $orderCreateModel->getQuote()->getPayment()->addData($data['payment'])->setQuote($orderCreateModel->getQuote());
         return $orderCreateModel;
     }
 
