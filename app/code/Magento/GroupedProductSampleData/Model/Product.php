@@ -7,7 +7,7 @@ namespace Magento\GroupedProductSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks;
-use \Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\ObjectManager;
 
 /**
  * Setup grouped product
