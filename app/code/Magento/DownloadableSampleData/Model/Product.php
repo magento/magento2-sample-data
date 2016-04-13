@@ -57,9 +57,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\DownloadableSampleData\Model\Product\Converter $converter,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Eav\Model\Config $eavConfig,
-        SampleFactory $sampleFactory,
-        LinkFactory $linkFactory
+        \Magento\Eav\Model\Config $eavConfig
     ) {
         parent::__construct(
             $sampleDataContext,
@@ -70,8 +68,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
             $storeManager,
             $eavConfig
         );
-        $this->linkFactory = $linkFactory;
-        $this->sampleFactory = $sampleFactory;
     }
 
     /**
