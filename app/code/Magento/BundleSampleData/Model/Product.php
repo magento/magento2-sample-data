@@ -116,7 +116,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     private function getOptionFactory()
     {
 
-        if (!($this->optionFactory)) {
+        if (!$this->optionFactory) {
             $this->optionFactory = ObjectManager::getInstance()->get(
                 '\Magento\Bundle\Api\Data\OptionInterfaceFactory'
             );
@@ -133,7 +133,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     private function getLinkFactory()
     {
 
-        if (!($this->linkFactory)) {
+        if (!$this->linkFactory) {
             $this->linkFactory = ObjectManager::getInstance()->get(
                 '\Magento\Bundle\Api\Data\LinkInterfaceFactory'
             );
@@ -150,7 +150,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     private function getProductRepository()
     {
 
-        if (!($this->productRepository)) {
+        if (!$this->productRepository) {
             $this->productRepository = ObjectManager::getInstance()->get(
                 '\Magento\Catalog\Api\ProductRepositoryInterface'
             );
