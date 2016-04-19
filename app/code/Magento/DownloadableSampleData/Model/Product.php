@@ -187,7 +187,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      */
     private function getLinkFactory()
     {
-
         if (!$this->linkFactory) {
             $this->linkFactory = ObjectManager::getInstance()->get(
                 '\Magento\Downloadable\Api\Data\LinkInterfaceFactory'
@@ -204,7 +203,6 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      */
     private function getSampleFactory()
     {
-
         if (!$this->sampleFactory) {
             $this->sampleFactory = ObjectManager::getInstance()->get(
                 '\Magento\Downloadable\Api\Data\SampleInterfaceFactory'
