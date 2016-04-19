@@ -6,6 +6,9 @@
 namespace Magento\DownloadableSampleData\Model;
 
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+use Magento\Downloadable\Api\Data\SampleInterfaceFactory as SampleFactory;
+use Magento\Downloadable\Api\Data\LinkInterfaceFactory as LinkFactory;
+use \Magento\Framework\App\ObjectManager;
 
 /**
  * Setup downloadable product
@@ -26,6 +29,16 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @var array
      */
     protected $downloadableData = [];
+
+    /**
+     * @var SampleFactory
+     */
+    protected $sampleFactory;
+
+    /**
+     * @var LinkFactory
+     */
+    protected $linkFactory;
 
     /**
      * Product constructor.
@@ -96,9 +109,105 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     protected function prepareProduct($product, $data)
     {
         if (isset($this->downloadableData[$data['sku']])) {
+            $extension = $product->getExtensionAttributes();
+            $links = [];
+            foreach ($this->downloadableData[$data['sku']]['link'] as $linkData) {
+                $link = $this->getLinkFactory()->create(['data' => $linkData]);
+                if (isset($linkData['type'])) {
+                    $link->setLinkType($linkData['type']);
+                }
+                if (isset($linkData['file'])) {
+                    $link->setFile($linkData['file']);
+                }
+                if (isset($linkData['file_content'])) {
+                    $link->setLinkFileContent($linkData['file_content']);
+                }
+                $link->setId(null);
+                if (isset($linkData['sample']['type'])) {
+                    $link->setSampleType($linkData['sample']['type']);
+                }
+                if (isset($linkData['sample']['file'])) {
+                    $link->setSampleFileData($linkData['sample']['file']);
+                }
+                if (isset($linkData['sample']['url'])) {
+                    $link->setSampleUrl($linkData['sample']['url']);
+                }
+                if (isset($linkData['sample']['file_content'])) {
+                    $link->setSampleFileContent($linkData['file_content']);
+                }
+                $link->setStoreId($product->getStoreId());
+                $link->setWebsiteId($product->getStore()->getWebsiteId());
+                $link->setProductWebsiteIds($product->getWebsiteIds());
+                if (!$link->getSortOrder()) {
+                    $link->setSortOrder(1);
+                }
+                if (null === $link->getPrice()) {
+                    $link->setPrice(0);
+                }
+                if ($link->getIsUnlimited()) {
+                    $link->setNumberOfDownloads(0);
+                }
+                $links[] = $link;
+            }
+            $extension->setDownloadableProductLinks($links);
+
+            $samples = [];
+            foreach ($this->downloadableData[$data['sku']]['sample'] as $sampleData) {
+                $sample = $this->getSampleFactory()->create(['data' => $sampleData]);
+                $sample->setId(null);
+                $sample->setStoreId($product->getStoreId());
+                if (isset($sampleData['type'])) {
+                    $sample->setSampleType($sampleData['type']);
+                }
+                if (isset($sampleData['file'])) {
+                    $sample->setFile($sampleData['file']);
+                }
+                if (isset($sampleData['sample_url'])) {
+                    $sample->setSampleUrl($sampleData['sample_url']);
+                }
+                if (!$sample->getSortOrder()) {
+                    $sample->setSortOrder(1);
+                }
+                $samples[] = $sample;
+            }
+            $extension->setDownloadableProductSamples($samples);
+
             $product->setDownloadableData($this->downloadableData[$data['sku']]);
+            $product->setExtensionAttributes($extension);
         }
         $this->setVirtualStockData($product);
         return $this;
+    }
+
+    /**
+     * Get link interface factory
+     *
+     * @deprecated
+     * @return \Magento\Downloadable\Api\Data\LinkInterfaceFactory
+     */
+    private function getLinkFactory()
+    {
+        if (!$this->linkFactory) {
+            $this->linkFactory = ObjectManager::getInstance()->get(
+                '\Magento\Downloadable\Api\Data\LinkInterfaceFactory'
+            );
+        }
+        return $this->linkFactory;
+    }
+
+    /**
+     * Get sample interface factory
+     *
+     * @deprecated
+     * @return \Magento\Downloadable\Api\Data\SampleInterfaceFactory
+     */
+    private function getSampleFactory()
+    {
+        if (!$this->sampleFactory) {
+            $this->sampleFactory = ObjectManager::getInstance()->get(
+                '\Magento\Downloadable\Api\Data\SampleInterfaceFactory'
+            );
+        }
+        return $this->sampleFactory;
     }
 }
