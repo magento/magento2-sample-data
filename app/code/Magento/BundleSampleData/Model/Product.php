@@ -117,12 +117,11 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     {
 
         if (!($this->optionFactory)) {
-            return ObjectManager::getInstance()->get(
+            $this->optionFactory = ObjectManager::getInstance()->get(
                 '\Magento\Bundle\Api\Data\OptionInterfaceFactory'
             );
-        } else {
-            return $this->optionFactory;
         }
+        return $this->optionFactory;
     }
 
     /**
@@ -135,12 +134,11 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     {
 
         if (!($this->linkFactory)) {
-            return ObjectManager::getInstance()->get(
+            $this->linkFactory = ObjectManager::getInstance()->get(
                 '\Magento\Bundle\Api\Data\LinkInterfaceFactory'
             );
-        } else {
-            return $this->linkFactory;
         }
+        return $this->linkFactory;
     }
 
     /**
@@ -153,11 +151,10 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     {
 
         if (!($this->productRepository)) {
-            return ObjectManager::getInstance()->get(
+            $this->productRepository = ObjectManager::getInstance()->get(
                 '\Magento\Catalog\Api\ProductRepositoryInterface'
             );
-        } else {
-            return $this->productRepository;
         }
+        return $this->productRepository;
     }
 }
