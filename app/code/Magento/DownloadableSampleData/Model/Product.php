@@ -188,13 +188,12 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     private function getLinkFactory()
     {
 
-        if (!($this->linkFactory)) {
-            return ObjectManager::getInstance()->get(
+        if (!$this->linkFactory) {
+            $this->linkFactory = ObjectManager::getInstance()->get(
                 '\Magento\Downloadable\Api\Data\LinkInterfaceFactory'
             );
-        } else {
-            return $this->linkFactory;
         }
+        return $this->linkFactory;
     }
 
     /**
@@ -206,12 +205,11 @@ class Product extends \Magento\CatalogSampleData\Model\Product
     private function getSampleFactory()
     {
 
-        if (!($this->sampleFactory)) {
-            return ObjectManager::getInstance()->get(
+        if (!$this->sampleFactory) {
+            $this->sampleFactory = ObjectManager::getInstance()->get(
                 '\Magento\Downloadable\Api\Data\SampleInterfaceFactory'
             );
-        } else {
-            return $this->sampleFactory;
         }
+        return $this->sampleFactory;
     }
 }
