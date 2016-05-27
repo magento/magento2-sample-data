@@ -8,6 +8,8 @@ namespace Magento\CatalogSampleData\Model\Product;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Catalog\Model\ResourceModel\Product\Gallery as GalleryResource;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+use Magento\Framework\App\ObjectManager;
+use Magento\Catalog\Api\Data\ProductInterface;
 
 /**
  * Class Gallery
@@ -43,6 +45,11 @@ class Gallery
      * @var false|\Magento\Eav\Model\Entity\Attribute\AbstractAttribute
      */
     protected $eavConfig;
+
+    /**
+     * @var \Magento\Framework\EntityManager\MetadataPool
+     */
+    private $metadataPool;
 
     /**
      * @param SampleDataContext $sampleDataContext
@@ -122,15 +129,16 @@ class Gallery
             if (strpos($image, '_main') !== false) {
                 $baseImage = $image;
             }
+            $linkField = $this->getMetadataPool()->getMetadata(ProductInterface::class)->getLinkField();
             $id = $this->galleryResource->insertGallery([
                 'attribute_id' => $mediaAttribute->getAttributeId(),
-                'entity_id' => $product->getId(),
+                $linkField => $product->getId(),
                 'value' => $image,
             ]);
             $this->galleryResource->insertGalleryValueInStore([
                 'value_id' => $id,
                 'store_id' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
-                'entity_id' => $product->getId(),
+                $linkField => $product->getId(),
                 'label' => 'Image',
                 'position' => $i,
                 'disables' => 0,
@@ -158,6 +166,22 @@ class Gallery
                 ];
                 $adapter->insertOnDuplicate($table, $data, ['value']);
             }
+        }
+    }
+
+    /**
+     * @deprecated
+     *
+     * @return \Magento\Framework\EntityManager\MetadataPool|mixed
+     */
+    private function getMetadataPool()
+    {
+        if (!($this->metadataPool)) {
+            return ObjectManager::getInstance()->get(
+                '\Magento\Framework\EntityManager\MetadataPool'
+            );
+        } else {
+            return $this->metadataPool;
         }
     }
 }
