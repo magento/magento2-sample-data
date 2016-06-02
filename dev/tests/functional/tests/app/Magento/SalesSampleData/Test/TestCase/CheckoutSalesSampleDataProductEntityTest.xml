@@ -12,16 +12,19 @@
             <data name="id" xsi:type="string">1</data>
             <data name="salesRule" xsi:type="string">active_sales_rule_for_all_groups</data>
             <data name="prices" xsi:type="array">
-                <item name="grandTotal" xsi:type="string">50.00</item>
+                <item name="grandTotal" xsi:type="string">53.71</item>
             </data>
             <data name="status" xsi:type="string">Pending</data>
             <data name="orderButtonsAvailable" xsi:type="string">Back, Cancel, Hold, Ship, Invoice, Edit</data>
             <data name="payment/method" xsi:type="string">checkmo</data>
             <data name="checkoutMethod" xsi:type="string">login</data>
-            <data name="shippingAddress/dataset" xsi:type="string">US_address_1_without_email</data>
             <data name="shipping/shipping_service" xsi:type="string">Flat Rate</data>
             <data name="shipping/shipping_method" xsi:type="string">Fixed</data>
             <data name="configData" xsi:type="string">checkmo</data>
+            <data name="customer/data/firstname" xsi:type="string">Veronica</data>
+            <data name="customer/data/lastname" xsi:type="string">Costello</data>
+            <data name="customer/data/email" xsi:type="string">roni_cost@example.com</data>
+            <data name="customer/data/password" xsi:type="string">roni_cost3@example.com</data>
             <constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage"/>
             <constraint name="Magento\Sales\Test\Constraint\AssertOrderInOrdersGridOnFrontend"/>
         </variation>

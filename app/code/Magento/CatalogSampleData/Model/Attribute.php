@@ -149,9 +149,8 @@ class Attribute
                         $attributeSet = $this->processAttributeSet($setName);
                         $attributeGroupId = $attributeSet->getDefaultGroupId();
 
-                        $attribute = $this->attributeFactory->create();
+                        $attribute = $this->attributeFactory->create()->load($attributeId);
                         $attribute
-                            ->setId($attributeId)
                             ->setAttributeGroupId($attributeGroupId)
                             ->setAttributeSetId($attributeSet->getId())
                             ->setEntityTypeId($this->getEntityTypeId())

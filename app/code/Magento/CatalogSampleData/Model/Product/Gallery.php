@@ -118,6 +118,8 @@ class Gallery
      */
     protected function storeImage($product, $images)
     {
+        $linkField = $this->getMetadataPool()->getMetadata(ProductInterface::class)->getLinkField();
+        $productId = $product->getData($linkField);
         $baseImage = '';
         $i = 1;
         $mediaAttribute = $this->eavConfig->getAttribute('catalog_product', 'media_gallery');
@@ -129,21 +131,20 @@ class Gallery
             if (strpos($image, '_main') !== false) {
                 $baseImage = $image;
             }
-            $linkField = $this->getMetadataPool()->getMetadata(ProductInterface::class)->getLinkField();
+
             $id = $this->galleryResource->insertGallery([
                 'attribute_id' => $mediaAttribute->getAttributeId(),
-                $linkField => $product->getId(),
                 'value' => $image,
             ]);
             $this->galleryResource->insertGalleryValueInStore([
                 'value_id' => $id,
                 'store_id' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
-                $linkField => $product->getId(),
+                $linkField => $productId,
                 'label' => 'Image',
                 'position' => $i,
                 'disables' => 0,
             ]);
-            $this->galleryResource->bindValueToEntity($id, $product->getId());
+            $this->galleryResource->bindValueToEntity($id, $productId);
             $i++;
         }
 
@@ -160,7 +161,7 @@ class Gallery
                 $table = $imageAttribute->getBackend()->getTable();
                 /** @var \Magento\Framework\DB\Adapter\AdapterInterface $adapter*/
                 $data = [
-                    $attribute->getEntity()->getLinkField() => $product->getId(),
+                    $attribute->getEntity()->getLinkField() => $productId,
                     'attribute_id' => $attribute->getId(),
                     'value' => $baseImage,
                 ];

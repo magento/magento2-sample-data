@@ -130,13 +130,15 @@ class Processor
     {
         $this->setPhraseRenderer();
         if (!empty($orderData)) {
-            $orderCreateModel = $this->processQuote($orderData);
+            $this->currentSession = $this->sessionQuoteFactory->create();
             $customer = $this->customerRepository->get(
                 $orderData['order']['account']['email'],
                 $this->storeManager->getWebsite()->getId()
             );
+            $this->currentSession->setCustomerId($customer->getId());
+            $orderCreateModel = $this->processQuote($orderData);
             $orderCreateModel->getQuote()->setCustomer($customer);
-            $orderCreateModel->getSession()->setCustomerId($customer->getId());
+
             $order = $orderCreateModel->createOrder();
             $orderItem = $this->getOrderItemForTransaction($order);
             $this->invoiceOrder($orderItem);
@@ -163,7 +165,6 @@ class Processor
      */
     protected function processQuote($data = [])
     {
-        $this->currentSession = $this->sessionQuoteFactory->create();
         /** @var \Magento\Sales\Model\AdminOrder\Create $orderCreateModel */
         $orderCreateModel = $this->createOrderFactory->create(
             ['quoteSession' => $this->currentSession]
@@ -173,6 +174,7 @@ class Processor
         $orderCreateModel->setShippingAsBilling(1);
         $orderCreateModel->addProducts($data['add_products']);
         $orderCreateModel->getQuote()->getShippingAddress()->unsetData('cached_items_all');
+        $orderCreateModel->getQuote()->getShippingAddress()->setShippingMethod($data['order']['shipping_method']);
         $orderCreateModel->getQuote()->setTotalsCollectedFlag(false);
         $orderCreateModel->collectShippingRates();
         $orderCreateModel->getQuote()->getPayment()->addData($data['payment'])->setQuote($orderCreateModel->getQuote());
