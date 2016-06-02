@@ -132,7 +132,7 @@ class Attribute
                 $data['backend_model'] = $this->productHelper->getAttributeBackendModelByInputType(
                     $data['frontend_input']
                 );
-                $data += ['is_filterable' => 0, 'is_filterable_in_search' => 0, 'apply_to' => []];
+                $data += ['is_filterable' => 0, 'is_filterable_in_search' => 0];
                 $data['backend_type'] = $attribute->getBackendTypeByInput($data['frontend_input']);
 
                 $attribute->addData($data);
