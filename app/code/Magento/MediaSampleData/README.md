@@ -1,0 +1,1 @@
+Magento_MediaSampleData module consists of installation scripts and fixtures.
