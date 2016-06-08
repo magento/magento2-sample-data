@@ -9,7 +9,6 @@
         xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/mtf/Magento/Mtf/TestRunner/etc/testRunner.xsd">
     <rule scope="testsuite">
         <allow>
-            <module value="Magento_Install"/>
             <module value="Magento_CatalogSampleData"/>
             <module value="Magento_BundleSampleData"/>
             <module value="Magento_ConfigurableSampleData"/>
