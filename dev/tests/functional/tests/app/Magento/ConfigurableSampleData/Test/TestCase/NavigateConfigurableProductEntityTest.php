@@ -10,14 +10,13 @@ use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
 /**
  * @ZephyrId MAGETWO-33559
- * @group Sample_Data_(MX)
+ * @group Sample_Data
  */
 class NavigateConfigurableProductEntityTest extends Injectable
 {
     /* tags */
     const TEST_TYPE = 'acceptance_test';
     const MVP = 'yes';
-    const DOMAIN = 'MX';
     /* end tags */
 
     /**
