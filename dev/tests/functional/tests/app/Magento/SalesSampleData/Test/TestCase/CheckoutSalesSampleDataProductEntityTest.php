@@ -30,14 +30,13 @@ use Magento\Mtf\TestCase\Scenario;
  * 11. Place order.
  * 12. Perform assertions.
  *
- * @group Sample_Data_(MX)
+ * @group Sample_Data
  * @ZephyrId MAGETWO-33559
  */
 class CheckoutSalesSampleDataProductEntityTest extends Scenario
 {
     /* tags */
     const MVP = 'yes';
-    const DOMAIN = 'MX';
     const TEST_TYPE = 'acceptance_test';
     /* end tags */
 
