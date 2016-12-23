@@ -7,7 +7,7 @@ namespace Magento\SalesSampleData\Model\Order;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\App\ObjectManager;
-use Magento\Framework\Serialize\SerializerInterface;
+use Magento\Framework\Serialize\Serializer\Json;
 
 /**
  * Class Converter
@@ -35,7 +35,7 @@ class Converter
     protected $eavConfig;
 
     /**
-     * @var SerializerInterface
+     * @var Json
      */
     protected $serializer;
 
@@ -44,14 +44,14 @@ class Converter
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $productConverterFactory
      * @param \Magento\Eav\Model\Config $eavConfig
-     * @param SerializerInterface $serializer
+     * @param Json $serializer
      */
     public function __construct(
         CustomerRepositoryInterface $customerAccount,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $productConverterFactory,
         \Magento\Eav\Model\Config $eavConfig,
-        SerializerInterface $serializer = null
+        Json $serializer = null
     ) {
         $this->customerRepository = $customerAccount;
         $this->productFactory = $productFactory;
