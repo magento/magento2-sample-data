@@ -57,7 +57,7 @@ class Converter
         $this->productFactory = $productFactory;
         $this->productConverter = $productConverterFactory->create();
         $this->eavConfig = $eavConfig;
-        $this->serializer = $serializer ?: ObjectManager::getInstance()->get(SerializerInterface::class);
+        $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
     }
 
     /**
