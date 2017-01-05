@@ -6,6 +6,8 @@
 namespace Magento\SalesSampleData\Model\Order;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Serialize\Serializer\Json;
 
 /**
  * Class Converter
@@ -33,21 +35,29 @@ class Converter
     protected $eavConfig;
 
     /**
+     * @var Json
+     */
+    protected $serializer;
+
+    /**
      * @param CustomerRepositoryInterface $customerAccount
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $productConverterFactory
      * @param \Magento\Eav\Model\Config $eavConfig
+     * @param Json $serializer
      */
     public function __construct(
         CustomerRepositoryInterface $customerAccount,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $productConverterFactory,
-        \Magento\Eav\Model\Config $eavConfig
+        \Magento\Eav\Model\Config $eavConfig,
+        Json $serializer = null
     ) {
         $this->customerRepository = $customerAccount;
         $this->productFactory = $productFactory;
         $this->productConverter = $productConverterFactory->create();
         $this->eavConfig = $eavConfig;
+        $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
     }
 
     /**
@@ -164,14 +174,13 @@ class Converter
      */
     protected function convertProductData($productData)
     {
-        $productValues = unserialize($productData);
+        $productValues = $this->serializer->unserialize($productData);
         $productId = $this->getProductData($productValues['sku'])->getId();
         $productData = ['qty' => $productValues['qty']];
         if (isset($productValues['configurable_options'])) {
             $productData['super_attribute'] = $this->getProductAttributes($productValues['configurable_options']);
         }
         return [$productId => $productData];
-
     }
 
     /**
