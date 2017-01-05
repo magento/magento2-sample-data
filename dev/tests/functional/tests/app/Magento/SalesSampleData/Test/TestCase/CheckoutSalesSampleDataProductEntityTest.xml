@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /**
- * Copyright © 2015 Magento. All rights reserved.
+ * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\SalesSampleData\Test\TestCase\CheckoutSalesSampleDataProductEntityTest" summary="CheckoutSalesSampleDataProductEntityTest within Offline Payment Methods" ticketId="MAGETWO-27485">
         <variation name="CheckoutSalesSampleDataProductEntityTestVariation1" summary="US customer during checkout using coupon for all customer groups">
-            <data name="products" xsi:type="string">catalogProductSimple::sample_data_simple_product</data>
+            <data name="products/0" xsi:type="string">catalogProductSimple::sample_data_simple_product</data>
             <data name="id" xsi:type="string">1</data>
             <data name="salesRule" xsi:type="string">active_sales_rule_for_all_groups</data>
             <data name="prices" xsi:type="array">
-                <item name="grandTotal" xsi:type="string">50.00</item>
+                <item name="grandTotal" xsi:type="string">53.71</item>
             </data>
             <data name="status" xsi:type="string">Pending</data>
             <data name="orderButtonsAvailable" xsi:type="string">Back, Cancel, Hold, Ship, Invoice, Edit</data>
             <data name="payment/method" xsi:type="string">checkmo</data>
             <data name="checkoutMethod" xsi:type="string">login</data>
-            <data name="shippingAddress/dataset" xsi:type="string">US_address_1_without_email</data>
             <data name="shipping/shipping_service" xsi:type="string">Flat Rate</data>
             <data name="shipping/shipping_method" xsi:type="string">Fixed</data>
             <data name="configData" xsi:type="string">checkmo</data>
+            <data name="customer/data/firstname" xsi:type="string">Veronica</data>
+            <data name="customer/data/lastname" xsi:type="string">Costello</data>
+            <data name="customer/data/email" xsi:type="string">roni_cost@example.com</data>
+            <data name="customer/data/password" xsi:type="string">roni_cost3@example.com</data>
             <constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage"/>
             <constraint name="Magento\Sales\Test\Constraint\AssertOrderInOrdersGridOnFrontend"/>
         </variation>

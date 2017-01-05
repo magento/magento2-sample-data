@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /**
- * Copyright © 2015 Magento. All rights reserved.
+ * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
  -->
@@ -12,7 +12,7 @@
             <data name="customer/data/firstname" xsi:type="string">Veronica</data>
             <data name="customer/data/lastname" xsi:type="string">Costello</data>
             <data name="customer/data/email" xsi:type="string">roni_cost@example.com</data>
-            <data name="customer/data/password" xsi:type="string">roni_cost@example.com</data>
+            <data name="customer/data/password" xsi:type="string">roni_cost3@example.com</data>
         </variation>
     </testCase>
 </config>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2015 Magento. All rights reserved.
+ * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -11,14 +11,13 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Customer\Test\Page\CustomerAccountIndex;
 
 /**
- * @group Sample_Data_(MX)
+ * @group Sample_Data
  * @ZephyrId MAGETWO-33559
  */
 class LoginCustomerTest extends Injectable
 {
     /* tags */
     const MVP = 'yes';
-    const DOMAIN = 'CS';
     const TEST_TYPE = 'acceptance_test';
     /* end tags */
 
