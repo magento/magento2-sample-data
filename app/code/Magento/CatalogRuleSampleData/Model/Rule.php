@@ -8,7 +8,7 @@ namespace Magento\CatalogRuleSampleData\Model;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\CatalogRule\Model\RuleFactory as RuleFactory;
 use Magento\CatalogRule\Model\Rule\JobFactory as JobFactory;
-use Magento\Framework\Serialize\Json;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\App\ObjectManager;
 
 /**
