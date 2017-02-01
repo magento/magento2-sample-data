@@ -8,6 +8,8 @@ namespace Magento\CatalogRuleSampleData\Model;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\CatalogRule\Model\RuleFactory as RuleFactory;
 use Magento\CatalogRule\Model\Rule\JobFactory as JobFactory;
+use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Framework\App\ObjectManager;
 
 /**
  *  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -50,12 +52,18 @@ class Rule
     protected $jobFactory;
 
     /**
+     * @var Json
+     */
+    private $serializer;
+
+    /**
      * @param SampleDataContext $sampleDataContext
      * @param RuleFactory $ruleFactory
      * @param JobFactory $jobFactory
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
      * @param \Magento\Customer\Model\GroupFactory $groupFactory
      * @param \Magento\Store\Model\WebsiteFactory $websiteFactory
+     * @param Json $serializer Optional parameter to preserve backward compatibility
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -63,7 +71,8 @@ class Rule
         JobFactory $jobFactory,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory,
         \Magento\Customer\Model\GroupFactory $groupFactory,
-        \Magento\Store\Model\WebsiteFactory $websiteFactory
+        \Magento\Store\Model\WebsiteFactory $websiteFactory,
+        Json $serializer = null
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -72,6 +81,7 @@ class Rule
         $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->groupFactory = $groupFactory;
         $this->websiteFactory = $websiteFactory;
+        $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
     }
 
     /**
@@ -130,7 +140,11 @@ class Rule
                 }
             }
             if (!empty($replacement)) {
-                $data = preg_replace('/' . $matches[0][$matchedId] . '/', serialize($replacement), $data);
+                $data = preg_replace(
+                    '/' . $matches[0][$matchedId] . '/',
+                    $this->serializer->serialize($replacement),
+                    $data
+                );
             }
         }
         return $data;
