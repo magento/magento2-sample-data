@@ -60,7 +60,7 @@ class CmsBlock
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
      * @param \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
-     * @param Json $serializer
+     * @param Json|null $serializer
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
