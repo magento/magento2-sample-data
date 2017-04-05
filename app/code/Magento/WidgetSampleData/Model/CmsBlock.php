@@ -3,9 +3,9 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Magento\WidgetSampleData\Model;
 
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
@@ -49,12 +49,18 @@ class CmsBlock
     protected $csvReader;
 
     /**
+     * @var Json
+     */
+    private $serializer;
+
+    /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory
      * @param \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory
      * @param \Magento\Cms\Model\BlockFactory $cmsBlockFactory
      * @param \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
+     * @param Json|null $serializer
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -62,7 +68,8 @@ class CmsBlock
         \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory,
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
         \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory,
-        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
+        \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory,
+        Json $serializer = null
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -71,10 +78,13 @@ class CmsBlock
         $this->cmsBlockFactory = $cmsBlockFactory;
         $this->appCollectionFactory = $appCollectionFactory;
         $this->categoryFactory = $categoryFactory;
+        $this->serializer = $serializer ?: \Magento\Framework\App\ObjectManager::getInstance()->get(Json::class);
     }
 
     /**
-     * {@inheritdoc}
+     * Loop through list of fixture files and install widget data
+     *
+     * @param string[] $fixtures
      */
     public function install(array $fixtures)
     {
@@ -138,7 +148,10 @@ class CmsBlock
                 $pageGroup = [];
                 $group = $row['page_group'];
                 $pageGroup['page_group'] = $group;
-                $pageGroup[$group] = array_merge($pageGroupConfig[$group], unserialize($row['group_data']));
+                $pageGroup[$group] = array_merge(
+                    $pageGroupConfig[$group],
+                    $this->serializer->unserialize($row['group_data'])
+                );
                 if (!empty($pageGroup[$group]['entities'])) {
                     $pageGroup[$group]['entities'] = $this->getCategoryByUrlKey(
                         $pageGroup[$group]['entities']
