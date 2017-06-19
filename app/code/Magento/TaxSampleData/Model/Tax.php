@@ -117,6 +117,7 @@ class Tax
      *
      * @param array $fixtures
      * @return void
+     * @throws \Exception if something went wrong while saving the tax rate.
      */
     private function createTaxRates(array $fixtures)
     {
@@ -153,6 +154,7 @@ class Tax
      * Create tax rules.
      *
      * @return void
+     * @throws \Exception if something went wrong while saving the tax rule.
      */
     private function createTaxRules()
     {
