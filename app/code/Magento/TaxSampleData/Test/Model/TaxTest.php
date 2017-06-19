@@ -29,7 +29,7 @@ use Magento\TaxSampleData\Model\Tax;
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class InstallDataTest extends \PHPUnit_Framework_TestCase
+class TaxTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Tax
@@ -102,43 +102,35 @@ class InstallDataTest extends \PHPUnit_Framework_TestCase
 
         $this->taxRuleRepository = $this->getMockBuilder(TaxRuleRepositoryInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
+            ->setMethods(['save'])
             ->getMockForAbstractClass();
-
         $this->ruleFactory = $this->getMockBuilder(TaxRuleInterfaceFactory::class)
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMockForAbstractClass();
-
         $this->taxRateRepository = $this->getMockBuilder(TaxRateRepositoryInterface::class)
             ->disableOriginalConstructor()
             ->setMethods(['save'])
             ->getMockForAbstractClass();
-
         $this->taxRateRepository->expects(self::any())
             ->method('save')
             ->willReturnSelf();
-
         $this->rateFactory = $this->getMockBuilder(TaxRateInterfaceFactory::class)
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMockForAbstractClass();
-
         $this->taxRateFactory = $this->getMockBuilder(RateFactory::class)
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMockForAbstractClass();
-
         $this->criteriaBuilder = $this->getMockBuilder(SearchCriteriaBuilder::class)
             ->disableOriginalConstructor()
             ->setMethods(['addFilters', 'create'])
             ->getMock();
-
         $this->filterBuilder = $this->getMockBuilder(FilterBuilder::class)
             ->disableOriginalConstructor()
             ->setMethods(['setField', 'setConditionType', 'setValue', 'create'])
             ->getMock();
-
         $this->regionCollectionFactory = $this->getMockBuilder(CollectionFactory::class)
             ->disableOriginalConstructor()
             ->setMethods(['create'])

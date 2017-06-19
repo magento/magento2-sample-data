@@ -117,7 +117,7 @@ class Tax
      *
      * @param array $fixtures
      * @return void
-     * @throws \Exception
+     * @throws \Exception if something went wrong while saving the tax rate.
      */
     private function createTaxRates(array $fixtures)
     {
@@ -154,7 +154,7 @@ class Tax
      * Create tax rules.
      *
      * @return void
-     * @throws \Exception
+     * @throws \Exception if something went wrong while saving the tax rule.
      */
     private function createTaxRules()
     {
@@ -200,7 +200,7 @@ class Tax
      *
      * @param string $region
      * @param string $countryId
-     * @return mixed
+     * @return string|null
      */
     private function getRegionId($region, $countryId)
     {
