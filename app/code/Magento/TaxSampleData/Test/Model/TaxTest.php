@@ -265,7 +265,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
             ->willReturnMap(
                 [
                     ['Magento_TaxSampleData::fixtures/tax_rate.csv', $ratesFile],
-                    ['Magento_TaxSampleData::fixtures/tax_rule.csv', $ruleFile]
+                    ['Magento_TaxSampleData::fixtures/tax_rule.csv', $ruleFile],
                 ]
             );
 
@@ -277,8 +277,8 @@ class TaxTest extends \PHPUnit_Framework_TestCase
                         $ratesFile,
                         [
                             ['code', 'tax_country_id', 'tax_region_name', 'tax_postcode', 'rate'],
-                            ['US-MI-*-Rate 1', 'US', 'Michigan', '*', 8.25]
-                        ]
+                            ['US-MI-*-Rate 1', 'US', 'Michigan', '*', 8.25],
+                        ],
                     ],
                     [
                         $ruleFile,
@@ -290,11 +290,11 @@ class TaxTest extends \PHPUnit_Framework_TestCase
                                 'tax_product_class',
                                 'priority',
                                 'calculate_subtotal',
-                                'position'
+                                'position',
                             ],
-                            ['Rule1', 'US-MI-*-Rate 1', 3, 2, 0, '', 0]
-                        ]
-                    ]
+                            ['Rule1', 'US-MI-*-Rate 1', 3, 2, 0, '', 0],
+                        ],
+                    ],
                 ]
             );
 
@@ -302,7 +302,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
             \Magento\Framework\Setup\SampleData\Context::class,
             [
                 'fixtureManager' => $this->fixtureManager,
-                'csvReader' => $this->csvReader
+                'csvReader' => $this->csvReader,
             ]
         );
 
@@ -406,7 +406,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
                     'setProductTaxClassIds',
                     'setPriority',
                     'setCalculateSubtotal',
-                    'setPosition'
+                    'setPosition',
                 ]
             )
             ->getMockForAbstractClass();

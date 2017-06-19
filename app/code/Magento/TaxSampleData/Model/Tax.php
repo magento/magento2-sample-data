@@ -117,7 +117,6 @@ class Tax
      *
      * @param array $fixtures
      * @return void
-     * @throws \Exception if something went wrong while saving the tax rate.
      */
     private function createTaxRates(array $fixtures)
     {
@@ -154,44 +153,42 @@ class Tax
      * Create tax rules.
      *
      * @return void
-     * @throws \Exception if something went wrong while saving the tax rule.
      */
     private function createTaxRules()
     {
         $fixtureFile = 'Magento_TaxSampleData::fixtures/tax_rule.csv';
         $fixtureFileName = $this->fixtureManager->getFixture($fixtureFile);
-        if (!file_exists($fixtureFileName)) {
-            return;
-        }
+        if (file_exists($fixtureFileName)) {
 
-        $rows = $this->csvReader->getData($fixtureFileName);
-        $header = array_shift($rows);
+            $rows = $this->csvReader->getData($fixtureFileName);
+            $header = array_shift($rows);
 
-        foreach ($rows as $row) {
-            $data = [];
-            foreach ($row as $key => $value) {
-                $data[$header[$key]] = $value;
+            foreach ($rows as $row) {
+                $data = [];
+                foreach ($row as $key => $value) {
+                    $data[$header[$key]] = $value;
+                }
+                $filter = $this->filterBuilder->setField('code')
+                    ->setConditionType('=')
+                    ->setValue($data['code'])
+                    ->create();
+                $criteria = $this->criteriaBuilder->addFilters([$filter])->create();
+                $existingRates = $this->taxRuleRepository->getList($criteria)->getItems();
+                if (!empty($existingRates)) {
+                    continue;
+                }
+
+                $taxRate = $this->taxRateFactory->create()->loadByCode($data['tax_rate']);
+                $taxRule = $this->ruleFactory->create();
+                $taxRule->setCode($data['code'])
+                    ->setTaxRateIds([$taxRate->getId()])
+                    ->setCustomerTaxClassIds([$data['tax_customer_class']])
+                    ->setProductTaxClassIds([$data['tax_product_class']])
+                    ->setPriority($data['priority'])
+                    ->setCalculateSubtotal($data['calculate_subtotal'])
+                    ->setPosition($data['position']);
+                $this->taxRuleRepository->save($taxRule);
             }
-            $filter = $this->filterBuilder->setField('code')
-                ->setConditionType('=')
-                ->setValue($data['code'])
-                ->create();
-            $criteria = $this->criteriaBuilder->addFilters([$filter])->create();
-            $existingRates = $this->taxRuleRepository->getList($criteria)->getItems();
-            if (!empty($existingRates)) {
-                continue;
-            }
-
-            $taxRate = $this->taxRateFactory->create()->loadByCode($data['tax_rate']);
-            $taxRule = $this->ruleFactory->create();
-            $taxRule->setCode($data['code'])
-                ->setTaxRateIds([$taxRate->getId()])
-                ->setCustomerTaxClassIds([$data['tax_customer_class']])
-                ->setProductTaxClassIds([$data['tax_product_class']])
-                ->setPriority($data['priority'])
-                ->setCalculateSubtotal($data['calculate_subtotal'])
-                ->setPosition($data['position']);
-            $this->taxRuleRepository->save($taxRule);
         }
     }
 
