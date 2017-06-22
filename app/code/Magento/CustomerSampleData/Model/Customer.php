@@ -268,6 +268,6 @@ class Customer
     protected function getRegionId($address)
     {
         $country = $this->countryFactory->create()->loadByCode($address['country_id']);
-        return $country->getRegionCollection()->addFieldToFilter('name', $address['region'])->getFirstItem()->getId();
+        return $country->getRegionCollection()->addFieldToFilter('default_name', $address['region'])->getFirstItem()->getId();
     }
 }
