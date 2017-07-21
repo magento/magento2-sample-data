@@ -72,7 +72,7 @@ class Rule
     public function install(array $fixtures)
     {
         $attribute = $this->eavConfig->getAttribute('catalog_product', 'sku');
-        $attribute->setAttributeModel('Magento\Catalog\Model\ResourceModel\Eav\Attribute');
+        $this->eavConfig->modifyAttributeModel($attribute);
         if ($attribute->getIsUsedForPromoRules() == 0) {
             $attribute->setIsUsedForPromoRules('1')->save();
         }
