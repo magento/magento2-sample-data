@@ -60,11 +60,6 @@ class Customer
     protected $customerDataAddress;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
-
-    /**
      * @var \Magento\Framework\Api\DataObjectHelper
      */
     protected $dataObjectHelper;
@@ -86,7 +81,6 @@ class Customer
      * @param \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory
      * @param \Magento\Customer\Api\Data\RegionInterfaceFactory $regionFactory
      * @param \Magento\Customer\Api\AccountManagementInterface $accountManagement
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
      * @param \Magento\Framework\App\State $appState
      * @param Json|null $serializer
@@ -99,7 +93,6 @@ class Customer
         \Magento\Customer\Api\Data\AddressInterfaceFactory $addressFactory,
         \Magento\Customer\Api\Data\RegionInterfaceFactory $regionFactory,
         \Magento\Customer\Api\AccountManagementInterface $accountManagement,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Api\DataObjectHelper $dataObjectHelper,
         \Magento\Framework\App\State $appState,
         Json $serializer = null
@@ -111,7 +104,6 @@ class Customer
         $this->addressFactory = $addressFactory;
         $this->regionFactory = $regionFactory;
         $this->accountManagement = $accountManagement;
-        $this->storeManager = $storeManager;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->appState = $appState;
         $this->serializer = $serializer ?: \Magento\Framework\App\ObjectManager::getInstance()->get(Json::class);
@@ -189,10 +181,10 @@ class Customer
     {
         if (!$this->customerDataProfile) {
             $this->customerDataProfile = [
-                'website_id' => $this->storeManager->getWebsite()->getId(),
-                'group_id' => $this->storeManager->getGroup()->getId(),
+                'website_id' => 1,
+                'group_id' => 1,
                 'disable_auto_group_change' => '0',
-                'prefix',
+                'prefix' => '',
                 'firstname' => '',
                 'middlename' => '',
                 'lastname' => '',
