@@ -3,13 +3,13 @@
     "description": "N/A",
     "require": {
         "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
-        "magento/module-widget": "100.2.*",
+        "magento/module-widget": "101.0.*",
         "magento/module-sample-data": "100.2.*",
         "magento/module-theme": "100.2.*",
-        "magento/module-cms": "101.1.*"
+        "magento/module-cms": "102.0.*"
     },
     "type": "magento2-module",
-    "version": "100.2.0-dev",
+    "version": "100.2.0",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
