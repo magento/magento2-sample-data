@@ -3,7 +3,7 @@
     "description": "N/A",
     "require": {
         "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
-        "magento/module-cms": "101.1.*",
+        "magento/module-cms": "102.0.*",
         "magento/module-sample-data": "100.2.*",
         "magento/module-theme-sample-data": "100.2.*",
         "magento/sample-data-media": "100.2.*"
