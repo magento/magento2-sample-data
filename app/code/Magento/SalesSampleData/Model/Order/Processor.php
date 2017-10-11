@@ -177,6 +177,7 @@ class Processor
         $orderCreateModel->getQuote()->getShippingAddress()->setShippingMethod($data['order']['shipping_method']);
         $orderCreateModel->getQuote()->setTotalsCollectedFlag(false);
         $orderCreateModel->collectShippingRates();
+        $orderCreateModel->getQuote()->getShippingAddress()->setBaseShippingDiscountTaxCompensationAmount(null);
         $orderCreateModel->getQuote()->getPayment()->addData($data['payment'])->setQuote($orderCreateModel->getQuote());
         return $orderCreateModel;
     }
