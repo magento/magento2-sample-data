@@ -49,6 +49,7 @@ class Product extends \Magento\CatalogSampleData\Model\Product
      * @param \Magento\CatalogSampleData\Model\Product\Gallery $gallery
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Eav\Model\Config $eavConfig
+     * @param \Magento\Downloadable\Api\Data\File\ContentInterfaceFactory $contentInterfaceFactory
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -57,7 +58,8 @@ class Product extends \Magento\CatalogSampleData\Model\Product
         \Magento\DownloadableSampleData\Model\Product\Converter $converter,
         \Magento\CatalogSampleData\Model\Product\Gallery $gallery,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Eav\Model\Config $eavConfig
+        \Magento\Eav\Model\Config $eavConfig,
+        \Magento\Downloadable\Api\Data\File\ContentInterfaceFactory $contentInterfaceFactory
     ) {
         parent::__construct(
             $sampleDataContext,
