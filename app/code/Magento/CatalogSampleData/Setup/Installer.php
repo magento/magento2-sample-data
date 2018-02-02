@@ -64,6 +64,11 @@ class Installer implements Setup\SampleData\InstallerInterface
                 'Magento_CatalogSampleData::fixtures/SimpleProduct/images_gear_bags.csv',
                 'Magento_CatalogSampleData::fixtures/SimpleProduct/images_gear_fitness_equipment.csv',
                 'Magento_CatalogSampleData::fixtures/SimpleProduct/images_gear_watches.csv',
+            ],
+            [
+                'Magento_CatalogSampleData::fixtures/Links/crosssell.csv',
+                'Magento_CatalogSampleData::fixtures/Links/related.csv',
+                'Magento_CatalogSampleData::fixtures/Links/upsell.csv',
             ]
         );
     }
