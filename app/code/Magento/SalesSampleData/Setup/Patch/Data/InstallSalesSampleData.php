@@ -6,15 +6,20 @@
 
 namespace Magento\SalesSampleData\Setup\Patch\Data;
 
+use Magento\Framework\Indexer\AbstractProcessor;
 use Magento\Framework\Setup;
 use Magento\Setup\Model\Patch\DataPatchInterface;
+use Magento\Setup\Model\Patch\NonTransactionableInterface;
 use Magento\Setup\Model\Patch\PatchVersionInterface;
 
 /**
  * Class InstallSalesSampleData
  * @package Magento\SalesSampleData\Setup\Patch\Data
  */
-class InstallSalesSampleData implements DataPatchInterface, PatchVersionInterface
+class InstallSalesSampleData implements
+    DataPatchInterface,
+    PatchVersionInterface,
+    NonTransactionableInterface
 {
     /**
      * @var Setup\SampleData\Executor
@@ -27,16 +32,24 @@ class InstallSalesSampleData implements DataPatchInterface, PatchVersionInterfac
     protected $installer;
 
     /**
+     * @var AbstractProcessor
+     */
+    private $indexerProcessor;
+
+    /**
      * InstallSalesSampleData constructor.
      * @param Setup\SampleData\Executor $executor
      * @param \Magento\SalesSampleData\Setup\Installer $installer
+     * @param AbstractProcessor $indexerProcessor
      */
     public function __construct(
         Setup\SampleData\Executor $executor,
-        \Magento\SalesSampleData\Setup\Installer $installer
+        \Magento\SalesSampleData\Setup\Installer $installer,
+        \Magento\CatalogInventory\Model\Indexer\Stock\Processor $indexerProcessor
     ) {
         $this->executor = $executor;
         $this->installer = $installer;
+        $this->indexerProcessor = $indexerProcessor;
     }
 
     /**
@@ -44,6 +57,7 @@ class InstallSalesSampleData implements DataPatchInterface, PatchVersionInterfac
      */
     public function apply()
     {
+        $this->indexerProcessor->reindexAll();
         $this->executor->exec($this->installer);
     }
 
