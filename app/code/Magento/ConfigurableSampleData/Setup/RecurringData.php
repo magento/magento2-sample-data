@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\CatalogRuleSampleData\Setup;
+namespace Magento\ConfigurableSampleData\Setup;
 
 use Magento\Framework\App\State;
 use Magento\Framework\Indexer\IndexerInterfaceFactory;
