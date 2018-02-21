@@ -43,7 +43,7 @@
             <data name="product/data/url_key" xsi:type="string">karmen-yoga-pant</data>
             <data name="product/data/name" xsi:type="string">Karmen Yoga Pant</data>
             <data name="product/data/sku" xsi:type="string">WP01</data>
-            <data name="product/data/price/value" xsi:type="string">39</data>
+            <data name="product/data/price/value" xsi:type="string">31.20</data>
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductPage" />
             <constraint name="Magento\Catalog\Test\Constraint\AssertImagesAreVisibleOnProductPage" />
         </variation>
@@ -91,7 +91,7 @@
             <data name="product/data/url_key" xsi:type="string">caesar-warm-up-pant</data>
             <data name="product/data/name" xsi:type="string">Caesar Warm-Up Pant</data>
             <data name="product/data/sku" xsi:type="string">MP01</data>
-            <data name="product/data/price/value" xsi:type="string">35</data>
+            <data name="product/data/price/value" xsi:type="string">28</data>
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductPage" />
             <constraint name="Magento\Catalog\Test\Constraint\AssertImagesAreVisibleOnProductPage" />
         </variation>
@@ -139,7 +139,7 @@
             <data name="product/data/url_key" xsi:type="string">caesar-warm-up-pant</data>
             <data name="product/data/name" xsi:type="string">Caesar Warm-Up Pant</data>
             <data name="product/data/sku" xsi:type="string">MP01</data>
-            <data name="product/data/price/value" xsi:type="string">35</data>
+            <data name="product/data/price/value" xsi:type="string">28</data>
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductPage" />
             <constraint name="Magento\Catalog\Test\Constraint\AssertImagesAreVisibleOnProductPage" />
         </variation>
