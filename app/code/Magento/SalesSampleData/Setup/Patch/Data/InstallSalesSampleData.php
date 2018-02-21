@@ -8,9 +8,9 @@ namespace Magento\SalesSampleData\Setup\Patch\Data;
 
 use Magento\Framework\Indexer\AbstractProcessor;
 use Magento\Framework\Setup;
-use Magento\Setup\Model\Patch\DataPatchInterface;
-use Magento\Setup\Model\Patch\NonTransactionableInterface;
-use Magento\Setup\Model\Patch\PatchVersionInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Framework\Setup\Patch\NonTransactionableInterface;
+use Magento\Framework\Setup\Patch\PatchVersionInterface;
 
 /**
  * Class InstallSalesSampleData
