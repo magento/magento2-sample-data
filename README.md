@@ -56,7 +56,7 @@ To remove the sample data modules from the code base, run one of the following c
 
 * If sample data was deployed from the composer repository, run: `# bin/magento sampledata:remove`
 * If sample data was deployed from the GitHub repository and linked to your Magento instance, run:
-`# php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php – --command=unlink --ce-source="<path_to_your_magento_instance>"`
+`# php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php -- --command=unlink --ce-source="<path_to_your_magento_instance>"`
 
 To delete all the products and other entities provided by the sample data modules, delete the database and reinstall Magento with a clean database.
 
