@@ -36,7 +36,7 @@ class AssertCustomerNavigation extends AbstractConstraint
             $actualPageTitles[] = $titleBlock->getTitle();
         }
 
-        \PHPUnit\Framework\Assert::assertEquals(
+        \PHPUnit_Framework_Assert::assertEquals(
             $expectedPageTitles,
             $actualPageTitles,
             "Page titles are different."
