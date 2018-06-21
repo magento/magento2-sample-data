@@ -8,7 +8,6 @@ namespace Magento\CustomerSampleData\Test\TestCase;
 
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Customer\Test\Page\CustomerAccountIndex;
 
 /**
  * @group Sample_Data_(MX)
@@ -23,21 +22,17 @@ class LoginCustomerTest extends Injectable
     /* end tags */
 
     /**
-     * Create Customer account on Storefront.
+     * Login to customer account on Storefront.
      *
      * @param Customer $customer
-     * @param CustomerAccountIndex $customerAccountIndex
+     * @return void
      */
-    public function test(Customer $customer, CustomerAccountIndex $customerAccountIndex)
+    public function test(Customer $customer)
     {
         // Steps
         $this->objectManager->create(
             'Magento\Customer\Test\TestStep\LoginCustomerOnFrontendStep',
             ['customer' => $customer]
         )->run();
-        $customerAccountIndex->getAccountMenuBlock()->openMenuItem('Account Information');
-        $customerAccountIndex->getAccountMenuBlock()->openMenuItem('Address Book');
-        $customerAccountIndex->getAccountMenuBlock()->openMenuItem('My Orders');
-        $customerAccountIndex->getAccountMenuBlock()->openMenuItem('My Wish List');
     }
 }
