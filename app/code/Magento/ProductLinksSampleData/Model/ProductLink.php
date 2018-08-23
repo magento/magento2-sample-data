@@ -5,6 +5,11 @@
  */
 namespace Magento\ProductLinksSampleData\Model;
 
+use Magento\Catalog\Api\Data\ProductLinkInterfaceFactory;
+use Magento\Catalog\Api\ProductLinkRepositoryInterface;
+use Magento\Catalog\Model\ProductFactory;
+use Magento\Catalog\Model\ProductRepository;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
@@ -23,29 +28,45 @@ class ProductLink
     protected $csvReader;
 
     /**
-     * @var \Magento\Catalog\Model\ProductFactory
+     * @var ProductFactory
      */
     protected $productFactory;
 
     /**
-     * @var \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks
+     * @var ProductLinkInterfaceFactory
      */
-    protected $linksInitializer;
+    private $productLinkFactory;
+
+    /**
+     * @var ProductRepository
+     */
+    private $productRepository;
+
+    /**
+     * @var ProductLinkRepositoryInterface
+     */
+    private $productLinkRepository;
 
     /**
      * @param SampleDataContext $sampleDataContext
-     * @param \Magento\Catalog\Model\ProductFactory $productFactory
-     * @param \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks $linksInitializer
+     * @param ProductFactory $productFactory
+     * @param ProductRepository $productRepository
+     * @param ProductLinkRepositoryInterface $productLinkRepository
+     * @param ProductLinkInterfaceFactory $productLinkFactory
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
-        \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Magento\Catalog\Model\Product\Initialization\Helper\ProductLinks $linksInitializer
+        ProductFactory $productFactory,
+        ProductRepository $productRepository,
+        ProductLinkRepositoryInterface $productLinkRepository,
+        ProductLinkInterfaceFactory $productLinkFactory
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
         $this->productFactory = $productFactory;
-        $this->linksInitializer = $linksInitializer;
+        $this->productRepository = $productRepository;
+        $this->productLinkRepository = $productLinkRepository;
+        $this->productLinkFactory = $productLinkFactory;
     }
 
     /**
@@ -74,23 +95,25 @@ class ProductLink
                     foreach ($row as $key => $value) {
                         $data[$header[$key]] = $value;
                     }
-                    $row = $data;
-                    /** @var \Magento\Catalog\Model\Product $product */
-                    $product = $this->productFactory->create();
-                    $productId = $product->getIdBySku($row['sku']);
-                    if (!$productId) {
+
+                    try {
+                        $product = $this->productRepository->get($data['sku']);
+                    } catch (NoSuchEntityException $e) {
                         continue;
                     }
-                    $product->setId($productId);
-                    $links = [$linkType => []];
-                    foreach (explode("\n", $row['linked_sku']) as $linkedProductSku) {
-                        $linkedProductId = $product->getIdBySku($linkedProductSku);
-                        if ($linkedProductId) {
-                            $links[$linkType][$linkedProductId] = [];
+
+                    $linkedProductSkus = explode("\n", $data['linked_sku']);
+                    foreach ($linkedProductSkus as $linkedProductSku) {
+                        $productLink = $this->productLinkFactory->create();
+                        $productLink->setSku($product->getSku())
+                            ->setLinkedProductSku($linkedProductSku)
+                            ->setLinkType($linkType);
+                        try {
+                            $this->productLinkRepository->save($productLink);
+                        } catch (NoSuchEntityException $e) {
+                            continue;
                         }
                     }
-                    $this->linksInitializer->initializeLinks($product, $links);
-                    $product->getLinkInstance()->saveProductRelations($product);
                 }
             }
         }
