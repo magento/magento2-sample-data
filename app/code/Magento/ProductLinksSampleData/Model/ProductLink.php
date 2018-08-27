@@ -8,8 +8,6 @@ namespace Magento\ProductLinksSampleData\Model;
 use Magento\Catalog\Api\Data\ProductLinkInterfaceFactory;
 use Magento\Catalog\Api\ProductLinkRepositoryInterface;
 use Magento\Catalog\Model\ProductFactory;
-use Magento\Catalog\Model\ProductRepository;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 
 /**
@@ -38,11 +36,6 @@ class ProductLink
     private $productLinkFactory;
 
     /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-
-    /**
      * @var ProductLinkRepositoryInterface
      */
     private $productLinkRepository;
@@ -50,23 +43,20 @@ class ProductLink
     /**
      * @param SampleDataContext $sampleDataContext
      * @param ProductFactory $productFactory
-     * @param ProductRepository $productRepository
-     * @param ProductLinkRepositoryInterface $productLinkRepository
      * @param ProductLinkInterfaceFactory $productLinkFactory
+     * @param ProductLinkRepositoryInterface $productLinkRepository
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
         ProductFactory $productFactory,
-        ProductRepository $productRepository,
-        ProductLinkRepositoryInterface $productLinkRepository,
-        ProductLinkInterfaceFactory $productLinkFactory
+        ProductLinkInterfaceFactory $productLinkFactory,
+        ProductLinkRepositoryInterface $productLinkRepository
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
         $this->productFactory = $productFactory;
-        $this->productRepository = $productRepository;
-        $this->productLinkRepository = $productLinkRepository;
         $this->productLinkFactory = $productLinkFactory;
+        $this->productLinkRepository = $productLinkRepository;
     }
 
     /**
@@ -96,24 +86,30 @@ class ProductLink
                         $data[$header[$key]] = $value;
                     }
 
-                    try {
-                        $product = $this->productRepository->get($data['sku']);
-                    } catch (NoSuchEntityException $e) {
+                    $product = $this->productFactory->create();
+                    $productId = $product->getIdBySku($data['sku']);
+                    if (!$productId) {
                         continue;
                     }
-
+                    $product->setId($productId);
+                    $product->setSku($data['sku']);
+                    $links = $this->productLinkRepository->getList($product);
                     $linkedProductSkus = explode("\n", $data['linked_sku']);
                     foreach ($linkedProductSkus as $linkedProductSku) {
-                        $productLink = $this->productLinkFactory->create();
-                        $productLink->setSku($product->getSku())
-                            ->setLinkedProductSku($linkedProductSku)
-                            ->setLinkType($linkType);
-                        try {
-                            $this->productLinkRepository->save($productLink);
-                        } catch (NoSuchEntityException $e) {
+                        $linkedProduct = $this->productFactory->create();
+                        $linkedProductId = $linkedProduct->getIdBySku($linkedProductSku);
+                        if (!$linkedProductId) {
                             continue;
                         }
+
+                        $productLink = $this->productLinkFactory->create();
+                        $productLink->setSku($data['sku'])
+                            ->setLinkedProductSku($linkedProductSku)
+                            ->setLinkType($linkType);
+                        $links[] = $productLink;
                     }
+                    $product->setProductLinks($links);
+                    $product->getLinkInstance()->saveProductRelations($product);
                 }
             }
         }
