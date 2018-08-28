@@ -94,10 +94,14 @@ class ProductLink
                     $product->setId($productId);
                     $product->setSku($data['sku']);
                     $links = $this->productLinkRepository->getList($product);
-                    $linkedProductSkus = explode("\n", $data['linked_sku']);
-                    foreach ($linkedProductSkus as $linkedProductSku) {
+                    $linkedSkusByType = array_fill_keys(array_keys($linkTypes), []);
+                    foreach ($links as $link) {
+                        $linkedSkusByType[$link->getLinkType()][] = $link->getLinkedProductSku();
+                    }
+
+                    foreach (explode("\n", $data['linked_sku']) as $linkedProductSku) {
                         $linkedProductId = $product->getIdBySku($linkedProductSku);
-                        if (!$linkedProductId) {
+                        if (!$linkedProductId || in_array($linkedProductSku, $linkedSkusByType[$linkType])) {
                             continue;
                         }
 
