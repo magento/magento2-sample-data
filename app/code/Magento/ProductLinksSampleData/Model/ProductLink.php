@@ -96,8 +96,7 @@ class ProductLink
                     $links = $this->productLinkRepository->getList($product);
                     $linkedProductSkus = explode("\n", $data['linked_sku']);
                     foreach ($linkedProductSkus as $linkedProductSku) {
-                        $linkedProduct = $this->productFactory->create();
-                        $linkedProductId = $linkedProduct->getIdBySku($linkedProductSku);
+                        $linkedProductId = $product->getIdBySku($linkedProductSku);
                         if (!$linkedProductId) {
                             continue;
                         }
