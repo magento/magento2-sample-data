@@ -31,7 +31,7 @@ class Installer implements Setup\SampleData\InstallerInterface
         $this->productLink->install(
             ['Magento_ProductLinksSampleData::fixtures/related.csv'],
             ['Magento_ProductLinksSampleData::fixtures/upsell.csv'],
-            ['Magento_ProductLinksSampleData::fixtures/crossell.csv']
+            ['Magento_ProductLinksSampleData::fixtures/crosssell.csv']
         );
     }
 }
