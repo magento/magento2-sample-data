@@ -14,6 +14,7 @@
             <module name="Magento_Catalog"/>
             <module name="Magento_CatalogSearch"/>
             <module name="Magento_SampleData"/>
+            <module name="Magento_InventoryCatalog"/>
         </sequence>
     </module>
 </config>
