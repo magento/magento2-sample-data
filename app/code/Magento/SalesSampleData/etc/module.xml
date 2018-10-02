@@ -6,7 +6,7 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Magento_SalesSampleData" setup_version="2.0.0">
+    <module name="Magento_SalesSampleData" >
         <sequence>
             <module name="Magento_Sales"/>
             <module name="Magento_SampleData"/>
@@ -14,7 +14,7 @@
             <module name="Magento_CatalogSampleData"/>
             <module name="Magento_BundleSampleData"/>
             <module name="Magento_ConfigurableSampleData"/>
-            <module name="Magento_GroupedSampleData"/>
+            <module name="Magento_GroupedProductSampleData"/>
             <module name="Magento_GiftCardSampleData"/>
             <module name="Magento_TaxSampleData"/>
         </sequence>
