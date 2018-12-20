@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="VeronicaCostello">
+        <data key="firstname">Veronica</data>
+        <data key="lastname">Costello</data>
+        <data key="email">roni_cost@example.com</data>
+        <data key="password">roni_cost3@example.com</data>
+        <data key="customerNavigationLink_0_navigationName">Account Information</data>
+        <data key="customerNavigationLink_0_pageTitle">Account Information</data>
+        <data key="customerNavigationLink_1_navigationName">Address Book</data>
+        <data key="customerNavigationLink_1_pageTitle">Address Book</data>
+        <data key="customerNavigationLink_2_navigationName">My Orders</data>
+        <data key="customerNavigationLink_2_pageTitle">My Orders</data>
+        <data key="customerNavigationLink_3_navigationName">My Wish List</data>
+        <data key="customerNavigationLink_3_pageTitle">My Wish List</data>
+    </entity>
+</entities>

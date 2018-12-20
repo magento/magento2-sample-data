@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="LumaYogaForLife">
+        <data key="url_key">luma-yoga-for-life</data>
+        <data key="name">Luma Yoga For Life</data>
+        <data key="sku">240-LV09</data>
+        <data key="price">$0.00</data>
+        <data key="image">lt06.jpg</data>
+    </entity>        
+    <entity name="SoloPowerCircuit">
+        <data key="url_key">solo-power-circuit</data>
+        <data key="name">Solo Power Circuit</data>
+        <data key="sku">240-LV07</data>
+        <data key="price">$14.00</data>
+        <data key="image">lt04.jpg</data>
+    </entity>
+    <entity name="YogaAdventure">
+        <data key="url_key">yoga-adventure</data>
+        <data key="name">Yoga Adventure</data>
+        <data key="sku">240-LV06</data>
+        <data key="price">$22.00</data>
+        <data key="image">lt03.jpg</data>
+    </entity>
+    <entity name="BeginnersYoga">
+        <data key="url_key">beginner-s-yoga</data>
+        <data key="name">Beginner's Yoga</data>
+        <data key="sku">240-LV04</data>
+        <data key="price">$6.00</data>
+        <data key="image">lt01.jpg</data>
+    </entity>
+    <entity name="LifeLongFitnessIV">
+        <data key="url_key">lifelong-fitness-iv</data>
+        <data key="name">LifeLong Fitness IV</data>
+        <data key="sku">240-LV05</data>
+        <data key="price">$14.00</data>
+        <data key="image">lt02.jpg</data>
+    </entity>
+    <entity name="AdvancedPilatesYogaStrength">
+        <data key="url_key">advanced-pilates-yoga-strength</data>
+        <data key="name">Advanced Pilates &amp; Yoga (Strength)</data>
+        <data key="sku">240-LV08</data>
+        <data key="price">$18.00</data>
+        <data key="image">lt05.jpg</data>
+    </entity>
+</entities>
