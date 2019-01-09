@@ -8,6 +8,7 @@ namespace Magento\OfflineShippingSampleData\Model;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
 use Magento\Framework\App\ObjectManager;
 use Magento\Config\App\Config\Type\System as SystemConfig;
+use Magento\OfflineShipping\Model\Carrier\Tablerate as CarrierTablerate;
 
 /**
  * Class Tablerate
@@ -128,7 +129,7 @@ class Tablerate
                             'dest_country_id' => $data['country'],
                             'dest_region_id' => $regionId,
                             'dest_zip' => $data['zip'],
-                            'condition_name' => 'package_value',
+                            'condition_name' => CarrierTablerate::CONDITION_CODE_PACKAGE_VALUE_WITH_DISCOUNT,
                             'condition_value' => $data['order_subtotal'],
                             'price' => $data['price'],
                             'cost' => 0,
@@ -146,7 +147,9 @@ class Tablerate
         }
 
         $this->configWriter->save('carriers/tablerate/active', 1);
-        $this->configWriter->save('carriers/tablerate/condition_name', 'package_value');
+        $this->configWriter->save(
+            'carriers/tablerate/condition_name', CarrierTablerate::CONDITION_CODE_PACKAGE_VALUE_WITH_DISCOUNT
+        );
         $this->cacheTypeList->cleanType('config');
         $this->systemConfig->clean();
     }
