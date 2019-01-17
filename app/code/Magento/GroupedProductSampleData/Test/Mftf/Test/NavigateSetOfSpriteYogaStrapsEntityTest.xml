@@ -15,7 +15,7 @@
             <title value="Should be able to see Set of Sprite Yoga Straps Product"/>
             <description value="Should be able to see Set of Sprite Yoga Straps Product created by GroupedSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11960"/>
             <group value="sampleData"/>
         </annotations>
 

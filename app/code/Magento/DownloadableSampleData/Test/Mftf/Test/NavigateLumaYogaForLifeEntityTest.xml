@@ -15,7 +15,7 @@
             <title value="Should be able to see Luma Yoga For Life Product"/>
             <description value="Should be able to see Luma Yoga For Life Product created by DownloadableSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11957"/>
             <group value="sampleData"/>
         </annotations>
 

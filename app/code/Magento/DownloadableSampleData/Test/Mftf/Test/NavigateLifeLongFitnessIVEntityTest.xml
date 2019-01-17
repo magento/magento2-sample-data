@@ -15,7 +15,7 @@
             <title value="Should be able to see Life Long Fitness IV Product"/>
             <description value="Should be able to see Life Long Fitness IV Product created by DownloadableSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11956"/>
             <group value="sampleData"/>
         </annotations>
 

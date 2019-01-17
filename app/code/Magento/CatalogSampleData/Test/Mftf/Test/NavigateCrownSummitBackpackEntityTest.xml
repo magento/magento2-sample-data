@@ -15,7 +15,7 @@
             <title value="Should be able to see Crown Summit Backpack Product"/>
             <description value="Should be able to see Crown Summit Backpack Product created by CatalogSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11070"/>
             <group value="sampleData"/>
         </annotations>
 

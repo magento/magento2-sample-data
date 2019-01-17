@@ -15,7 +15,7 @@
             <title value="Should be able to login as a Veronica Costello customer." />
             <description value="Should be able to login as a Veronica Costello customer and navigate through customer menu." />
             <severity value="MAJOR" />
-            <testCaseId value="MAGETWO-33559" />
+            <testCaseId value="MC-11834" />
             <group value="sampleData" />
         </annotations>
 

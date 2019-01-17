@@ -15,7 +15,7 @@
             <title value="Should be able to see Fiona Fitness Short Product"/>
             <description value="Should be able to see Fiona Fitness Short Product created by CatalogSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11827"/>
             <group value="sampleData"/>
         </annotations>
 

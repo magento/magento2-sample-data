@@ -15,7 +15,7 @@
             <title value="Should be able to see Eos V-Neck Hoodie Product"/>
             <description value="Should be able to see Eos V-Neck Hoodie Product created by CatalogSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11826"/>
             <group value="sampleData"/>
         </annotations>
 

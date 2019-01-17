@@ -15,7 +15,7 @@
             <title value="Should be able to see Zoltan Gym Tee Product"/>
             <description value="Should be able to see Zoltan Gym Tee Product created by CatalogSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11833"/>
             <group value="sampleData"/>
         </annotations>
 

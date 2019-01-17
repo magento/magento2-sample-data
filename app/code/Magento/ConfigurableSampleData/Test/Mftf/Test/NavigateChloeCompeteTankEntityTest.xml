@@ -15,7 +15,7 @@
             <title value="Should be able to see Chloe Compete Tank Product"/>
             <description value="Should be able to see Chloe Compete Tank Product created by CatalogSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11824"/>
             <group value="sampleData"/>
         </annotations>
 

@@ -15,7 +15,7 @@
             <title value="Should be able to see Sprite Foam Roller Product"/>
             <description value="Should be able to see Sprite Foam Roller Product created by CatalogSampleData module"/>
             <severity value="MAJOR"/>
-            <testCaseId value="MAGETWO-33559"/>
+            <testCaseId value="MC-11794"/>
             <group value="sampleData"/>
         </annotations>
 
