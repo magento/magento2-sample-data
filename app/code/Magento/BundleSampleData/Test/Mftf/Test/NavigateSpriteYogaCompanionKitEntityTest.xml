@@ -16,7 +16,7 @@
             <description value="Should be able to see Sprite Yoga Companion Kit Product created by BundleSampleData module"/>
             <severity value="MAJOR"/>
             <testCaseId value="MC-11068"/>
-            <group value="SampleData"/>
+            <group value="sampleData"/>
         </annotations>
 
         <actionGroup ref="StorefrontOpenProductPageActionGroup" stepKey="openProductPage">
