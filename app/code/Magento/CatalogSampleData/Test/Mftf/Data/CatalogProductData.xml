@@ -28,7 +28,7 @@
         <data key="name">Endurance Watch</data>
         <data key="sku">24-MG01</data>
         <data key="price">$49.00</data>
-        <data key="url_key">sprite-foam-roller</data>
+        <data key="url_key">endurance-watch</data>
         <data key="image">mg01-bk-0.jpg</data>
     </entity>
 
@@ -50,7 +50,7 @@
 
     <entity name="ClamberWatch" type="product">
         <data key="name">Clamber Watch</data>
-        <data key="sku">24-MB03</data>
+        <data key="sku">24-WG03</data>
         <data key="price">$54.00</data>
         <data key="url_key">clamber-watch</data>
         <data key="image">wg03-gr-0.jpg</data>
@@ -58,7 +58,7 @@
 
     <entity name="CrownSummitBackpack" type="product">
         <data key="name">Crown Summit Backpack</data>
-        <data key="sku">24-WG03</data>
+        <data key="sku">24-MB03</data>
         <data key="price">$38.00</data>
         <data key="url_key">crown-summit-backpack</data>
         <data key="image">mb03-black-0.jpg</data>
