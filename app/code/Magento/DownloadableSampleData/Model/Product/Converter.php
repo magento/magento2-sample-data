@@ -44,10 +44,10 @@ class Converter extends \Magento\CatalogSampleData\Model\Product\Converter
             $attrOptionCollectionFactory,
             $productCollectionFactory
         );
-        $this->fileContentFactory = $fileContentFactory ?: ObjectManager::getInstance()->create(
+        $this->fileContentFactory = $fileContentFactory ?: ObjectManager::getInstance()->get(
             \Magento\Downloadable\Api\Data\File\ContentInterfaceFactory::class
         );
-        $this->filesystem = $filesystem ?: ObjectManager::getInstance()->create(
+        $this->filesystem = $filesystem ?: ObjectManager::getInstance()->get(
             Filesystem::class
         );
     }
