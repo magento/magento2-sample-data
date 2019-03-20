@@ -18,6 +18,7 @@ class LoginCustomerTest extends Injectable
     /* tags */
     const MVP = 'yes';
     const TEST_TYPE = 'acceptance_test';
+    const MFTF_MIGRATED = 'yes';
     /* end tags */
 
     /**

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="LoginVeronicaCostelloCustomerTest">
+        <annotations>
+            <features value="CustomerSampleData" />
+            <stories value="Sample data" />
+            <title value="Should be able to login as a Veronica Costello customer." />
+            <description value="Should be able to login as a Veronica Costello customer and navigate through customer menu." />
+            <severity value="MAJOR" />
+            <testCaseId value="MC-11834" />
+            <group value="sampleData" />
+        </annotations>
+
+        <after>
+            <actionGroup ref="StorefrontSignOutActionGroup" stepKey="logout" />
+        </after>
+
+        <actionGroup ref="LoginToStorefrontActionGroup" stepKey="loginAsCustomer">
+            <argument name="Customer" value="VeronicaCostello" />
+        </actionGroup>
+        <actionGroup ref="OpenMyAccountPageActionGroup" stepKey="openCustomersMyAccountPage" />
+
+        <actionGroup ref="NavigateThroughCustomerTabsActionGroup" stepKey="openAccountInformationTab">
+            <argument name="navigationItemName" value="{{VeronicaCostello.customerNavigationLink_0_navigationName}}" />
+        </actionGroup>
+        <actionGroup ref="AssertCustomerAccountPageTitleActionGroup" stepKey="assertAccountInformationPageTitle">
+            <argument name="pageTitle" value="{{VeronicaCostello.customerNavigationLink_0_pageTitle}}" />
+        </actionGroup>
+
+        <actionGroup ref="NavigateThroughCustomerTabsActionGroup" stepKey="openAddressBookTab">
+            <argument name="navigationItemName" value="{{VeronicaCostello.customerNavigationLink_1_navigationName}}" />
+        </actionGroup>
+        <actionGroup ref="AssertCustomerAccountPageTitleActionGroup" stepKey="assertAddressBookPageTitle">
+            <argument name="pageTitle" value="{{VeronicaCostello.customerNavigationLink_1_pageTitle}}" />
+        </actionGroup>
+
+        <actionGroup ref="NavigateThroughCustomerTabsActionGroup" stepKey="openMyOrdersTab">
+            <argument name="navigationItemName" value="{{VeronicaCostello.customerNavigationLink_2_navigationName}}" />
+        </actionGroup>
+        <actionGroup ref="AssertCustomerAccountPageTitleActionGroup" stepKey="assertMyOrdersPageTitle">
+            <argument name="pageTitle" value="{{VeronicaCostello.customerNavigationLink_2_pageTitle}}" />
+        </actionGroup>
+
+        <actionGroup ref="NavigateThroughCustomerTabsActionGroup" stepKey="openMyWishListTab">
+            <argument name="navigationItemName" value="{{VeronicaCostello.customerNavigationLink_3_navigationName}}" />
+        </actionGroup>
+        <actionGroup ref="AssertCustomerAccountPageTitleActionGroup" stepKey="assertMyWishListPageTitle">
+            <argument name="pageTitle" value="{{VeronicaCostello.customerNavigationLink_3_pageTitle}}" />
+        </actionGroup>
+    </test>
+</tests>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="SetOfSpriteYogaStraps">
+        <data key="url_key">set-of-sprite-yoga-straps</data>
+        <data key="name">Set of Sprite Yoga Straps</data>
+        <data key="sku">24-WG085_Group</data>
+        <data key="image">luma-yoga-strap-set.jpg</data>
+    </entity>
+</entities>
