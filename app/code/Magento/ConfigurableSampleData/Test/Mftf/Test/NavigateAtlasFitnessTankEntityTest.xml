@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="NavigateAtlasFitnessTankEntityTest">
+        <annotations>
+            <features value="CatalogSampleData"/>
+            <stories value="Sample data"/>
+            <title value="Should be able to see Atlas Fitness Tank Product"/>
+            <description value="Should be able to see Atlas Fitness Tank Product created by CatalogSampleData module"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="MC-11819"/>
+            <group value="sampleData"/>
+        </annotations>
+
+        <actionGroup ref="StorefrontOpenProductPageActionGroup" stepKey="openProductPage">
+            <argument name="productUrl" value="{{AtlasFitnessTank.url_key}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductNameOnProductPageActionGroup" stepKey="assertProductName">
+            <argument name="productName" value="{{AtlasFitnessTank.name}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductSkuOnProductPageActionGroup" stepKey="assertProductSku">
+            <argument name="productSku" value="{{AtlasFitnessTank.sku}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductPriceOnProductPageActionGroup" stepKey="assertProductPrice">
+            <argument name="productPrice" value="{{AtlasFitnessTank.price}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductImagesOnProductPageActionGroup" stepKey="assertProductImage">
+            <argument name="productImage" value="{{AtlasFitnessTank.image}}" />
+        </actionGroup>
+    </test>
+</tests>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="StellarSolarJacket">
+        <data key="url_key">stellar-solar-jacket</data>
+        <data key="name">Stellar Solar Jacket</data>
+        <data key="sku">WJ01</data>
+        <data key="price">$75.00</data>
+        <data key="image">wj01-red_main_1.jpg</data>
+    </entity>
+    <entity name="EosVNeckHoodie">
+        <data key="url_key">eos-v-neck-hoodie</data>
+        <data key="name">Eos V-Neck Hoodie</data>
+        <data key="sku">WH11</data>
+        <data key="price">$54.00</data>
+        <data key="image">wh11-blue_main_1.jpg</data>
+    </entity>
+    <entity name="GabrielleMicroSleeveTop">
+        <data key="url_key">gabrielle-micro-sleeve-top</data>
+        <data key="name">Gabrielle Micro Sleeve Top</data>
+        <data key="sku">WS02</data>
+        <data key="price">$28.00</data>
+        <data key="image">ws02-green_main_1.jpg</data>
+    </entity>
+    <entity name="ElectraBraTop">
+        <data key="url_key">electra-bra-top</data>
+        <data key="name">Electra Bra Top</data>
+        <data key="sku">WB01</data>
+        <data key="price">$39.00</data>
+        <data key="image">wb01-gray_main_1.jpg</data>
+    </entity>
+    <entity name="KarmenYogaPant">
+        <data key="url_key">karmen-yoga-pant</data>
+        <data key="name">Karmen Yoga Pant</data>
+        <data key="sku">WP01</data>
+        <data key="price">$31.20</data>
+        <data key="image">wp01-gray_main_1.jpg</data>
+    </entity>
+    <entity name="FionaFitnessShort">
+        <data key="url_key">fiona-fitness-short</data>
+        <data key="name">Fiona Fitness Short</data>
+        <data key="sku">WSH01</data>
+        <data key="price">$29.00</data>
+        <data key="image">wsh01-black_main_1.jpg</data>
+    </entity>
+    <entity name="BeaumontSummitKit">
+        <data key="url_key">beaumont-summit-kit</data>
+        <data key="name">Beaumont Summit Kit</data>
+        <data key="sku">MJ01</data>
+        <data key="price">$42.00</data>
+        <data key="image">mj01-yellow_main_1.jpg</data>
+    </entity>
+    <entity name="ChazKangerooHoodie">
+        <data key="url_key">chaz-kangeroo-hoodie</data>
+        <data key="name">Chaz Kangeroo Hoodie</data>
+        <data key="sku">MH01</data>
+        <data key="price">$52.00</data>
+        <data key="image">mh01-gray_main_1.jpg</data>
+    </entity>
+    <entity name="ZoltanGymTee">
+        <data key="url_key">zoltan-gym-tee</data>
+        <data key="name">Zoltan Gym Tee</data>
+        <data key="sku">MS06</data>
+        <data key="price">$29.00</data>
+        <data key="image">ms06-blue_main_1.jpg</data>
+    </entity>
+    <entity name="AtlasFitnessTank">
+        <data key="url_key">atlas-fitness-tank</data>
+        <data key="name">Atlas Fitness Tank</data>
+        <data key="sku">MT11</data>
+        <data key="price">$18.00</data>
+        <data key="image">mt11-blue_main_1.jpg</data>
+    </entity>
+    <entity name="CaesarWarmUpPant">
+        <data key="url_key">caesar-warm-up-pant</data>
+        <data key="name">Caesar Warm-Up Pant</data>
+        <data key="sku">MP01</data>
+        <data key="price">$28.00</data>
+        <data key="image">mp01-gray_main_1.jpg</data>
+    </entity>
+    <entity name="ArcadioGymShort">
+        <data key="url_key">arcadio-gym-short</data>
+        <data key="name">Arcadio Gym Short</data>
+        <data key="sku">MSH11</data>
+        <data key="price">$20.00</data>
+        <data key="image">msh11-blue_main_1.jpg</data>
+    </entity>
+    <entity name="StarkFundamentalHoodie">
+        <data key="url_key">stark-fundamental-hoodie</data>
+        <data key="name">Stark Fundamental Hoodie</data>
+        <data key="sku">MH06</data>
+        <data key="price">$42.00</data>
+        <data key="image">mh06-blue_main_1.jpg</data>
+    </entity>
+    <entity name="HollisterBackyardSweatshirt">
+        <data key="url_key">hollister-backyard-sweatshirt</data>
+        <data key="name">Hollister Backyard Sweatshirt</data>
+        <data key="sku">MH05</data>
+        <data key="price">$52.00</data>
+        <data key="image">mh05-white_main_1.jpg</data>
+    </entity>
+    <entity name="ChloeCompeteTank">
+        <data key="url_key">chloe-compete-tank</data>
+        <data key="name">Chloe Compete Tank</data>
+        <data key="sku">WT06</data>
+        <data key="price">$39.00</data>
+        <data key="image">wt06-blue_main_1.jpg</data>
+    </entity>
+    <entity name="AbominableHoodie">
+        <data key="url_key">abominable-hoodie</data>
+        <data key="name">Abominable Hoodie</data>
+        <data key="sku">MH09</data>
+        <data key="price">$69.00</data>
+        <data key="image">mh09-blue_main_1.jpg</data>
+    </entity>
+</entities>

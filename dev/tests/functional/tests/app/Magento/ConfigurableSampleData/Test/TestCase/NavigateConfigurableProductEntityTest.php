@@ -17,6 +17,7 @@ class NavigateConfigurableProductEntityTest extends Injectable
     /* tags */
     const TEST_TYPE = 'acceptance_test';
     const MVP = 'yes';
+    const MFTF_MIGRATED = 'yes';
     /* end tags */
 
     /**

@@ -19,4 +19,14 @@
             <module value="Magento_SalesSampleData"/>
         </allow>
     </rule>
+    <rule scope="testcase">
+        <deny>
+            <tag group="mftf_migrated" value="yes" />
+        </deny>
+    </rule>
+    <rule scope="variation">
+        <deny>
+            <tag group="mftf_migrated" value="yes" />
+        </deny>
+    </rule>
 </config>
