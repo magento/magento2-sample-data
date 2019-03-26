@@ -7,6 +7,7 @@ namespace Magento\WidgetSampleData\Model;
 
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
+use \Magento\Framework\App\State;
 
 /**
  * Launches setup of sample data for Widget module
@@ -54,6 +55,11 @@ class CmsBlock
     private $serializer;
 
     /**
+     * @var State
+     */
+    private $appState;
+
+    /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Widget\Model\Widget\InstanceFactory $widgetFactory
      * @param \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory
@@ -61,6 +67,7 @@ class CmsBlock
      * @param \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory
      * @param Json|null $serializer
+     * @param State|null $appState
      */
     public function __construct(
         SampleDataContext $sampleDataContext,
@@ -69,7 +76,8 @@ class CmsBlock
         \Magento\Cms\Model\BlockFactory $cmsBlockFactory,
         \Magento\Widget\Model\ResourceModel\Widget\Instance\CollectionFactory $appCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoryFactory,
-        Json $serializer = null
+        Json $serializer = null,
+        State $appState = null
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -79,6 +87,7 @@ class CmsBlock
         $this->appCollectionFactory = $appCollectionFactory;
         $this->categoryFactory = $categoryFactory;
         $this->serializer = $serializer ?: \Magento\Framework\App\ObjectManager::getInstance()->get(Json::class);
+        $this->appState = $appState ?: \Magento\Framework\App\ObjectManager::getInstance()->get(State::class);
     }
 
     /**
@@ -163,7 +172,10 @@ class CmsBlock
                     ->setStoreIds([\Magento\Store\Model\Store::DEFAULT_STORE_ID])
                     ->setWidgetParameters(['block_id' => $block->getId()])
                     ->setPageGroups([$pageGroup]);
-                $widgetInstance->save();
+                $this->appState->emulateAreaCode(
+                    'frontend',
+                    [$widgetInstance, 'save']
+                );
             }
         }
     }
