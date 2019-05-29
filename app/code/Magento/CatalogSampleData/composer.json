@@ -2,8 +2,11 @@
     "name": "magento/module-catalog-sample-data",
     "description": "N/A",
     "require": {
-        "php": "~7.1.3||~7.2.0",
-        "magento/module-sample-data": "*"
+        "php": "~7.1.3||~7.2.0||~7.3.0",
+        "magento/framework": "*",
+        "magento/module-store": "*",
+        "magento/module-eav": "*",
+        "magento/module-catalog": "*"
     },
     "type": "magento2-module",
     "license": [
