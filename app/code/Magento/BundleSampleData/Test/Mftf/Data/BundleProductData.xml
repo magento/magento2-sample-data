@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="SpriteYogaCompanionKit" type="product">
+        <data key="name">Sprite Yoga Companion Kit</data>
+        <data key="sku">24-WG080</data>
+        <data key="url_key">sprite-yoga-companion-kit</data>
+        <data key="image">luma-yoga-kit-2.jpg</data>
+    </entity>
+</entities>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="OvernightDuffle" type="product">
+        <data key="name">Overnight Duffle</data>
+        <data key="sku">24-WB07</data>
+        <data key="price">$45.00</data>
+        <data key="url_key">overnight-duffle</data>
+        <data key="image">wb07-brown-0.jpg</data>
+    </entity>
+
+    <entity name="SpriteFoamRoller" type="product">
+        <data key="name">Sprite Foam Roller</data>
+        <data key="sku">24-WG088</data>
+        <data key="price">$19.00</data>
+        <data key="url_key">sprite-foam-roller</data>
+        <data key="image">luma-foam-roller.jpg</data>
+    </entity>
+
+    <entity name="EnduranceWatch" type="product">
+        <data key="name">Endurance Watch</data>
+        <data key="sku">24-MG01</data>
+        <data key="price">$49.00</data>
+        <data key="url_key">endurance-watch</data>
+        <data key="image">mg01-bk-0.jpg</data>
+    </entity>
+
+    <entity name="JoustDuffleBag" type="product">
+        <data key="name">Joust Duffle Bag</data>
+        <data key="sku">24-MB01</data>
+        <data key="price">$34.00</data>
+        <data key="url_key">joust-duffle-bag</data>
+        <data key="image">mb01-blue-0.jpg</data>
+    </entity>
+
+    <entity name="DualHandleCardioBall" type="product">
+        <data key="name">Dual Handle Cardio Ball</data>
+        <data key="sku">24-UG07</data>
+        <data key="price">$12.00</data>
+        <data key="url_key">dual-handle-cardio-ball</data>
+        <data key="image">ug07-bk-0.jpg</data>
+    </entity>
+
+    <entity name="ClamberWatch" type="product">
+        <data key="name">Clamber Watch</data>
+        <data key="sku">24-WG03</data>
+        <data key="price">$54.00</data>
+        <data key="url_key">clamber-watch</data>
+        <data key="image">wg03-gr-0.jpg</data>
+    </entity>
+
+    <entity name="CrownSummitBackpack" type="product">
+        <data key="name">Crown Summit Backpack</data>
+        <data key="sku">24-MB03</data>
+        <data key="price">$38.00</data>
+        <data key="url_key">crown-summit-backpack</data>
+        <data key="image">mb03-black-0.jpg</data>
+    </entity>
+</entities>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="NavigateSpriteFoamRollerEntityTest">
+        <annotations>
+            <features value="CatalogSampleData"/>
+            <stories value="Sample data"/>
+            <title value="Should be able to see Sprite Foam Roller Product"/>
+            <description value="Should be able to see Sprite Foam Roller Product created by CatalogSampleData module"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="MC-11794"/>
+            <group value="sampleData"/>
+        </annotations>
+
+        <actionGroup ref="StorefrontOpenProductPageActionGroup" stepKey="openProductPage">
+            <argument name="productUrl" value="{{SpriteFoamRoller.url_key}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductNameOnProductPageActionGroup" stepKey="assertProductName">
+            <argument name="productName" value="{{SpriteFoamRoller.name}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductSkuOnProductPageActionGroup" stepKey="assertProductSku">
+            <argument name="productSku" value="{{SpriteFoamRoller.sku}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductPriceOnProductPageActionGroup" stepKey="assertProductPrice">
+            <argument name="productPrice" value="{{SpriteFoamRoller.price}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductImagesOnProductPageActionGroup" stepKey="assertProductImage">
+            <argument name="productImage" value="{{SpriteFoamRoller.image}}" />
+        </actionGroup>
+    </test>
+</tests>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="NavigateLifeLongFitnessIVEntityTest">
+        <annotations>
+            <features value="DownloadableSampleData"/>
+            <stories value="Sample data"/>
+            <title value="Should be able to see Life Long Fitness IV Product"/>
+            <description value="Should be able to see Life Long Fitness IV Product created by DownloadableSampleData module"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="MC-11956"/>
+            <group value="sampleData"/>
+        </annotations>
+
+        <actionGroup ref="StorefrontOpenProductPageActionGroup" stepKey="openProductPage">
+            <argument name="productUrl" value="{{LifeLongFitnessIV.url_key}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductNameOnProductPageActionGroup" stepKey="assertProductName">
+            <argument name="productName" value="{{LifeLongFitnessIV.name}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductSkuOnProductPageActionGroup" stepKey="assertProductSku">
+            <argument name="productSku" value="{{LifeLongFitnessIV.sku}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductPriceOnProductPageActionGroup" stepKey="assertProductPrice">
+            <argument name="productPrice" value="{{LifeLongFitnessIV.price}}" />
+        </actionGroup>
+        <actionGroup ref="StorefrontAssertProductImagesOnProductPageActionGroup" stepKey="assertProductImage">
+            <argument name="productImage" value="{{LifeLongFitnessIV.image}}" />
+        </actionGroup>
+    </test>
+</tests>
