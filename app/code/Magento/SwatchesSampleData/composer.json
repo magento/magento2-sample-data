@@ -2,10 +2,10 @@
     "name": "magento/module-swatches-sample-data",
     "description": "N/A",
     "require": {
-        "php": "~7.1.3||~7.2.0",
-        "magento/module-swatches": "*",
-        "magento/module-sample-data": "*",
-        "magento/module-eav": "*"
+        "php": "~7.1.3||~7.2.0||~7.3.0",
+        "magento/framework": "*",
+        "magento/module-eav": "*",
+        "magento/module-catalog": "*"
     },
     "type": "magento2-module",
     "license": [
