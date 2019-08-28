@@ -2,7 +2,7 @@
     "name": "magento/module-cms-sample-data",
     "description": "N/A",
     "require": {
-        "php": "~7.1.0|~7.2.0",
+        "php": "~7.1.0||~7.2.0",
         "magento/module-cms": "102.0.*",
         "magento/module-sample-data": "100.2.*",
         "magento/module-theme-sample-data": "100.2.*",

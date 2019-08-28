@@ -2,7 +2,7 @@
     "name": "magento/module-sales-sample-data",
     "description": "N/A",
     "require": {
-        "php": "~7.1.0|~7.2.0",
+        "php": "~7.1.0||~7.2.0",
         "magento/module-sales": "101.0.*",
         "magento/module-sample-data": "100.2.*",
         "magento/module-configurable-sample-data": "100.2.*",
