@@ -197,6 +197,9 @@ class Converter
             }
             $options = $this->productConverter->getAttributeOptions($attribute->getAttributeCode());
             $attributeOption = $options->getItemByColumnValue('value', $value);
+            if (!$attributeOption) {
+                throw new \RuntimeException('Required option "' .$value .'" for ' .$attributeCode .' does not exist');
+            }
             $attributeId = $attributeOption->getDataByKey('attribute_id');
             $attributesData[$attributeId] = $attributeOption->getDataByKey('option_id');
         }
