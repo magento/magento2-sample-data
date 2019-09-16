@@ -108,7 +108,7 @@ class Attribute
             foreach ($rows as $row) {
                 $data = [];
                 foreach ($row as $key => $value) {
-                    $data[$header[$key]] = $value;
+                    $data[$header[$key]] = trim($value);
                 }
                 $data['attribute_set'] = explode("\n", $data['attribute_set']);
 

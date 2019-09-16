@@ -5,7 +5,6 @@
  */
 namespace Magento\ConfigurableSampleData\Model;
 
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem\Directory\ReadFactory;
 use Magento\ImportExport\Model\Import;
@@ -16,6 +15,11 @@ use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorI
  */
 class Product
 {
+    /**
+     * @var Import
+     */
+    private $importModel;
+
     /**
      * @var \Magento\ImportExport\Model\Import\Source\CsvFactory
      */
@@ -37,11 +41,6 @@ class Product
     private $componentRegistrar;
 
     /**
-     * @var \Magento\ImportExport\Model\ImportFactory
-     */
-    private $importFactory;
-
-    /**
      * @var \Magento\Eav\Model\Config
      */
     private $eavConfig;
@@ -53,7 +52,6 @@ class Product
      * @param \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory
      * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
      * @param \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
-     * @param \Magento\ImportExport\Model\ImportFactory|null $importFactory
      */
     public function __construct(
         \Magento\Eav\Model\Config $eavConfig,
@@ -61,16 +59,14 @@ class Product
         \Magento\ImportExport\Model\Import\Source\CsvFactory $csvSourceFactory,
         \Magento\Indexer\Model\Indexer\CollectionFactory $indexerCollectionFactory,
         \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory,
-        \Magento\Framework\Component\ComponentRegistrar $componentRegistrar,
-        ?\Magento\ImportExport\Model\ImportFactory $importFactory = null
+        \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
     ) {
         $this->eavConfig = $eavConfig;
+        $this->importModel = $importModel;
         $this->csvSourceFactory = $csvSourceFactory;
         $this->indexerCollectionFactory = $indexerCollectionFactory;
         $this->readFactory = $readFactory;
         $this->componentRegistrar = $componentRegistrar;
-        $this->importFactory = $importFactory
-            ?? ObjectManager::getInstance()->get(\Magento\ImportExport\Model\ImportFactory::class);
     }
 
     /**
@@ -78,12 +74,9 @@ class Product
      */
     public function install()
     {
-        \Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType::$attributeCodeToId = [];
-        \Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType::$commonAttributesCache = [];
-        \Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType::$invAttributesCache = [];
         $this->eavConfig->clear();
         /** @var Import $importModel */
-        $importModel = $this->importFactory->create();
+        $importModel = $this->importModel;
         $importModel->setData(
             [
                 'entity' => 'catalog_product',
