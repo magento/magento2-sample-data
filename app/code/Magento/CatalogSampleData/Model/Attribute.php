@@ -179,7 +179,7 @@ class Attribute
             ->load();
         foreach ($data['option'] as $value) {
             if (!$options->getItemByColumnValue('value', $value)) {
-                $result[] = $value;
+                $result[] = trim($value);
             }
         }
         return $result ? $this->convertOption($result) : $result;
