@@ -40,6 +40,11 @@ class Converter
     protected $serializer;
 
     /**
+     * @var \Magento\ConfigurableSampleData\Model\Product\ConverterFactory
+     */
+    private $converterFactory;
+
+    /**
      * @param CustomerRepositoryInterface $customerAccount
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\ConfigurableSampleData\Model\Product\ConverterFactory $productConverterFactory
@@ -55,6 +60,7 @@ class Converter
     ) {
         $this->customerRepository = $customerAccount;
         $this->productFactory = $productFactory;
+        $this->converterFactory = $productConverterFactory;
         $this->productConverter = $productConverterFactory->create();
         $this->eavConfig = $eavConfig;
         $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
@@ -175,9 +181,12 @@ class Converter
     protected function convertProductData($productData)
     {
         $productValues = $this->serializer->unserialize($productData);
-        $productId = $this->getProductData($productValues['sku'])->getId();
+        $product = $this->getProductData($productValues['sku']);
+        $productId = $product->getId();
         $productData = ['qty' => $productValues['qty']];
         if (isset($productValues['configurable_options'])) {
+            $this->productConverter = $this->converterFactory->create();
+            $this->productConverter->setAttributeSetId($product->getAttributeSetId());
             $productData['super_attribute'] = $this->getProductAttributes($productValues['configurable_options']);
         }
         return [$productId => $productData];
