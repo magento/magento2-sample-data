@@ -205,7 +205,15 @@ class Converter
                 continue;
             }
             $options = $this->productConverter->getAttributeOptions($attribute->getAttributeCode());
-            $attributeOption = $options->getItemByColumnValue('value', $value);
+            $attributeOption = null;
+            $options->load();
+            /** @var \Magento\Framework\DataObject $option */
+            foreach ($options as $option) {
+                if (mb_strtolower($option->getData('value')) === mb_strtolower($value)) {
+                    $attributeOption = $option;
+                    break;
+                }
+            }
             if (!$attributeOption) {
                 throw new \RuntimeException('Required option "' .$value .'" for ' .$attributeCode .' does not exist');
             }
