@@ -2,9 +2,12 @@
     "name": "magento/module-catalog-rule-sample-data",
     "description": "N/A",
     "require": {
-        "php": "~7.1.3||~7.2.0",
+        "php": "~7.1.3||~7.2.0||~7.3.0",
+        "magento/framework": "102.0.*",
         "magento/module-catalog-rule": "101.1.*",
-        "magento/module-sample-data": "100.3.*"
+        "magento/module-store": "101.0.*",
+        "magento/module-customer": "102.0.*",
+        "magento/module-catalog": "103.0.*"
     },
     "type": "magento2-module",
     "license": [
@@ -19,5 +22,5 @@
             "Magento\\CatalogRuleSampleData\\": ""
         }
     },
-    "version": "100.3.2"
+    "version": "100.3.3"
 }

@@ -10,6 +10,7 @@
         <sequence>
             <module name="Magento_Msrp"/>
             <module name="Magento_SampleData"/>
+            <module name="Magento_ConfigurableSampleData"/>
         </sequence>
     </module>
 </config>
