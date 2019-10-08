@@ -3,7 +3,7 @@
     "description": "N/A",
     "require": {
         "php": "~7.1.3||~7.2.0",
-        "magento/module-sample-data": "*"
+        "magento/module-sample-data": "100.3.*"
     },
     "type": "magento2-module",
     "license": [
@@ -17,5 +17,6 @@
         "psr-4": {
             "Magento\\CustomerSampleData\\": ""
         }
-    }
+    },
+    "version": "100.3.2-p2"
 }

@@ -3,10 +3,10 @@
     "description": "N/A",
     "require": {
         "php": "~7.1.3||~7.2.0",
-        "magento/module-cms": "*",
-        "magento/module-sample-data": "*",
-        "magento/module-theme-sample-data": "*",
-        "magento/sample-data-media": "*"
+        "magento/module-cms": "103.0.*",
+        "magento/module-sample-data": "100.3.*",
+        "magento/module-theme-sample-data": "100.3.*",
+        "magento/sample-data-media": "100.3.*"
     },
     "type": "magento2-module",
     "license": [
@@ -20,5 +20,6 @@
         "psr-4": {
             "Magento\\CmsSampleData\\": ""
         }
-    }
+    },
+    "version": "100.3.2-p2"
 }
