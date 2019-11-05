@@ -32,6 +32,8 @@ class Msrp
 
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
+     * @deprecated
+     * @see $collectionFactory
      */
     protected $productCollection;
 
@@ -39,6 +41,11 @@ class Msrp
      * @var \Magento\Framework\App\Config\Storage\WriterInterface
      */
     protected $configWriter;
+
+    /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
+     */
+    private $collectionFactory;
 
     /**
      * @param SampleDataContext $sampleDataContext
@@ -54,6 +61,28 @@ class Msrp
         $this->csvReader = $sampleDataContext->getCsvReader();
         $this->productCollection = $productCollectionFactory->create()->addAttributeToSelect('sku');
         $this->configWriter = $configWriter;
+        $this->collectionFactory = $productCollectionFactory;
+    }
+
+    /**
+     * Load products with given SKUs.
+     *
+     * @param string[] $skus
+     * @return \Magento\Catalog\Model\Product[]
+     */
+    private function loadProducts(array $skus): array
+    {
+        /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $collection */
+        $collection = $this->collectionFactory->create();
+        $collection->addAttributeToSelect('sku');
+        $collection->addAttributeToFilter('sku', ['in' => $skus]);
+        $products = [];
+        /** @var \Magento\Catalog\Model\Product $product */
+        foreach ($collection as $product) {
+            $products[$product->getSku()] = $product;
+        }
+
+        return $products;
     }
 
     /**
@@ -68,29 +97,40 @@ class Msrp
                 continue;
             }
 
+            $productsData = [];
             $rows = $this->csvReader->getData($fileName);
             $header = array_shift($rows);
-
             foreach ($rows as $row) {
-                $data = [];
-                foreach ($row as $key => $value) {
-                    $data[$header[$key]] = $value;
+                $rowData = [];
+                $sku = null;
+                foreach ($row as $i => $data) {
+                    if ($header[$i] === 'sku') {
+                        $sku = $data;
+                    } else {
+                        $rowData[$header[$i]] = $data;
+                    }
                 }
-                $row = $data;
-                $productId = $this->getProductIdBySku($row['sku']);
-                if (!$productId) {
-                    continue;
+                if ($sku) {
+                    $productsData[$sku] = $rowData;
                 }
-                /** @var \Magento\Catalog\Model\Product $product */
-                $product = $this->productCollection->getItemById($productId);
-                $product->setMsrpDisplayActualPriceType(Type::TYPE_ON_GESTURE);
-                if (!empty($row['msrp'])) {
-                    $price = $row['msrp'];
-                } else {
-                    $price = $product->getPrice()*1.1;
+            }
+            if ($productsData) {
+                $products = $this->loadProducts(array_keys($productsData));
+
+                foreach ($productsData as $sku => $data) {
+                    if (!array_key_exists($sku, $products)) {
+                        throw new \RuntimeException('Require product with SKU#' . $sku .' not found!');
+                    }
+                    $product = $products[$sku];
+                    $product->setMsrpDisplayActualPriceType(Type::TYPE_ON_GESTURE);
+                    if (!empty($data['msrp'])) {
+                        $price = $data['msrp'];
+                    } else {
+                        $price = $product->getPrice()*1.1;
+                    }
+                    $product->setMsrp($price);
+                    $product->save();
                 }
-                $product->setMsrp($price);
-                $product->save();
             }
         }
     }
@@ -100,6 +140,8 @@ class Msrp
      *
      * @param string $sku
      * @return int|null
+     * @deprecated
+     * @see loadProducts()
      */
     protected function getProductIdBySku($sku)
     {
