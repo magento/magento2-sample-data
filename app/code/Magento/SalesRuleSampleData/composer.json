@@ -3,10 +3,10 @@
     "description": "N/A",
     "require": {
         "php": "~7.1.3||~7.2.0||~7.3.0",
-        "magento/framework": "102.0.*",
-        "magento/module-catalog-rule-sample-data": "100.3.*",
-        "magento/module-sales-rule": "101.1.*",
-        "magento/module-eav": "102.0.*"
+        "magento/framework": "*",
+        "magento/module-catalog-rule-sample-data": "*",
+        "magento/module-sales-rule": "*",
+        "magento/module-eav": "*"
     },
     "type": "magento2-module",
     "license": [
@@ -20,6 +20,5 @@
         "psr-4": {
             "Magento\\SalesRuleSampleData\\": ""
         }
-    },
-    "version": "100.3.3"
+    }
 }
