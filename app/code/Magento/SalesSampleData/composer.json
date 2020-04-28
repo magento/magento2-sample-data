@@ -3,16 +3,16 @@
     "description": "N/A",
     "require": {
         "php": "~7.1.3||~7.2.0||~7.3.0",
-        "magento/framework": "102.0.*",
-        "magento/module-sales": "102.0.*",
-        "magento/module-configurable-sample-data": "100.3.*",
-        "magento/module-catalog-inventory": "100.3.*",
-        "magento/module-customer": "102.0.*",
-        "magento/module-catalog": "103.0.*",
-        "magento/module-eav": "102.0.*",
-        "magento/module-backend": "101.0.*",
-        "magento/module-shipping": "100.3.*",
-        "magento/module-store": "101.0.*"
+        "magento/framework": "*",
+        "magento/module-sales": "*",
+        "magento/module-configurable-sample-data": "*",
+        "magento/module-catalog-inventory": "*",
+        "magento/module-customer": "*",
+        "magento/module-catalog": "*",
+        "magento/module-eav": "*",
+        "magento/module-backend": "*",
+        "magento/module-shipping": "*",
+        "magento/module-store": "*"
     },
     "type": "magento2-module",
     "license": [
@@ -26,6 +26,5 @@
         "psr-4": {
             "Magento\\SalesSampleData\\": ""
         }
-    },
-    "version": "100.3.4"
+    }
 }
