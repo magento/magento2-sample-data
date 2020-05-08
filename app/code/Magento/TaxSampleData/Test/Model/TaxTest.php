@@ -29,7 +29,7 @@ use Magento\TaxSampleData\Model\Tax;
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class TaxTest extends \PHPUnit_Framework_TestCase
+class TaxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Tax
@@ -37,54 +37,54 @@ class TaxTest extends \PHPUnit_Framework_TestCase
     private $taxModel;
 
     /**
-     * @var TaxRuleRepositoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TaxRuleRepositoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $taxRuleRepository;
 
     /**
-     * @var TaxRuleInterfaceFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var TaxRuleInterfaceFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private $ruleFactory;
 
     /**
-     * @var TaxRateRepositoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TaxRateRepositoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $taxRateRepository;
 
     /**
-     * @var TaxRateInterfaceFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var TaxRateInterfaceFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private $rateFactory;
 
     /**
-     * @var RateFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var RateFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private $taxRateFactory;
 
     /**
-     * @var SearchCriteriaBuilder|\PHPUnit_Framework_MockObject_MockObject
+     * @var SearchCriteriaBuilder|\PHPUnit\Framework\MockObject\MockObject
      */
     private $criteriaBuilder;
 
     /**
-     * @var FilterBuilder|\PHPUnit_Framework_MockObject_MockObject
+     * @var FilterBuilder|\PHPUnit\Framework\MockObject\MockObject
      */
     private $filterBuilder;
 
     /**
-     * @var FixtureManager|\PHPUnit_Framework_MockObject_MockObject
+     * @var FixtureManager|\PHPUnit\Framework\MockObject\MockObject
      */
     private $fixtureManager;
 
     /**
-     * @var Csv|\PHPUnit_Framework_MockObject_MockObject
+     * @var Csv|\PHPUnit\Framework\MockObject\MockObject
      */
     private $csvReader;
 
     /**
      * Region collection factory.
      *
-     * @var CollectionFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var CollectionFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private $regionCollectionFactory;
 
@@ -96,7 +96,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritdoc
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->objectManager = new ObjectManager($this);
 
@@ -205,7 +205,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepare region collection mock.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit\Framework\MockObject\MockObject
      */
     private function prepareRegionCollection()
     {
@@ -312,7 +312,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepare tax rate mock.
      *
-     * @return TaxRateInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return TaxRateInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function prepareTaxRate()
     {
@@ -370,7 +370,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
             ->method('addFilters')
             ->willReturnSelf();
 
-        $searchCriteria = $this->getMock(SearchCriteria::class);
+        $searchCriteria = $this->createMock(SearchCriteria::class);
 
         $this->criteriaBuilder->expects(self::once())
             ->method('create')
@@ -392,7 +392,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepare tax rule mock.
      *
-     * @return TaxRuleInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return TaxRuleInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function prepareTaxRule()
     {
