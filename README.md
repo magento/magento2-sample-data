@@ -37,7 +37,7 @@ To deploy sample data from the Magento composer repository without Magento CLI:
 
 Where `<version>` is the version of the packages; it should correspond to the version of the Magento instance.
 
-Each package corresponds to a sample data module. The complete list of available modules can be viewed in the [sample data GitHub repository] (https://github.com/magento/magento2-sample-data/tree/develop/app/code/Magento)
+Each package corresponds to a sample data module. The complete list of available modules can be viewed in the [sample data GitHub repository] (https://github.com/magento/magento2-sample-data/tree/2.3-develop/app/code/Magento)
 
 2. To update the dependencies, in the Magento root directory, run: `# composer update`
 
