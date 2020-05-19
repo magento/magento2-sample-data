@@ -15,7 +15,7 @@ If your Magento code base was cloned from the `master` branch, you can use eithe
 ### Deploy Sample Data from Composer Repository
 
 To deploy sample data from the Magento composer repository using Magento CLI:
-
+uj
 1. If your Magento instance is already installed, skip this step. Otherwise, in the Magento root directory, run: `# composer install`.
 2. In the Magento root directory, run: `# bin/magento sampledata:deploy`. This command collects the dependencies from the `suggest` sections of the `composer.json` files of modules, which suggest to install sample data (like `Magento_Catalog`, `Magento_Sales`, and so on).
 
