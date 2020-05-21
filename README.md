@@ -49,7 +49,7 @@ To deploy sample data from the GitHub repository:
 2. Link the sample data and your Magento instance by running: `# php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php -- --ce-source="<path_to_your_magento_instance>"`
 
 ## Install Sample Data
-Once the sample data is deployed, it will be installed automatically when you install or upgrade your Magento instance either by using the command line.
+Once the sample data is deployed, it will be installed automatically when you install or upgrade your Magento instance by using the command line.
 
 ## Uninstall Sample Data
 To remove the sample data modules from the code base, run one of the following commands from the Magento root directory:
