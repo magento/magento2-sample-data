@@ -212,7 +212,7 @@ class Review
     protected function getRating($rating)
     {
         $ratingCollection = $this->ratingFactory->create()->getResourceCollection();
-        if (!$this->ratings[$rating]) {
+        if (empty($this->ratings[$rating])) {
             $this->ratings[$rating] = $ratingCollection->addFieldToFilter('rating_code', $rating)->getFirstItem();
         }
         return $this->ratings[$rating];
