@@ -70,3 +70,17 @@ The deleted sample data entities will be restored. Those entities, which were ch
 
 ## Documentation
 You can find the more detailed description of sample data manipulation procedures at [http://devdocs.magento.com/guides/v2.4/install-gde/install/cli/install-cli-sample-data.html](http://devdocs.magento.com/guides/v2.4/install-gde/install/cli/install-cli-sample-data.html)
+
+## Contributing to the Magento 2 Code Base
+Contributions can take the form of new components or features, changes to existing features, tests, documentation (such as developer guides, user guides, examples, or specifications), bug fixes, optimizations, or just good suggestions.
+
+To learn about how to make a contribution, click [here][1].
+
+To learn about issues, click [here][2]. To open an issue, click [here][3].
+
+To suggest documentation improvements, click [here][4].
+
+[1]: <https://devdocs.magento.com/guides/v2.3/contributor-guide/contributing.html>
+[2]: <https://devdocs.magento.com/guides/v2.3/contributor-guide/contributing.html#report>
+[3]: <https://github.com/magento/security-package/issues>
+[4]: <https://devdocs.magento.com>
