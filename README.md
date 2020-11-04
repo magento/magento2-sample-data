@@ -46,7 +46,7 @@ Each package corresponds to a sample data module. The complete list of available
 To deploy sample data from the GitHub repository:
 
 1. Clone sample data from `https://github.com/magento/magento2-sample-data`. If your Magento instance was cloned from the `master` branch, choose the `master` branch when cloning sample data; choose the `develop` branch if Magento was cloned from `develop`.
-2. Link the sample data and your Magento instance by running: `# php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php -- --ce-source="<path_to_your_magento_instance>"`
+2. Link the sample data and your Magento instance by running: `# php -f <sample-data_clone_dir>/dev/tools/build-sample-data.php  --ce-source="<path_to_your_magento_instance>"`
 
 ## Install Sample Data
 Once the sample data is deployed, it will be installed automatically when you install or upgrade your Magento instance by using the command line.
