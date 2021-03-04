@@ -29,7 +29,7 @@ use Magento\TaxSampleData\Model\Tax;
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class TaxTest extends \PHPUnit_Framework_TestCase
+class TaxTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Tax
@@ -370,7 +370,7 @@ class TaxTest extends \PHPUnit_Framework_TestCase
             ->method('addFilters')
             ->willReturnSelf();
 
-        $searchCriteria = $this->getMock(SearchCriteria::class);
+        $searchCriteria = $this->createMock(SearchCriteria::class);
 
         $this->criteriaBuilder->expects(self::once())
             ->method('create')
