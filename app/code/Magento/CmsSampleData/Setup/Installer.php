@@ -60,7 +60,6 @@ class Installer implements Setup\SampleData\InstallerInterface
         $this->block->install(
             [
                 'Magento_CmsSampleData::fixtures/blocks/categories_static_blocks.csv',
-                'Magento_CmsSampleData::fixtures/blocks/categories_static_blocks_giftcard.csv',
                 'Magento_CmsSampleData::fixtures/blocks/pages_static_blocks.csv',
             ]
         );

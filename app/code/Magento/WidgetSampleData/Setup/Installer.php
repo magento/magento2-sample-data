@@ -28,8 +28,7 @@ class Installer implements Setup\SampleData\InstallerInterface
     {
         $this->cmsBlock->install(
             [
-                'Magento_WidgetSampleData::fixtures/cmsblock.csv',
-                'Magento_WidgetSampleData::fixtures/cmsblock_giftcard.csv'
+                'Magento_WidgetSampleData::fixtures/cmsblock.csv'
             ]
         );
     }

@@ -1,2 +1,0 @@
-block_identifier,type_code,theme_path,title,page_group,group_data
-giftcard-block,cms_static_block,frontend/Magento/luma,"Giftcard Category Content",anchor_categories,"{""entities"":""gift-cards"",""block"":""content.top"",""for"":""specific"",""is_anchor_only"":1}"
