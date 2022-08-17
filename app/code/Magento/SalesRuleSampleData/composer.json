@@ -2,7 +2,7 @@
     "name": "magento/module-sales-rule-sample-data",
     "description": "N/A",
     "require": {
-        "php": "~7.4.0||~8.1.0",
+        "php": "~8.1.0",
         "magento/framework": "*",
         "magento/module-catalog-rule-sample-data": "*",
         "magento/module-sales-rule": "*",
