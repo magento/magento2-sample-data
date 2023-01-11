@@ -52,6 +52,11 @@ class Gallery
     private $metadataPool;
 
     /**
+     * @var GalleryResource
+     */
+    protected $galleryResource;
+
+    /**
      * @param SampleDataContext $sampleDataContext
      * @param ProductFactory $productFactory
      * @param GalleryResource $galleryResource
