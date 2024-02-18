@@ -5,6 +5,7 @@
  */
 namespace Magento\CustomerSampleData\Model;
 
+use Magento\Customer\Api\CustomerMetadataInterface;
 use Magento\Customer\Api\Data\RegionInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Setup\SampleData\Context as SampleDataContext;
@@ -80,6 +81,11 @@ class Customer
     private $serializer;
 
     /**
+     * @var CustomerMetadataInterface
+     */
+    private $customerMetadata;
+
+    /**
      * @param SampleDataContext $sampleDataContext
      * @param \Magento\Directory\Model\CountryFactory $countryFactory
      * @param \Magento\Customer\Api\Data\CustomerInterfaceFactory $customerFactory
@@ -89,7 +95,8 @@ class Customer
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Api\DataObjectHelper $dataObjectHelper
      * @param \Magento\Framework\App\State $appState
-     * @param Json|null $serializer
+     * @param Json $serializer
+     * @param CustomerMetadataInterface $customerMetadata
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -102,7 +109,8 @@ class Customer
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Api\DataObjectHelper $dataObjectHelper,
         \Magento\Framework\App\State $appState,
-        Json $serializer = null
+        Json $serializer,
+        CustomerMetadataInterface $customerMetadata
     ) {
         $this->fixtureManager = $sampleDataContext->getFixtureManager();
         $this->csvReader = $sampleDataContext->getCsvReader();
@@ -114,7 +122,8 @@ class Customer
         $this->storeManager = $storeManager;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->appState = $appState;
-        $this->serializer = $serializer ?: \Magento\Framework\App\ObjectManager::getInstance()->get(Json::class);
+        $this->serializer = $serializer;
+        $this->customerMetadata = $customerMetadata;
     }
 
     /**
@@ -246,14 +255,25 @@ class Customer
      */
     protected function convertRowData($row, $data)
     {
+        $genders = [];
+        $genderAttr = $this->customerMetadata->getAttributeMetadata('gender');
+        foreach ($genderAttr->getOptions() as $genderOption) {
+            $genders[$genderOption->getValue()] = $genderOption->getLabel();
+        }
+
         foreach ($row as $field => $value) {
             if (isset($data[$field])) {
-                if ($field == 'street') {
-                    $data[$field] = $this->serializer->unserialize($value);
+                if ($field === 'password') {
                     continue;
                 }
-                if ($field == 'password') {
-                    continue;
+
+                switch ($field) {
+                    case 'street':
+                        $value = $this->serializer->unserialize($value);
+                        break;
+                    case 'gender':
+                        $value = array_search($value, $genders);
+                        break;
                 }
                 $data[$field] = $value;
             }
