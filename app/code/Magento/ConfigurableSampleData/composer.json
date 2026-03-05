@@ -1,22 +1,23 @@
 {
     "name": "magento/module-configurable-sample-data",
     "description": "N/A",
-    "require": {
-        "php": "~8.2.0||~8.3.0||~8.4.0",
-        "magento/framework": "*",
-        "magento/module-configurable-product": "*",
-        "magento/module-product-links-sample-data": "*",
-        "magento/module-indexer": "*",
-        "magento/module-catalog-sample-data": "*",
-        "magento/module-import-export": "*",
-        "magento/module-eav": "*",
-        "magento/module-catalog": "*"
-    },
     "type": "magento2-module",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
     ],
+    "version": "100.4.4",
+    "require": {
+        "php": "~8.2.0||~8.3.0||~8.4.0",
+        "magento/framework": "103.0.*",
+        "magento/module-configurable-product": "100.4.*",
+        "magento/module-product-links-sample-data": "100.4.*",
+        "magento/module-indexer": "100.4.*",
+        "magento/module-catalog-sample-data": "100.4.*",
+        "magento/module-import-export": "101.0.*",
+        "magento/module-eav": "102.1.*",
+        "magento/module-catalog": "104.0.*"
+    },
     "autoload": {
         "files": [
             "registration.php"
@@ -26,3 +27,4 @@
         }
     }
 }
+
