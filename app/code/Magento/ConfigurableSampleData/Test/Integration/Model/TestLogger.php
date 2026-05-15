@@ -4,9 +4,10 @@
  * See COPYING.txt for license details.
  */
 
-namespace Magento\SampleData\Model;
+namespace Magento\ConfigurableSampleData\Test\Integration\Model;
 
 use Magento\Framework\Setup\LoggerInterface;
+use Magento\SampleData\Model\Logger;
 
 class TestLogger implements LoggerInterface
 {
