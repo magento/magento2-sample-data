@@ -9,7 +9,7 @@ title,page_layout,meta_keywords,meta_description,identifier,content_heading,cont
       <ul style=""list-style: none; margin-top: 20px; padding: 0;"">
           <li><a href=""{{store url=""contact""}}"">Contact Luma</a></li>
           <li><a href=""{{store url=""customer-service""}}"">Customer Service</a></li>
-          <li><a href=""{{store url=""privacy-policy""}}"">Luma Privacy Policy</a></li>
+          <li><a href=""{{store url=""privacy-policy-cookie-restriction-mode""}}"">Luma Privacy Policy</a></li>
           <li><a href=""{{store url=""""}}"">Shop Luma</a></li>
       </ul>
   </div>
