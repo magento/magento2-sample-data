@@ -25,7 +25,7 @@ title,identifier,content
                    <span>Apparel Design Inquiries</span>
                </strong>
                <div class=""box-content"">
-                   <p>Are you an independent clothing designer? Feature your products on the Luma website! Please direct all inquiries via email to: <a href=""mailto:cs@luma.com"">cs@luma.com</a></p>
+                   <p>Are you an independent clothing designer? Feature your products on the Luma website! Please direct all inquiries via email to: <a href=""mailto:cs@example.com"">cs@example.com</a></p>
                </div>
            </div>
            <div class=""box box-press-inquiries"">
@@ -33,7 +33,7 @@ title,identifier,content
                    <span>Press Inquiries</span>
                </strong>
                <div class=""box-content"">
-                   <p>Please direct all media inquiries via email to: <a href=""mailto:pr@luma.com"">pr@luma.com</a></p>
+                   <p>Please direct all media inquiries via email to: <a href=""mailto:pr@example.com"">pr@example.com</a></p>
                </div>
            </div>
        </div>
